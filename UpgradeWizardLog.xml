@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ReportesWeb1_2.csproj" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" name="ApplicationInsights.config" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ApplicationInsights.config" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="201811232148026_InitialCreate.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Migrations\201811232148026_InitialCreate.resx" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="packages.config" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\packages.config" />
+  <event action="Analyze" type="Success" name="telerikReportViewer-12.1.18.620.min.js" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ReportViewer\js\telerikReportViewer-12.1.18.620.min.js" />
+  <event action="Analyze" type="Success" name="telerikReportViewer.kendo-12.1.18.620.min.js" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ReportViewer\js\telerikReportViewer.kendo-12.1.18.620.min.js" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\_ViewStart.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\_ViewStart.cshtml" />
+  <event action="Analyze" type="Success" name="_ViewStart.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\_ViewStart.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\_ExternalLoginsListPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\_ExternalLoginsListPartial.cshtml" />
+  <event action="Analyze" type="Success" name="_ExternalLoginsListPartial.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\_ExternalLoginsListPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ConfirmEmail.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ConfirmEmail.cshtml" />
+  <event action="Analyze" type="Success" name="ConfirmEmail.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ConfirmEmail.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ExternalLoginConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ExternalLoginConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="ExternalLoginConfirmation.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ExternalLoginConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ExternalLoginFailure.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ExternalLoginFailure.cshtml" />
+  <event action="Analyze" type="Success" name="ExternalLoginFailure.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ExternalLoginFailure.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ForgotPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ForgotPassword.cshtml" />
+  <event action="Analyze" type="Success" name="ForgotPassword.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ForgotPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ForgotPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ForgotPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="ForgotPasswordConfirmation.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ForgotPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\Login.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\Login.cshtml" />
+  <event action="Analyze" type="Success" name="Login.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\Login.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\Register.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\Register.cshtml" />
+  <event action="Analyze" type="Success" name="Register.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\Register.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ResetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ResetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="ResetPassword.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ResetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ResetPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ResetPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="ResetPasswordConfirmation.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\ResetPasswordConfirmation.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\SendCode.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\SendCode.cshtml" />
+  <event action="Analyze" type="Success" name="SendCode.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\SendCode.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\VerifyCode.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\VerifyCode.cshtml" />
+  <event action="Analyze" type="Success" name="VerifyCode.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Account\VerifyCode.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\About.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\About.cshtml" />
+  <event action="Analyze" type="Success" name="About.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\About.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\Contact.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\Contact.cshtml" />
+  <event action="Analyze" type="Success" name="Contact.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\Contact.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Home\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\AddPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\AddPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="AddPhoneNumber.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\AddPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\ChangePassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\ChangePassword.cshtml" />
+  <event action="Analyze" type="Success" name="ChangePassword.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\ChangePassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Index.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\Index.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\ManageLogins.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\ManageLogins.cshtml" />
+  <event action="Analyze" type="Success" name="ManageLogins.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\ManageLogins.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\SetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\SetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="SetPassword.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\SetPassword.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\VerifyPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\VerifyPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="VerifyPhoneNumber.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Manage\VerifyPhoneNumber.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\_ListaBolsasPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\_ListaBolsasPartial.cshtml" />
+  <event action="Analyze" type="Success" name="_ListaBolsasPartial.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\_ListaBolsasPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\CajeroReceptorIndex.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\CajeroReceptorIndex.cshtml" />
+  <event action="Analyze" type="Success" name="CajeroReceptorIndex.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\CajeroReceptorIndex.cshtml" />
+  <event action="Analyze" type="Success" name="ComparativoCajeroReceptor.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ComparativoCajeroReceptor.resx" />
+  <event action="Analyze" type="Success" name="ComparativoDiaCaseta.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ComparativoDiaCaseta.resx" />
+  <event action="Analyze" type="Success" name="ComparativoTurnoCarriles.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ComparativoTurnoCarriles.resx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\DiaCasetaIndex.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\DiaCasetaIndex.cshtml" />
+  <event action="Analyze" type="Success" name="DiaCasetaIndex.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\DiaCasetaIndex.cshtml" />
+  <event action="Analyze" type="Success" name="PreliquidacionCajeroReceptor.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\PreliquidacionCajeroReceptor.resx" />
+  <event action="Analyze" type="Success" name="PreliquidacionDiaCaseta.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\PreliquidacionDiaCaseta.resx" />
+  <event action="Analyze" type="Success" name="PreliquidacionTurnoCarriles.resx" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\PreliquidacionTurnoCarriles.resx" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\Pruebas.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\Pruebas.cshtml" />
+  <event action="Analyze" type="Success" name="Pruebas.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\Pruebas.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportCajeroReceptorView.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportCajeroReceptorView.cshtml" />
+  <event action="Analyze" type="Success" name="ReportCajeroReceptorView.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportCajeroReceptorView.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportDiaCasetaView.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportDiaCasetaView.cshtml" />
+  <event action="Analyze" type="Success" name="ReportDiaCasetaView.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportDiaCasetaView.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportTurnoCarrilesView.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportTurnoCarrilesView.cshtml" />
+  <event action="Analyze" type="Success" name="ReportTurnoCarrilesView.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\ReportTurnoCarrilesView.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\TurnoCarrilesIndex.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\TurnoCarrilesIndex.cshtml" />
+  <event action="Analyze" type="Success" name="TurnoCarrilesIndex.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Reportes\TurnoCarrilesIndex.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\_Layout.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\_Layout.cshtml" />
+  <event action="Analyze" type="Success" name="_Layout.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\_Layout.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\_LoginPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\_LoginPartial.cshtml" />
+  <event action="Analyze" type="Success" name="_LoginPartial.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\_LoginPartial.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\EditorTemplates\DateTime.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\EditorTemplates\DateTime.cshtml" />
+  <event action="Analyze" type="Success" name="DateTime.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\EditorTemplates\DateTime.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\Error.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\Error.cshtml" />
+  <event action="Analyze" type="Success" name="Error.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\Error.cshtml" />
+  <event action="Analyze" type="Success" name="Register Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\Lockout.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly Directives" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\Lockout.cshtml" />
+  <event action="Analyze" type="Success" name="Lockout.cshtml" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Shared\Lockout.cshtml" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Web.config" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Views\Web.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config" />
+  <event action="Analyze" type="Error" name="Config Sections" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config">System.IO.FileLoadException: El nombre de ensamblado o el código base dado no es válido. (Excepción de HRESULT: 0x80131047)
+   en System.Reflection.AssemblyName.nInit(RuntimeAssembly&amp; assembly, Boolean forIntrospection, Boolean raiseResolveEvent)
+   en System.Reflection.AssemblyName..ctor(String assemblyName)
+   en Telerik.Reporting.UpgradeWizard.Engine.ConfigSectionsItem.AnalyzeInternal()
+   en Telerik.Reporting.UpgradeWizard.Engine.UpgradeItem.Analyze()</event>
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config" />
+  <event action="Analyze" type="Success" name="Web.config" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Web.Debug.config" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Debug.config" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="Web.Release.config" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\Web.Release.config" />
+  <event action="Analyze" type="Success" name="ReportesWeb1_2" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\ReportesWeb1_2.csproj" />
+  <event action="Analyze" type="Success" name="ReportesWeb1_2" path="C:\Users\DESARROLLO2\source\repos\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2.sln" />
+</log>

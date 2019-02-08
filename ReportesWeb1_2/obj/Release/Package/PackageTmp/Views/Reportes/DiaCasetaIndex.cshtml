@@ -1,0 +1,140 @@
+﻿@model ReportesWeb1_2.ModelsReportes.DiaCasetaModel
+
+@{
+    ViewBag.Title = "Dia-Caseta";
+}
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            LoadEncargadoTurno();
+            LoadAdministradores();
+            OutLoader();
+
+            $('#loaderButton').on('click', function (e) {
+                if ($('#form0').valid()) {
+                    /*Al terminar de cargar el sitio, primero se va la animación del Preloader*/
+                    $("#loader").fadeIn();
+                    /*Medio segundo despues, se va poco a poco el fondo del preloader*/
+                    $("#loader-wrapper").delay(500).fadeIn("slow");
+
+                    $('#form0').submit();
+                }
+            });
+        });
+
+        function LoadEncargadoTurno() {
+            $.ajax({
+                url: '@Url.Action("GetEncargadosTurno", "Reportes")',
+                type: 'GET',
+                data: '{}',
+                cache: false,
+                success: function (data) {
+                    $.each(data, function (i, row) {
+                        var $option = $('<option>');
+                        $option.val(row.Value);
+                        $option.html(row.Text);
+                        $('#IdEncargadoTurno').append($option);
+                    });
+                },
+                error: function (ex) {
+                    alert('Error!!!' + ex);
+                },
+            });
+        }
+
+
+        function LoadAdministradores() {
+            $.ajax({
+                url: '@Url.Action("GetAdministradores", "Reportes")',
+                type: 'GET',
+                data: '{}',
+                cache: false,
+                success: function (data) {
+                    $.each(data, function (i, row) {
+                        var $option = $('<option>');
+                        $option.val(row.Value);
+                        $option.html(row.Text);
+                        $('#IdAdministrador').append($option);
+                    });
+                },
+                error: function (ex) {
+                    alert("Error!!!" + ex);
+                }
+            });
+        }
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
+
+<div class="container">
+    <h1>Dia-Caseta</h1>
+</div>
+
+@using (Html.BeginForm("ReportDiaCasetaView", "Reportes", FormMethod.Post, htmlAttributes: new { @id = "form0" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdDelegacion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.IdDelegacion, (string)ViewBag.Delegacion, htmlAttributes: new { @class = "font-weight-bold" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdPlaza, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.IdPlaza, (string)ViewBag.Plaza, htmlAttributes: new { @class = "font-weight-bold" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdEncargadoTurno, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.IdEncargadoTurno, new SelectList(string.Empty, "Value", "Text"), "Seleccione un encargado de turno", htmlAttributes: new { @class = "form-control contorno" })
+                @Html.ValidationMessageFor(model => model.IdEncargadoTurno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdAdministrador, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.IdAdministrador, new SelectList(string.Empty, "Value", "Text"), "Seleccione un administrador", htmlAttributes: new { @class = "form-control contorno" })
+                @Html.ValidationMessageFor(model => model.IdAdministrador, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Fecha)
+                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.Observaciones, new { @class = "form-control contorno", @rows = 3 })
+                @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="button" value="Generar reportes" class="btn btn-primary boton2" id="loaderButton" />
+            </div>
+        </div>
+    </div>
+}

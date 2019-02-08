@@ -1,0 +1,193 @@
+@model ReportesWeb1_2.ModelsReportes.DiaCasetaModel
+@using ReportesWeb1_2.Views.Reportes
+@using Telerik.Reporting
+@using Telerik.ReportViewer.Mvc
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Telerik MVC HTML5 Report Viewer</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    @*<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+        <link href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.blueopal.min.css" rel="stylesheet" />*@
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <link href="~/Scripts/kendo.blueopal.min.css" rel="stylesheet" />
+    <link href="~/Scripts/kendo.common.min.css" rel="stylesheet" />
+
+    <!--kendo.all.min.js can be used as well instead of the following custom Kendo UI subset-->
+    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer.kendo-12.1.18.620.min.js")"></script>
+
+    <style>
+        #reportViewer1 {
+            position: relative;
+            width: 1300px;
+            height: 900px;
+            font-family: Verdana, Arial;
+        }
+    </style>
+
+    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-12.1.18.620.min.js")"></script>
+
+</head>
+<body>
+
+@{ 
+    var typeReportSource = new TypeReportSource() { TypeName = typeof(ReportesWeb1_2.Views.Reportes.ReportBookDiaCasetaToc).AssemblyQualifiedName };
+
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par1", Model.PreDCViewModel.Par1));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par3", Model.PreDCViewModel.Par3));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par5", Model.PreDCViewModel.Par5));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par7", Model.PreDCViewModel.Par7));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par11", Model.PreDCViewModel.Par11));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par12", Model.PreDCViewModel.Par12));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par13", Model.PreDCViewModel.Par13));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par14", Model.PreDCViewModel.Par14));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par15", Model.PreDCViewModel.Par15));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par16", Model.PreDCViewModel.Par16));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par17", Model.PreDCViewModel.Par17));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par18", Model.PreDCViewModel.Par18));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par19", Model.PreDCViewModel.Par19));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par20", Model.PreDCViewModel.Par20));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par21", Model.PreDCViewModel.Par21));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par22", Model.PreDCViewModel.Par22));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par23", Model.PreDCViewModel.Par23));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par24", Model.PreDCViewModel.Par24));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par25", Model.PreDCViewModel.Par25));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par26", Model.PreDCViewModel.Par26));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par27", Model.PreDCViewModel.Par27));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par28", Model.PreDCViewModel.Par28));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par29", Model.PreDCViewModel.Par29));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par30", Model.PreDCViewModel.Par30));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par31", Model.PreDCViewModel.Par31));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par40", Model.PreDCViewModel.Par40));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par41", Model.PreDCViewModel.Par41));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par42", Model.PreDCViewModel.Par42));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par43", Model.PreDCViewModel.Par43));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par140", Model.PreDCViewModel.Par140));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par141", Model.PreDCViewModel.Par141));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par142", Model.PreDCViewModel.Par142));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par143", Model.PreDCViewModel.Par143));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par32", Model.PreDCViewModel.Par32));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par33", Model.PreDCViewModel.Par33));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par34", Model.PreDCViewModel.Par34));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par35", Model.PreDCViewModel.Par35));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par36", Model.PreDCViewModel.Par36));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par37", Model.PreDCViewModel.Par37));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par38", Model.PreDCViewModel.Par38));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par39", Model.PreDCViewModel.Par39));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par44", Model.PreDCViewModel.Par44));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par45", Model.PreDCViewModel.Par45));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par46", Model.PreDCViewModel.Par46));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par47", Model.PreDCViewModel.Par47));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par48", Model.PreDCViewModel.Par48));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par49", Model.PreDCViewModel.Par49));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par50", Model.PreDCViewModel.Par50));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par51", Model.PreDCViewModel.Par51));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par52", Model.PreDCViewModel.Par52));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par53", Model.PreDCViewModel.Par53));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par54", Model.PreDCViewModel.Par54));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par55", Model.PreDCViewModel.Par55));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par56", Model.PreDCViewModel.Par56));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par57", Model.PreDCViewModel.Par57));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par58", Model.PreDCViewModel.Par58));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par59", Model.PreDCViewModel.Par59));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par60", Model.PreDCViewModel.Par60));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par63", Model.PreDCViewModel.Par63));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par64", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par65", Model.PreDCViewModel.Par65));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par66", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par67", Model.PreDCViewModel.Par67));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par68", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par69", Model.PreDCViewModel.Par69));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par72", Model.PreDCViewModel.Par72));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par73", Model.PreDCViewModel.Par73));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par74", Model.PreDCViewModel.Par74));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par77", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par79", Model.PreDCViewModel.Par79));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par82", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par87", Model.PreDCViewModel.Par87));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par88", Model.PreDCViewModel.Par88));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par89", Model.PreDCViewModel.Par89));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par92", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par94", Model.PreDCViewModel.Par94));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par95", "0"));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par96", Model.PreDCViewModel.Par96));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par98", Model.PreDCViewModel.Par98));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par99", Model.PreDCViewModel.Par99));
+
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).parelu1", Model.PreDCViewModel.Parelu1));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).parelu2", Model.PreDCViewModel.Parelu2));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).parelu3", Model.PreDCViewModel.Parelu3));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).parelu4", Model.PreDCViewModel.Parelu4));
+
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par1", ""));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par2", Model.ComDCViewModel.Par2));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par3", Model.ComDCViewModel.Par3));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par4", Model.ComDCViewModel.Par4));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par5", ""));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par6", ""));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par7", Model.ComDCViewModel.Par7));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par8", ""));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par9", ""));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par10", ""));
+    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par11", ""));
+
+    int count = 12;
+    while (count <= 539)
+    {
+        var param = Model.ComDCViewModel.GetType().GetProperty("Par" + count).GetValue(Model.ComDCViewModel, null);
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par" + count, param));
+        count++;
+    }
+}
+
+@(Html.TelerikReporting().ReportViewer()
+        // Each report viewer must have an id - it will be used by the initialization script
+        // to find the element and initialize the report viewer.
+        .Id("reportViewer1")
+        // The URL of the service which will serve reports.
+        // The URL corresponds to the name of the controller class (ReportsController).
+        // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
+        .ServiceUrl(Url.Content("~/api/reports"))
+        // The URL for custom report viewer template. The template can be edited -
+        // new functionalities can be added and unneeded ones can be removed.
+        // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
+        // .TemplateUrl(Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-12.1.18.620.html"))
+        // Strongly typed ReportSource - TypeReportSource or UriReportSource.
+        //.ReportSource(new TypeReportSource() { TypeName = "ReportesWeb1_2.Views.Reportes.ReportBookDiaCaseta, ReportesWeb1_2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
+        .ReportSource(typeReportSource)
+        // Specifies whether the viewer is in interactive or print preview mode.
+        // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
+        // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
+        .ViewMode(ViewMode.Interactive)
+        // Sets the scale mode of the viewer.
+        // Three modes exist currently:
+        // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
+        // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
+        // Specific - Uses the scale to zoom in and out the report.
+        .ScaleMode(ScaleMode.Specific)
+        // Zoom in and out the report using the scale
+        // 1.0 is equal to 100%, i.e. the original size of the report
+        .Scale(1.0)
+        // Sets whether the viewer’s client session to be persisted between the page’s refreshes(ex. postback).
+        // The session is stored in the browser’s sessionStorage and is available for the duration of the page session.
+        .PersistSession(false)
+        // Sets the print mode of the viewer.
+        .PrintMode(PrintMode.AutoSelect)
+		//Switches accessibility mode ON or OFF.
+		.EnableAccessibility(true)
+)
+
+    <br />
+    @Html.ActionLink("Regresar a Inicio", "Index", "Home")
+
+</body>
+</html>
