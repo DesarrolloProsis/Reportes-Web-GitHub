@@ -111,6 +111,10 @@ namespace ReportesWeb1_2.ServicesReportes
         DataColumn DataColumnaReporte20;
         DataRow DatarowReporte20;
 
+        DataTable DataTableReporte21_RP = new DataTable("tabla_reporte 21_RP");
+        DataColumn DataColumnaReporte21_RP;
+        DataRow DatarowReporte21_RP;
+
         public PreTCViewModel GenerarPreliquidacion_Turno_Carriles(DateTime Fecha, string IdPlazaCobro, string Turno, string EncargadoTurno, string Delegacion, string Administrador, string Observaciones, string NameConString)
         {
             var Reporte = new PreTCViewModel();
@@ -1231,7 +1235,7 @@ namespace ReportesWeb1_2.ServicesReportes
             return Reporte;
         }
 
-        public ComTCViewModel GenerarComparativo_Turno_Carriles()
+        public DataSet GenerarComparativo_Turno_Carriles()
         {
             var Reporte = new ComTCViewModel();
 
@@ -1254,6 +1258,13 @@ namespace ReportesWeb1_2.ServicesReportes
             var db_tot_20 = 0.0d;
             var db_tot_22 = 0.0d;
             var db_tot_24 = 0.0d;
+
+            var db_tot_22_rp = 0.0d;
+            var db_tot_24_rp = 0.0d;
+
+            var db_tot_22_rp4 = 0.0d;
+            var db_tot_24_rp4 = 0.0d;
+
             var db_tot_26 = 0.0d;
             var db_tot_28 = 0.0d;
             var db_tot_30 = 0.0d;
@@ -1449,6 +1460,18 @@ namespace ReportesWeb1_2.ServicesReportes
             DataTable oDataTableReporte_total_9 = new DataTable("tabla_reporte_total_9");
             DataColumn oDataColumnaReporte_total_9;
             DataRow oDatarowReporte_total_9;
+            //------------------
+
+            //tabla 10 RP
+            System.Data.DataSet odataSetReporte_11_RP = new System.Data.DataSet();
+            DataTable oDataTableReporte_11_RP = new DataTable("tabla_reporte_9_RP");
+            DataColumn oDataColumnaReporte_11_RP;
+            DataRow oDatarowReporte_11_RP;
+
+            System.Data.DataSet odataSetReporte_total_11_RP = new System.Data.DataSet();
+            DataTable oDataTableReporte_total_11_RP = new DataTable("tabla_reporte_total_10_RP");
+            DataColumn oDataColumnaReporte_total_11_RP;
+            DataRow oDatarowReporte_total_11_RP;
 
             switch (TurnoSt.Substring(0, 2))
             {
@@ -1522,24 +1545,44 @@ namespace ReportesWeb1_2.ServicesReportes
 
             odataSetReporte.Tables.Add(oDataTableReporte);
 
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Grupo");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Concepto");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Descricion_clase");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Numero_clase");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(1, "Numero");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "strNumero");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            odataSetReporte_11_RP.Tables.Add(oDataTableReporte_11_RP);
+
             ////ARMO MI TIPO TARIFA
-            //StrQuerys = "SELECT MAX(Version_Tarif) as version " +
-            //            "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
-            //            "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
-            //            "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+            StrQuerys = "SELECT MAX(Version_Tarif) as version " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
 
-            //// TC
-            //StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
-            //                        "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+            // TC
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            //StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
 
-            StrQuerys = @"SELECT MAX(Version_Tarif) as version 
-                        FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
-                        WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
-                        AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
-                        AND TRANSACTION.ID_VOIE = voie_physique.id_voie
-                        AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE ";
+            //StrQuerys = @"SELECT MAX(Version_Tarif) as version 
+            //            FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
+            //            WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
+            //            AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
+            //            AND TRANSACTION.ID_VOIE = voie_physique.id_voie
+            //            AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE ";
 
             if (MtGlb.QueryDataSet(StrQuerys, "TRANSACTION"))
                 int_version_tarifa = Convert.ToInt32(MtGlb.oDataRow["version"].ToString());
@@ -1623,12 +1666,12 @@ namespace ReportesWeb1_2.ServicesReportes
             //-------------------------------------------------------------------------
 
             dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
-            dvTarifa.RowFilter = "CODE = 2 ";
+            dvTarifa.RowFilter = "CODE = 72 ";
 
             foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "a";
-                strConcepto = " TARIFA REF. Reducida";
+                strConcepto = " TARIFA REF. Reducida RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -1638,7 +1681,6 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDatarowReporte["Numero_clase"] = StrLinea;
 
                 oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
-
 
                 oDataTableReporte.Rows.Add(oDatarowReporte);
             }
@@ -1646,12 +1688,12 @@ namespace ReportesWeb1_2.ServicesReportes
             //-------------------------------------------------------------------------
 
             dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
-            dvTarifa.RowFilter = "CODE = 72 ";
+            dvTarifa.RowFilter = "CODE = 73 ";
 
             foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "a";
-                strConcepto = " TARIFA REF. Pago Inmediato";
+                strConcepto = " TARIFA REF. Reducida RP3";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -1662,8 +1704,27 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
 
-
                 oDataTableReporte.Rows.Add(oDatarowReporte);
+            }
+
+            dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
+            dvTarifa.RowFilter = "CODE = 74 ";
+
+            foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " TARIFA REF. Reducida RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"].ToString()));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                oDatarowReporte_11_RP["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
+
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
             }
 
             //' ''''''''''''''''''FIN TARIFAS
@@ -2249,7 +2310,7 @@ namespace ReportesWeb1_2.ServicesReportes
 
             StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
 
-            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 71 or ID_PAIEMENT = 72 or ID_PAIEMENT = 73 or ID_PAIEMENT = 74 or ID_PAIEMENT = 10) " +
+            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 72) " +
                                     "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
                                     "GROUP BY TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2";
 
@@ -2260,7 +2321,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds3.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2285,7 +2346,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2314,7 +2375,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds5.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2343,7 +2404,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2380,7 +2441,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds7.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2404,7 +2465,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2436,7 +2497,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2473,7 +2534,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2519,6 +2580,575 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 oDataTableReporte.Rows.Add(oDatarowReporte);
             }
+
+            //----------------------------------------------------------------
+            //res pago inmediato aforo 73
+
+            StrQuerys = "SELECT TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2,SUM(PRIX_TOTAL) AS Total, count(*) as cruces, SUM(code_grille_tarif) as excedentes " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+
+            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 73) " +
+                                    "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
+                                    "GROUP BY TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2";
+
+            MtGlb.QueryDataSet(StrQuerys, "TRANSACTION");
+
+            dvEvento = MtGlb.Ds.Tables["TRANSACTION"].DefaultView;
+
+            foreach (DataRow item in MtGlb.Ds3.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp = db_tot_22_rp + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    db_tot_24_rp = db_tot_24_rp + Convert.ToDouble(dvEvento[0]["Total"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //excedentes asignados
+            foreach (DataRow item in MtGlb.Ds5.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp = db_tot_22_rp + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 73 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.Asignacion_excedente_clase(Convert.ToInt32(item["ID_CLASSE"]))]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo exedentes
+            foreach (DataRow item in MtGlb.Ds7.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = dvEvento[0]["excedentes"];
+                    oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["excedentes"];
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 73 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.IIf(Convert.ToString(item["ID_CLASSE"]).Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo excedentes directos aclase
+            foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    //10,11
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case int n when (n == 10 || n == 18):
+                            oDatarowReporte_11_RP["Numero"] = dvEvento[0]["cruces"];
+                            oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["cruces"];
+                            break;
+                        case 11:
+                            oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 73 ";
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case 10:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        case 11:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2));
+                            break;
+                        case 18:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL16"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //----------------------------------------------------------------
+            //res pago inmediato aforo 74
+
+            StrQuerys = "SELECT TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2,SUM(PRIX_TOTAL) AS Total, count(*) as cruces, SUM(code_grille_tarif) as excedentes " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+
+            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 74) " +
+                                    "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
+                                    "GROUP BY TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2";
+
+            MtGlb.QueryDataSet(StrQuerys, "TRANSACTION");
+
+            dvEvento = MtGlb.Ds.Tables["TRANSACTION"].DefaultView;
+
+            foreach (DataRow item in MtGlb.Ds3.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp4 = db_tot_22_rp4 + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    db_tot_24_rp4 = db_tot_24_rp4 + Convert.ToDouble(dvEvento[0]["Total"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //excedentes asignados
+            foreach (DataRow item in MtGlb.Ds5.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp4 = db_tot_22_rp4 + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 74 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.Asignacion_excedente_clase(Convert.ToInt32(item["ID_CLASSE"]))]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo exedentes
+            foreach (DataRow item in MtGlb.Ds7.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = dvEvento[0]["excedentes"];
+                    oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["excedentes"];
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 74 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.IIf(Convert.ToString(item["ID_CLASSE"]).Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo excedentes directos aclase
+            foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    //10,11
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case int n when (n == 10 || n == 18):
+                            oDatarowReporte_11_RP["Numero"] = dvEvento[0]["cruces"];
+                            oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["cruces"];
+                            break;
+                        case 11:
+                            oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 74 ";
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case 10:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        case 11:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2));
+                            break;
+                        case 18:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL16"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
 
             //aforo total new
             //''''''''''''''''''''''''''''''
@@ -3452,6 +4082,21 @@ namespace ReportesWeb1_2.ServicesReportes
             odataSetReporte_total.Tables.Add(oDataTableReporte_total);
             //--------------------------------------------------------
 
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "Cantidad");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "Total");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "Tipo_Total");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "strNumero");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            odataSetReporte_total_11_RP.Tables.Add(oDataTableReporte_total_11_RP);
+            //--------------------------------------------------------
+
             oDatarowReporte_total = oDataTableReporte_total.NewRow();
 
             oDatarowReporte_total["Cantidad"] = "001";
@@ -3536,6 +4181,27 @@ namespace ReportesWeb1_2.ServicesReportes
             oDatarowReporte_total["strNumero"] = db_tot_24;
 
             oDataTableReporte_total.Rows.Add(oDatarowReporte_total);
+
+            //-----------------------------------
+            oDatarowReporte_total_11_RP = oDataTableReporte_total_11_RP.NewRow();
+
+            oDatarowReporte_total_11_RP["Cantidad"] = "22";
+            oDatarowReporte_total_11_RP["Total"] = "             Total           ";
+            oDatarowReporte_total_11_RP["Tipo_Total"] = " Aforo";
+            oDatarowReporte_total_11_RP["strNumero"] = db_tot_22_rp;
+
+            oDataTableReporte_total_11_RP.Rows.Add(oDatarowReporte_total_11_RP);
+            //---------------
+            //---------------
+            oDatarowReporte_total_11_RP = oDataTableReporte_total_11_RP.NewRow();
+
+            oDatarowReporte_total_11_RP["Cantidad"] = "24";
+            oDatarowReporte_total_11_RP["Total"] = "             Total           ";
+            oDatarowReporte_total_11_RP["Tipo_Total"] = " Ingreso";
+            oDatarowReporte_total_11_RP["strNumero"] = db_tot_24_rp;
+
+            oDataTableReporte_total_11_RP.Rows.Add(oDatarowReporte_total_11_RP);
+            //-----------------------------------
 
             oDatarowReporte_total = oDataTableReporte_total.NewRow();
 
@@ -14724,11 +15390,11 @@ namespace ReportesWeb1_2.ServicesReportes
             //Reporte.Par11 = par11;
             //par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11
 
-            DataSet1(odataSetReporte, odataSetReporte_total, odataSetReporte_2, odataSetReporte_total_2, odataSetReporte_3, odataSetReporte_total_3, odataSetReporte_4, odataSetReporte_total_4, odataSetReporte_10, odataSetReporte_total_10, odataSetReporte_5, odataSetReporte_total_5, odataSetReporte_6, odataSetReporte_total_6, odataSetReporte_7, odataSetReporte_total_7, odataSetReporte_8, odataSetReporte_total_8, odataSetReporte_9, odataSetReporte_total_9);
+            DataSet1(odataSetReporte, odataSetReporte_total, odataSetReporte_2, odataSetReporte_total_2, odataSetReporte_3, odataSetReporte_total_3, odataSetReporte_4, odataSetReporte_total_4, odataSetReporte_10, odataSetReporte_total_10, odataSetReporte_5, odataSetReporte_total_5, odataSetReporte_6, odataSetReporte_total_6, odataSetReporte_7, odataSetReporte_total_7, odataSetReporte_8, odataSetReporte_total_8, odataSetReporte_9, odataSetReporte_total_9, odataSetReporte_11_RP, odataSetReporte_total_11_RP);
 
             foreach (DataRow item in dataSet1.Tables[0].Rows)
             {
-                if (item["Concepto"].ToString() == " Normal Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " Res. Pago Inmediato Aforo" || item["Concepto"].ToString() == "Aforo Total")
+                if (item["Concepto"].ToString() == " Normal Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP2" || item["Concepto"].ToString() == "Aforo Total")
                     Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n0}", Convert.ToDouble(item["Numero"])), null);
                 else
                     Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n}", Convert.ToDouble(item["Numero"])), null);
@@ -14882,9 +15548,9 @@ namespace ReportesWeb1_2.ServicesReportes
                     Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n}", Convert.ToDouble(item["strNumero"])), null);
             }
 
-            return Reporte;
+            //return Reporte;
 
-            //return dataSet1;
+            return dataSet1;
         }
 
         private string Encabezados_clases(int id_clase)
@@ -14931,7 +15597,7 @@ namespace ReportesWeb1_2.ServicesReportes
             return rpt;
         }
 
-        private void DataSet1(System.Data.DataSet data, System.Data.DataSet data2, System.Data.DataSet data3, System.Data.DataSet data4, System.Data.DataSet data5, System.Data.DataSet data6, System.Data.DataSet data7, System.Data.DataSet data8, System.Data.DataSet data9, System.Data.DataSet data10, System.Data.DataSet data11, System.Data.DataSet data12, System.Data.DataSet data13, System.Data.DataSet data14, System.Data.DataSet data15, System.Data.DataSet data16, System.Data.DataSet data17, System.Data.DataSet data18, System.Data.DataSet data19, System.Data.DataSet data20)
+        private void DataSet1(System.Data.DataSet data, System.Data.DataSet data2, System.Data.DataSet data3, System.Data.DataSet data4, System.Data.DataSet data5, System.Data.DataSet data6, System.Data.DataSet data7, System.Data.DataSet data8, System.Data.DataSet data9, System.Data.DataSet data10, System.Data.DataSet data11, System.Data.DataSet data12, System.Data.DataSet data13, System.Data.DataSet data14, System.Data.DataSet data15, System.Data.DataSet data16, System.Data.DataSet data17, System.Data.DataSet data18, System.Data.DataSet data19, System.Data.DataSet data20, System.Data.DataSet data21, System.Data.DataSet data22)
         {
             #region Data
             DataColumnaReporte1 = MtGlb.Agregar_datacolum(2, "Grupo");
@@ -15706,7 +16372,7 @@ namespace ReportesWeb1_2.ServicesReportes
                         }
                     }
                 }
-                else if (item["Concepto"].ToString() == " TARIFA REF. Reducida")
+                else if (item["Concepto"].ToString() == " TARIFA REF. Reducida RP2")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
                     {
@@ -15919,7 +16585,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == "TARIFA REF. Reducida"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -15942,7 +16608,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == "TARIFA REF. Reducida"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -15963,7 +16629,7 @@ namespace ReportesWeb1_2.ServicesReportes
                         }
                     }
                 }
-                else if (item["Concepto"].ToString() == " TARIFA REF. Pago Inmediato")
+                else if (item["Concepto"].ToString() == " TARIFA REF. Reducida RP3")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
                     {
@@ -16176,7 +16842,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == "TARIFA REF. Pago Inmediato"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP3"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -16199,7 +16865,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == "TARIFA REF. Pago Inmediato"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP3"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -18275,12 +18941,12 @@ namespace ReportesWeb1_2.ServicesReportes
                     }
                 }
 
-                else if (item["Concepto"].ToString() == " Res. Pago Inmediato Aforo")
+                else if (item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP2")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18314,7 +18980,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18348,7 +19014,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18416,7 +19082,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18450,7 +19116,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18484,7 +19150,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18518,7 +19184,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18552,7 +19218,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18586,7 +19252,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18620,7 +19286,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18654,7 +19320,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18688,7 +19354,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18722,7 +19388,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18756,7 +19422,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18788,12 +19454,12 @@ namespace ReportesWeb1_2.ServicesReportes
                         }
                     }
                 }
-                else if (item["Concepto"].ToString() == "Ingreso" && item["Grupo"].ToString() == "d")
+                else if (item["Concepto"].ToString() == "Ingreso RP2" && item["Grupo"].ToString() == "d")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18827,7 +19493,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18861,7 +19527,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18895,7 +19561,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18929,7 +19595,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18963,7 +19629,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18997,7 +19663,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19031,7 +19697,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19065,7 +19731,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19099,7 +19765,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19133,7 +19799,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19167,7 +19833,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19201,7 +19867,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19235,7 +19901,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19269,7 +19935,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
