@@ -153,7 +153,7 @@ namespace ReportesWeb1_2.Controllers
         [HttpPost]
         public ActionResult ReportTurnoCarrilesView(TurnoCarrilesModel model)
         {
-            DataSet comTCViewModel = new DataSet();
+            //DataSet comTCViewModel = new DataSet();
             if (ModelState.IsValid)
             {
                 var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
@@ -178,13 +178,13 @@ namespace ReportesWeb1_2.Controllers
                 var EncargadoTurno = model.ListEncargadosTurno.Find(x => x.Value == model.IdEncargadoTurno);
 
                 var preTCViewModel = TuCaRepository.GenerarPreliquidacion_Turno_Carriles(model.Fecha, Plaza.Value, Turno.Text, EncargadoTurno.Value + "    " + EncargadoTurno.Text, Delegacion.Text, Administrador.Value + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
-                comTCViewModel = TuCaRepository.GenerarComparativo_Turno_Carriles();
+                var comTCViewModel = TuCaRepository.GenerarComparativo_Turno_Carriles();
 
                 model.PreTCViewModel = preTCViewModel;
-                //model.ComTCViewModel = comTCViewModel;
+                model.ComTCViewModel = comTCViewModel;
 
-                return View("Pruebas", comTCViewModel);
-                //return View(model);
+                //return View("Pruebas", comTCViewModel);
+                return View(model);
             }
 
             return RedirectToAction("TurnoCarrilesIndex");
