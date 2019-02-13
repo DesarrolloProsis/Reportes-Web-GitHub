@@ -12,7 +12,7 @@ namespace ReportesWeb1_2.Services
 {
     public class MetodosGlbRepository
     {
-        private static OracleConnection Conexion = new OracleConnection();
+        private static OracleConnection Conexion = null;
 
         public DataSet Ds = new DataSet();
         public DataSet Ds1 = new DataSet();
@@ -44,6 +44,7 @@ namespace ReportesWeb1_2.Services
         /// <returns></returns>
         public OracleConnection GetConnectionOracle(string NameConString)
         {
+            Conexion = new OracleConnection();
 
             if (Conexion.State == ConnectionState.Closed)
             {
@@ -62,7 +63,10 @@ namespace ReportesWeb1_2.Services
         public void CloseConnectionOracle()
         {
             if (Conexion.State == ConnectionState.Open)
+            {
                 Conexion.Close();
+                Conexion.Dispose();
+            }
         }
 
         /// <summary>
@@ -153,7 +157,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds.Tables.Count != 0)
+            {
                 Ds.Clear();
+                Ds.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -196,7 +203,11 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds1.Tables.Count != 0)
+            {
                 Ds1.Clear();
+                Ds1.Dispose();
+            }
+
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -239,7 +250,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds2.Tables.Count != 0)
+            {
                 Ds2.Clear();
+                Ds2.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -281,7 +295,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds3.Tables.Count != 0)
+            {
                 Ds3.Clear();
+                Ds3.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -324,7 +341,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds4.Tables.Count != 0)
+            {
                 Ds4.Clear();
+                Ds4.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -366,7 +386,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds5.Tables.Count != 0)
+            {
                 Ds5.Clear();
+                Ds5.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -409,7 +432,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds6.Tables.Count != 0)
+            {
                 Ds6.Clear();
+                Ds6.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -451,7 +477,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds7.Tables.Count != 0)
+            {
                 Ds7.Clear();
+                Ds7.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -493,7 +522,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (Ds8.Tables.Count != 0)
+            {
                 Ds8.Clear();
+                Ds8.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -535,7 +567,10 @@ namespace ReportesWeb1_2.Services
             bool _return = false;
 
             if (DsTarifa.Tables.Count != 0)
+            {
                 DsTarifa.Clear();
+                DsTarifa.Dispose();
+            }
 
             using (OracleCommand Cmd = new OracleCommand(Query, Conexion))
             {
@@ -574,30 +609,36 @@ namespace ReportesWeb1_2.Services
         /// <param name="Nombre_colum"></param>
         public DataColumn Agregar_datacolum(int int_tipo, string Nombre_colum)
         {
-            DataColumn columna = new DataColumn();
+            DataColumn columna = null;
 
             switch (int_tipo)
             {
                 case 1: //double
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.Double");
-                    columna.ColumnName = Nombre_colum;
-                    columna.ReadOnly = true;
-                    columna.Unique = false;
+                    columna = new DataColumn
+                    {
+                        DataType = System.Type.GetType("System.Double"),
+                        ColumnName = Nombre_colum,
+                        ReadOnly = true,
+                        Unique = false
+                    };
                     break;
                 case 2: //string
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.String");
-                    columna.ColumnName = Nombre_colum;
-                    columna.ReadOnly = true;
-                    columna.Unique = false;
+                    columna = new DataColumn
+                    {
+                        DataType = System.Type.GetType("System.String"),
+                        ColumnName = Nombre_colum,
+                        ReadOnly = true,
+                        Unique = false
+                    };
                     break;
                 case 3: //date
-                    columna = new DataColumn();
-                    columna.DataType = System.Type.GetType("System.DateTime");
-                    columna.ColumnName = Nombre_colum;
-                    columna.ReadOnly = true;
-                    columna.Unique = false;
+                    columna = new DataColumn
+                    {
+                        DataType = System.Type.GetType("System.DateTime"),
+                        ColumnName = Nombre_colum,
+                        ReadOnly = true,
+                        Unique = false
+                    };
                     break;
                 default:
                     break;

@@ -30,85 +30,145 @@ namespace ReportesWeb1_2.ServicesReportes
 
         System.Data.DataSet dataSet1 = new System.Data.DataSet();
 
-        DataTable DataTableReporte1 = new DataTable("tabla_reporte 1");
-        DataColumn DataColumnaReporte1;
-        DataRow DatarowReporte1;
+        //tabla 1
+        //------------------
+        System.Data.DataSet odataSetReporte = new System.Data.DataSet();
+        DataTable oDataTableReporte = new DataTable("tabla_reporte");
+        DataColumn oDataColumnaReporte;
+        DataRow oDatarowReporte;
 
-        DataTable DataTableReporte2 = new DataTable("tabla_reporte 2");
-        DataColumn DataColumnaReporte2;
-        DataRow DatarowReporte2;
+        System.Data.DataSet odataSetReporte_total = new System.Data.DataSet();
+        DataTable oDataTableReporte_total = new DataTable("tabla_reporte_total");
+        DataColumn oDataColumnaReporte_total;
+        DataRow oDatarowReporte_total;
+        //------------------
 
-        DataTable DataTableReporte3 = new DataTable("tabla_reporte 3");
-        DataColumn DataColumnaReporte3;
-        DataRow DatarowReporte3;
+        //tabla 2
+        //------------------
+        System.Data.DataSet odataSetReporte_2 = new System.Data.DataSet();
+        DataTable oDataTableReporte_2 = new DataTable("tabla_reporte_2");
+        DataColumn oDataColumnaReporte_2;
+        DataRow oDatarowReporte_2;
 
-        DataTable DataTableReporte4 = new DataTable("tabla_reporte 4");
-        DataColumn DataColumnaReporte4;
-        DataRow DatarowReporte4;
+        System.Data.DataSet odataSetReporte_total_2 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_2 = new DataTable("tabla_reporte_total_2");
+        DataColumn oDataColumnaReporte_total_2;
+        DataRow oDatarowReporte_total_2;
+        //------------------
 
-        DataTable DataTableReporte5 = new DataTable("tabla_reporte 5");
-        DataColumn DataColumnaReporte5;
-        DataRow DatarowReporte5;
+        //tabla 3
+        //------------------
+        System.Data.DataSet odataSetReporte_3 = new System.Data.DataSet();
+        DataTable oDataTableReporte_3 = new DataTable("tabla_reporte_3");
+        DataColumn oDataColumnaReporte_3;
+        DataRow oDatarowReporte_3;
 
-        DataTable DataTableReporte6 = new DataTable("tabla_reporte 6");
-        DataColumn DataColumnaReporte6;
-        DataRow DatarowReporte6;
+        System.Data.DataSet odataSetReporte_total_3 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_3 = new DataTable("tabla_reporte_total_3");
+        DataColumn oDataColumnaReporte_total_3;
+        DataRow oDatarowReporte_total_3;
+        //------------------
 
-        DataTable DataTableReporte7 = new DataTable("tabla_reporte 7");
-        DataColumn DataColumnaReporte7;
-        DataRow DatarowReporte7;
+        //tabla 4
+        //------------------
+        System.Data.DataSet odataSetReporte_4 = new System.Data.DataSet();
+        DataTable oDataTableReporte_4 = new DataTable("tabla_reporte_4");
+        DataColumn oDataColumnaReporte_4;
+        DataRow oDatarowReporte_4;
 
-        DataTable DataTableReporte8 = new DataTable("tabla_reporte 8");
-        DataColumn DataColumnaReporte8;
-        DataRow DatarowReporte8;
+        System.Data.DataSet odataSetReporte_total_4 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_4 = new DataTable("tabla_reporte_total_4");
+        DataColumn oDataColumnaReporte_total_4;
+        DataRow oDatarowReporte_total_4;
+        //------------------
 
-        DataTable DataTableReporte9 = new DataTable("tabla_reporte 9");
-        DataColumn DataColumnaReporte9;
-        DataRow DatarowReporte9;
+        //tabla 10 tarjetas bancarias
+        //------------------
+        System.Data.DataSet odataSetReporte_10 = new System.Data.DataSet();
+        DataTable oDataTableReporte_10 = new DataTable("tabla_reporte_10");
+        DataColumn oDataColumnaReporte_10;
+        DataRow oDatarowReporte_10;
 
-        DataTable DataTableReporte10 = new DataTable("tabla_reporte 10");
-        DataColumn DataColumnaReporte10;
-        DataRow DatarowReporte10;
+        System.Data.DataSet odataSetReporte_total_10 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_10 = new DataTable("tabla_reporte_total_10");
+        DataColumn oDataColumnaReporte_total_10;
+        DataRow oDatarowReporte_total_10;
+        //------------------
 
-        DataTable DataTableReporte11 = new DataTable("tabla_reporte 11");
-        DataColumn DataColumnaReporte11;
-        DataRow DatarowReporte11;
+        //tabla 5
+        //------------------
+        System.Data.DataSet odataSetReporte_5 = new System.Data.DataSet();
+        DataTable oDataTableReporte_5 = new DataTable("tabla_reporte_5");
+        DataColumn oDataColumnaReporte_5;
+        DataRow oDatarowReporte_5;
 
-        DataTable DataTableReporte12 = new DataTable("tabla_reporte 12");
-        DataColumn DataColumnaReporte12;
-        DataRow DatarowReporte12;
+        System.Data.DataSet odataSetReporte_total_5 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_5 = new DataTable("tabla_reporte_total_5");
+        DataColumn oDataColumnaReporte_total_5;
+        DataRow oDatarowReporte_total_5;
+        //------------------
 
-        DataTable DataTableReporte13 = new DataTable("tabla_reporte 13");
-        DataColumn DataColumnaReporte13;
-        DataRow DatarowReporte13;
+        //tabla 6
+        //------------------
+        System.Data.DataSet odataSetReporte_6 = new System.Data.DataSet();
+        DataTable oDataTableReporte_6 = new DataTable("tabla_reporte_6");
+        DataColumn oDataColumnaReporte_6;
+        DataRow oDatarowReporte_6;
 
-        DataTable DataTableReporte14 = new DataTable("tabla_reporte 14");
-        DataColumn DataColumnaReporte14;
-        DataRow DatarowReporte14;
+        System.Data.DataSet odataSetReporte_total_6 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_6 = new DataTable("tabla_reporte_total_6");
+        DataColumn oDataColumnaReporte_total_6;
+        DataRow oDatarowReporte_total_6;
+        //------------------
 
-        DataTable DataTableReporte15 = new DataTable("tabla_reporte 15");
-        DataColumn DataColumnaReporte15;
-        DataRow DatarowReporte15;
+        //tabla 7
+        //------------------
+        System.Data.DataSet odataSetReporte_7 = new System.Data.DataSet();
+        DataTable oDataTableReporte_7 = new DataTable("tabla_reporte_7");
+        DataColumn oDataColumnaReporte_7;
+        DataRow oDatarowReporte_7;
 
-        DataTable DataTableReporte16 = new DataTable("tabla_reporte 16");
-        DataColumn DataColumnaReporte16;
-        DataRow DatarowReporte16;
+        System.Data.DataSet odataSetReporte_total_7 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_7 = new DataTable("tabla_reporte_total_7");
+        DataColumn oDataColumnaReporte_total_7;
+        DataRow oDatarowReporte_total_7;
+        //------------------
 
-        DataTable DataTableReporte17 = new DataTable("tabla_reporte 17");
-        DataColumn DataColumnaReporte17;
-        DataRow DatarowReporte17;
+        //tabla 8
+        //------------------
+        System.Data.DataSet odataSetReporte_8 = new System.Data.DataSet();
+        DataTable oDataTableReporte_8 = new DataTable("tabla_reporte_8");
+        DataColumn oDataColumnaReporte_8;
+        DataRow oDatarowReporte_8;
 
-        DataTable DataTableReporte18 = new DataTable("tabla_reporte 18");
-        DataColumn DataColumnaReporte18;
-        DataRow DatarowReporte18;
+        System.Data.DataSet odataSetReporte_total_8 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_8 = new DataTable("tabla_reporte_total_8");
+        DataColumn oDataColumnaReporte_total_8;
+        DataRow oDatarowReporte_total_8;
+        //------------------
 
-        DataTable DataTableReporte19 = new DataTable("tabla_reporte 19");
-        DataColumn DataColumnaReporte19;
-        DataRow DatarowReporte19;
+        //tabla 9
+        //------------------
+        System.Data.DataSet odataSetReporte_9 = new System.Data.DataSet();
+        DataTable oDataTableReporte_9 = new DataTable("tabla_reporte_9");
+        DataColumn oDataColumnaReporte_9;
+        DataRow oDatarowReporte_9;
 
-        DataTable DataTableReporte20 = new DataTable("tabla_reporte 20");
-        DataColumn DataColumnaReporte20;
-        DataRow DatarowReporte20;
+        System.Data.DataSet odataSetReporte_total_9 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_9 = new DataTable("tabla_reporte_total_9");
+        DataColumn oDataColumnaReporte_total_9;
+        DataRow oDatarowReporte_total_9;
+
+        //tabla 10 RP
+        System.Data.DataSet odataSetReporte_11_RP = new System.Data.DataSet();
+        DataTable oDataTableReporte_11_RP = new DataTable("tabla_reporte_9_RP");
+        DataColumn oDataColumnaReporte_11_RP;
+        DataRow oDatarowReporte_11_RP;
+
+        System.Data.DataSet odataSetReporte_total_11_RP = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_11_RP = new DataTable("tabla_reporte_total_10_RP");
+        DataColumn oDataColumnaReporte_total_11_RP;
+        DataRow oDatarowReporte_total_11_RP;
 
         /// <summary>
         /// Generar reporte preliquidación dia caseta
@@ -137,7 +197,6 @@ namespace ReportesWeb1_2.ServicesReportes
             string H_fin_turno = string.Empty;
             string Dt_fin_poste = string.Empty;
             string No_Turno = string.Empty;
-            int Id_Turno = 0;
 
             var fechaOpeTemp = string.Empty;
             var str_MATRICULE = string.Empty;
@@ -225,20 +284,9 @@ namespace ReportesWeb1_2.ServicesReportes
             var par61 = "0";
             var par62 = "0";
 
-            var par87 = "0";
-            var par88 = "0";
-            var par72 = "0";
-            var par73 = "0";
-
             var VAR_11 = "0";
             var VAR_50 = "0";
             var VAR_13 = "0";
-
-            var VAR_73 = 0.0d;
-            var VAR_88 = "0";
-            var VAR_63 = "0";
-            var VAR_67 = "0";
-            var VAR_65 = "0";
 
             var VAR_12 = "0";
             var VAR_14 = "0";
@@ -1211,7 +1259,6 @@ namespace ReportesWeb1_2.ServicesReportes
             string Dt_ini_poste = string.Empty;
             string Dt_fin_poste = string.Empty;
             string No_Turno = string.Empty;
-            int Id_Turno = 0;
             string strGrupo = string.Empty;
             string strConcepto = string.Empty;
 
@@ -1222,51 +1269,33 @@ namespace ReportesWeb1_2.ServicesReportes
 
             var db_tot_14 = 0.0d;
             var db_tot_15 = 0.0d;
-            var db_tot_16 = 0.0d;
             var db_tot_18 = 0.0d;
             var db_tot_20 = 0.0d;
             var db_tot_22 = 0.0d;
             var db_tot_24 = 0.0d;
+
+            var db_tot_22_rp = 0.0d;
+            var db_tot_24_rp = 0.0d;
+
+            var db_tot_22_rp4 = 0.0d;
+            var db_tot_24_rp4 = 0.0d;
+
             var db_tot_26 = 0.0d;
-            var db_tot_28 = 0.0d;
-            var db_tot_30 = 0.0d;
             var db_tot_32 = 0.0d;
             var db_tot_35 = 0.0d;
             var db_tot_36 = 0.0d;
-            var db_tot_38 = 0.0d;
-            var db_tot_45 = 0.0d;
-            var db_tot_451 = 0.0d;
-            var db_tot_452 = 0.0d;
-            var db_tot_453 = 0.0d;
-            var db_tot_454 = 0.0d;
-            var db_tot_455 = 0.0d;
             var db_tot_46 = 0.0d;
-            var db_tot_461 = 0.0d;
-            var db_tot_462 = 0.0d;
-            var db_tot_463 = 0.0d;
-            var db_tot_464 = 0.0d;
-            var db_tot_465 = 0.0d;
             var db_tot_47 = 0.0d;
-            var db_tot_471 = 0.0d;
-            var db_tot_472 = 0.0d;
-            var db_tot_473 = 0.0d;
-            var db_tot_474 = 0.0d;
-            var db_tot_475 = 0.0d;
-            var db_tot_48 = 0.0d;
             var db_tot_49 = 0.0d;
             var db_tot_50 = 0.0d;
-            var db_tot_53 = 0.0d;
             var db_tot_531 = 0.0d;
             var db_tot_532 = 0.0d;
             var db_tot_533 = 0.0d;
-            var db_tot_54 = 0.0d;
             var db_tot_541 = 0.0d;
             var db_tot_542 = 0.0d;
             var db_tot_543 = 0.0d;
-            var db_tot_55 = 0.0d;
             var db_tot_56 = 0.0d;
             var db_tot_57 = 0.0d;
-            var db_tot_58 = 0.0d;
             var db_tot_77 = 0.0d;
             var db_tot_78 = 0.0d;
             var db_tot_80 = 0.0d;
@@ -1285,7 +1314,6 @@ namespace ReportesWeb1_2.ServicesReportes
             var db_tot_147 = 0.0d;
             var db_tot_1471 = 0.0d;
 
-            var db_tot_148 = 0.0d;
             var db_tot_149 = 0.0d;
             var db_tot_150 = 0.0d;
 
@@ -1293,135 +1321,6 @@ namespace ReportesWeb1_2.ServicesReportes
 
             DataView dvTarifa;
             DataView dvEvento;
-
-            //tabla 1
-            //------------------
-            System.Data.DataSet odataSetReporte = new System.Data.DataSet();
-            DataTable oDataTableReporte = new DataTable("tabla_reporte");
-            DataColumn oDataColumnaReporte;
-            DataRow oDatarowReporte;
-
-            System.Data.DataSet odataSetReporte_total = new System.Data.DataSet();
-            DataTable oDataTableReporte_total = new DataTable("tabla_reporte_total");
-            DataColumn oDataColumnaReporte_total;
-            DataRow oDatarowReporte_total;
-            //------------------
-
-            //tabla 2
-            //------------------
-            System.Data.DataSet odataSetReporte_2 = new System.Data.DataSet();
-            DataTable oDataTableReporte_2 = new DataTable("tabla_reporte_2");
-            DataColumn oDataColumnaReporte_2;
-            DataRow oDatarowReporte_2;
-
-            System.Data.DataSet odataSetReporte_total_2 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_2 = new DataTable("tabla_reporte_total_2");
-            DataColumn oDataColumnaReporte_total_2;
-            DataRow oDatarowReporte_total_2;
-            //------------------
-
-            //tabla 3
-            //------------------
-            System.Data.DataSet odataSetReporte_3 = new System.Data.DataSet();
-            DataTable oDataTableReporte_3 = new DataTable("tabla_reporte_3");
-            DataColumn oDataColumnaReporte_3;
-            DataRow oDatarowReporte_3;
-
-            System.Data.DataSet odataSetReporte_total_3 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_3 = new DataTable("tabla_reporte_total_3");
-            DataColumn oDataColumnaReporte_total_3;
-            DataRow oDatarowReporte_total_3;
-            //------------------
-
-            //tabla 4
-            //------------------
-            System.Data.DataSet odataSetReporte_4 = new System.Data.DataSet();
-            DataTable oDataTableReporte_4 = new DataTable("tabla_reporte_4");
-            DataColumn oDataColumnaReporte_4;
-            DataRow oDatarowReporte_4;
-
-            System.Data.DataSet odataSetReporte_total_4 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_4 = new DataTable("tabla_reporte_total_4");
-            DataColumn oDataColumnaReporte_total_4;
-            DataRow oDatarowReporte_total_4;
-            //------------------
-
-            //tabla 10 tarjetas bancarias
-            //------------------
-            System.Data.DataSet odataSetReporte_10 = new System.Data.DataSet();
-            DataTable oDataTableReporte_10 = new DataTable("tabla_reporte_10");
-            DataColumn oDataColumnaReporte_10;
-            DataRow oDatarowReporte_10;
-
-            System.Data.DataSet odataSetReporte_total_10 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_10 = new DataTable("tabla_reporte_total_10");
-            DataColumn oDataColumnaReporte_total_10;
-            DataRow oDatarowReporte_total_10;
-            //------------------
-
-            //tabla 5
-            //------------------
-            System.Data.DataSet odataSetReporte_5 = new System.Data.DataSet();
-            DataTable oDataTableReporte_5 = new DataTable("tabla_reporte_5");
-            DataColumn oDataColumnaReporte_5;
-            DataRow oDatarowReporte_5;
-
-            System.Data.DataSet odataSetReporte_total_5 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_5 = new DataTable("tabla_reporte_total_5");
-            DataColumn oDataColumnaReporte_total_5;
-            DataRow oDatarowReporte_total_5;
-            //------------------
-
-            //tabla 6
-            //------------------
-            System.Data.DataSet odataSetReporte_6 = new System.Data.DataSet();
-            DataTable oDataTableReporte_6 = new DataTable("tabla_reporte_6");
-            DataColumn oDataColumnaReporte_6;
-            DataRow oDatarowReporte_6;
-
-            System.Data.DataSet odataSetReporte_total_6 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_6 = new DataTable("tabla_reporte_total_6");
-            DataColumn oDataColumnaReporte_total_6;
-            DataRow oDatarowReporte_total_6;
-            //------------------
-
-            //tabla 7
-            //------------------
-            System.Data.DataSet odataSetReporte_7 = new System.Data.DataSet();
-            DataTable oDataTableReporte_7 = new DataTable("tabla_reporte_7");
-            DataColumn oDataColumnaReporte_7;
-            DataRow oDatarowReporte_7;
-
-            System.Data.DataSet odataSetReporte_total_7 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_7 = new DataTable("tabla_reporte_total_7");
-            DataColumn oDataColumnaReporte_total_7;
-            DataRow oDatarowReporte_total_7;
-            //------------------
-
-            //tabla 8
-            //------------------
-            System.Data.DataSet odataSetReporte_8 = new System.Data.DataSet();
-            DataTable oDataTableReporte_8 = new DataTable("tabla_reporte_8");
-            DataColumn oDataColumnaReporte_8;
-            DataRow oDatarowReporte_8;
-
-            System.Data.DataSet odataSetReporte_total_8 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_8 = new DataTable("tabla_reporte_total_8");
-            DataColumn oDataColumnaReporte_total_8;
-            DataRow oDatarowReporte_total_8;
-            //------------------
-
-            //tabla 9
-            //------------------
-            System.Data.DataSet odataSetReporte_9 = new System.Data.DataSet();
-            DataTable oDataTableReporte_9 = new DataTable("tabla_reporte_9");
-            DataColumn oDataColumnaReporte_9;
-            DataRow oDatarowReporte_9;
-
-            System.Data.DataSet odataSetReporte_total_9 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_9 = new DataTable("tabla_reporte_total_9");
-            DataColumn oDataColumnaReporte_total_9;
-            DataRow oDatarowReporte_total_9;
 
             Dt_ini_poste = FechaSt.AddDays(-1).ToString("MM/dd/yyyy") + " 22:00:00";
             Dt_fin_poste = FechaSt.ToString("MM/dd/yyyy") + " 21:59:59";
@@ -1471,24 +1370,44 @@ namespace ReportesWeb1_2.ServicesReportes
 
             odataSetReporte.Tables.Add(oDataTableReporte);
 
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Grupo");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Concepto");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Descricion_clase");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "Numero_clase");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(1, "Numero");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            oDataColumnaReporte_11_RP = MtGlb.Agregar_datacolum(2, "strNumero");
+            oDataTableReporte_11_RP.Columns.Add(oDataColumnaReporte_11_RP);
+
+            odataSetReporte_11_RP.Tables.Add(oDataTableReporte_11_RP);
+
             ////ARMO MI TIPO TARIFA
-            //StrQuerys = "SELECT MAX(Version_Tarif) as version " +
-            //            "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
-            //            "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
-            //            "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+            StrQuerys = "SELECT MAX(Version_Tarif) as version " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
 
-            //// DC
-            //StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
-            //                        "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+            // DC
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            //StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
 
-            StrQuerys = @"SELECT MAX(Version_Tarif) as version 
-                        FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
-                        WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
-                        AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
-                        AND TRANSACTION.ID_VOIE = voie_physique.id_voie
-                        AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE ";
+            //StrQuerys = @"SELECT MAX(Version_Tarif) as version 
+            //            FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
+            //            WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
+            //            AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
+            //            AND TRANSACTION.ID_VOIE = voie_physique.id_voie
+            //            AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE ";
 
 
             if (MtGlb.QueryDataSet(StrQuerys, "TRANSACTION"))
@@ -1572,28 +1491,6 @@ namespace ReportesWeb1_2.ServicesReportes
 
             //-------------------------------------------------------------------------
 
-            dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
-            dvTarifa.RowFilter = "CODE = 2 ";
-
-            foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
-            {
-                strGrupo = "a";
-                strConcepto = " TARIFA REF. Reducida";
-
-                oDatarowReporte = oDataTableReporte.NewRow();
-
-                oDatarowReporte["Grupo"] = strGrupo;
-                oDatarowReporte["Concepto"] = strConcepto;
-                oDatarowReporte["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"].ToString()));
-                oDatarowReporte["Numero_clase"] = StrLinea;
-
-                oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
-
-
-                oDataTableReporte.Rows.Add(oDatarowReporte);
-            }
-
-            //-------------------------------------------------------------------------
 
             dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
             dvTarifa.RowFilter = "CODE = 72 ";
@@ -1601,7 +1498,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "a";
-                strConcepto = " TARIFA REF. Pago Inmediato";
+                strConcepto = " TARIFA REF. Reducida RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -1612,8 +1509,49 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
 
+                oDataTableReporte.Rows.Add(oDatarowReporte);
+            }
+
+            //-------------------------------------------------------------------------
+
+            dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
+            dvTarifa.RowFilter = "CODE = 73 ";
+
+            foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " TARIFA REF. Reducida RP3";
+
+                oDatarowReporte = oDataTableReporte.NewRow();
+
+                oDatarowReporte["Grupo"] = strGrupo;
+                oDatarowReporte["Concepto"] = strConcepto;
+                oDatarowReporte["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"].ToString()));
+                oDatarowReporte["Numero_clase"] = StrLinea;
+
+                oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
 
                 oDataTableReporte.Rows.Add(oDatarowReporte);
+            }
+
+            dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
+            dvTarifa.RowFilter = "CODE = 74 ";
+
+            foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " TARIFA REF. Reducida RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"].ToString()));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                oDatarowReporte_11_RP["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
+
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
             }
 
             //' ''''''''''''''''''FIN TARIFAS
@@ -2187,6 +2125,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
             }
 
+
             //res pago inmediato aforo C21  C23 new 
 
             StrQuerys = "SELECT TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2,SUM(PRIX_TOTAL) AS Total, count(*) as cruces, SUM(code_grille_tarif) as excedentes " +
@@ -2199,7 +2138,7 @@ namespace ReportesWeb1_2.ServicesReportes
 
             StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
 
-            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 71 or ID_PAIEMENT = 72 or ID_PAIEMENT = 73 or ID_PAIEMENT = 74 or ID_PAIEMENT = 10) " +
+            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 72) " +
                                     "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
                                     "GROUP BY TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2";
 
@@ -2210,7 +2149,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds3.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2235,7 +2174,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2264,7 +2203,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds5.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2293,7 +2232,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2330,7 +2269,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds7.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2354,7 +2293,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2386,7 +2325,7 @@ namespace ReportesWeb1_2.ServicesReportes
             foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
             {
                 strGrupo = "d";
-                strConcepto = " Res. Pago Inmediato Aforo";
+                strConcepto = " Res. Pago Inmediato Aforo RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2423,7 +2362,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
 
                 strGrupo = "d";
-                strConcepto = "Ingreso";
+                strConcepto = "Ingreso RP2";
 
                 oDatarowReporte = oDataTableReporte.NewRow();
 
@@ -2469,6 +2408,575 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 oDataTableReporte.Rows.Add(oDatarowReporte);
             }
+
+            //----------------------------------------------------------------
+            //res pago inmediato aforo 73
+
+            StrQuerys = "SELECT TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2,SUM(PRIX_TOTAL) AS Total, count(*) as cruces, SUM(code_grille_tarif) as excedentes " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+
+            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 73) " +
+                                    "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
+                                    "GROUP BY TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2";
+
+            MtGlb.QueryDataSet(StrQuerys, "TRANSACTION");
+
+            dvEvento = MtGlb.Ds.Tables["TRANSACTION"].DefaultView;
+
+            foreach (DataRow item in MtGlb.Ds3.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp = db_tot_22_rp + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    db_tot_24_rp = db_tot_24_rp + Convert.ToDouble(dvEvento[0]["Total"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //excedentes asignados
+            foreach (DataRow item in MtGlb.Ds5.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp = db_tot_22_rp + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 73 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.Asignacion_excedente_clase(Convert.ToInt32(item["ID_CLASSE"]))]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo exedentes
+            foreach (DataRow item in MtGlb.Ds7.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = dvEvento[0]["excedentes"];
+                    oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["excedentes"];
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 73 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.IIf(Convert.ToString(item["ID_CLASSE"]).Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo excedentes directos aclase
+            foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    //10,11
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case int n when (n == 10 || n == 18):
+                            oDatarowReporte_11_RP["Numero"] = dvEvento[0]["cruces"];
+                            oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["cruces"];
+                            break;
+                        case 11:
+                            oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP3";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 73 ";
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case 10:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        case 11:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2));
+                            break;
+                        case 18:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL16"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp = db_tot_24_rp + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //----------------------------------------------------------------
+            //res pago inmediato aforo 74
+
+            StrQuerys = "SELECT TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2,SUM(PRIX_TOTAL) AS Total, count(*) as cruces, SUM(code_grille_tarif) as excedentes " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+
+            StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 74) " +
+                                    "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
+                                    "GROUP BY TYPE_CLASSE.ID_CLASSE, TYPE_CLASSE.ORDRE_AFFICHAGE, TYPE_CLASSE.LIBELLE_CLASSE, TYPE_CLASSE.LIBELLE_CLASSE_L2, TYPE_CLASSE.LIBELLE_COURT1, TYPE_CLASSE.LIBELLE_COURT2";
+
+            MtGlb.QueryDataSet(StrQuerys, "TRANSACTION");
+
+            dvEvento = MtGlb.Ds.Tables["TRANSACTION"].DefaultView;
+
+            foreach (DataRow item in MtGlb.Ds3.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp4 = db_tot_22_rp4 + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["Total"]);
+                    db_tot_24_rp4 = db_tot_24_rp4 + Convert.ToDouble(dvEvento[0]["Total"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //excedentes asignados
+            foreach (DataRow item in MtGlb.Ds5.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_22_rp4 = db_tot_22_rp4 + Convert.ToDouble(dvEvento[0]["cruces"]);
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+
+                if (Convert.ToInt32(item["ID_CLASSE"]) == 10 || Convert.ToInt32(item["ID_CLASSE"]) == 11 || Convert.ToInt32(item["ID_CLASSE"]) == 17)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(1);
+                else if (Convert.ToInt32(item["ID_CLASSE"]) == 16 || Convert.ToInt32(item["ID_CLASSE"]) == 18)
+                    oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(9);
+
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 74 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.Asignacion_excedente_clase(Convert.ToInt32(item["ID_CLASSE"]))]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                    db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo exedentes
+            foreach (DataRow item in MtGlb.Ds7.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    oDatarowReporte_11_RP["Numero"] = dvEvento[0]["excedentes"];
+                    oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["excedentes"];
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 74 ";
+                    dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL" + MtGlb.IIf(Convert.ToString(item["ID_CLASSE"]).Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())]);
+
+                    oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]);
+                    db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["excedentes"]));
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
+            //solo excedentes directos aclase
+            foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
+            {
+                strGrupo = "a";
+                strConcepto = " Res. Pago Inmediato Aforo RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    //10,11
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case int n when (n == 10 || n == 18):
+                            oDatarowReporte_11_RP["Numero"] = dvEvento[0]["cruces"];
+                            oDatarowReporte_11_RP["strNumero"] = dvEvento[0]["cruces"];
+                            break;
+                        case 11:
+                            oDatarowReporte_11_RP["Numero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            oDatarowReporte_11_RP["strNumero"] = Convert.ToDouble(dvEvento[0]["cruces"]) * 2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+
+                strGrupo = "a";
+                strConcepto = "Ingreso RP4";
+
+                oDatarowReporte_11_RP = oDataTableReporte_11_RP.NewRow();
+
+                oDatarowReporte_11_RP["Grupo"] = strGrupo;
+                oDatarowReporte_11_RP["Concepto"] = strConcepto;
+                oDatarowReporte_11_RP["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                oDatarowReporte_11_RP["Numero_clase"] = StrLinea;
+
+                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                if (dvEvento.Count >= 1)
+                {
+                    dvTarifa.RowFilter = "CODE = 74 ";
+
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
+                    {
+                        case 10:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        case 11:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                            db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * (Convert.ToDouble(dvEvento[0]["cruces"]) * 2));
+                            break;
+                        case 18:
+                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL16"]);
+                            oDatarowReporte_11_RP["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            oDatarowReporte_11_RP["strNumero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                            db_tot_24_rp4 = db_tot_24_rp4 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    oDatarowReporte_11_RP["Numero"] = 0;
+                    oDatarowReporte_11_RP["strNumero"] = 0;
+                }
+                oDataTableReporte_11_RP.Rows.Add(oDatarowReporte_11_RP);
+            }
+
 
             //aforo total new
             //''''''''''''''''''''''''''''''
@@ -3403,6 +3911,23 @@ namespace ReportesWeb1_2.ServicesReportes
             odataSetReporte_total.Tables.Add(oDataTableReporte_total);
             //--------------------------------------------------------
 
+            //--------------------------------------------------------
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "Cantidad");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "Total");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "Tipo_Total");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            oDataColumnaReporte_total_11_RP = MtGlb.Agregar_datacolum(2, "strNumero");
+            oDataTableReporte_total_11_RP.Columns.Add(oDataColumnaReporte_total_11_RP);
+
+            odataSetReporte_total_11_RP.Tables.Add(oDataTableReporte_total_11_RP);
+            //--------------------------------------------------------
+
             oDatarowReporte_total = oDataTableReporte_total.NewRow();
 
             oDatarowReporte_total["Cantidad"] = "001";
@@ -3487,6 +4012,48 @@ namespace ReportesWeb1_2.ServicesReportes
             oDatarowReporte_total["strNumero"] = db_tot_24;
 
             oDataTableReporte_total.Rows.Add(oDatarowReporte_total);
+
+            //-----------------------------------
+            oDatarowReporte_total_11_RP = oDataTableReporte_total_11_RP.NewRow();
+
+            oDatarowReporte_total_11_RP["Cantidad"] = "22";
+            oDatarowReporte_total_11_RP["Total"] = "             Total           ";
+            oDatarowReporte_total_11_RP["Tipo_Total"] = " Aforo";
+            oDatarowReporte_total_11_RP["strNumero"] = db_tot_22_rp;
+
+            oDataTableReporte_total_11_RP.Rows.Add(oDatarowReporte_total_11_RP);
+            //---------------
+            //---------------
+            oDatarowReporte_total_11_RP = oDataTableReporte_total_11_RP.NewRow();
+
+            oDatarowReporte_total_11_RP["Cantidad"] = "24";
+            oDatarowReporte_total_11_RP["Total"] = "             Total           ";
+            oDatarowReporte_total_11_RP["Tipo_Total"] = " Ingreso";
+            oDatarowReporte_total_11_RP["strNumero"] = db_tot_24_rp;
+
+            oDataTableReporte_total_11_RP.Rows.Add(oDatarowReporte_total_11_RP);
+            //-----------------------------------
+
+            //-----------------------------------
+            oDatarowReporte_total_11_RP = oDataTableReporte_total_11_RP.NewRow();
+
+            oDatarowReporte_total_11_RP["Cantidad"] = "23";
+            oDatarowReporte_total_11_RP["Total"] = "             Total           ";
+            oDatarowReporte_total_11_RP["Tipo_Total"] = " Aforo";
+            oDatarowReporte_total_11_RP["strNumero"] = db_tot_22_rp4;
+
+            oDataTableReporte_total_11_RP.Rows.Add(oDatarowReporte_total_11_RP);
+            //---------------
+            //---------------
+            oDatarowReporte_total_11_RP = oDataTableReporte_total_11_RP.NewRow();
+
+            oDatarowReporte_total_11_RP["Cantidad"] = "25";
+            oDatarowReporte_total_11_RP["Total"] = "             Total           ";
+            oDatarowReporte_total_11_RP["Tipo_Total"] = " Ingreso";
+            oDatarowReporte_total_11_RP["strNumero"] = db_tot_24_rp4;
+
+            oDataTableReporte_total_11_RP.Rows.Add(oDatarowReporte_total_11_RP);
+            //-----------------------------------
 
             oDatarowReporte_total = oDataTableReporte_total.NewRow();
 
@@ -14672,11 +15239,11 @@ namespace ReportesWeb1_2.ServicesReportes
             //Reporte.Par11 = par11;
             //par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11
 
-            DataSet1(odataSetReporte, odataSetReporte_total, odataSetReporte_2, odataSetReporte_total_2, odataSetReporte_3, odataSetReporte_total_3, odataSetReporte_4, odataSetReporte_total_4, odataSetReporte_10, odataSetReporte_total_10, odataSetReporte_5, odataSetReporte_total_5, odataSetReporte_6, odataSetReporte_total_6, odataSetReporte_7, odataSetReporte_total_7, odataSetReporte_8, odataSetReporte_total_8, odataSetReporte_9, odataSetReporte_total_9);
+            DataSet1(odataSetReporte, odataSetReporte_total, odataSetReporte_2, odataSetReporte_total_2, odataSetReporte_3, odataSetReporte_total_3, odataSetReporte_4, odataSetReporte_total_4, odataSetReporte_10, odataSetReporte_total_10, odataSetReporte_5, odataSetReporte_total_5, odataSetReporte_6, odataSetReporte_total_6, odataSetReporte_7, odataSetReporte_total_7, odataSetReporte_8, odataSetReporte_total_8, odataSetReporte_9, odataSetReporte_total_9, odataSetReporte_11_RP, odataSetReporte_total_11_RP);
 
             foreach (DataRow item in dataSet1.Tables[0].Rows)
             {
-                if (item["Concepto"].ToString() == " Normal Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " Res. Pago Inmediato Aforo" || item["Concepto"].ToString() == "Aforo Total")
+                if (item["Concepto"].ToString() == " Normal Aforo" || item["Concepto"].ToString() == " REDUCIDA Aforo" || item["Concepto"].ToString() == " TARIFA REF. Reducida RP2" || item["Concepto"].ToString() == " TARIFA REF. Reducida RP3" || item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP2" || item["Concepto"].ToString() == "Aforo Total")
                     Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n0}", Convert.ToDouble(item["Numero"])), null);
                 else
                     Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n}", Convert.ToDouble(item["Numero"])), null);
@@ -14830,6 +15397,22 @@ namespace ReportesWeb1_2.ServicesReportes
                     Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n}", Convert.ToDouble(item["strNumero"])), null);
             }
 
+            foreach (DataRow item in dataSet1.Tables[20].Rows)
+            {
+                if (item["Concepto"].ToString() == " TARIFA REF. Reducida RP4" || item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP3" || item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP4")
+                    Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n0}", Convert.ToDouble(item["Numero"])), null);
+                else
+                    Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n}", Convert.ToDouble(item["Numero"])), null);
+            }
+
+            foreach (DataRow item in dataSet1.Tables[21].Rows)
+            {
+                if (item["Tipo_Total"].ToString() == " Aforo")
+                    Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n0}", Convert.ToDouble(item["strNumero"])), null);
+                else
+                    Reporte.GetType().GetProperty("Par" + item["Param_telerik"]).SetValue(Reporte, String.Format("{0:n}", Convert.ToDouble(item["strNumero"])), null);
+            }
+
             return Reporte;
 
             //return dataSet1;
@@ -14879,9 +15462,98 @@ namespace ReportesWeb1_2.ServicesReportes
             return rpt;
         }
 
-        private void DataSet1(System.Data.DataSet data, System.Data.DataSet data2, System.Data.DataSet data3, System.Data.DataSet data4, System.Data.DataSet data5, System.Data.DataSet data6, System.Data.DataSet data7, System.Data.DataSet data8, System.Data.DataSet data9, System.Data.DataSet data10, System.Data.DataSet data11, System.Data.DataSet data12, System.Data.DataSet data13, System.Data.DataSet data14, System.Data.DataSet data15, System.Data.DataSet data16, System.Data.DataSet data17, System.Data.DataSet data18, System.Data.DataSet data19, System.Data.DataSet data20)
+        private void DataSet1(System.Data.DataSet data, System.Data.DataSet data2, System.Data.DataSet data3, System.Data.DataSet data4, System.Data.DataSet data5, System.Data.DataSet data6, System.Data.DataSet data7, System.Data.DataSet data8, System.Data.DataSet data9, System.Data.DataSet data10, System.Data.DataSet data11, System.Data.DataSet data12, System.Data.DataSet data13, System.Data.DataSet data14, System.Data.DataSet data15, System.Data.DataSet data16, System.Data.DataSet data17, System.Data.DataSet data18, System.Data.DataSet data19, System.Data.DataSet data20, System.Data.DataSet data21, System.Data.DataSet data22)
         {
             #region Data
+
+            DataTable DataTableReporte1 = new DataTable("tabla_reporte 1");
+            DataColumn DataColumnaReporte1;
+            DataRow DatarowReporte1;
+
+            DataTable DataTableReporte2 = new DataTable("tabla_reporte 2");
+            DataColumn DataColumnaReporte2;
+            DataRow DatarowReporte2;
+
+            DataTable DataTableReporte3 = new DataTable("tabla_reporte 3");
+            DataColumn DataColumnaReporte3;
+            DataRow DatarowReporte3;
+
+            DataTable DataTableReporte4 = new DataTable("tabla_reporte 4");
+            DataColumn DataColumnaReporte4;
+            DataRow DatarowReporte4;
+
+            DataTable DataTableReporte5 = new DataTable("tabla_reporte 5");
+            DataColumn DataColumnaReporte5;
+            DataRow DatarowReporte5;
+
+            DataTable DataTableReporte6 = new DataTable("tabla_reporte 6");
+            DataColumn DataColumnaReporte6;
+            DataRow DatarowReporte6;
+
+            DataTable DataTableReporte7 = new DataTable("tabla_reporte 7");
+            DataColumn DataColumnaReporte7;
+            DataRow DatarowReporte7;
+
+            DataTable DataTableReporte8 = new DataTable("tabla_reporte 8");
+            DataColumn DataColumnaReporte8;
+            DataRow DatarowReporte8;
+
+            DataTable DataTableReporte9 = new DataTable("tabla_reporte 9");
+            DataColumn DataColumnaReporte9;
+            DataRow DatarowReporte9;
+
+            DataTable DataTableReporte10 = new DataTable("tabla_reporte 10");
+            DataColumn DataColumnaReporte10;
+            DataRow DatarowReporte10;
+
+            DataTable DataTableReporte11 = new DataTable("tabla_reporte 11");
+            DataColumn DataColumnaReporte11;
+            DataRow DatarowReporte11;
+
+            DataTable DataTableReporte12 = new DataTable("tabla_reporte 12");
+            DataColumn DataColumnaReporte12;
+            DataRow DatarowReporte12;
+
+            DataTable DataTableReporte13 = new DataTable("tabla_reporte 13");
+            DataColumn DataColumnaReporte13;
+            DataRow DatarowReporte13;
+
+            DataTable DataTableReporte14 = new DataTable("tabla_reporte 14");
+            DataColumn DataColumnaReporte14;
+            DataRow DatarowReporte14;
+
+            DataTable DataTableReporte15 = new DataTable("tabla_reporte 15");
+            DataColumn DataColumnaReporte15;
+            DataRow DatarowReporte15;
+
+            DataTable DataTableReporte16 = new DataTable("tabla_reporte 16");
+            DataColumn DataColumnaReporte16;
+            DataRow DatarowReporte16;
+
+            DataTable DataTableReporte17 = new DataTable("tabla_reporte 17");
+            DataColumn DataColumnaReporte17;
+            DataRow DatarowReporte17;
+
+            DataTable DataTableReporte18 = new DataTable("tabla_reporte 18");
+            DataColumn DataColumnaReporte18;
+            DataRow DatarowReporte18;
+
+            DataTable DataTableReporte19 = new DataTable("tabla_reporte 19");
+            DataColumn DataColumnaReporte19;
+            DataRow DatarowReporte19;
+
+            DataTable DataTableReporte20 = new DataTable("tabla_reporte 20");
+            DataColumn DataColumnaReporte20;
+            DataRow DatarowReporte20;
+
+            DataTable DataTableReporte21 = new DataTable("tabla_reporte 21_RP");
+            DataColumn DataColumnaReporte21;
+            DataRow DatarowReporte21;
+
+            DataTable DataTableReporte22 = new DataTable("tabla_reporte 22_RP");
+            DataColumn DataColumnaReporte22;
+            DataRow DatarowReporte22;
+
             DataColumnaReporte1 = MtGlb.Agregar_datacolum(2, "Grupo");
             DataTableReporte1.Columns.Add(DataColumnaReporte1);
 
@@ -15352,6 +16024,52 @@ namespace ReportesWeb1_2.ServicesReportes
             dataSet1.Tables.Add(DataTableReporte20);
 
             /********************************************************************/
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(2, "Grupo");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(2, "Concepto");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(2, "Descricion_clase");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(2, "Numero_clase");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(1, "Numero");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(1, "Param_telerik");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            DataColumnaReporte21 = MtGlb.Agregar_datacolum(2, "Table_telerik");
+            DataTableReporte21.Columns.Add(DataColumnaReporte21);
+
+            dataSet1.Tables.Add(DataTableReporte21);
+
+            /********************************************************************/
+
+            DataColumnaReporte22 = MtGlb.Agregar_datacolum(2, "Cantidad");
+            DataTableReporte22.Columns.Add(DataColumnaReporte22);
+
+            DataColumnaReporte22 = MtGlb.Agregar_datacolum(2, "Total");
+            DataTableReporte22.Columns.Add(DataColumnaReporte22);
+
+            DataColumnaReporte22 = MtGlb.Agregar_datacolum(2, "Tipo_Total");
+            DataTableReporte22.Columns.Add(DataColumnaReporte22);
+
+            DataColumnaReporte22 = MtGlb.Agregar_datacolum(2, "strNumero");
+            DataTableReporte22.Columns.Add(DataColumnaReporte22);
+
+            DataColumnaReporte22 = MtGlb.Agregar_datacolum(1, "Param_telerik");
+            DataTableReporte22.Columns.Add(DataColumnaReporte22);
+
+            DataColumnaReporte22 = MtGlb.Agregar_datacolum(2, "Table_telerik");
+            DataTableReporte22.Columns.Add(DataColumnaReporte22);
+
+            dataSet1.Tables.Add(DataTableReporte22);
+
+            /********************************************************************/
             #endregion
 
             #region comentariosDouble 
@@ -15654,7 +16372,7 @@ namespace ReportesWeb1_2.ServicesReportes
                         }
                     }
                 }
-                else if (item["Concepto"].ToString() == " TARIFA REF. Reducida")
+                else if (item["Concepto"].ToString() == " TARIFA REF. Reducida RP2")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
                     {
@@ -15867,7 +16585,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == "TARIFA REF. Reducida"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -15890,7 +16608,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == "TARIFA REF. Reducida"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -15911,7 +16629,7 @@ namespace ReportesWeb1_2.ServicesReportes
                         }
                     }
                 }
-                else if (item["Concepto"].ToString() == " TARIFA REF. Pago Inmediato")
+                else if (item["Concepto"].ToString() == " TARIFA REF. Reducida RP3")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
                     {
@@ -16124,7 +16842,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == "TARIFA REF. Pago Inmediato"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP3"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -16147,7 +16865,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == "TARIFA REF. Pago Inmediato"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP3"
                                       select myRow;
 
                         if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
@@ -18223,12 +18941,12 @@ namespace ReportesWeb1_2.ServicesReportes
                     }
                 }
 
-                else if (item["Concepto"].ToString() == " Res. Pago Inmediato Aforo")
+                else if (item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP2")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18262,7 +18980,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18296,7 +19014,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18330,7 +19048,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18364,7 +19082,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18398,7 +19116,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18432,7 +19150,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18466,7 +19184,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18500,7 +19218,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18534,7 +19252,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18568,7 +19286,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18602,7 +19320,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18636,7 +19354,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18670,7 +19388,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18704,7 +19422,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18736,12 +19454,12 @@ namespace ReportesWeb1_2.ServicesReportes
                         }
                     }
                 }
-                else if (item["Concepto"].ToString() == "Ingreso" && item["Grupo"].ToString() == "d")
+                else if (item["Concepto"].ToString() == "Ingreso RP2" && item["Grupo"].ToString() == "d")
                 {
                     if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18775,7 +19493,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18809,7 +19527,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18843,7 +19561,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18877,7 +19595,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18911,7 +19629,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18945,7 +19663,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -18979,7 +19697,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19013,7 +19731,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19047,7 +19765,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19081,7 +19799,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19115,7 +19833,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19149,7 +19867,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19183,7 +19901,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -19217,7 +19935,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "d")
                     {
                         var dataRow = from myRow in DataTableReporte1.AsEnumerable()
-                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso"
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "d" && myRow.Field<string>("Concepto") == "Ingreso RP2"
                                       select myRow;
 
                         if (dataRow.Count() == 0)
@@ -31897,6 +32615,2412 @@ namespace ReportesWeb1_2.ServicesReportes
                     }
                 }
             }
+
+
+
+            // RPI
+            table_numero = 21;
+            foreach (DataRow item in data21.Tables[0].Rows)
+            {
+                DataTableReporte21.Columns["Numero"].ReadOnly = false;
+
+                if (item["Concepto"].ToString() == " TARIFA REF. Reducida RP4")
+                {
+                    if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "a")
+                    {
+                        DatarowReporte21 = DataTableReporte21.NewRow();
+
+                        DatarowReporte21["Grupo"] = item["Grupo"];
+                        DatarowReporte21["Concepto"] = item["Concepto"];
+                        DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                        DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                        DatarowReporte21["Numero"] = item["Numero"];
+                        DatarowReporte21["Param_telerik"] = param_numero;
+                        DatarowReporte21["Table_telerik"] = table_numero;
+
+                        DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                        param_numero++;
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                            DatarowReporte21["Numero"] = item["Numero"];
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Concepto") == " TARIFA REF. Reducida RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0 && item["Numero"].ToString() != "0")
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+                            DatarowReporte21["Numero"] = item["Numero"];
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                    }
+                }
+                else if (item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP3")
+                {
+                    if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Motos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Motos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Motos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Motos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autobuses2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autobuses2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autobuses3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autobuses3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autobuses4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autobuses4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones5 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones5;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones5 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones5;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones6 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones6;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones6 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones6;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones7 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones7;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones7 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones7;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones8 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones8;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones8 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones8;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones9 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones9;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones9 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones9;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            EE1 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = EE1;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            EE1 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = EE1;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            EE2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = EE2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            EE2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = EE2;
+                        }
+                    }
+                }
+                else if (item["Concepto"].ToString() == "Ingreso RP3" && item["Grupo"].ToString() == "a")
+                {
+                    if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Autos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Autos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Motos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Motos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Motos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Motos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autobuses2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autobuses2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autobuses3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autobuses3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Autobuses3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Autobuses3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autobuses4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autobuses4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Autobuses4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Autobuses4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones5 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones5;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones5 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones5;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones6 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones6;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones6 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones6;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones7 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones7;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones7 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones7;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones8 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones8;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones8 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones8;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones9 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones9;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones9 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones9;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _EE1 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _EE1;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _EE1 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _EE1;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP3"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _EE2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _EE2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _EE2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _EE2;
+                        }
+                    }
+                }
+                else if (item["Concepto"].ToString() == " Res. Pago Inmediato Aforo RP4")
+                {
+                    if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Motos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Motos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Motos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Motos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autobuses2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autobuses2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autobuses3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autobuses3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Autobuses4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Autobuses4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones5 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones5;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones5 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones5;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones6 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones6;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones6 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones6;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones7 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones7;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones7 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones7;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones8 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones8;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones8 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones8;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            Camiones9 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = Camiones9;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Camiones9 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Camiones9;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            EE1 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = EE1;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            EE1 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = EE1;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == " Res. Pago Inmediato Aforo RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            EE2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = EE2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            EE2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = EE2;
+                        }
+                    }
+                }
+                else if (item["Concepto"].ToString() == "Ingreso RP4" && item["Grupo"].ToString() == "a")
+                {
+                    if (item["Descricion_clase"].ToString() == "Autos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Autos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Autos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Motos" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Motos" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Motos = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Motos;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Motos += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Motos;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autobuses2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autobuses2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            Autobuses2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = Autobuses2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autobuses3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autobuses3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Autobuses3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Autobuses3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Autobuses" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Autobuses" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Autobuses4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Autobuses4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Autobuses4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Autobuses4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "2" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones2;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "3" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "3" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones3 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones3;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones3 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones3;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "4" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "4" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones4 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones4;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones4 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones4;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "5" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "5" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones5 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones5;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones5 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones5;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "6" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "6" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones6 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones6;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones6 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones6;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "7" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "7" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones7 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones7;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones7 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones7;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "8" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "8" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones8 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones8;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones8 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones8;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Camiones" && item["Numero_clase"].ToString() == "9" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Descricion_clase") == "Camiones" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Numero_clase") == "9" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _Camiones9 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _Camiones9;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _Camiones9 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _Camiones9;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE1" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE1" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _EE1 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _EE1;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _EE1 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _EE1;
+                        }
+                    }
+                    else if (item["Descricion_clase"].ToString() == "Ejes Excedentes" && item["Numero_clase"].ToString() == "EE2" && item["Grupo"].ToString() == "a")
+                    {
+                        var dataRow = from myRow in DataTableReporte21.AsEnumerable()
+                                      where myRow.Field<string>("Numero_clase") == "EE2" && myRow.Field<string>("Grupo") == "a" && myRow.Field<string>("Concepto") == "Ingreso RP4"
+                                      select myRow;
+
+                        if (dataRow.Count() == 0)
+                        {
+                            DatarowReporte21 = DataTableReporte21.NewRow();
+
+                            DatarowReporte21["Grupo"] = item["Grupo"];
+                            DatarowReporte21["Concepto"] = item["Concepto"];
+                            DatarowReporte21["Descricion_clase"] = item["Descricion_clase"];
+                            DatarowReporte21["Numero_clase"] = item["Numero_clase"];
+
+                            _EE2 = Convert.ToDouble(item["Numero"]);
+
+                            DatarowReporte21["Numero"] = _EE2;
+                            DatarowReporte21["Param_telerik"] = param_numero;
+                            DatarowReporte21["Table_telerik"] = table_numero;
+
+                            DataTableReporte21.Rows.Add(DatarowReporte21);
+
+                            param_numero++;
+                        }
+                        else
+                        {
+                            int i = DataTableReporte21.Rows.IndexOf(dataRow.FirstOrDefault());
+
+                            _EE2 += Convert.ToDouble(item["Numero"]);
+
+                            DataTableReporte21.Rows[i]["Numero"] = _EE2;
+                        }
+                    }
+                }
+            }
+
+            table_numero = 22;
+            foreach (DataRow item in data22.Tables[0].Rows)
+            {
+                if (item["strNumero"].ToString() != string.Empty)
+                {
+                    DatarowReporte22 = DataTableReporte22.NewRow();
+
+                    DatarowReporte22["Cantidad"] = item["Cantidad"];
+                    DatarowReporte22["Total"] = item["Total"];
+                    DatarowReporte22["Tipo_Total"] = item["Tipo_Total"];
+                    DatarowReporte22["strNumero"] = item["strNumero"];
+
+                    DatarowReporte22["Param_telerik"] = param_numero;
+                    DatarowReporte22["Table_telerik"] = table_numero;
+
+                    param_numero++;
+
+                    DataTableReporte22.Rows.Add(DatarowReporte22);
+                }
+            }
+
+            oDataTableReporte.Clear();
+            oDataTableReporte.Dispose();
+
+            oDataTableReporte_total.Clear();
+            oDataTableReporte_total.Dispose();
+
+            oDataTableReporte_2.Clear();
+            oDataTableReporte_2.Dispose();
+
+            oDataTableReporte_total_2.Clear();
+            oDataTableReporte_total_2.Dispose();
+
+            oDataTableReporte_3.Clear();
+            oDataTableReporte_3.Dispose();
+
+            oDataTableReporte_total_3.Clear();
+            oDataTableReporte_total_3.Dispose();
+
+            oDataTableReporte_4.Clear();
+            oDataTableReporte_4.Dispose();
+
+            oDataTableReporte_total_4.Clear();
+            oDataTableReporte_total_4.Dispose();
+
+            oDataTableReporte_5.Clear();
+            oDataTableReporte_5.Dispose();
+
+            oDataTableReporte_total_5.Clear();
+            oDataTableReporte_total_5.Dispose();
+
+            oDataTableReporte_7.Clear();
+            oDataTableReporte_7.Dispose();
+
+            oDataTableReporte_total_7.Clear();
+            oDataTableReporte_total_7.Dispose();
+
+            oDataTableReporte_8.Clear();
+            oDataTableReporte_8.Dispose();
+
+            oDataTableReporte_total_8.Clear();
+            oDataTableReporte_total_8.Dispose();
+
+            oDataTableReporte_9.Clear();
+            oDataTableReporte_9.Dispose();
+
+            oDataTableReporte_total_9.Clear();
+            oDataTableReporte_total_9.Dispose();
+
+            oDataTableReporte_10.Clear();
+            oDataTableReporte_10.Dispose();
+
+            oDataTableReporte_total_10.Clear();
+            oDataTableReporte_total_10.Dispose();
+
+            oDataTableReporte_6.Clear();
+            oDataTableReporte_6.Dispose();
+
+            oDataTableReporte_total_6.Clear();
+            oDataTableReporte_total_6.Dispose();
+
+            oDataTableReporte_11_RP.Clear();
+            oDataTableReporte_11_RP.Dispose();
+
+            oDataTableReporte_total_11_RP.Clear();
+            oDataTableReporte_total_11_RP.Dispose();
         }
     }
 }

@@ -236,7 +236,7 @@ namespace ReportesWeb1_2.ServicesReportes
             string H_inicio_turno = string.Empty;
             string H_fin_turno = string.Empty;
             string No_Turno = string.Empty;
-            int Id_Turno = 0;
+            short Id_Turno = 0;
             var Reporte = new PreCRViewModel();
 
             var fechaOpeTemp = string.Empty;
@@ -1769,53 +1769,28 @@ namespace ReportesWeb1_2.ServicesReportes
 
             var db_tot_14 = 0.0d;
             var db_tot_15 = 0.0d;
-            var db_tot_16 = 0.0d;
             var db_tot_18 = 0.0d;
             var db_tot_20 = 0.0d;
             var db_tot_22 = 0.0d;
             var db_tot_24 = 0.0d;
             var db_tot_26 = 0.0d;
-            var db_tot_28 = 0.0d;
-            var db_tot_30 = 0.0d;
             var db_tot_32 = 0.0d;
             var db_tot_35 = 0.0d;
             var db_tot_36 = 0.0d;
-            var db_tot_38 = 0.0d;
-            var db_tot_45 = 0.0d;
-            var db_tot_451 = 0.0d;
-            var db_tot_452 = 0.0d;
-            var db_tot_453 = 0.0d;
-            var db_tot_454 = 0.0d;
-            var db_tot_455 = 0.0d;
             var db_tot_46 = 0.0d;
-            var db_tot_461 = 0.0d;
-            var db_tot_462 = 0.0d;
-            var db_tot_463 = 0.0d;
-            var db_tot_464 = 0.0d;
-            var db_tot_465 = 0.0d;
             var db_tot_47 = 0.0d;
-            var db_tot_471 = 0.0d;
-            var db_tot_472 = 0.0d;
-            var db_tot_473 = 0.0d;
-            var db_tot_474 = 0.0d;
-            var db_tot_475 = 0.0d;
-            var db_tot_48 = 0.0d;
             var db_tot_49 = 0.0d;
             var db_tot_50 = 0.0d;
-            var db_tot_53 = 0.0d;
             var db_tot_531 = 0.0d;
             var db_tot_532 = 0.0d;
             //Gerardo
             var db_tot_533 = 0.0d;
-            var db_tot_54 = 0.0d;
             var db_tot_541 = 0.0d;
             var db_tot_542 = 0.0d;
             //Gerardo
             var db_tot_543 = 0.0d;
-            var db_tot_55 = 0.0d;
             var db_tot_56 = 0.0d;
             var db_tot_57 = 0.0d;
-            var db_tot_58 = 0.0d;
             var db_tot_77 = 0.0d;
             var db_tot_78 = 0.0d;
             var db_tot_80 = 0.0d;
@@ -1834,7 +1809,6 @@ namespace ReportesWeb1_2.ServicesReportes
             var db_tot_147 = 0.0d;
             var db_tot_1471 = 0.0d;
 
-            var db_tot_148 = 0.0d;
             var db_tot_149 = 0.0d;
             var db_tot_150 = 0.0d;
 

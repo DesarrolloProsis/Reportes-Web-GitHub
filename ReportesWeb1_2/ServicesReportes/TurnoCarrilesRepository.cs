@@ -29,95 +29,148 @@ namespace ReportesWeb1_2.ServicesReportes
         static string StrLinea = string.Empty;
         int int_version_tarifa = 0;
 
+        //tabla 1
+        //------------------
+        System.Data.DataSet odataSetReporte = new System.Data.DataSet();
+        DataTable oDataTableReporte = new DataTable("tabla_reporte");
+        DataColumn oDataColumnaReporte;
+        DataRow oDatarowReporte;
+
+        System.Data.DataSet odataSetReporte_total = new System.Data.DataSet();
+        DataTable oDataTableReporte_total = new DataTable("tabla_reporte_total");
+        DataColumn oDataColumnaReporte_total;
+        DataRow oDatarowReporte_total;
+        //------------------
+
+        //tabla 2
+        //------------------
+        System.Data.DataSet odataSetReporte_2 = new System.Data.DataSet();
+        DataTable oDataTableReporte_2 = new DataTable("tabla_reporte_2");
+        DataColumn oDataColumnaReporte_2;
+        DataRow oDatarowReporte_2;
+
+        System.Data.DataSet odataSetReporte_total_2 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_2 = new DataTable("tabla_reporte_total_2");
+        DataColumn oDataColumnaReporte_total_2;
+        DataRow oDatarowReporte_total_2;
+        //------------------
+
+        //tabla 3
+        //------------------
+        System.Data.DataSet odataSetReporte_3 = new System.Data.DataSet();
+        DataTable oDataTableReporte_3 = new DataTable("tabla_reporte_3");
+        DataColumn oDataColumnaReporte_3;
+        DataRow oDatarowReporte_3;
+
+        System.Data.DataSet odataSetReporte_total_3 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_3 = new DataTable("tabla_reporte_total_3");
+        DataColumn oDataColumnaReporte_total_3;
+        DataRow oDatarowReporte_total_3;
+        //------------------
+
+        //tabla 4
+        //------------------
+        System.Data.DataSet odataSetReporte_4 = new System.Data.DataSet();
+        DataTable oDataTableReporte_4 = new DataTable("tabla_reporte_4");
+        DataColumn oDataColumnaReporte_4;
+        DataRow oDatarowReporte_4;
+
+        System.Data.DataSet odataSetReporte_total_4 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_4 = new DataTable("tabla_reporte_total_4");
+        DataColumn oDataColumnaReporte_total_4;
+        DataRow oDatarowReporte_total_4;
+        //------------------
+
+        //tabla 10 tarjetas bancarias
+        //------------------
+        System.Data.DataSet odataSetReporte_10 = new System.Data.DataSet();
+        DataTable oDataTableReporte_10 = new DataTable("tabla_reporte_10");
+        DataColumn oDataColumnaReporte_10;
+        DataRow oDatarowReporte_10;
+
+        System.Data.DataSet odataSetReporte_total_10 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_10 = new DataTable("tabla_reporte_total_10");
+        DataColumn oDataColumnaReporte_total_10;
+        DataRow oDatarowReporte_total_10;
+        //------------------
+
+        //tabla 5
+        //------------------
+        System.Data.DataSet odataSetReporte_5 = new System.Data.DataSet();
+        DataTable oDataTableReporte_5 = new DataTable("tabla_reporte_5");
+        DataColumn oDataColumnaReporte_5;
+        DataRow oDatarowReporte_5;
+
+        System.Data.DataSet odataSetReporte_total_5 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_5 = new DataTable("tabla_reporte_total_5");
+        DataColumn oDataColumnaReporte_total_5;
+        DataRow oDatarowReporte_total_5;
+        //------------------
+
+        //tabla 6
+        //------------------
+        System.Data.DataSet odataSetReporte_6 = new System.Data.DataSet();
+        DataTable oDataTableReporte_6 = new DataTable("tabla_reporte_6");
+        DataColumn oDataColumnaReporte_6;
+        DataRow oDatarowReporte_6;
+
+        System.Data.DataSet odataSetReporte_total_6 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_6 = new DataTable("tabla_reporte_total_6");
+        DataColumn oDataColumnaReporte_total_6;
+        DataRow oDatarowReporte_total_6;
+        //------------------
+
+        //tabla 7
+        //------------------
+        System.Data.DataSet odataSetReporte_7 = new System.Data.DataSet();
+        DataTable oDataTableReporte_7 = new DataTable("tabla_reporte_7");
+        DataColumn oDataColumnaReporte_7;
+        DataRow oDatarowReporte_7;
+
+        System.Data.DataSet odataSetReporte_total_7 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_7 = new DataTable("tabla_reporte_total_7");
+        DataColumn oDataColumnaReporte_total_7;
+        DataRow oDatarowReporte_total_7;
+        //------------------
+
+        //tabla 8
+        //------------------
+        System.Data.DataSet odataSetReporte_8 = new System.Data.DataSet();
+        DataTable oDataTableReporte_8 = new DataTable("tabla_reporte_8");
+        DataColumn oDataColumnaReporte_8;
+        DataRow oDatarowReporte_8;
+
+        System.Data.DataSet odataSetReporte_total_8 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_8 = new DataTable("tabla_reporte_total_8");
+        DataColumn oDataColumnaReporte_total_8;
+        DataRow oDatarowReporte_total_8;
+        //------------------
+
+        //tabla 9
+        //------------------
+        System.Data.DataSet odataSetReporte_9 = new System.Data.DataSet();
+        DataTable oDataTableReporte_9 = new DataTable("tabla_reporte_9");
+        DataColumn oDataColumnaReporte_9;
+        DataRow oDatarowReporte_9;
+
+        System.Data.DataSet odataSetReporte_total_9 = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_9 = new DataTable("tabla_reporte_total_9");
+        DataColumn oDataColumnaReporte_total_9;
+        DataRow oDatarowReporte_total_9;
+        //------------------
+
+        //tabla 10 RP
+        System.Data.DataSet odataSetReporte_11_RP = new System.Data.DataSet();
+        DataTable oDataTableReporte_11_RP = new DataTable("tabla_reporte_9_RP");
+        DataColumn oDataColumnaReporte_11_RP;
+        DataRow oDatarowReporte_11_RP;
+
+        System.Data.DataSet odataSetReporte_total_11_RP = new System.Data.DataSet();
+        DataTable oDataTableReporte_total_11_RP = new DataTable("tabla_reporte_total_10_RP");
+        DataColumn oDataColumnaReporte_total_11_RP;
+        DataRow oDatarowReporte_total_11_RP;
+
         System.Data.DataSet dataSet1 = new System.Data.DataSet();
-
-        DataTable DataTableReporte1 = new DataTable("tabla_reporte 1");
-        DataColumn DataColumnaReporte1;
-        DataRow DatarowReporte1;
-
-        DataTable DataTableReporte2 = new DataTable("tabla_reporte 2");
-        DataColumn DataColumnaReporte2;
-        DataRow DatarowReporte2;
-
-        DataTable DataTableReporte3 = new DataTable("tabla_reporte 3");
-        DataColumn DataColumnaReporte3;
-        DataRow DatarowReporte3;
-
-        DataTable DataTableReporte4 = new DataTable("tabla_reporte 4");
-        DataColumn DataColumnaReporte4;
-        DataRow DatarowReporte4;
-
-        DataTable DataTableReporte5 = new DataTable("tabla_reporte 5");
-        DataColumn DataColumnaReporte5;
-        DataRow DatarowReporte5;
-
-        DataTable DataTableReporte6 = new DataTable("tabla_reporte 6");
-        DataColumn DataColumnaReporte6;
-        DataRow DatarowReporte6;
-
-        DataTable DataTableReporte7 = new DataTable("tabla_reporte 7");
-        DataColumn DataColumnaReporte7;
-        DataRow DatarowReporte7;
-
-        DataTable DataTableReporte8 = new DataTable("tabla_reporte 8");
-        DataColumn DataColumnaReporte8;
-        DataRow DatarowReporte8;
-
-        DataTable DataTableReporte9 = new DataTable("tabla_reporte 9");
-        DataColumn DataColumnaReporte9;
-        DataRow DatarowReporte9;
-
-        DataTable DataTableReporte10 = new DataTable("tabla_reporte 10");
-        DataColumn DataColumnaReporte10;
-        DataRow DatarowReporte10;
-
-        DataTable DataTableReporte11 = new DataTable("tabla_reporte 11");
-        DataColumn DataColumnaReporte11;
-        DataRow DatarowReporte11;
-
-        DataTable DataTableReporte12 = new DataTable("tabla_reporte 12");
-        DataColumn DataColumnaReporte12;
-        DataRow DatarowReporte12;
-
-        DataTable DataTableReporte13 = new DataTable("tabla_reporte 13");
-        DataColumn DataColumnaReporte13;
-        DataRow DatarowReporte13;
-
-        DataTable DataTableReporte14 = new DataTable("tabla_reporte 14");
-        DataColumn DataColumnaReporte14;
-        DataRow DatarowReporte14;
-
-        DataTable DataTableReporte15 = new DataTable("tabla_reporte 15");
-        DataColumn DataColumnaReporte15;
-        DataRow DatarowReporte15;
-
-        DataTable DataTableReporte16 = new DataTable("tabla_reporte 16");
-        DataColumn DataColumnaReporte16;
-        DataRow DatarowReporte16;
-
-        DataTable DataTableReporte17 = new DataTable("tabla_reporte 17");
-        DataColumn DataColumnaReporte17;
-        DataRow DatarowReporte17;
-
-        DataTable DataTableReporte18 = new DataTable("tabla_reporte 18");
-        DataColumn DataColumnaReporte18;
-        DataRow DatarowReporte18;
-
-        DataTable DataTableReporte19 = new DataTable("tabla_reporte 19");
-        DataColumn DataColumnaReporte19;
-        DataRow DatarowReporte19;
-
-        DataTable DataTableReporte20 = new DataTable("tabla_reporte 20");
-        DataColumn DataColumnaReporte20;
-        DataRow DatarowReporte20;
-
-        DataTable DataTableReporte21 = new DataTable("tabla_reporte 21_RP");
-        DataColumn DataColumnaReporte21;
-        DataRow DatarowReporte21;
-
-        DataTable DataTableReporte22 = new DataTable("tabla_reporte 22_RP");
-        DataColumn DataColumnaReporte22;
-        DataRow DatarowReporte22;
 
         public PreTCViewModel GenerarPreliquidacion_Turno_Carriles(DateTime Fecha, string IdPlazaCobro, string Turno, string EncargadoTurno, string Delegacion, string Administrador, string Observaciones, string NameConString)
         {
@@ -130,13 +183,11 @@ namespace ReportesWeb1_2.ServicesReportes
             DelegacionSt = Delegacion;
             AdministradorSt = Administrador;
             NameConStringSt = NameConString;
-
             string H_inicio_turno = string.Empty;
             string Dt_ini_poste = string.Empty;
             string H_fin_turno = string.Empty;
             string Dt_fin_poste = string.Empty;
             string No_Turno = string.Empty;
-            int Id_Turno = 0;
 
             var fechaOpeTemp = string.Empty;
             var str_MATRICULE = string.Empty;
@@ -146,10 +197,11 @@ namespace ReportesWeb1_2.ServicesReportes
             string str_id_voie = string.Empty;
             string int_id_voie = string.Empty;
             string int_numero_poste = string.Empty;
+            short Id_Turno = 0;
 
             var par3 = "0";
-            var par5 = "0";
             var par4 = "0";
+            var par5 = "0";
             var par1 = "0";
             var par7 = "0";
             var par9 = "0";
@@ -225,20 +277,9 @@ namespace ReportesWeb1_2.ServicesReportes
             var par61 = "0";
             var par62 = "0";
 
-            var par87 = "0";
-            var par88 = "0";
-            var par72 = "0";
-            var par73 = "0";
-
             var VAR_11 = "0";
             var VAR_50 = "0";
             var VAR_13 = "0";
-
-            var VAR_73 = 0.0d;
-            var VAR_88 = "0";
-            var VAR_63 = "0";
-            var VAR_67 = "0";
-            var VAR_65 = "0";
 
             var VAR_12 = "0";
             var VAR_14 = "0";
@@ -1246,7 +1287,6 @@ namespace ReportesWeb1_2.ServicesReportes
             string Dt_ini_poste = string.Empty;
             string Dt_fin_poste = string.Empty;
             string No_Turno = string.Empty;
-            int Id_Turno = 0;
             string strGrupo = string.Empty;
             string strConcepto = string.Empty;
 
@@ -1254,10 +1294,10 @@ namespace ReportesWeb1_2.ServicesReportes
             var par7 = string.Empty;
             var par3 = string.Empty;
             var par4 = string.Empty;
+            short Id_Turno = 0;
 
             var db_tot_14 = 0.0d;
             var db_tot_15 = 0.0d;
-            var db_tot_16 = 0.0d;
             var db_tot_18 = 0.0d;
             var db_tot_20 = 0.0d;
             var db_tot_22 = 0.0d;
@@ -1270,45 +1310,21 @@ namespace ReportesWeb1_2.ServicesReportes
             var db_tot_24_rp4 = 0.0d;
 
             var db_tot_26 = 0.0d;
-            var db_tot_28 = 0.0d;
-            var db_tot_30 = 0.0d;
             var db_tot_32 = 0.0d;
             var db_tot_35 = 0.0d;
             var db_tot_36 = 0.0d;
-            var db_tot_38 = 0.0d;
-            var db_tot_45 = 0.0d;
-            var db_tot_451 = 0.0d;
-            var db_tot_452 = 0.0d;
-            var db_tot_453 = 0.0d;
-            var db_tot_454 = 0.0d;
-            var db_tot_455 = 0.0d;
             var db_tot_46 = 0.0d;
-            var db_tot_461 = 0.0d;
-            var db_tot_462 = 0.0d;
-            var db_tot_463 = 0.0d;
-            var db_tot_464 = 0.0d;
-            var db_tot_465 = 0.0d;
             var db_tot_47 = 0.0d;
-            var db_tot_471 = 0.0d;
-            var db_tot_472 = 0.0d;
-            var db_tot_473 = 0.0d;
-            var db_tot_474 = 0.0d;
-            var db_tot_475 = 0.0d;
-            var db_tot_48 = 0.0d;
             var db_tot_49 = 0.0d;
             var db_tot_50 = 0.0d;
-            var db_tot_53 = 0.0d;
             var db_tot_531 = 0.0d;
             var db_tot_532 = 0.0d;
             var db_tot_533 = 0.0d;
-            var db_tot_54 = 0.0d;
             var db_tot_541 = 0.0d;
             var db_tot_542 = 0.0d;
             var db_tot_543 = 0.0d;
-            var db_tot_55 = 0.0d;
             var db_tot_56 = 0.0d;
             var db_tot_57 = 0.0d;
-            var db_tot_58 = 0.0d;
             var db_tot_77 = 0.0d;
             var db_tot_78 = 0.0d;
             var db_tot_80 = 0.0d;
@@ -1327,155 +1343,14 @@ namespace ReportesWeb1_2.ServicesReportes
             var db_tot_147 = 0.0d;
             var db_tot_1471 = 0.0d;
 
-            var db_tot_148 = 0.0d;
             var db_tot_149 = 0.0d;
             var db_tot_150 = 0.0d;
+
 
             var dbl_tarifa_excedentes_asignada = 0.0d;
 
             DataView dvTarifa;
             DataView dvEvento;
-
-            //tabla 1
-            //------------------
-            System.Data.DataSet odataSetReporte = new System.Data.DataSet();
-            DataTable oDataTableReporte = new DataTable("tabla_reporte");
-            DataColumn oDataColumnaReporte;
-            DataRow oDatarowReporte;
-
-            System.Data.DataSet odataSetReporte_total = new System.Data.DataSet();
-            DataTable oDataTableReporte_total = new DataTable("tabla_reporte_total");
-            DataColumn oDataColumnaReporte_total;
-            DataRow oDatarowReporte_total;
-            //------------------
-
-            //tabla 2
-            //------------------
-            System.Data.DataSet odataSetReporte_2 = new System.Data.DataSet();
-            DataTable oDataTableReporte_2 = new DataTable("tabla_reporte_2");
-            DataColumn oDataColumnaReporte_2;
-            DataRow oDatarowReporte_2;
-
-            System.Data.DataSet odataSetReporte_total_2 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_2 = new DataTable("tabla_reporte_total_2");
-            DataColumn oDataColumnaReporte_total_2;
-            DataRow oDatarowReporte_total_2;
-            //------------------
-
-            //tabla 3
-            //------------------
-            System.Data.DataSet odataSetReporte_3 = new System.Data.DataSet();
-            DataTable oDataTableReporte_3 = new DataTable("tabla_reporte_3");
-            DataColumn oDataColumnaReporte_3;
-            DataRow oDatarowReporte_3;
-
-            System.Data.DataSet odataSetReporte_total_3 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_3 = new DataTable("tabla_reporte_total_3");
-            DataColumn oDataColumnaReporte_total_3;
-            DataRow oDatarowReporte_total_3;
-            //------------------
-
-            //tabla 4
-            //------------------
-            System.Data.DataSet odataSetReporte_4 = new System.Data.DataSet();
-            DataTable oDataTableReporte_4 = new DataTable("tabla_reporte_4");
-            DataColumn oDataColumnaReporte_4;
-            DataRow oDatarowReporte_4;
-
-            System.Data.DataSet odataSetReporte_total_4 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_4 = new DataTable("tabla_reporte_total_4");
-            DataColumn oDataColumnaReporte_total_4;
-            DataRow oDatarowReporte_total_4;
-            //------------------
-
-            //tabla 10 tarjetas bancarias
-            //------------------
-            System.Data.DataSet odataSetReporte_10 = new System.Data.DataSet();
-            DataTable oDataTableReporte_10 = new DataTable("tabla_reporte_10");
-            DataColumn oDataColumnaReporte_10;
-            DataRow oDatarowReporte_10;
-
-            System.Data.DataSet odataSetReporte_total_10 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_10 = new DataTable("tabla_reporte_total_10");
-            DataColumn oDataColumnaReporte_total_10;
-            DataRow oDatarowReporte_total_10;
-            //------------------
-
-            //tabla 5
-            //------------------
-            System.Data.DataSet odataSetReporte_5 = new System.Data.DataSet();
-            DataTable oDataTableReporte_5 = new DataTable("tabla_reporte_5");
-            DataColumn oDataColumnaReporte_5;
-            DataRow oDatarowReporte_5;
-
-            System.Data.DataSet odataSetReporte_total_5 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_5 = new DataTable("tabla_reporte_total_5");
-            DataColumn oDataColumnaReporte_total_5;
-            DataRow oDatarowReporte_total_5;
-            //------------------
-
-            //tabla 6
-            //------------------
-            System.Data.DataSet odataSetReporte_6 = new System.Data.DataSet();
-            DataTable oDataTableReporte_6 = new DataTable("tabla_reporte_6");
-            DataColumn oDataColumnaReporte_6;
-            DataRow oDatarowReporte_6;
-
-            System.Data.DataSet odataSetReporte_total_6 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_6 = new DataTable("tabla_reporte_total_6");
-            DataColumn oDataColumnaReporte_total_6;
-            DataRow oDatarowReporte_total_6;
-            //------------------
-
-            //tabla 7
-            //------------------
-            System.Data.DataSet odataSetReporte_7 = new System.Data.DataSet();
-            DataTable oDataTableReporte_7 = new DataTable("tabla_reporte_7");
-            DataColumn oDataColumnaReporte_7;
-            DataRow oDatarowReporte_7;
-
-            System.Data.DataSet odataSetReporte_total_7 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_7 = new DataTable("tabla_reporte_total_7");
-            DataColumn oDataColumnaReporte_total_7;
-            DataRow oDatarowReporte_total_7;
-            //------------------
-
-            //tabla 8
-            //------------------
-            System.Data.DataSet odataSetReporte_8 = new System.Data.DataSet();
-            DataTable oDataTableReporte_8 = new DataTable("tabla_reporte_8");
-            DataColumn oDataColumnaReporte_8;
-            DataRow oDatarowReporte_8;
-
-            System.Data.DataSet odataSetReporte_total_8 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_8 = new DataTable("tabla_reporte_total_8");
-            DataColumn oDataColumnaReporte_total_8;
-            DataRow oDatarowReporte_total_8;
-            //------------------
-
-            //tabla 9
-            //------------------
-            System.Data.DataSet odataSetReporte_9 = new System.Data.DataSet();
-            DataTable oDataTableReporte_9 = new DataTable("tabla_reporte_9");
-            DataColumn oDataColumnaReporte_9;
-            DataRow oDatarowReporte_9;
-
-            System.Data.DataSet odataSetReporte_total_9 = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_9 = new DataTable("tabla_reporte_total_9");
-            DataColumn oDataColumnaReporte_total_9;
-            DataRow oDatarowReporte_total_9;
-            //------------------
-
-            //tabla 10 RP
-            System.Data.DataSet odataSetReporte_11_RP = new System.Data.DataSet();
-            DataTable oDataTableReporte_11_RP = new DataTable("tabla_reporte_9_RP");
-            DataColumn oDataColumnaReporte_11_RP;
-            DataRow oDatarowReporte_11_RP;
-
-            System.Data.DataSet odataSetReporte_total_11_RP = new System.Data.DataSet();
-            DataTable oDataTableReporte_total_11_RP = new DataTable("tabla_reporte_total_10_RP");
-            DataColumn oDataColumnaReporte_total_11_RP;
-            DataRow oDatarowReporte_total_11_RP;
 
             switch (TurnoSt.Substring(0, 2))
             {
@@ -15642,6 +15517,95 @@ namespace ReportesWeb1_2.ServicesReportes
         private void DataSet1(System.Data.DataSet data, System.Data.DataSet data2, System.Data.DataSet data3, System.Data.DataSet data4, System.Data.DataSet data5, System.Data.DataSet data6, System.Data.DataSet data7, System.Data.DataSet data8, System.Data.DataSet data9, System.Data.DataSet data10, System.Data.DataSet data11, System.Data.DataSet data12, System.Data.DataSet data13, System.Data.DataSet data14, System.Data.DataSet data15, System.Data.DataSet data16, System.Data.DataSet data17, System.Data.DataSet data18, System.Data.DataSet data19, System.Data.DataSet data20, System.Data.DataSet data21, System.Data.DataSet data22)
         {
             #region Data
+
+            DataTable DataTableReporte1 = new DataTable("tabla_reporte 1");
+            DataColumn DataColumnaReporte1;
+            DataRow DatarowReporte1;
+
+            DataTable DataTableReporte2 = new DataTable("tabla_reporte 2");
+            DataColumn DataColumnaReporte2;
+            DataRow DatarowReporte2;
+
+            DataTable DataTableReporte3 = new DataTable("tabla_reporte 3");
+            DataColumn DataColumnaReporte3;
+            DataRow DatarowReporte3;
+
+            DataTable DataTableReporte4 = new DataTable("tabla_reporte 4");
+            DataColumn DataColumnaReporte4;
+            DataRow DatarowReporte4;
+
+            DataTable DataTableReporte5 = new DataTable("tabla_reporte 5");
+            DataColumn DataColumnaReporte5;
+            DataRow DatarowReporte5;
+
+            DataTable DataTableReporte6 = new DataTable("tabla_reporte 6");
+            DataColumn DataColumnaReporte6;
+            DataRow DatarowReporte6;
+
+            DataTable DataTableReporte7 = new DataTable("tabla_reporte 7");
+            DataColumn DataColumnaReporte7;
+            DataRow DatarowReporte7;
+
+            DataTable DataTableReporte8 = new DataTable("tabla_reporte 8");
+            DataColumn DataColumnaReporte8;
+            DataRow DatarowReporte8;
+
+            DataTable DataTableReporte9 = new DataTable("tabla_reporte 9");
+            DataColumn DataColumnaReporte9;
+            DataRow DatarowReporte9;
+
+            DataTable DataTableReporte10 = new DataTable("tabla_reporte 10");
+            DataColumn DataColumnaReporte10;
+            DataRow DatarowReporte10;
+
+            DataTable DataTableReporte11 = new DataTable("tabla_reporte 11");
+            DataColumn DataColumnaReporte11;
+            DataRow DatarowReporte11;
+
+            DataTable DataTableReporte12 = new DataTable("tabla_reporte 12");
+            DataColumn DataColumnaReporte12;
+            DataRow DatarowReporte12;
+
+            DataTable DataTableReporte13 = new DataTable("tabla_reporte 13");
+            DataColumn DataColumnaReporte13;
+            DataRow DatarowReporte13;
+
+            DataTable DataTableReporte14 = new DataTable("tabla_reporte 14");
+            DataColumn DataColumnaReporte14;
+            DataRow DatarowReporte14;
+
+            DataTable DataTableReporte15 = new DataTable("tabla_reporte 15");
+            DataColumn DataColumnaReporte15;
+            DataRow DatarowReporte15;
+
+            DataTable DataTableReporte16 = new DataTable("tabla_reporte 16");
+            DataColumn DataColumnaReporte16;
+            DataRow DatarowReporte16;
+
+            DataTable DataTableReporte17 = new DataTable("tabla_reporte 17");
+            DataColumn DataColumnaReporte17;
+            DataRow DatarowReporte17;
+
+            DataTable DataTableReporte18 = new DataTable("tabla_reporte 18");
+            DataColumn DataColumnaReporte18;
+            DataRow DatarowReporte18;
+
+            DataTable DataTableReporte19 = new DataTable("tabla_reporte 19");
+            DataColumn DataColumnaReporte19;
+            DataRow DatarowReporte19;
+
+            DataTable DataTableReporte20 = new DataTable("tabla_reporte 20");
+            DataColumn DataColumnaReporte20;
+            DataRow DatarowReporte20;
+
+            DataTable DataTableReporte21 = new DataTable("tabla_reporte 21_RP");
+            DataColumn DataColumnaReporte21;
+            DataRow DatarowReporte21;
+
+            DataTable DataTableReporte22 = new DataTable("tabla_reporte 22_RP");
+            DataColumn DataColumnaReporte22;
+            DataRow DatarowReporte22;
+
             DataColumnaReporte1 = MtGlb.Agregar_datacolum(2, "Grupo");
             DataTableReporte1.Columns.Add(DataColumnaReporte1);
 
@@ -32704,6 +32668,8 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
             }
 
+
+
             // RPI
             table_numero = 21;
             foreach (DataRow item in data21.Tables[0].Rows)
@@ -35041,6 +35007,72 @@ namespace ReportesWeb1_2.ServicesReportes
                     DataTableReporte22.Rows.Add(DatarowReporte22);
                 }
             }
+
+            oDataTableReporte.Clear();
+            oDataTableReporte.Dispose();
+
+            oDataTableReporte_total.Clear();
+            oDataTableReporte_total.Dispose();
+
+            oDataTableReporte_2.Clear();
+            oDataTableReporte_2.Dispose();
+
+            oDataTableReporte_total_2.Clear();
+            oDataTableReporte_total_2.Dispose();
+
+            oDataTableReporte_3.Clear();
+            oDataTableReporte_3.Dispose();
+
+            oDataTableReporte_total_3.Clear();
+            oDataTableReporte_total_3.Dispose();
+
+            oDataTableReporte_4.Clear();
+            oDataTableReporte_4.Dispose();
+
+            oDataTableReporte_total_4.Clear();
+            oDataTableReporte_total_4.Dispose();
+
+            oDataTableReporte_5.Clear();
+            oDataTableReporte_5.Dispose();
+
+            oDataTableReporte_total_5.Clear();
+            oDataTableReporte_total_5.Dispose();
+
+            oDataTableReporte_7.Clear();
+            oDataTableReporte_7.Dispose();
+
+            oDataTableReporte_total_7.Clear();
+            oDataTableReporte_total_7.Dispose();
+
+            oDataTableReporte_8.Clear();
+            oDataTableReporte_8.Dispose();
+
+            oDataTableReporte_total_8.Clear();
+            oDataTableReporte_total_8.Dispose();
+
+            oDataTableReporte_9.Clear();
+            oDataTableReporte_9.Dispose();
+
+            oDataTableReporte_total_9.Clear();
+            oDataTableReporte_total_9.Dispose();
+
+            oDataTableReporte_10.Clear();
+            oDataTableReporte_10.Dispose();
+
+            oDataTableReporte_total_10.Clear();
+            oDataTableReporte_total_10.Dispose();
+
+            oDataTableReporte_6.Clear();
+            oDataTableReporte_6.Dispose();
+
+            oDataTableReporte_total_6.Clear();
+            oDataTableReporte_total_6.Dispose();
+
+            oDataTableReporte_11_RP.Clear();
+            oDataTableReporte_11_RP.Dispose();
+
+            oDataTableReporte_total_11_RP.Clear();
+            oDataTableReporte_total_11_RP.Dispose();
         }
     }
 }
