@@ -1,40 +1,43 @@
     ======  ======
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: Initiate log
     Message: 
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: Initiate InternalManager
     Message: Trying to Validate License
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: Requesting EVT
     Message: EVTP
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: Requesting Validation
     Message: ILMValidate
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: LICENSER
     Message: READ REGS START
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: LICENSER
     Message: TRL MODE
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: LICENSER
-    Message: DS LEFT-197
-    Time:08/02/2019 9:04:02
+    Message: DS LEFT-203
+    Time:14/02/2019 09:41:22 a. m.
     Title: LICENSER
-    Message: DT MARK PASSED-197.00:00:00
-    Time:08/02/2019 9:04:02
+    Message: DT MARK PASSED-203.00:00:00
+    Time:14/02/2019 09:41:22 a. m.
     Title: ILMValidate action
     Message: LIC
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: Acceso denegado a la ruta de acceso 'C:\ProgramData\Telerik\Hash.lic'.
     Message:    en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
    en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
    en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    en Telerik.Licensing.Licenser.ReadHashPass()
-    Time:08/02/2019 9:04:02
+    Time:14/02/2019 09:41:22 a. m.
     Title: LICENSER - TGO
     Message: Start
+    Time:14/02/2019 09:41:23 a. m.
+    Title: LICENSER - TGO
+    Message: Object reference not set to an instance of an object.
     No Telerik Reporting products found in registry
     Entering constructor for: Telerik.WinControls.Converter.VSPackage.VSPackage
     Entering Initialize() for: Telerik.WinControls.Converter.VSPackage.VSPackage
@@ -61,24 +64,19 @@
     Entering Initialize() for: Telerik.Xamarin.UI.VSPackage.VsPackage
     Entering constructor for: Telerik.Web.UI.VSPackage.VSPackage
     Entering Initialize() for: Telerik.Web.UI.VSPackage.VSPackage
-    Time:08/02/2019 9:04:14
-    Title: LICENSER - TGO
-    Message: No había ningún extremo escuchando en https://www.telerik.com/services/LicenseService/Service.svc que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información.
-    Time:08/02/2019 9:04:14
-    Title: No había ningún extremo escuchando en https://www.telerik.com/services/LicenseService/Service.svc que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información.
-    Message: 
-Server stack trace: 
-   en System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
-   en System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
-   en System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
-   en System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
-   en System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
-   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
-   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
-   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
-
-Exception rethrown at [0]: 
-   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+    Assembly resolution failed: Telerik.JustMock.AddIn.XmlSerializers, Version=2018.2.511.5, Culture=neutral, PublicKeyToken=602a9bfd8c8c4ad7
+    TS:Registry store: user registry root "HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\15.0_85783fb7"
+    TS:Registry store: config registry root "HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\15.0_85783fb7_Config"
+    TRR Initialize DataExplorerToolWindow
+    TRR Initialize ReportExplorerToolWindow
+    TRR Initialize GroupExplorerToolWindow
+    Assembly resolution failed: Telerik.VSX.2018.3.1011.1.XmlSerializers, Version=2018.3.1011.1, Culture=neutral, PublicKeyToken=0dfdc51bd06071b4
+    Assembly resolution failed: Telerik.UserSettings.2018.3.1011.1.XmlSerializers, Version=2018.3.1011.1, Culture=neutral, PublicKeyToken=0dfdc51bd06071b4
+    Assembly resolution failed: Telerik.UserSettings.2018.4.1121.1.XmlSerializers, Version=2018.4.1121.1, Culture=neutral, PublicKeyToken=0dfdc51bd06071b4
+    Assembly resolution failed: Telerik.VSX.Notifications.1.2.0.0.XmlSerializers, Version=1.2.0.0, Culture=neutral, PublicKeyToken=0dfdc51bd06071b4
+    Assembly resolution failed: Telerik.VSX.Notifications.1.2.0.0.XmlSerializers, Version=1.2.0.0, Culture=neutral, PublicKeyToken=0dfdc51bd06071b4
+    Assembly resolution failed: Telerik.Xamarin.UI.VSX.2018.4.1121.1.XmlSerializers, Version=2018.4.1121.1, Culture=neutral, PublicKeyToken=0dfdc51bd06071b4
+oting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
    en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
    en Telerik.Licensing.TestStudioLicensing.ILicenseWebUIService.LogError(String subject, String body)
    en Telerik.Licensing.TestStudioLicensing.LicenseWebUIServiceClient.LogError(String subject, String body)

@@ -69,7 +69,7 @@
     </tbody>
 </table>
 
-<h3>pago en efectivo dollares</h3>
+@*<h3>pago en efectivo dollares</h3>
 <table class="table table-sm table-dark">
     <thead>
         <tr>
@@ -84,7 +84,7 @@
     </thead>
     <tbody>
         @{
-            foreach (DataRow row in Model.Tables[2].Rows)
+            foreach (DataRow row in Model.Tables[0].Rows)
             {
                 <tr>
                     <td>@row[0]</td>
@@ -114,7 +114,7 @@
     </thead>
     <tbody>
         @{
-            foreach (DataRow row in Model.Tables[3].Rows)
+            foreach (DataRow row in Model.Tables[1].Rows)
             {
                 <tr>
                     <td>@row[0]</td>
@@ -127,9 +127,9 @@
             }
         }
     </tbody>
-</table>
+</table>*@
 
-<h3>PAGO ANTICIPADO RESIDENTES</h3>
+@*<h3>PAGO ANTICIPADO RESIDENTES</h3>
 <table class="table table-sm table-dark">
     <thead>
         <tr>
@@ -605,64 +605,4 @@
             }
         }
     </tbody>
-</table>
-
-<h3>COMPLEMENTAR LA PRIMERA TABLA CON LOS RPI</h3>
-<table class="table table-sm table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Grupo</th>
-            <th scope="col">Concepto</th>
-            <th scope="col">Descricion_clase</th>
-            <th scope="col">Numero_clase</th>
-            <th scope="col">Numero</th>
-            <th scope="col">Numero param</th>
-            <th scope="col">Numero tabla</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (DataRow row in Model.Tables[20].Rows)
-            {
-                <tr>
-                    <td>@row[0]</td>
-                    <td>@row[1]</td>
-                    <td>@row[2]</td>
-                    <td>@row[3]</td>
-                    <td>@row[4]</td>
-                    <td>@row[5]</td>
-                    <td>@row[6]</td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-
-<h3>total RPI</h3>
-<table class="table table-sm table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Total</th>
-            <th scope="col">Tipo_Total</th>
-            <th scope="col">strNumero</th>
-            <th scope="col">Param_telerik</th>
-            <th scope="col">Table_telerik</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (DataRow row in Model.Tables[21].Rows)
-            {
-                <tr>
-                    <td>@row[0]</td>
-                    <td>@row[1]</td>
-                    <td>@row[2]</td>
-                    <td>@row[3]</td>
-                    <td>@row[4]</td>
-                    <td>@row[5]</td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+</table>*@

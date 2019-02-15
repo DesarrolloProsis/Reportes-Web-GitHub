@@ -168,6 +168,16 @@
             typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par" + count, param));
             count++;
         }
+
+
+        int i = 1;
+        while (count <= 618)
+        {
+            var param = Model.ComCRViewModel.GetType().GetProperty("Par" + count).GetValue(Model.ComCRViewModel, null);
+            typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).ParRP" + i, param));
+            count++;
+            i++;
+        }
     }
 
     @(Html.TelerikReporting().ReportViewer()
