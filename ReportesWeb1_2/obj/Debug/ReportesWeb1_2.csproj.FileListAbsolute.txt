@@ -1531,4 +1531,3 @@ C:\Users\DESARROLLO2\Desktop\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\obj\
 C:\Users\DESARROLLO2\Desktop\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.CopyComplete
 C:\Users\DESARROLLO2\Desktop\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.dll
 C:\Users\DESARROLLO2\Desktop\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.pdb
-C:\Users\DESARROLLO2\Desktop\ReportesWeb1_23\ReportesWeb1_23\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csprojAssemblyReference.cache

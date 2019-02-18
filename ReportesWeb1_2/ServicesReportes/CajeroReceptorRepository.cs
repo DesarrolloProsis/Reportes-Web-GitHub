@@ -29688,7 +29688,7 @@ namespace ReportesWeb1_2.ServicesReportes
                             _Autos = Convert.ToDouble(item["Numero"]);
 
                             DatarowReporte1["Numero"] = _Autos;
-                            DatarowReporte1["Param_telerik"] = param_numero;
+                            DatarowReporte1["Param_telerik"] = "619";
                             DatarowReporte1["Table_telerik"] = table_numero;
 
                             DataTableReporte1.Rows.Add(DatarowReporte1);

@@ -150,7 +150,7 @@
         }
 
         int i = 1;
-        while (count <= 618)
+        while (count <= 619)
         {
             var param = Model.ComTCViewModel.GetType().GetProperty("Par" + count).GetValue(Model.ComTCViewModel, null);
             typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).ParRP" + i, param));

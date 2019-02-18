@@ -906,6 +906,7 @@ namespace ReportesWeb1_2.Views.Reportes
             Telerik.Reporting.ReportParameter reportParameter616 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter617 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter618 = new Telerik.Reporting.ReportParameter();
+            Telerik.Reporting.ReportParameter reportParameter619 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
             this.textBox27 = new Telerik.Reporting.TextBox();
             this.textBox207 = new Telerik.Reporting.TextBox();
@@ -1075,7 +1076,6 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox508 = new Telerik.Reporting.TextBox();
             this.textBox511 = new Telerik.Reporting.TextBox();
             this.textBox489 = new Telerik.Reporting.TextBox();
-            this.textBox491 = new Telerik.Reporting.TextBox();
             this.textBox492 = new Telerik.Reporting.TextBox();
             this.textBox494 = new Telerik.Reporting.TextBox();
             this.textBox495 = new Telerik.Reporting.TextBox();
@@ -1633,6 +1633,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox631 = new Telerik.Reporting.TextBox();
             this.textBox632 = new Telerik.Reporting.TextBox();
             this.textBox633 = new Telerik.Reporting.TextBox();
+            this.textBox59 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // textBox27
@@ -4958,28 +4959,6 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox489.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
             this.textBox489.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox489.Value = "Aforo";
-            // 
-            // textBox491
-            // 
-            this.textBox491.Format = "{0}";
-            this.textBox491.Name = "textBox491";
-            this.textBox491.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(1.2000000476837158D), Telerik.Reporting.Drawing.Unit.Cm(0.34000000357627869D));
-            this.textBox491.Style.BackgroundColor = System.Drawing.Color.Silver;
-            this.textBox491.Style.BorderColor.Bottom = System.Drawing.Color.Black;
-            this.textBox491.Style.BorderColor.Left = System.Drawing.Color.Black;
-            this.textBox491.Style.BorderColor.Right = System.Drawing.Color.Black;
-            this.textBox491.Style.BorderColor.Top = System.Drawing.Color.Black;
-            this.textBox491.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox491.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox491.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox491.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox491.Style.BorderWidth.Bottom = Telerik.Reporting.Drawing.Unit.Point(1D);
-            this.textBox491.Style.BorderWidth.Left = Telerik.Reporting.Drawing.Unit.Point(1D);
-            this.textBox491.Style.BorderWidth.Right = Telerik.Reporting.Drawing.Unit.Point(1D);
-            this.textBox491.Style.BorderWidth.Top = Telerik.Reporting.Drawing.Unit.Point(1D);
-            this.textBox491.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
-            this.textBox491.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
-            this.textBox491.Value = "= Parameters.par428.Value";
             // 
             // textBox492
             // 
@@ -15644,7 +15623,7 @@ namespace ReportesWeb1_2.Views.Reportes
             tableGroup229.Name = "tableGroup";
             tableGroup229.ReportItem = this.textBox489;
             tableGroup230.Name = "tableGroup1";
-            tableGroup230.ReportItem = this.textBox491;
+            tableGroup230.ReportItem = this.textBox59;
             tableGroup231.Name = "group33";
             tableGroup231.ReportItem = this.textBox492;
             tableGroup232.Name = "group32";
@@ -15707,7 +15686,6 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox485,
             this.textBox483,
             this.textBox489,
-            this.textBox491,
             this.textBox492,
             this.textBox494,
             this.textBox495,
@@ -15721,7 +15699,8 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox507,
             this.textBox509,
             this.textBox510,
-            this.textBox512});
+            this.textBox512,
+            this.textBox59});
             this.table8.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.50650238990783691D), Telerik.Reporting.Drawing.Unit.Cm(14.659026145935059D));
             this.table8.Name = "table8";
             tableGroup245.Groupings.Add(new Telerik.Reporting.Grouping(null));
@@ -17008,6 +16987,20 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox633.Value = "Diferencia entre total marcado por el Cajero-Receptor y el Equipo de Control de T" +
     "ránsito";
             // 
+            // textBox59
+            // 
+            this.textBox59.Name = "textBox59";
+            this.textBox59.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(1.2000000476837158D), Telerik.Reporting.Drawing.Unit.Cm(0.34000000357627869D));
+            this.textBox59.Style.BackgroundColor = System.Drawing.Color.Silver;
+            this.textBox59.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox59.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox59.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox59.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox59.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
+            this.textBox59.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.textBox59.StyleName = "";
+            this.textBox59.Value = "= Parameters.ParRP80.Value";
+            // 
             // ComparativoTurnoCarriles
             // 
             this.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
@@ -17647,6 +17640,7 @@ namespace ReportesWeb1_2.Views.Reportes
             reportParameter616.Name = "ParRP77";
             reportParameter617.Name = "ParRP78";
             reportParameter618.Name = "ParRP79";
+            reportParameter619.Name = "ParRP80";
             this.ReportParameters.Add(reportParameter1);
             this.ReportParameters.Add(reportParameter2);
             this.ReportParameters.Add(reportParameter3);
@@ -18265,6 +18259,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.ReportParameters.Add(reportParameter616);
             this.ReportParameters.Add(reportParameter617);
             this.ReportParameters.Add(reportParameter618);
+            this.ReportParameters.Add(reportParameter619);
             styleRule1.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
             new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.TextItemBase)),
             new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.HtmlTextBox))});
@@ -18811,7 +18806,6 @@ namespace ReportesWeb1_2.Views.Reportes
         private Telerik.Reporting.TextBox textBox486;
         private Telerik.Reporting.TextBox textBox488;
         private Telerik.Reporting.TextBox textBox489;
-        private Telerik.Reporting.TextBox textBox491;
         private Telerik.Reporting.TextBox textBox492;
         private Telerik.Reporting.TextBox textBox494;
         private Telerik.Reporting.TextBox textBox495;
@@ -19004,5 +18998,6 @@ namespace ReportesWeb1_2.Views.Reportes
         private Telerik.Reporting.TextBox textBox33;
         private Telerik.Reporting.TextBox textBox45;
         private Telerik.Reporting.TextBox textBox48;
+        private Telerik.Reporting.TextBox textBox59;
     }
 }

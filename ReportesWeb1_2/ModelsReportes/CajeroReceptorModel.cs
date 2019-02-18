@@ -782,6 +782,7 @@ namespace ReportesWeb1_2.ModelsReportes
         public string Par616 { get; set; }
         public string Par617 { get; set; }
         public string Par618 { get; set; }
+        public string Par619 { get; set; }
     }
 
     public class Bolsas
