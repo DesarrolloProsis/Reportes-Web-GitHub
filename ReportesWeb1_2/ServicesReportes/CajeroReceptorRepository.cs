@@ -312,27 +312,27 @@ namespace ReportesWeb1_2.ServicesReportes
 
             if (MtGlb.QueryDataSet(StrQuerys, "TYPE_VOIE"))
             {
-                if (MtGlb.Ds.Tables["TYPE_VOIE"].Rows.Count >= 1)
+                Data.Clear();
+
+                foreach (DataRow item in MtGlb.Ds.Tables["TYPE_VOIE"].Rows)
                 {
-                    Data.Clear();
+                    i += 1;
+                    var Expr5 = MtGlb.Fecha(item["Expr5"].ToString());
+                    var Expr6 = MtGlb.Fecha(item["Expr6"].ToString());
 
-                    foreach (DataRow item in MtGlb.Ds.Tables["TYPE_VOIE"].Rows)
+                    Data.Add(new Bolsas
                     {
-                        i += 1;
-                        var Expr5 = MtGlb.Fecha(item["Expr5"].ToString());
-                        var Expr6 = MtGlb.Fecha(item["Expr6"].ToString());
-
-                        Data.Add(new Bolsas
-                        {
-                            Id = i,
-                            Inicio = Convert.ToDateTime(Expr5).ToString("MM/dd/yyyy HH:mm:ss"),
-                            Fin = Convert.ToDateTime(Expr6).ToString("MM/dd/yyyy HH:mm:ss"),
-                            Carril = item["VOIE"].ToString(),
-                            Bolsa = item["Expr4"].ToString()
-                        });
-                    }
+                        Id = i,
+                        Inicio = Convert.ToDateTime(Expr5).ToString("MM/dd/yyyy HH:mm:ss"),
+                        Fin = Convert.ToDateTime(Expr6).ToString("MM/dd/yyyy HH:mm:ss"),
+                        Carril = item["VOIE"].ToString(),
+                        Bolsa = item["Expr4"].ToString()
+                    });
                 }
             }
+            else
+                Data.Clear();
+
 
             MtGlb.CloseConnectionOracle();
 
@@ -2150,33 +2150,33 @@ namespace ReportesWeb1_2.ServicesReportes
             odataSetReporte_9.Tables.Add(oDataTableReporte_9);
 
             //ARMO MI TIPO TARIFA
-            StrQuerys = "SELECT MAX(Version_Tarif) as version " +
-                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
-                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
-                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+            //StrQuerys = "SELECT MAX(Version_Tarif) as version " +
+            //            "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+            //            "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+            //            "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
 
             DateTime _Dt_ini_poste = DateTime.ParseExact(Dt_ini_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
             DateTime _Dt_fin_poste = DateTime.ParseExact(Dt_fin_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-            StrQuerys = StrQuerys + "AND (DATE_TRANSACTION >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
-                "AND (DATE_TRANSACTION <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+            //StrQuerys = StrQuerys + "AND (DATE_TRANSACTION >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+            //    "AND (DATE_TRANSACTION <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
-                                    "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
-                                    "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
-                                    "AND ID_VOIE = '" + int_id_voie + "' " +
-                                    "AND VOIE = '" + str_id_voie + "' ";
+            //StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
+            //                        "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
+            //                        "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
+            //                        "AND ID_VOIE = '" + int_id_voie + "' " +
+            //                        "AND VOIE = '" + str_id_voie + "' ";
 
-            //StrQuerys = @"SELECT MAX(Version_Tarif) as version 
-            //            FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
-            //            WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
-            //            AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
-            //            AND TRANSACTION.ID_VOIE = voie_physique.id_voie
-            //            AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE
-            //            AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + @"'
-            //            AND TRANSACTION.ID_GARE =  " + int_id_gare + @" 
-            //            AND TRANSACTION.ID_VOIE = '" + int_id_voie + @"' 
-            //            AND TRANSACTION.VOIE = '" + str_id_voie + "'  ";
+            StrQuerys = @"SELECT MAX(Version_Tarif) as version 
+                        FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
+                        WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
+                        AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
+                        AND TRANSACTION.ID_VOIE = voie_physique.id_voie
+                        AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE
+                        AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + @"'
+                        AND TRANSACTION.ID_GARE =  " + int_id_gare + @" 
+                        AND TRANSACTION.ID_VOIE = '" + int_id_voie + @"' 
+                        AND TRANSACTION.VOIE = '" + str_id_voie + "'  ";
 
             if (MtGlb.QueryDataSet(StrQuerys, "TRANSACTION"))
                 int_version_tarifa = Convert.ToInt32(MtGlb.oDataRow["version"].ToString());
@@ -2911,7 +2911,11 @@ namespace ReportesWeb1_2.ServicesReportes
             StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
                                     "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+            StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
+                                    "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
+                                    "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
+                                    "AND ID_VOIE = '" + int_id_voie + "' " +
+                                    "AND VOIE = '" + str_id_voie + "' ";
 
             StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 72) " +
                                     "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
@@ -3195,7 +3199,11 @@ namespace ReportesWeb1_2.ServicesReportes
             StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
                                     "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+            StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
+                                    "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
+                                    "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
+                                    "AND ID_VOIE = '" + int_id_voie + "' " +
+                                    "AND VOIE = '" + str_id_voie + "' ";
 
             StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 73) " +
                                     "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
@@ -3479,7 +3487,11 @@ namespace ReportesWeb1_2.ServicesReportes
             StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
                                     "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+            StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
+                                    "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
+                                    "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
+                                    "AND ID_VOIE = '" + int_id_voie + "' " +
+                                    "AND VOIE = '" + str_id_voie + "' ";
 
             StrQuerys = StrQuerys + "AND (ID_PAIEMENT = 74) " +
                                     "AND (ID_OBS_SEQUENCE = '7' or ID_OBS_SEQUENCE = 'F') " +
