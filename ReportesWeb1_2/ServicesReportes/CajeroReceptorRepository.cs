@@ -2150,33 +2150,33 @@ namespace ReportesWeb1_2.ServicesReportes
             odataSetReporte_9.Tables.Add(oDataTableReporte_9);
 
             //ARMO MI TIPO TARIFA
-            //StrQuerys = "SELECT MAX(Version_Tarif) as version " +
-            //            "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
-            //            "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
-            //            "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+            StrQuerys = "SELECT MAX(Version_Tarif) as version " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
 
             DateTime _Dt_ini_poste = DateTime.ParseExact(Dt_ini_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
             DateTime _Dt_fin_poste = DateTime.ParseExact(Dt_fin_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-            //StrQuerys = StrQuerys + "AND (DATE_TRANSACTION >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
-            //    "AND (DATE_TRANSACTION <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+            StrQuerys = StrQuerys + "AND (DATE_TRANSACTION >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                "AND (DATE_TRANSACTION <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            //StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
-            //                        "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
-            //                        "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
-            //                        "AND ID_VOIE = '" + int_id_voie + "' " +
-            //                        "AND VOIE = '" + str_id_voie + "' ";
+            StrQuerys = StrQuerys + "AND (MATRICULE = '" + str_MATRICULE + "') " +
+                                    "AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + "' " +
+                                    "AND TRANSACTION.ID_GARE = " + int_id_gare + " " +
+                                    "AND ID_VOIE = '" + int_id_voie + "' " +
+                                    "AND VOIE = '" + str_id_voie + "' ";
 
-            StrQuerys = @"SELECT MAX(Version_Tarif) as version 
-                        FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
-                        WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
-                        AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
-                        AND TRANSACTION.ID_VOIE = voie_physique.id_voie
-                        AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE
-                        AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + @"'
-                        AND TRANSACTION.ID_GARE =  " + int_id_gare + @" 
-                        AND TRANSACTION.ID_VOIE = '" + int_id_voie + @"' 
-                        AND TRANSACTION.VOIE = '" + str_id_voie + "'  ";
+            //StrQuerys = @"SELECT MAX(Version_Tarif) as version 
+            //            FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
+            //            WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
+            //            AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
+            //            AND TRANSACTION.ID_VOIE = voie_physique.id_voie
+            //            AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE
+            //            AND TRANSACTION.ID_RESEAU = '" + str_id_RESEAU + @"'
+            //            AND TRANSACTION.ID_GARE =  " + int_id_gare + @" 
+            //            AND TRANSACTION.ID_VOIE = '" + int_id_voie + @"' 
+            //            AND TRANSACTION.VOIE = '" + str_id_voie + "'  ";
 
             if (MtGlb.QueryDataSet(StrQuerys, "TRANSACTION"))
                 int_version_tarifa = Convert.ToInt32(MtGlb.oDataRow["version"].ToString());
