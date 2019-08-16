@@ -140,6 +140,15 @@ namespace ReportesWeb1_2.Controllers
             ViewBag.Delegacion = DelegacionBag;
             ViewBag.Plaza = PlazaBag;
 
+            if (TempData.ContainsKey("Carril"))
+                ViewBag.Error = TempData["Carril"].ToString();
+            else if (TempData.ContainsKey("Bolsa"))
+                ViewBag.Error = TempData["Bolsa"].ToString();
+            else if (TempData.ContainsKey("Comenta"))
+                ViewBag.Error = TempData["Comenta"].ToString();
+            else
+                ViewBag.Error = null;
+
             return View(model);
         }
 
@@ -216,22 +225,19 @@ namespace ReportesWeb1_2.Controllers
 
                 if (validaciones.ValidarCarrilesCerrados(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
                 {
-                    ViewBag.Titulo = "Existen carriles abiertos:";
-                    ViewBag.Mensaje = validaciones.Message;
+                    TempData["Carril"] = "Existen carriles abiertos: " + validaciones.Message;
 
                     return RedirectToAction("TurnoCarrilesIndex", model);
                 }
                 else if (validaciones.ValidarBolsas(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
                 {
-                    ViewBag.Titulo = "Existen bolsas sin declarar:";
-                    ViewBag.Mensaje = validaciones.Message;
+                    TempData["Bolsa"] = "Existen bolsas sin declarar: " + validaciones.Message;
 
                     return RedirectToAction("TurnoCarrilesIndex", model);
                 }
                 else if (validaciones.ValidarComentarios(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
                 {
-                    ViewBag.Titulo = "Falta ingresar comentarios:";
-                    ViewBag.Mensaje = validaciones.Message;
+                    TempData["Comenta"] = "Falta ingresar comentarios: " + validaciones.Message;
 
                     return RedirectToAction("TurnoCarrilesIndex", model);
                 }

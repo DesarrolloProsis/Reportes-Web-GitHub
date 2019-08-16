@@ -37,6 +37,7 @@ namespace ReportesWeb1_2.Services
             string TurnoP = string.Empty;
             string FechaInicio = string.Empty;
             string FechaFinal = string.Empty;
+            BanValidaciones = true;
 
             switch (TempTurno.Substring(0, 2))
             {
@@ -106,11 +107,11 @@ namespace ReportesWeb1_2.Services
                     BanValidaciones = false;
                 }
                 Connection.Close();
+            }
 
-                foreach (Carril value in CarrilesCerrados)
-                {
-                    Message += Message + value.LANE + ", ";
-                }
+            foreach (Carril value in CarrilesCerrados)
+            {
+                Message += value.LANE + ", ";
             }
 
             rpt = BanValidaciones == true ? "OK" : "STOP";
@@ -135,6 +136,7 @@ namespace ReportesWeb1_2.Services
             string FechaInicio = string.Empty;
             string FechaFinal = string.Empty;
             string TurnoP = string.Empty;
+            BanValidaciones = true;
 
             switch (TempTurno.Substring(0, 2))
             {
@@ -198,7 +200,6 @@ namespace ReportesWeb1_2.Services
         {
             OracleCommand Cmd = new OracleCommand();
             OracleConnection Connection = new OracleConnection(Conexion);
-            BanValidaciones = true;
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             //Connection.ConnectionString = ConfigurationManager.ConnectionStrings["OracleDbContext"].ConnectionString;
@@ -207,7 +208,7 @@ namespace ReportesWeb1_2.Services
             string FechaInicio = string.Empty;
             string FechaFinal = string.Empty;
             string TurnoP = string.Empty;
-
+            BanValidaciones = true;
 
             switch (TempTurno.Substring(0, 2))
             {
