@@ -165,7 +165,7 @@ namespace ReportesWeb1_2.Services
                             "C.NUMERO_POSTE AS Corte, " +
                             "TO_CHAR(C.DATE_DEBUT_POSTE,'HH24:mi:SS') AS Inicio_Turno, " +
                             "TO_CHAR(C.DATE_FIN_POSTE,'HH24:mi:SS') AS Fin_Turno, " +
-                            "'Entrega no realizada de bolsa '||C.VOIE||' Inicio '||TO_CHAR(C.DATE_DEBUT_POSTE,'HH24:mi:SS')||',Fin '||TO_CHAR(C.DATE_FIN_POSTE,'HH24:mi:SS')||' '||A.MATRICULE||'/'|| A.NOM AS Aviso " +
+                            "'Bolsa '||C.VOIE||' Inicio '||TO_CHAR(C.DATE_DEBUT_POSTE,'HH24:mi:SS')||',Fin '||TO_CHAR(C.DATE_FIN_POSTE,'HH24:mi:SS')||' '||A.MATRICULE||'/'|| A.NOM AS Aviso " +
                             "FROM FIN_POSTE C " +
                             "LEFT JOIN TABLE_PERSONNEL  A ON C.Matricule = A.Matricule " +
                             "WHERE C.DATE_DEBUT_POSTE " +
@@ -176,12 +176,15 @@ namespace ReportesWeb1_2.Services
             Cmd.CommandText = Query;
             Cmd.Connection = Connection;
             OracleDataReader DataReader = Cmd.ExecuteReader();
+            string bolsas = "";
             while (DataReader.Read())
             {
                 BanValidaciones = false;
-                Message += DataReader["Aviso"].ToString();
+                bolsas += $"<p>{DataReader["Aviso"].ToString()}</p><br>";
             }
             Connection.Close();
+
+            Message = $"Bolsas pendientes: {bolsas}";
 
             rpt = BanValidaciones == true ? "OK" : "STOP";
 
