@@ -1471,24 +1471,24 @@ namespace ReportesWeb1_2.ServicesReportes
 
             odataSetReporte.Tables.Add(oDataTableReporte);
 
-            ////ARMO MI TIPO TARIFA
-            //StrQuerys = "SELECT MAX(Version_Tarif) as version " +
-            //            "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
-            //            "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
-            //            "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
+            //ARMO MI TIPO TARIFA
+            StrQuerys = "SELECT MAX(Version_Tarif) as version " +
+                        "FROM TRANSACTION, TYPE_CLASSE,SITE_GARE " +
+                        "WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE " +
+                        "AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE ";
 
-            //// DC
-            //StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
-            //                        "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
+            // DC
+            StrQuerys = StrQuerys + "AND (DATE_DEBUT_POSTE >= TO_DATE('" + _Dt_ini_poste.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                    "AND (DATE_DEBUT_POSTE <= TO_DATE('" + _Dt_fin_poste.ToString("yyyyMMddHHmmss") + "','YYYYMMDDHH24MISS')) ";
 
-            //StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
+            StrQuerys = StrQuerys + "AND ID_SITE = " + IdPlazaCobroSt + " AND MATRICULE <> '000000' ";
 
-            StrQuerys = @"SELECT MAX(Version_Tarif) as version 
-                        FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
-                        WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
-                        AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
-                        AND TRANSACTION.ID_VOIE = voie_physique.id_voie
-                        AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE ";
+            //StrQuerys = @"SELECT MAX(Version_Tarif) as version 
+            //            FROM TRANSACTION, TYPE_CLASSE, SITE_GARE, voie_physique, ETAT_LOGICIEL
+            //            WHERE TRANSACTION.TAB_ID_CLASSE = TYPE_CLASSE.ID_CLASSE
+            //            AND TRANSACTION.ID_GARE = SITE_GARE.ID_GARE
+            //            AND TRANSACTION.ID_VOIE = voie_physique.id_voie
+            //            AND ETAT_LOGICIEL.ID_GARE = voie_physique.ID_GARE ";
 
 
             if (MtGlb.QueryDataSet(StrQuerys, "TRANSACTION"))

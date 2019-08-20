@@ -22,6 +22,7 @@ namespace ReportesWeb1_2.Controllers
     {
         private ProsisSQLServerModel db = new ProsisSQLServerModel();
         private MetodosGlbRepository MtGlb = new MetodosGlbRepository();
+        private Validation validaciones = new Validation();
         private CajeroReceptorRepository CaReRepository = new CajeroReceptorRepository();
         private TurnoCarrilesRepository TuCaRepository = new TurnoCarrilesRepository();
         private DiaCasetaRepository DiCaRepository = new DiaCasetaRepository();
@@ -139,6 +140,15 @@ namespace ReportesWeb1_2.Controllers
             ViewBag.Delegacion = DelegacionBag;
             ViewBag.Plaza = PlazaBag;
 
+            if (TempData.ContainsKey("Carril"))
+                ViewBag.Error = TempData["Carril"].ToString();
+            else if (TempData.ContainsKey("Bolsa"))
+                ViewBag.Error = TempData["Bolsa"].ToString();
+            else if (TempData.ContainsKey("Comenta"))
+                ViewBag.Error = TempData["Comenta"].ToString();
+            else
+                ViewBag.Error = null;
+
             return View(model);
         }
 
@@ -156,6 +166,7 @@ namespace ReportesWeb1_2.Controllers
             //DataSet comTCViewModel = new DataSet();
             if (ModelState.IsValid)
             {
+
                 var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
                 model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
@@ -176,6 +187,58 @@ namespace ReportesWeb1_2.Controllers
                 var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
                 var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
                 var EncargadoTurno = model.ListEncargadosTurno.Find(x => x.Value == model.IdEncargadoTurno);
+                string ConexionDB = string.Empty;
+
+                if (Plaza.Value == "04") //Tepotzotlan
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.20.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "05") //Palmillas
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.23.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "27") //Chichimequillas
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.24.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "06") //Querétaro
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.25.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "61") //Libramiento
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.27.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "83") //Villagrán
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.28.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "86") //Cerro Gordo
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.29.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "41") //Salamanca
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.30.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "69") //Jorobas
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.21                                           .221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+
+                else if (Plaza.Value == "41") //Salamanca
+                    ConexionDB = "User Id=GEADBA;Password=fgeuorjvne;  Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.3.30.221)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=GEAPROD)))";
+                else
+                    Response.Write("<script>alert('" + "Plaza en progreso" + "');</script>");
+
+                if (validaciones.ValidarCarrilesCerrados(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                {
+                    TempData["Carril"] = "Existen carriles abiertos: " + validaciones.Message;
+
+                    return RedirectToAction("TurnoCarrilesIndex", model);
+                }
+                else if (validaciones.ValidarBolsas(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                {
+                    TempData["Bolsa"] = "Existen bolsas sin declarar: " + validaciones.Message;
+
+                    return RedirectToAction("TurnoCarrilesIndex", model);
+                }
+                else if (validaciones.ValidarComentarios(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                {
+                    TempData["Comenta"] = "Falta ingresar comentarios: " + validaciones.Message;
+
+                    return RedirectToAction("TurnoCarrilesIndex", model);
+                }
 
                 var preTCViewModel = TuCaRepository.GenerarPreliquidacion_Turno_Carriles(model.Fecha, Plaza.Value, Turno.Text, EncargadoTurno.Value + "    " + EncargadoTurno.Text, Delegacion.Text, Administrador.Value + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
                 var comTCViewModel = TuCaRepository.GenerarComparativo_Turno_Carriles();
