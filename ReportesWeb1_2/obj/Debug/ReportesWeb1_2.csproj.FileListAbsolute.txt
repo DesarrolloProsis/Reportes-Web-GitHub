@@ -1863,7 +1863,6 @@ C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Entit
 C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csprojAssemblyReference.cache
 C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Migrations.InitialCreate.resources
 C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoCajeroReceptor.resources
 C:\Users\Rodrigo\Desktop\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoDiaCaseta.resources
