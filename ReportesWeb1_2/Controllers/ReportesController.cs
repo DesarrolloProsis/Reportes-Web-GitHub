@@ -52,7 +52,7 @@ namespace ReportesWeb1_2.Controllers
                                     pla => pla.pla.Id_Plaza,
                                     ope => ope.Plaza_Id,
                                     (pla, ope) => new { pla, ope })
-                                .Where(x => x.ope.Num_Gea == userMatricula).FirstOrDefault();
+                                .Where(x => x.ope.Num_Capufe == userMatricula).FirstOrDefault();
 
                 NameConnectionString = "Oracle" + Result.pla.pla.Num_Plaza;
                 DelegacionBag = Result.pla.del.Nom_Delegacion;

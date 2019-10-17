@@ -44,10 +44,15 @@
         var typeReportSource = new TypeReportSource() { TypeName = typeof(ReportesWeb1_2.Views.Reportes.ReportBookTurnoCarrilesToc).AssemblyQualifiedName };
 
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par1", Model.PreTCViewModel.Par1));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par2", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par3", Model.PreTCViewModel.Par3));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par4", Model.PreTCViewModel.Par4));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par5", Model.PreTCViewModel.Par5));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par6", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par7", Model.PreTCViewModel.Par7));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par8", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par9", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par10", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par11", Model.PreTCViewModel.Par11));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par12", Model.PreTCViewModel.Par12));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par13", Model.PreTCViewModel.Par13));
@@ -84,6 +89,7 @@
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par36", Model.PreTCViewModel.Par36));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par37", Model.PreTCViewModel.Par37));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par38", Model.PreTCViewModel.Par38));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par39", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par44", Model.PreTCViewModel.Par44));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par45", Model.PreTCViewModel.Par45));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par46", Model.PreTCViewModel.Par46));
@@ -101,6 +107,8 @@
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par58", Model.PreTCViewModel.Par58));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par59", Model.PreTCViewModel.Par59));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par60", Model.PreTCViewModel.Par60));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par61", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par62", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par63", Model.PreTCViewModel.Par63));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par64", "0"));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par65", Model.PreTCViewModel.Par65));
@@ -108,19 +116,34 @@
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par67", Model.PreTCViewModel.Par67));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par68", "0"));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par69", Model.PreTCViewModel.Par69));
-        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par72", Model.PreTCViewModel.Par72));
-        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par73", Model.PreTCViewModel.Par73));
-        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par74", Model.PreTCViewModel.Par74));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par70", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par71", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par72", Model.PreTCViewModel.Par72 == null ? "" : Model.PreTCViewModel.Par72));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par73", Model.PreTCViewModel.Par73 == null ? "" : Model.PreTCViewModel.Par73));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par74", Model.PreTCViewModel.Par74 == null ? "" : Model.PreTCViewModel.Par74));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par75", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par76", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par77", "0"));
-        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par79", Model.PreTCViewModel.Par79));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par78", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par79", Model.PreTCViewModel.Par79 == null ? "" : Model.PreTCViewModel.Par79));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par80", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par81", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par82", "0"));
-        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par87", Model.PreTCViewModel.Par87));
-        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par88", Model.PreTCViewModel.Par88));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par83", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par84", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par85", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par86", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par87", Model.PreTCViewModel.Par87 == null ? "" : Model.PreTCViewModel.Par87));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par88", Model.PreTCViewModel.Par88 == null ? "" : Model.PreTCViewModel.Par88));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par89", Model.PreTCViewModel.Par89));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par90", ""));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par91", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par92", "0"));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par93", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par94", Model.PreTCViewModel.Par94));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par95", "0"));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par96", Model.PreTCViewModel.Par96));
+        typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par97", ""));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par98", Model.PreTCViewModel.Par98));
         typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(1).par99", Model.PreTCViewModel.Par99));
 
@@ -144,47 +167,79 @@
         int count = 12;
         while (count <= 539)
         {
-            var param = Model.ComTCViewModel.GetType().GetProperty("Par" + count).GetValue(Model.ComTCViewModel, null);
-            typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par" + count, param));
-            count++;
+            if (count == 426)
+            {
+                typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par" + count, "0"));
+                count++;
+            }
+            else
+            {
+                var param = Model.ComTCViewModel.GetType().GetProperty("Par" + count).GetValue(Model.ComTCViewModel, null);
+                typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter("reports(0).par" + count, param == null ? "" : param));
+                count++;
+            }
+        }
+
+        var reportProcessor = new Telerik.Reporting.Processing.ReportProcessor();
+
+        // set any deviceInfo settings if necessary
+        var deviceInfo = new System.Collections.Hashtable();
+
+        Telerik.Reporting.Processing.RenderingResult result = reportProcessor.RenderReport("PDF", typeReportSource, deviceInfo);
+
+        // NOMBRE DE TURNO PreTCViewModel.Par4
+        string fileName = $"REPORTE TURNO {Model.PreTCViewModel.Par4}" + "." + result.Extension;
+
+        // NOMBRE  PreTCViewModel.Par1 10/15/2019
+        string path = $"C:\\ReportesWeb\\{Model.PreTCViewModel.Par1.Substring(6, 4)}\\{Model.PreTCViewModel.Par1.Substring(0, 2)}\\{Model.PreTCViewModel.Par1.Substring(3, 2)}\\";
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        string filePath = System.IO.Path.Combine(path, fileName);
+
+        using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
+        {
+            fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
         }
     }
 
     @(Html.TelerikReporting().ReportViewer()
-            // Each report viewer must have an id - it will be used by the initialization script
-            // to find the element and initialize the report viewer.
-            .Id("reportViewer1")
-            // The URL of the service which will serve reports.
-            // The URL corresponds to the name of the controller class (ReportsController).
-            // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
-            .ServiceUrl(Url.Content("~/api/reports"))
-            // The URL for custom report viewer template. The template can be edited -
-            // new functionalities can be added and unneeded ones can be removed.
-            // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
-            // .TemplateUrl(Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-12.1.18.620.html"))
-            // Strongly typed ReportSource - TypeReportSource or UriReportSource.
-            //.ReportSource(new TypeReportSource() { TypeName = "ReportesWeb1_2.Views.Reportes.ReportBookTurnoCarriles, ReportesWeb1_2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
-            .ReportSource(typeReportSource)
-            // Specifies whether the viewer is in interactive or print preview mode.
-            // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
-            // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
-            .ViewMode(ViewMode.Interactive)
-            // Sets the scale mode of the viewer.
-            // Three modes exist currently:
-            // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
-            // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
-            // Specific - Uses the scale to zoom in and out the report.
-            .ScaleMode(ScaleMode.Specific)
-            // Zoom in and out the report using the scale
-            // 1.0 is equal to 100%, i.e. the original size of the report
-            .Scale(1.0)
-            // Sets whether the viewer’s client session to be persisted between the page’s refreshes(ex. postback).
-            // The session is stored in the browser’s sessionStorage and is available for the duration of the page session.
-            .PersistSession(false)
-            // Sets the print mode of the viewer.
-            .PrintMode(PrintMode.AutoSelect)
-            //Switches accessibility mode ON or OFF.
-            .EnableAccessibility(true)
+        // Each report viewer must have an id - it will be used by the initialization script
+        // to find the element and initialize the report viewer.
+        .Id("reportViewer1")
+        // The URL of the service which will serve reports.
+        // The URL corresponds to the name of the controller class (ReportsController).
+        // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
+        .ServiceUrl(Url.Content("~/api/reports"))
+        // The URL for custom report viewer template. The template can be edited -
+        // new functionalities can be added and unneeded ones can be removed.
+        // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
+        // .TemplateUrl(Url.Content("~/ReportViewer/templates/telerikReportViewerTemplate-12.1.18.620.html"))
+        // Strongly typed ReportSource - TypeReportSource or UriReportSource.
+        //.ReportSource(new TypeReportSource() { TypeName = "ReportesWeb1_2.Views.Reportes.ReportBookTurnoCarriles, ReportesWeb1_2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
+        .ReportSource(typeReportSource)
+        // Specifies whether the viewer is in interactive or print preview mode.
+        // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
+        // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
+        .ViewMode(ViewMode.Interactive)
+        // Sets the scale mode of the viewer.
+        // Three modes exist currently:
+        // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
+        // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
+        // Specific - Uses the scale to zoom in and out the report.
+        .ScaleMode(ScaleMode.Specific)
+        // Zoom in and out the report using the scale
+        // 1.0 is equal to 100%, i.e. the original size of the report
+        .Scale(1.0)
+        // Sets whether the viewer’s client session to be persisted between the page’s refreshes(ex. postback).
+        // The session is stored in the browser’s sessionStorage and is available for the duration of the page session.
+        .PersistSession(false)
+        // Sets the print mode of the viewer.
+        .PrintMode(PrintMode.AutoSelect)
+        //Switches accessibility mode ON or OFF.
+        .EnableAccessibility(true)
     )
 
     <br />
