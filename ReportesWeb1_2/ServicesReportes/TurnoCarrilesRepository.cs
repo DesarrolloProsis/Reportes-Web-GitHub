@@ -467,10 +467,28 @@ namespace ReportesWeb1_2.ServicesReportes
                             else
                                 FOLIO_NUMBER_CLOSE = Convert.ToDouble(item["FOLIO_NUMBER_CLOSE"].ToString().Substring(0, 9));
 
-                            if (FOLIO_NUMBER_CLOSE <= FOLIO_NUMBER_OPEN)
-                                db_acom_folios = db_acom_folios + 1;
+                            /*
+                             *  If FOLIO_NUMBER_CLOSE = 0 Or FOLIO_NUMBER_OPEN = 0 Then
+                                db_acom_folios = db_acom_folios
+                                Else
+                                    If FOLIO_NUMBER_CLOSE <= FOLIO_NUMBER_OPEN Then
+                                        db_acom_folios = db_acom_folios + 1
+                                    Else
+                                        db_acom_folios = db_acom_folios + (FOLIO_NUMBER_CLOSE - FOLIO_NUMBER_OPEN + 1)
+                                    End If
+                                End If
+                             */
+                            if (FOLIO_NUMBER_OPEN == 0 || FOLIO_NUMBER_CLOSE == 0)
+                            {
+                                db_acom_folios = db_acom_folios;
+                            }
                             else
-                                db_acom_folios = db_acom_folios + (FOLIO_NUMBER_CLOSE - FOLIO_NUMBER_OPEN + 1);
+                            {
+                                if (FOLIO_NUMBER_CLOSE <= FOLIO_NUMBER_OPEN)
+                                    db_acom_folios = db_acom_folios + 1;
+                                else
+                                    db_acom_folios = db_acom_folios + (FOLIO_NUMBER_CLOSE - FOLIO_NUMBER_OPEN + 1);
+                            }
 
                             //*************************
 
