@@ -316,8 +316,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ReportViewer\js\telerikReportViewer-12.1.18.620.min.js" />
-    <Content Include="ReportViewer\js\telerikReportViewer.kendo-12.1.18.620.min.js" />
+    <Content Include="ReportViewer\js\telerikReportViewer-13.2.19.918.min.js" />
+    <Content Include="ReportViewer\js\telerikReportViewer.kendo-13.2.19.918.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -480,7 +480,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50223</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1025/</IISUrl>
+          <IISUrl>http://localhost:1040/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

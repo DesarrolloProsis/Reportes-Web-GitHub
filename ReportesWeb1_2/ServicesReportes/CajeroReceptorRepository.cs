@@ -861,7 +861,7 @@ namespace ReportesWeb1_2.ServicesReportes
                             par5 = "001 BIS" + " " + MtGlb.oDataRow2["NOM_GARE"];
                             break;
                         default:
-                            par5 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_GARE"];
+                            par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_GARE"];
                             break;
                     }
                 }
@@ -2160,16 +2160,17 @@ namespace ReportesWeb1_2.ServicesReportes
 
             if (MtGlb.QueryDataSet2(StrQuerys, "TYPE_GARE"))
             {
-                if (IdPlazaCobroSt != "08")
+                switch (IdPlazaCobroSt)
                 {
-                    if (IdPlazaCobroSt != "09")
-                        par2 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_GARE"];
-                    else
+                    case "08":
+                        par2 = "001" + " " + MtGlb.oDataRow2["NOM_GARE"];
+                        break;
+                    case "09":
                         par2 = "001 BIS" + " " + MtGlb.oDataRow2["NOM_GARE"];
-                }
-                else
-                {
-                    par2 = "001" + " " + MtGlb.oDataRow2["NOM_GARE"];
+                        break;
+                    default:
+                        par2 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_GARE"];
+                        break;
                 }
 
                 int_id_gare = MtGlb.oDataRow2["ID_GARE"].ToString();

@@ -359,7 +359,7 @@ namespace ReportesWeb1_2.ServicesReportes
                             par5 = "001 BIS" + " " + MtGlb.oDataRow2["NOM_SITE"];
                             break;
                         default:
-                            par5 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                            par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
                             break;
                     }
                 }
@@ -1505,7 +1505,7 @@ namespace ReportesWeb1_2.ServicesReportes
                         par7 = "001 BIS" + " " + MtGlb.oDataRow2["NOM_SITE"];
                         break;
                     default:
-                        par7 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                        par7 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
                         break;
                 }
             }
