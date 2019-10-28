@@ -142,10 +142,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/16/2019 12:53:11</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.dll">
-      <publishTime>10/28/2019 13:13:35</publishTime>
+      <publishTime>10/28/2019 13:50:30</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.pdb">
-      <publishTime>10/28/2019 13:13:35</publishTime>
+      <publishTime>10/28/2019 13:50:30</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>10/16/2019 12:53:11</publishTime>
@@ -411,8 +411,17 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <File Include="Content/img/background2.jpg">
       <publishTime>10/16/2019 12:53:02</publishTime>
     </File>
+    <File Include="Content/img/local.svg">
+      <publishTime>10/28/2019 13:38:23</publishTime>
+    </File>
     <File Include="Content/img/logo.png">
       <publishTime>10/16/2019 12:53:02</publishTime>
+    </File>
+    <File Include="Content/img/today.svg">
+      <publishTime>10/28/2019 13:37:41</publishTime>
+    </File>
+    <File Include="Content/img/turno.svg">
+      <publishTime>10/28/2019 13:36:29</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>10/16/2019 12:53:02</publishTime>
@@ -631,7 +640,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/16/2019 12:53:03</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/16/2019 12:53:03</publishTime>
+      <publishTime>10/28/2019 13:49:22</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>10/16/2019 12:53:03</publishTime>

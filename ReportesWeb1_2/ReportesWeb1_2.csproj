@@ -309,7 +309,10 @@
     <Content Include="Content\css-yisus\estilos.css" />
     <Content Include="Content\img\background.jpg" />
     <Content Include="Content\img\background2.jpg" />
+    <Content Include="Content\img\local.svg" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\today.svg" />
+    <Content Include="Content\img\turno.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
