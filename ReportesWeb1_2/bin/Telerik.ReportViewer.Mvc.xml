@@ -123,6 +123,21 @@
             The name of the createEditor function as string, without parentheses.
             </summary>
         </member>
+        <member name="T:Telerik.ReportViewer.Mvc.DocumentMapAreaPosition">
+            <summary>
+            Specifies where the Document Map Area should be displayed.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.DocumentMapAreaPosition.Left">
+            <summary>
+            Displays Document Map Area on the <strong>left</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.DocumentMapAreaPosition.Right">
+            <summary>
+            Displays Document Map Area on the <strong>right</strong> of the page view.
+            </summary>
+        </member>
         <member name="T:Telerik.ReportViewer.Mvc.HtmlHelpers">
             <summary>
             A class that contains a collection of all Telerik Reporting widgets
@@ -264,6 +279,13 @@
             <param name="templateUrl"></param>
             <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
         </member>
+        <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.InitialPageAreaImageUrl(System.String)">
+            <summary>
+            The image URL for the PageArea background image. Used only when the parameter values are missing or invalid.
+            </summary>
+            <param name="initialPageAreaImageUrl"></param>
+            <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
+        </member>
         <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.ReportSource(Telerik.Reporting.ReportSource)">
             <summary>
             Sets the <see cref="T:Telerik.Reporting.ReportSource"/> 
@@ -278,6 +300,20 @@
             for the report displayed in the viewer.
             </summary>
             <param name="typeReportSource"></param>
+            <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.SendEmail(Telerik.ReportViewer.Mvc.SendEmail)">
+            <summary>
+            The send e-mail message options
+            </summary>
+            <param name="sendEmailOptions"></param>
+            <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.Parameters(Telerik.ReportViewer.Mvc.Parameters)">
+            <summary>
+            The parameters options
+            </summary>
+            <param name="parametersOptions"></param>
             <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
         </member>
         <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.ReportSource(Telerik.Reporting.UriReportSource)">
@@ -323,6 +359,35 @@
             Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
             </summary>
             <param name="viewMode"></param>
+            <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.PageMode(Telerik.ReportViewer.Mvc.PageMode)">
+            <summary>
+            Specifies whether the viewer is in Continuous scroll or Single page mode.
+            SinglePage - Displays only one report page in PageArea container
+            ContinuousScroll - Displays large amount of report pages by appending additional pages on demand. 
+            </summary>
+            <param name="pageMode"></param>
+            <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.ParametersAreaPosition(Telerik.ReportViewer.Mvc.ParametersAreaPosition)">
+            <summary>
+            Specifies where the Parameters Area should be displayed.
+            Right - Displays Parameters Area on the right of the page view.
+            Left - Displays Parameters Area on the left of the page view.
+            Top - Displays Parameters Area on the top of the page view.
+            Bottom - Displays Parameters Area on the bottom of the page view. 
+            </summary>
+            <param name="parametersAreaPosition"></param>
+            <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.DocumentMapAreaPosition(Telerik.ReportViewer.Mvc.DocumentMapAreaPosition)">
+            <summary>
+            Specifies where the Document Map Area should be displayed.
+            Right - Displays Document Map Area on the right of the page view.
+            Left - Displays Document Map Area on the left of the page view.
+            </summary>
+            <param name="documentMapAreaPosition"></param>
             <returns><see cref="T:Telerik.ReportViewer.Mvc.IReportViewerBuilder"/></returns>
         </member>
         <member name="M:Telerik.ReportViewer.Mvc.IReportViewerBuilder.ScaleMode(Telerik.ReportViewer.Mvc.ScaleModes)">
@@ -478,6 +543,73 @@
             Renders deferred initialization statements.
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Telerik.ReportViewer.Mvc.PageMode">
+            <summary>
+            Specifies the page mode for the ReportViewer control.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.PageMode.ContinuousScroll">
+            <summary>
+            Displays large amount of report pages by appending additional pages on demand.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.PageMode.SinglePage">
+            <summary>
+            Displays only one report page in PageArea container
+            </summary>
+        </member>
+        <member name="T:Telerik.ReportViewer.Mvc.Parameters">
+            <summary>
+            Provides a class for the Parameters options.
+            Contains the Editors object property.
+            </summary>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.Parameters.#ctor">
+            <summary>
+            The default constructor.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.Parameters.Editors">
+            <summary>
+            Definds the parameters editors types
+            </summary>
+        </member>
+        <member name="T:Telerik.ReportViewer.Mvc.Editors">
+            <summary>
+            Provides a class for the Parameters Editors options.
+            Contains the SingleSelect and MultiSelect properties.
+            </summary>
+        </member>
+        <member name="T:Telerik.ReportViewer.Mvc.EditorTypes">
+            <summary>
+             List of the possible parameters editors types.
+            </summary>
+        </member>
+        <member name="T:Telerik.ReportViewer.Mvc.ParametersAreaPosition">
+            <summary>
+            Specifies where the Parameters Area should be displayed.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.ParametersAreaPosition.Right">
+            <summary>
+            Displays Parameters Area on the <strong>right</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.ParametersAreaPosition.Left">
+            <summary>
+            Displays Parameters Area on the <strong>left</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.ParametersAreaPosition.Top">
+            <summary>
+            Displays Parameters Area on the <strong>top</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Mvc.ParametersAreaPosition.Bottom">
+            <summary>
+            Displays Parameters Area on the <strong>bottom</strong> of the page view.
+            </summary>
         </member>
         <member name="T:Telerik.ReportViewer.Mvc.PrintMode">
             <summary>
@@ -663,6 +795,68 @@
             Uses the scale to zoom in and out the report.
             </summary>
         </member>
+        <member name="T:Telerik.ReportViewer.Mvc.SendEmail">
+            <summary>
+            Provides a class for the send e-mail message options.
+            Contains the enabled property, the preselected rendering Format, from and to e-mail addresses.
+            </summary>
+        </member>
+        <member name="M:Telerik.ReportViewer.Mvc.SendEmail.#ctor">
+            <summary>
+            The default constructor.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.Enabled">
+            <summary>
+            Indicates whether to show the send e-mail button
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.From">
+            <summary>
+            A valid e-mail for the e-mail message FROM address.
+            This field is required if empty the user should set it in the Send Mail Message dialog.
+            The users can modify this value in the Send Mail Message dialog. 
+            The SendMailMessage implementation should accept the specified FROM e-mail address.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.To">
+            <summary>
+            A valid e-mail for the e-mail message TO address.
+            This field is required if empty the user should set it in the Send Mail Message dialog.
+            The users can modify this value in the Send Mail Message dialog. 
+            The SendMailMessage implementation should accept the specified TO e-mail address.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.CC">
+            <summary>
+            A valid e-mail for the e-mail message CC address.
+            This field is optional.
+            The users can modify this value in the Send Mail Message dialog. 
+            The SendMailMessage implementation should accept the specified CC e-mail addresses.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.Subject">
+            <summary>
+            A string used for the MailMessage Subject value.
+            This field is optional.
+            The users can modify this value in the Send Mail Message dialog. 
+            The SendMailMessage implementation should accept the specified e-mail subject.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.Body">
+            <summary>
+            A string used for the MailMessage Body value.
+            This field is optional.
+            The users can modify this value in the Send Mail Message dialog. 
+            The SendMailMessage implementation should accept the specified e-mail body.
+            </summary>
+        </member>
+        <member name="P:Telerik.ReportViewer.Mvc.SendEmail.Format">
+            <summary>
+            The preselected rendering format. 
+            The users can modify this value in the Send Mail Message dialog. 
+            </summary>
+        </member>
         <member name="T:Telerik.ReportViewer.Mvc.ViewMode">
             <summary>
             Specifies whether the viewer is in interactive or print preview mode
@@ -728,6 +922,21 @@
             Returns an instance, initialized with the default key mapping
             </summary>
         </member>
+        <member name="T:Telerik.ReportViewer.Html5.Common.DocumentMapAreaPosition">
+            <summary>
+            Specifies where the Document Map Area should be displayed.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.DocumentMapAreaPosition.Left">
+            <summary>
+            Displays Document Map Area on the <strong>left</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.DocumentMapAreaPosition.Right">
+            <summary>
+            Displays Document Map Area on the <strong>right</strong> of the page view.
+            </summary>
+        </member>
         <member name="T:Telerik.ReportViewer.Html5.Common.ExceptionMessages">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -752,6 +961,46 @@
         <member name="P:Telerik.ReportViewer.Html5.Common.ExceptionMessages.NameCannotContainInvalidCharacters">
             <summary>
               Looks up a localized string similar to The name of the element cannot contain invalid characters..
+            </summary>
+        </member>
+        <member name="T:Telerik.ReportViewer.Html5.Common.PageMode">
+            <summary>
+            Specifies the page mode for the ReportViewer control.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.PageMode.ContinuousScroll">
+            <summary>
+            Displays large amount of report pages by appending additional pages on demand.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.PageMode.SinglePage">
+            <summary>
+            Displays only one report page in PageArea container
+            </summary>
+        </member>
+        <member name="T:Telerik.ReportViewer.Html5.Common.ParametersAreaPosition">
+            <summary>
+            Specifies where the Parameters Area should be displayed.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.ParametersAreaPosition.Right">
+            <summary>
+            Displays Parameters Area on the <strong>right</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.ParametersAreaPosition.Left">
+            <summary>
+            Displays Parameters Area on the <strong>left</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.ParametersAreaPosition.Top">
+            <summary>
+            Displays Parameters Area on the <strong>top</strong> of the page view.
+            </summary>
+        </member>
+        <member name="F:Telerik.ReportViewer.Html5.Common.ParametersAreaPosition.Bottom">
+            <summary>
+            Displays Parameters Area on the <strong>bottom</strong> of the page view.
             </summary>
         </member>
         <member name="T:Telerik.ReportViewer.Html5.Common.PrintMode">

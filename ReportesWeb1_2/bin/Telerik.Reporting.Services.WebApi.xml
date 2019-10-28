@@ -213,6 +213,38 @@
             <param name="instanceID">The report instance used for the document</param>
             <param name="documentID">The ID of the document</param>
         </member>
+        <member name="M:Telerik.Reporting.Services.WebApi.ReportsControllerBase.SendDocument(System.String,System.String,System.String,Telerik.Reporting.Services.WebApi.SendDocumentArgs)">
+            <summary>
+            Sends an e-mail message with attached document
+            </summary>
+            <param name="clientID">The client session ID which contains the document</param>
+            <param name="instanceID">The report instance used for the document</param>
+            <param name="documentID">The ID of the document</param>
+            <param name="args">The mail message args</param>
+        </member>
+        <member name="M:Telerik.Reporting.Services.WebApi.ReportsControllerBase.CreateMailMessage(Telerik.Reporting.Services.WebApi.SendDocumentArgs,Telerik.Reporting.Services.Engine.DocumentData)">
+            <summary>
+            Creates the mail message that will be used in SendDocument
+            </summary>
+            <param name="args">The args to use in the mail message</param>
+            <param name="result">The document to attach to the mail message</param>
+            <returns>Mail message</returns>
+        </member>
+        <member name="M:Telerik.Reporting.Services.WebApi.ReportsControllerBase.SendMailMessage(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends an e-mail message containing a report document to its recipients. 
+            Override this method in order to effectively send the mail message.
+            </summary>
+            <remarks>
+            The default implementation of this method is empty. Override this method in order to use the feature.
+            </remarks>
+            <example>
+            <code lang="C#" source="CodeSnippets\MvcCS\Controllers\ReportsController.cs" region="SendMailMessage_Implementation" />
+            <code lang="VB" source="CodeSnippets\MvcVB\Controllers\ReportsController.vb" region="SendMailMessage_Implementation" />
+            </example>
+            <param name="mailMessage">The mail message to send</param>
+            <returns>The default value is NotImplemented.</returns>
+        </member>
         <member name="M:Telerik.Reporting.Services.WebApi.ReportsControllerBase.OnCreateDocument(Telerik.Reporting.Services.CreateDocumentEventArgs)">
             <summary>
             Called when document is requested, before rendering the document.
@@ -427,6 +459,36 @@
             <remarks>
             Applicable only when BaseDocumentID is provided.
             </remarks>
+        </member>
+        <member name="T:Telerik.Reporting.Services.WebApi.SendDocumentArgs">
+            <summary>
+            Represents the mail message arguments passed to the SendDocument method of the <see cref="T:Telerik.Reporting.Services.WebApi.ReportsControllerBase"/>
+            </summary>
+        </member>
+        <member name="P:Telerik.Reporting.Services.WebApi.SendDocumentArgs.From">
+            <summary>
+            The mail message From part
+            </summary>
+        </member>
+        <member name="P:Telerik.Reporting.Services.WebApi.SendDocumentArgs.To">
+            <summary>
+            The mail message To part
+            </summary>
+        </member>
+        <member name="P:Telerik.Reporting.Services.WebApi.SendDocumentArgs.Cc">
+            <summary>
+            The mail message Cc part
+            </summary>
+        </member>
+        <member name="P:Telerik.Reporting.Services.WebApi.SendDocumentArgs.Subject">
+            <summary>
+            The mail message Subject part
+            </summary>
+        </member>
+        <member name="P:Telerik.Reporting.Services.WebApi.SendDocumentArgs.Body">
+            <summary>
+            The mail message Body part
+            </summary>
         </member>
         <member name="T:Telerik.Reporting.Services.WebApi.ReportsControllerConfiguration">
             <summary>
