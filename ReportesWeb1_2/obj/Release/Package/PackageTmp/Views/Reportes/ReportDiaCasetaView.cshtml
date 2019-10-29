@@ -23,7 +23,7 @@
     <link href="~/Scripts/kendo.common.min.css" rel="stylesheet" />
 
     <!--kendo.all.min.js can be used as well instead of the following custom Kendo UI subset-->
-    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer.kendo-13.2.19.918.min.js")"></script>
+    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer.kendo-12.1.18.620.min.js")"></script>
 
     <style>
         #reportViewer1 {
@@ -34,7 +34,7 @@
         }
     </style>
 
-    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-13.2.19.918.min.js")"></script>
+    <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-12.1.18.620.min.js")"></script>
 
 </head>
 <body>
@@ -234,7 +234,7 @@
         // The session is stored in the browser�s sessionStorage and is available for the duration of the page session.
         .PersistSession(false)
         // Sets the print mode of the viewer.
-        .PrintMode(PrintMode.AutoSelect)
+        .PrintMode(PrintMode.ForcePDFFile)
         //Switches accessibility mode ON or OFF.
         .EnableAccessibility(true)
     )

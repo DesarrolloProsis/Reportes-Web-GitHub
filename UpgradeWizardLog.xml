@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
 <log>
-  <event>Get project references.</event>
   <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportesWeb1_2.csproj" />
   <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ApplicationInsights.config" />
   <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ApplicationInsights.config" />
@@ -26,8 +25,8 @@
   <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\packages.config" />
   <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\packages.config" />
   <event action="Analyze" type="Success" name="packages.config" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\packages.config" />
-  <event action="Analyze" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportViewer\js\telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Analyze" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportViewer\js\telerikReportViewer.kendo-13.2.19.918.min.js" />
+  <event action="Analyze" type="Success" name="telerikReportViewer-12.1.18.620.min.js" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportViewer\js\telerikReportViewer-12.1.18.620.min.js" />
+  <event action="Analyze" type="Success" name="telerikReportViewer.kendo-12.1.18.620.min.js" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportViewer\js\telerikReportViewer.kendo-12.1.18.620.min.js" />
   <event action="Analyze" type="Success" />
   <event action="Analyze" type="Success" />
   <event action="Analyze" type="Success" />
@@ -208,27 +207,4 @@
   <event action="Analyze" type="Success" name="Web.Release.config" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\Web.Release.config" />
   <event action="Analyze" type="Success" name="ReportesWeb1_2" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportesWeb1_2.csproj" />
   <event action="Analyze" type="Success" name="ReportesWeb1_2" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2.sln" />
-  <event action="Analyze" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Analyze" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Analyze" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Analyze" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Analyze" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Analyze" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Backup" type="Success" name="ReportesWeb1_2" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportesWeb1_2.csproj" />
-  <event action="Upgrade" type="Success" name="Assembly References" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportesWeb1_2.csproj" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportViewer\js\telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportViewer\js\telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="ReportCajeroReceptorView.cshtml" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\Views\Reportes\ReportCajeroReceptorView.cshtml" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="ReportDiaCasetaView.cshtml" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\Views\Reportes\ReportDiaCasetaView.cshtml" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer-13.2.19.918.min.js" path="telerikReportViewer-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="telerikReportViewer.kendo-13.2.19.918.min.js" path="telerikReportViewer.kendo-13.2.19.918.min.js" />
-  <event action="Upgrade" type="Success" name="ReportTurnoCarrilesView.cshtml" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\Views\Reportes\ReportTurnoCarrilesView.cshtml" />
-  <event action="Upgrade" type="Success" name="Config Sections" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\Web.config" />
-  <event action="Upgrade" type="Success" name="Web.config" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\Web.config" />
-  <event action="Upgrade" type="Success" name="ReportesWeb1_2" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\ReportesWeb1_2.csproj" />
-  <event action="Upgrade" type="Success" name="ReportesWeb1_2" path="C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2.sln" />
 </log>
