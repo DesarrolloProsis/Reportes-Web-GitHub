@@ -22,6 +22,7 @@
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
     <link href="~/Scripts/kendo.blueopal.min.css" rel="stylesheet" />
     <link href="~/Scripts/kendo.common.min.css" rel="stylesheet" />
+    @*<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>*@
 
     <!--kendo.all.min.js can be used as well instead of the following custom Kendo UI subset-->
     <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer.kendo-12.1.18.620.min.js")"></script>
@@ -36,7 +37,7 @@
     </style>
 
     <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-12.1.18.620.min.js")"></script>
-
+    <script src="~/Scripts/polyfill.min.js?features=Promise"></script>
 </head>
 <body>
 
@@ -195,40 +196,40 @@
     }
 
     @(Html.TelerikReporting().ReportViewer()
-            // Each report viewer must have an id - it will be used by the initialization script
-            // to find the element and initialize the report viewer.
-            .Id("reportViewer1")
-            // The URL of the service which will serve reports.
-            // The URL corresponds to the name of the controller class (ReportsController).
-            // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
-            .ServiceUrl(Url.Content("~/api/reports"))
-            // The URL for custom report viewer template. The template can be edited -
-            // new functionalities can be added and unneeded ones can be removed.
-            // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
-            // 
-            // Strongly typed ReportSource - TypeReportSource or UriReportSource.
-            //.ReportSource(new TypeReportSource() { TypeName = "ReportesWeb1_2.ReportBookCajeroReceptor, ReportesWeb1_2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
-            .ReportSource(typeReportSource)
-            // Specifies whether the viewer is in interactive or print preview mode.
-            // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
-            // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
-            .ViewMode(ViewMode.Interactive)
-            // Sets the scale mode of the viewer.
-            // Three modes exist currently:
-            // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
-            // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
-            // Specific - Uses the scale to zoom in and out the report.
-            .ScaleMode(ScaleMode.Specific)
-            // Zoom in and out the report using the scale
-            // 1.0 is equal to 100%, i.e. the original size of the report
-            .Scale(1.0)
-            // Sets whether the viewer�s client session to be persisted between the page�s refreshes(ex. postback).
-            // The session is stored in the browser�s sessionStorage and is available for the duration of the page session.
-            .PersistSession(false)
-            // Sets the print mode of the viewer.
-            .PrintMode(PrintMode.ForcePDFFile)
-            //Switches accessibility mode ON or OFF.
-            .EnableAccessibility(true)
+                            // Each report viewer must have an id - it will be used by the initialization script
+                            // to find the element and initialize the report viewer.
+                            .Id("reportViewer1")
+                            // The URL of the service which will serve reports.
+                            // The URL corresponds to the name of the controller class (ReportsController).
+                            // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
+                            .ServiceUrl(Url.Content("~/api/reports"))
+                            // The URL for custom report viewer template. The template can be edited -
+                            // new functionalities can be added and unneeded ones can be removed.
+                            // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
+                            //
+                            // Strongly typed ReportSource - TypeReportSource or UriReportSource.
+                            //.ReportSource(new TypeReportSource() { TypeName = "ReportesWeb1_2.ReportBookCajeroReceptor, ReportesWeb1_2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" })
+                            .ReportSource(typeReportSource)
+                            // Specifies whether the viewer is in interactive or print preview mode.
+                            // PrintPreview - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
+                            // Interactive - Displays the report in its original width and height with no paging. Additionally interactivity is enabled.
+                            .ViewMode(ViewMode.Interactive)
+                            // Sets the scale mode of the viewer.
+                            // Three modes exist currently:
+                            // FitPage - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
+                            // FitPageWidth - The report will be zoomed in or out so that the width of the screen and the width of the report match.
+                            // Specific - Uses the scale to zoom in and out the report.
+                            .ScaleMode(ScaleMode.Specific)
+                            // Zoom in and out the report using the scale
+                            // 1.0 is equal to 100%, i.e. the original size of the report
+                            .Scale(1.0)
+                            // Sets whether the viewer�s client session to be persisted between the page�s refreshes(ex. postback).
+                            // The session is stored in the browser�s sessionStorage and is available for the duration of the page session.
+                            .PersistSession(false)
+                            // Sets the print mode of the viewer.
+                            .PrintMode(PrintMode.ForcePDFPlugin)
+                            //Switches accessibility mode ON or OFF.
+                            .EnableAccessibility(true)
     )
 
     <br />

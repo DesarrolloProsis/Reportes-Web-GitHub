@@ -2120,7 +2120,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox16.Style.BorderWidth.Top = Telerik.Reporting.Drawing.Unit.Point(1D);
             this.textBox16.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.textBox16.StyleName = "";
-            this.textBox16.Value = "Vehículos Residentes R.P.A.";
+            this.textBox16.Value = "Vehículos Residentes S.P.";
             // 
             // textBox17
             // 
@@ -2318,7 +2318,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox45.Style.BorderWidth.Top = Telerik.Reporting.Drawing.Unit.Point(1D);
             this.textBox45.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.textBox45.StyleName = "";
-            this.textBox45.Value = "Boletos Residentes P.A.";
+            this.textBox45.Value = "Boletos Residentes S.A.";
             // 
             // textBox66
             // 

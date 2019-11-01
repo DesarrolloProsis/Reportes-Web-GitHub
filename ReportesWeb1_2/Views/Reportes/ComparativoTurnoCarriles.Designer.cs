@@ -3527,7 +3527,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox413.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
             this.textBox413.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox413.StyleName = "";
-            this.textBox413.Value = "R.P.A.";
+            this.textBox413.Value = "R.S.P.";
             // 
             // textBox380
             // 
@@ -15104,21 +15104,21 @@ namespace ReportesWeb1_2.Views.Reportes
             // 
             // table10
             // 
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(3.1485412120819092D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.296459436416626D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(3.1485414505004883D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2964593172073364D)));
             this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2082650661468506D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2062509059906006D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1709716320037842D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2238885164260864D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2062510251998901D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1709717512130737D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.223888635635376D)));
             this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1533339023590088D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2062509059906006D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2415273189544678D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1709716320037842D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2062510251998901D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2415274381637573D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1709717512130737D)));
             this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1886115074157715D)));
             this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2327090501785278D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2238878011703491D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2238885164260864D)));
-            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1533328294754028D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2238879203796387D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.223888635635376D)));
+            this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.1533329486846924D)));
             this.table10.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Cm(1.2062498331069946D)));
             this.table10.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Cm(0.34000000357627869D)));
             this.table10.Body.SetCellContent(0, 0, this.textBox549);

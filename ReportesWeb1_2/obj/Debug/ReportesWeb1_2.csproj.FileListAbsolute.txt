@@ -1700,7 +1700,6 @@ C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.CopyComplete
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.dll
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.pdb
-C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\ApplicationInsights.config
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\ReportesWeb1_2.dll.config
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\ReportesWeb1_2.dll
@@ -1796,6 +1795,7 @@ C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.WebPages.Deployment.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.WebPages.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.WebPages.Razor.dll
+C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.Services.WebApi.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.XpsRendering.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.ReportViewer.Mvc.dll
@@ -1856,7 +1856,6 @@ C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Enti
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csprojAssemblyReference.cache
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Migrations.InitialCreate.resources
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoCajeroReceptor.resources
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoDiaCaseta.resources

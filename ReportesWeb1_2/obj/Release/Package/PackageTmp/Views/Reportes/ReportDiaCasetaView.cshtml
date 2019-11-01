@@ -35,6 +35,7 @@
     </style>
 
     <script src="@Url.Content("~/ReportViewer/js/telerikReportViewer-12.1.18.620.min.js")"></script>
+    <script src="~/Scripts/polyfill.min.js?features=Promise"></script>
 
 </head>
 <body>
@@ -234,7 +235,7 @@
         // The session is stored in the browser�s sessionStorage and is available for the duration of the page session.
         .PersistSession(false)
         // Sets the print mode of the viewer.
-        .PrintMode(PrintMode.ForcePDFFile)
+        .PrintMode(PrintMode.ForcePDFPlugin)
         //Switches accessibility mode ON or OFF.
         .EnableAccessibility(true)
     )
