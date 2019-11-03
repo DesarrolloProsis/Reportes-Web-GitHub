@@ -2369,7 +2369,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox16.Style.BorderWidth.Top = Telerik.Reporting.Drawing.Unit.Point(1D);
             this.textBox16.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.textBox16.StyleName = "";
-            this.textBox16.Value = "Vehículos Residentes S.P.";
+            this.textBox16.Value = "Vehículos Residentes P.A.";
             // 
             // textBox17
             // 

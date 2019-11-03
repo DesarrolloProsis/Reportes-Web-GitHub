@@ -3537,7 +3537,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox413.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(5D);
             this.textBox413.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox413.StyleName = "";
-            this.textBox413.Value = "R.S.P.";
+            this.textBox413.Value = "R.P.A";
             // 
             // panel1
             // 
