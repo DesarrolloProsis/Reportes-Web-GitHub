@@ -521,6 +521,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ReportViewer\js\print.min.js" />
+    <Content Include="ReportViewer\js\telerikReportViewer-12.1.18.620.js" />
     <Content Include="ReportViewer\js\telerikReportViewer-12.1.18.620.min.js" />
     <Content Include="ReportViewer\js\telerikReportViewer.kendo-12.1.18.620.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />

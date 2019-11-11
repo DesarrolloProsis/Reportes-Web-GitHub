@@ -1869,4 +1869,3 @@ C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\R
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.CopyComplete
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.dll
 C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.pdb
-C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csprojAssemblyReference.cache

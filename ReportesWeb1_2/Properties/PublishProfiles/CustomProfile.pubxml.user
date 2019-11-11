@@ -142,10 +142,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/16/2019 12:53:11</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.dll">
-      <publishTime>11/01/2019 19:04:55</publishTime>
+      <publishTime>11/11/2019 14:27:11</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.pdb">
-      <publishTime>11/01/2019 19:04:55</publishTime>
+      <publishTime>11/11/2019 14:27:11</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>10/16/2019 12:53:11</publishTime>
@@ -432,6 +432,12 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <File Include="Global.asax">
       <publishTime>10/16/2019 12:53:03</publishTime>
     </File>
+    <File Include="ReportViewer/js/print.min.js">
+      <publishTime>11/11/2019 12:47:16</publishTime>
+    </File>
+    <File Include="ReportViewer/js/telerikReportViewer-12.1.18.620.js">
+      <publishTime>11/11/2019 13:06:33</publishTime>
+    </File>
     <File Include="ReportViewer/js/telerikReportViewer-12.1.18.620.min.js">
       <publishTime>06/20/2018 19:15:40</publishTime>
     </File>
@@ -673,13 +679,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/16/2019 12:56:13</publishTime>
     </File>
     <File Include="Views/Reportes/ReportCajeroReceptorView.cshtml">
-      <publishTime>11/01/2019 15:23:41</publishTime>
+      <publishTime>11/11/2019 14:13:16</publishTime>
     </File>
     <File Include="Views/Reportes/ReportDiaCasetaView.cshtml">
-      <publishTime>11/01/2019 15:57:10</publishTime>
+      <publishTime>11/11/2019 14:12:53</publishTime>
     </File>
     <File Include="Views/Reportes/ReportTurnoCarrilesView.cshtml">
-      <publishTime>11/01/2019 15:57:32</publishTime>
+      <publishTime>11/11/2019 13:59:40</publishTime>
     </File>
     <File Include="Views/Reportes/TurnoCarrilesIndex.cshtml">
       <publishTime>10/16/2019 12:56:13</publishTime>
@@ -712,7 +718,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/16/2019 12:53:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/01/2019 19:04:59</publishTime>
+      <publishTime>11/03/2019 20:49:50</publishTime>
     </File>
   </ItemGroup>
 </Project>
