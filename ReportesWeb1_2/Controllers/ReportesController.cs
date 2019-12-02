@@ -211,7 +211,25 @@ namespace ReportesWeb1_2.Controllers
                     return RedirectToAction("TurnoCarrilesIndex", model);
                 }
 
-                var preTCViewModel = TuCaRepository.GenerarPreliquidacion_Turno_Carriles(model.Fecha, Plaza.Value, Turno.Text, EncargadoTurno.Value + "    " + EncargadoTurno.Text, Delegacion.Text, Administrador.Value + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
+                string encargado_num = "";
+                string admin_num = "";
+                string Matricule_Cajero = EncargadoTurno.Value;
+                var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                if (Query_Cajero != null)
+                    encargado_num = Query_Cajero.Num_Capufe;
+                else
+                    encargado_num = EncargadoTurno.Value;
+
+                Matricule_Cajero = Administrador.Value;
+                Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                if (Query_Cajero != null)
+                    admin_num = Query_Cajero.Num_Capufe;
+                else
+                    admin_num = Administrador.Value;
+
+                var preTCViewModel = TuCaRepository.GenerarPreliquidacion_Turno_Carriles(model.Fecha, Plaza.Value, Turno.Text, encargado_num + "    " + EncargadoTurno.Text, Delegacion.Text, admin_num + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
                 var comTCViewModel = TuCaRepository.GenerarComparativo_Turno_Carriles();
 
                 model.PreTCViewModel = preTCViewModel;
@@ -268,7 +286,25 @@ namespace ReportesWeb1_2.Controllers
                 var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
                 var EncargadoTurno = model.ListEncargadosTurno.Find(x => x.Value == model.IdEncargadoTurno);
 
-                var preDCViewModel = DiCaRepository.GenerarPreliquidacion_Dia_Caseta(model.Fecha, Plaza.Value, EncargadoTurno.Value + "    " + EncargadoTurno.Text, Delegacion.Text, Administrador.Value + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
+                string encargado_num = "";
+                string admin_num = "";
+                string Matricule_Cajero = EncargadoTurno.Value;
+                var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                if (Query_Cajero != null)
+                    encargado_num = Query_Cajero.Num_Capufe;
+                else
+                    encargado_num = EncargadoTurno.Value;
+
+                Matricule_Cajero = Administrador.Value;
+                Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                if (Query_Cajero != null)
+                    admin_num = Query_Cajero.Num_Capufe;
+                else
+                    admin_num = Administrador.Value;
+
+                var preDCViewModel = DiCaRepository.GenerarPreliquidacion_Dia_Caseta(model.Fecha, Plaza.Value, encargado_num + "    " + EncargadoTurno.Text, Delegacion.Text, admin_num + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
                 var comDCViewModel = DiCaRepository.GenerarComparativo_Dia_Caseta();
 
                 model.PreDCViewModel = preDCViewModel;

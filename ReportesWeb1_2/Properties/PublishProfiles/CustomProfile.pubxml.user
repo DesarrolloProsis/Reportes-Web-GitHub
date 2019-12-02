@@ -142,10 +142,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/13/2019 14:09:52</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.dll">
-      <publishTime>11/14/2019 12:50:20</publishTime>
+      <publishTime>12/02/2019 17:44:37</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.pdb">
-      <publishTime>11/14/2019 12:50:20</publishTime>
+      <publishTime>12/02/2019 17:44:37</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>11/13/2019 14:09:51</publishTime>
@@ -334,7 +334,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/13/2019 14:09:51</publishTime>
     </File>
     <File Include="bin/Telerik.Reporting.dll">
-      <publishTime>11/13/2019 14:09:48</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="bin/Telerik.Reporting.OpenXmlRendering.2.7.2.dll">
       <publishTime>11/13/2019 15:02:56</publishTime>
@@ -346,19 +346,19 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>06/20/2018 19:09:30</publishTime>
     </File>
     <File Include="bin/Telerik.Reporting.Services.WebApi.dll">
-      <publishTime>11/13/2019 14:09:48</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="bin/Telerik.Reporting.Services.WebApi.pdb">
       <publishTime>06/20/2018 19:09:42</publishTime>
     </File>
     <File Include="bin/Telerik.Reporting.XpsRendering.dll">
-      <publishTime>11/13/2019 14:09:48</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="bin/Telerik.Reporting.XpsRendering.pdb">
       <publishTime>06/20/2018 19:09:36</publishTime>
     </File>
     <File Include="bin/Telerik.ReportViewer.Mvc.dll">
-      <publishTime>11/13/2019 14:09:48</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="bin/Telerik.ReportViewer.Mvc.pdb">
       <publishTime>06/20/2018 19:10:28</publishTime>
@@ -436,7 +436,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/13/2019 15:02:56</publishTime>
     </File>
     <File Include="ReportViewer/js/telerikReportViewer-12.1.18.620.js">
-      <publishTime>11/13/2019 15:02:56</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="ReportViewer/js/telerikReportViewer-12.1.18.620.min.js">
       <publishTime>06/20/2018 19:15:40</publishTime>
@@ -685,13 +685,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/13/2019 15:02:56</publishTime>
     </File>
     <File Include="Views/Reportes/ReportCajeroReceptorView.cshtml">
-      <publishTime>11/13/2019 15:02:56</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="Views/Reportes/ReportDiaCasetaView.cshtml">
-      <publishTime>11/13/2019 15:02:56</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="Views/Reportes/ReportTurnoCarrilesView.cshtml">
-      <publishTime>11/13/2019 15:02:56</publishTime>
+      <publishTime>11/14/2019 13:52:51</publishTime>
     </File>
     <File Include="Views/Reportes/TurnoCarrilesIndex.cshtml">
       <publishTime>11/13/2019 15:02:56</publishTime>
@@ -724,7 +724,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/13/2019 14:09:48</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/14/2019 12:22:21</publishTime>
+      <publishTime>11/15/2019 10:50:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

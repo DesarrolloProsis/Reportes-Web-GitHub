@@ -665,10 +665,6 @@ C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\R
 C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Release\ReportesWeb1_2.csproj.CoreCompileInputs.cache
 C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Release\ReportesWeb1_2.dll
 C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Release\ReportesWeb1_2.pdb
-C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.dll
-C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.Services.WebApi.dll
-C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.XpsRendering.dll
-C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.ReportViewer.Mvc.dll
 C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.pdb
 C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.xml
 C:\Users\PCS186-OPE01\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.Services.WebApi.pdb
