@@ -335,18 +335,7 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 if (MtGlb.QueryDataSet2(StrQuerys, "TYPE_SITE"))
                 {
-                    switch (IdPlazaCobroSt)
-                    {
-                        case "08":
-                            par5 = "001" + " " + MtGlb.oDataRow2["NOM_SITE"];
-                            break;
-                        case "09":
-                            par5 = "001 BIS" + " " + MtGlb.oDataRow2["NOM_SITE"];
-                            break;
-                        default:
-                            par5 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
-                            break;
-                    }
+                    par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
                 }
 
                 DateTime _Dt_ini_poste = DateTime.ParseExact(Dt_ini_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
@@ -1444,18 +1433,7 @@ namespace ReportesWeb1_2.ServicesReportes
 
             if (MtGlb.QueryDataSet2(StrQuerys, "TYPE_SITE"))
             {
-                switch (IdPlazaCobroSt)
-                {
-                    case "08":
-                        par7 = "001" + " " + MtGlb.oDataRow2["NOM_SITE"];
-                        break;
-                    case "09":
-                        par7 = "001 BIS" + " " + MtGlb.oDataRow2["NOM_SITE"];
-                        break;
-                    default:
-                        par7 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
-                        break;
-                }
+                par7 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
             }
 
             DateTime _Dt_ini_poste = DateTime.ParseExact(Dt_ini_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
