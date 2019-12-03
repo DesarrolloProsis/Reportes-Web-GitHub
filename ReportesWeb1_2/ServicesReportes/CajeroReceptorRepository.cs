@@ -790,7 +790,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 if (MtGlb.QueryDataSet2(StrQuerys, "TABLE_PERSONNEL"))
                 {
                     string Matricule_Cajero = MtGlb.oDataRow2["MATRICULE"].ToString();
-                    var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Capufe == Matricule_Cajero).FirstOrDefault();
+                    var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
 
                     if (Query_Cajero != null)
                     {
@@ -2129,11 +2129,11 @@ namespace ReportesWeb1_2.ServicesReportes
             if (MtGlb.QueryDataSet2(StrQuerys, "TABLE_PERSONNEL"))
             {
                 string matricule = MtGlb.oDataRow2["Matricule"].ToString();
-                var query = db.Type_Operadores.Where(x => x.Num_Capufe == matricule).FirstOrDefault();
+                var query = db.Type_Operadores.Where(x => x.Num_Gea == matricule).FirstOrDefault();
 
                 if (query != null)
                 {
-                    par7 = matricule + "     " + MtGlb.oDataRow2["nombre"].ToString().Trim();
+                    par7 = query.Num_Capufe + "     " + MtGlb.oDataRow2["nombre"].ToString().Trim();
                     str_MATRICULE = MtGlb.oDataRow2["MATRICULE"].ToString();
                 }
                 else
