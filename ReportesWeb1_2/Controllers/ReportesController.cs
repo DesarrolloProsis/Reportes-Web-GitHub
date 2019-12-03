@@ -107,7 +107,15 @@ namespace ReportesWeb1_2.Controllers
                 var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
                 var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
 
-                model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, Administrador.Value + "    " + Administrador.Text, NameConnectionString);
+                string admin_num = "";
+                string Matricule_Cajero = Administrador.Value;
+                var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                if (Query_Cajero != null)
+                    admin_num = Query_Cajero.Num_Capufe;
+                else
+                    admin_num = Administrador.Value;
+                model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
 
                 return PartialView("_ListaBolsasPartial", model);
             }

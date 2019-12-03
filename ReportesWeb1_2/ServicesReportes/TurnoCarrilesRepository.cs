@@ -350,7 +350,17 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 if (MtGlb.QueryDataSet2(StrQuerys, "TYPE_SITE"))
                 {
-                    par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                    switch (IdPlazaCobroSt)
+                    {
+                        case "86":
+                        case "83":
+                        case "27":
+                            par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                            break;
+                        default:
+                            par5 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                            break;
+                    }
                 }
 
                 DateTime _Dt_ini_poste = DateTime.ParseExact(Dt_ini_poste, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
@@ -1485,7 +1495,17 @@ namespace ReportesWeb1_2.ServicesReportes
 
             if (MtGlb.QueryDataSet2(StrQuerys, "TYPE_SITE"))
             {
-                par7 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                switch (IdPlazaCobroSt)
+                {
+                    case "86":
+                    case "83":
+                    case "27":
+                        par7 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                        break;
+                    default:
+                        par7 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                        break;
+                }
             }
 
             par3 = No_Turno;
