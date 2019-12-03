@@ -795,7 +795,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     if (Query_Cajero != null)
                     {
                         par97 = Query_Cajero.Num_Capufe + "     " + MtGlb.oDataRow2["nombre"].ToString().Trim();
-                        str_MATRICULE = Query_Cajero.Num_Capufe;
+                        str_MATRICULE = MtGlb.oDataRow2["Matricule"].ToString();
                     }
                     else
                     {
