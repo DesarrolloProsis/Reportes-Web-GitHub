@@ -2249,7 +2249,13 @@ namespace ReportesWeb1_2.ServicesReportes
             //            AND TRANSACTION.VOIE = '" + str_id_voie + "'  ";
 
             if (MtGlb.QueryDataSet(StrQuerys, "TRANSACTION"))
-                int_version_tarifa = Convert.ToInt32(MtGlb.oDataRow["version"].ToString());
+            {
+                if (!string.IsNullOrEmpty(MtGlb.oDataRow["version"].ToString()))
+                    int_version_tarifa = Convert.ToInt32(MtGlb.oDataRow["version"].ToString());
+                else
+                    int_version_tarifa = 999;
+            }
+                
 
             //armo mis encabezados con las clases
             StrQuerys = "SELECT ID_CLASSE, ORDRE_AFFICHAGE, LIBELLE_CLASSE , LIBELLE_CLASSE_L2, LIBELLE_COURT1, " +
