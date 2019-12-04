@@ -3507,7 +3507,6 @@ namespace ReportesWeb1_2.Views.Reportes
             // 
             // textBox397
             // 
-            this.textBox397.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0D), Telerik.Reporting.Drawing.Unit.Cm(0D));
             this.textBox397.Name = "textBox397";
             this.textBox397.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(3.2000000476837158D), Telerik.Reporting.Drawing.Unit.Cm(0.34000000357627869D));
             this.textBox397.Style.BorderColor.Bottom = System.Drawing.Color.Black;
@@ -3537,7 +3536,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox413.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
             this.textBox413.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox413.StyleName = "";
-            this.textBox413.Value = "R.P.A.";
+            this.textBox413.Value = "R.S.P.";
             // 
             // textBox380
             // 
