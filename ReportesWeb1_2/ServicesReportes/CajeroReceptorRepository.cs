@@ -857,6 +857,17 @@ namespace ReportesWeb1_2.ServicesReportes
                         case "86":
                         case "83":
                         case "27":
+                        // MEX-IRA
+                        case "01":
+                        case "02":
+                        case "03":
+                        case "04":
+                        case "05": // Palmillas quitar
+                        case "06":
+                        case "07":
+                        case "08":
+                        case "09":
+                        case "84":
                             par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_GARE"];
                             break;
                         default:
@@ -2164,6 +2175,17 @@ namespace ReportesWeb1_2.ServicesReportes
                     case "86":
                     case "83":
                     case "27":
+                    // MEX-IRA
+                    case "01":
+                    case "02":
+                    case "03":
+                    case "04":
+                    case "05": // Palmillas quitar
+                    case "06":
+                    case "07":
+                    case "08":
+                    case "09":
+                    case "84":
                         par2 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_GARE"];
                         break;
                     default:

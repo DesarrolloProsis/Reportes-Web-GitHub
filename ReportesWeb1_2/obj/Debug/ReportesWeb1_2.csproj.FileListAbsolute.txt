@@ -2203,3 +2203,4 @@ C:\Users\Rodrigo\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Mic
 C:\Users\Rodrigo\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\Rodrigo\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
 C:\Users\Rodrigo\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.CopyComplete
+C:\Users\CAPUFE\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csprojAssemblyReference.cache
