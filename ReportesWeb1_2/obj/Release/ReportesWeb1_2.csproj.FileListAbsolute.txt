@@ -288,16 +288,6 @@ C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.WebPages.Razor.xml
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.Optimization.xml
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.pdb
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.xml
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.OpenXmlRendering.2.7.2.pdb
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.OpenXmlRendering.2.7.2.xml
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.Services.WebApi.pdb
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.Services.WebApi.xml
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.XpsRendering.pdb
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.Reporting.XpsRendering.xml
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.ReportViewer.Mvc.pdb
-C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Telerik.ReportViewer.Mvc.xml
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\Antlr3.Runtime.pdb
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\EntityFramework.xml
 C:\Users\Desarrollo-FCO\Documents\Gerardo\Reportes-Web-GitHub\ReportesWeb1_2\bin\EntityFramework.SqlServer.xml

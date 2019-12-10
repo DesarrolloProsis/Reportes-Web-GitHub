@@ -363,10 +363,12 @@ namespace ReportesWeb1_2.ServicesReportes
                         case "05": // Palmillas quitar
                         case "06":
                         case "07":
-                        case "08":
                         case "09":
                         case "84":
                             par5 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                            break;
+                        case "08":
+                            par5 = "001 " + MtGlb.oDataRow2["NOM_SITE"];
                             break;
                         default:
                             par5 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
@@ -1519,10 +1521,12 @@ namespace ReportesWeb1_2.ServicesReportes
                     case "05": // Palmillas quitar
                     case "06":
                     case "07":
-                    case "08":
                     case "09":
                     case "84":
                         par7 = "1" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
+                        break;
+                    case "08":
+                        par7 = "001 " + MtGlb.oDataRow2["NOM_SITE"];
                         break;
                     default:
                         par7 = "0" + IdPlazaCobroSt + " " + MtGlb.oDataRow2["NOM_SITE"];
