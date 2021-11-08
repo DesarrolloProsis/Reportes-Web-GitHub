@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -2279,7 +2281,8 @@ namespace ReportesWeb1_2.ServicesReportes
                 if (!string.IsNullOrEmpty(MtGlb.oDataRow["version"].ToString()))
                     int_version_tarifa = Convert.ToInt32(MtGlb.oDataRow["version"].ToString());
                 else
-                    int_version_tarifa = 999;
+                    //libramiento
+                    int_version_tarifa = 333;
             }
                 
 
@@ -2340,24 +2343,75 @@ namespace ReportesWeb1_2.ServicesReportes
 
             MtGlb.QueryDataSetTarifa(StrQuerys, "TABLE_TARIF");
 
+            if (true)
+            {
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = @"D:\Monitoreo\" + fecha + ".txt";
+
+                StreamWriter sw = new StreamWriter(path, true);
+
+                StackTrace stacktrace = new StackTrace();                
+                sw.WriteLine(StrQuerys);
+                sw.WriteLine("");
+
+                sw.Flush();
+                sw.Close();
+            }
+
             dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
             dvTarifa.RowFilter = "CODE = 1 ";
 
-            foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
+            var id = "";
+            var prueba = "";
+            var prueba2 = "";
+            var prueba3 = "";
+            var prueba4 = "";
+            var prueba5 = "";
+
+            try
             {
-                strGrupo = "a";
-                strConcepto = " TARIFA REF. Normal";
+                foreach (DataRow item in MtGlb.Ds6.Tables["TYPE_CLASSE"].Rows)
+                {
+                    id = Convert.ToString(item["ID_CLASSE"]);
+                    strGrupo = "a";
+                    strConcepto = " TARIFA REF. Normal";
 
-                oDatarowReporte = oDataTableReporte.NewRow();
+                    oDatarowReporte = oDataTableReporte.NewRow();
 
-                oDatarowReporte["Grupo"] = strGrupo;
-                oDatarowReporte["Concepto"] = strConcepto;
-                oDatarowReporte["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"].ToString()));
-                oDatarowReporte["Numero_clase"] = StrLinea;
+                    oDatarowReporte["Grupo"] = strGrupo;
+                    oDatarowReporte["Concepto"] = strConcepto;
+                    oDatarowReporte["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"].ToString()));
+                    oDatarowReporte["Numero_clase"] = StrLinea;
 
-                oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
+                    oDatarowReporte["Numero"] = dvTarifa[0]["Prix_CL" + MtGlb.IIf(item["ID_CLASSE"].ToString().Length == 1, "0" + item["ID_CLASSE"], item["ID_CLASSE"].ToString())];
 
-                oDataTableReporte.Rows.Add(oDatarowReporte);
+                    oDataTableReporte.Rows.Add(oDatarowReporte);
+
+                   prueba = Convert.ToString(oDatarowReporte["Grupo"]);
+                   prueba2 = Convert.ToString(oDatarowReporte["Concepto"]);
+                   prueba3 = Convert.ToString(oDatarowReporte["Descricion_clase"]);
+                   prueba4 = Convert.ToString(oDatarowReporte["Numero_clase"]);
+                   prueba5 = Convert.ToString(oDatarowReporte["Numero"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = @"D:\Monitoreo\" + fecha + ".txt";
+
+                StreamWriter sw = new StreamWriter(path, true);
+
+                StackTrace stacktrace = new StackTrace();
+                sw.WriteLine(this.GetType().FullName + " " + hora);
+                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                sw.WriteLine(id);
+                sw.WriteLine(StrQuerys);
+                sw.WriteLine("");
+
+                sw.Flush();
+                sw.Close();
             }
 
             //-------------------------------------------------------------------------

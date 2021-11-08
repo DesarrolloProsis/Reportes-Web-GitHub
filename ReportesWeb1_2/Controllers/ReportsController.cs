@@ -29,7 +29,7 @@ namespace ReportesWeb1_2.Controllers
             configurationInstance = new ReportServiceConfiguration
             {
                 HostAppId = "Html5App",
-                Storage = new FileStorage(),
+                Storage = new FileStorage("C:\\ReportesWeb"),
                 ReportResolver = resolver,
                 // ReportSharingTimeout = 0,
                 // ClientSessionTimeout = 15,
