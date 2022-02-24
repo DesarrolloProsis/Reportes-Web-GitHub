@@ -1250,7 +1250,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 Reporte.Par59 = string.Format("{0:n}", Convert.ToDouble(par59));
                 Reporte.Par60 = string.Format("{0:n0}", Convert.ToDouble(par60));
                 Reporte.Par61 = string.Format("{0:n}", Convert.ToDouble(par61));
-                Reporte.Par62 = string.Format("{0:n}", Convert.ToDouble(par62));
+                Reporte.Par62 = string.Format("{0:n0}", Convert.ToDouble(par62));
 
             }
             catch (Exception ex)
