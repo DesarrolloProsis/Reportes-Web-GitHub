@@ -2625,7 +2625,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox31.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(0D);
             this.textBox31.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox31.StyleName = "";
-            this.textBox31.Value = "= Parameters.par61.Value";
+            this.textBox31.Value = "= Parameters.par62.Value";
             // 
             // textBox32
             // 
@@ -2637,7 +2637,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.textBox32.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(0D);
             this.textBox32.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox32.StyleName = "";
-            this.textBox32.Value = "= Parameters.par62.Value";
+            this.textBox32.Value = "= Parameters.par61.Value";
             // 
             // textBox88
             // 

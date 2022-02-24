@@ -7,7 +7,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\Users\ramr1\OneDrive\Escritorio\pUBLICAR</_PublishTargetUrl>
-    <History>True|2022-02-24T17:47:46.1797637Z;True|2022-02-24T11:30:59.1685117-06:00;</History>
+    <History>True|2022-02-24T20:15:26.3892052Z;True|2022-02-24T11:47:46.1797637-06:00;True|2022-02-24T11:30:59.1685117-06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -143,10 +143,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>12/06/2021 14:57:34</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.dll">
-      <publishTime>02/24/2022 11:47:45</publishTime>
+      <publishTime>02/24/2022 14:15:17</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.pdb">
-      <publishTime>02/24/2022 11:47:45</publishTime>
+      <publishTime>02/24/2022 14:15:17</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>12/06/2021 14:57:34</publishTime>
