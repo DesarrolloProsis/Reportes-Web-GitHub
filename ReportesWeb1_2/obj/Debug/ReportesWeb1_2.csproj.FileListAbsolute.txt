@@ -2352,6 +2352,7 @@ C:\Users\martin\Documents\repositorios\Reportes-Web-GitHub\ReportesWeb1_2\obj\De
 C:\Users\martin\Documents\repositorios\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.CopyComplete
 C:\Users\martin\Documents\repositorios\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.dll
 C:\Users\martin\Documents\repositorios\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.pdb
+C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\EntityFramework.xml
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\ApplicationInsights.config
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\ReportesWeb1_2.dll.config
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\ReportesWeb1_2.dll
@@ -2473,7 +2474,6 @@ C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\Reportes
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.WebPages.Razor.xml
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Web.Optimization.xml
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Antlr3.Runtime.pdb
-C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\EntityFramework.xml
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\EntityFramework.SqlServer.xml
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Microsoft.AspNet.Identity.Owin.xml
@@ -2507,7 +2507,6 @@ C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\Reportes
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.AssemblyReference.cache
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Migrations.InitialCreate.resources
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoCajeroReceptor.resources
 C:\Users\Miguel\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoDiaCaseta.resources
