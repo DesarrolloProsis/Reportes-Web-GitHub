@@ -173,6 +173,7 @@ namespace ReportesWeb1_2.Views.Reportes
             Telerik.Reporting.ReportParameter reportParameter102 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter103 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter104 = new Telerik.Reporting.ReportParameter();
+            Telerik.Reporting.ReportParameter reportParameter105 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
             this.textBox86 = new Telerik.Reporting.TextBox();
             this.textBox42 = new Telerik.Reporting.TextBox();
@@ -4108,6 +4109,7 @@ namespace ReportesWeb1_2.Views.Reportes
             reportParameter102.Name = "parelu3";
             reportParameter103.Name = "parelu4";
             reportParameter104.Name = "par61";
+            reportParameter105.Name = "par62";
             this.ReportParameters.Add(reportParameter1);
             this.ReportParameters.Add(reportParameter2);
             this.ReportParameters.Add(reportParameter3);
@@ -4212,6 +4214,7 @@ namespace ReportesWeb1_2.Views.Reportes
             this.ReportParameters.Add(reportParameter102);
             this.ReportParameters.Add(reportParameter103);
             this.ReportParameters.Add(reportParameter104);
+            this.ReportParameters.Add(reportParameter105);
             styleRule1.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
             new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.TextItemBase)),
             new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.HtmlTextBox))});
