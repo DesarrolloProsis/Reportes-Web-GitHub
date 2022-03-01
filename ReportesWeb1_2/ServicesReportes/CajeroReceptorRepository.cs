@@ -987,12 +987,30 @@ namespace ReportesWeb1_2.ServicesReportes
                 {
                     par72 = VAR_13;
                     par87 = VAR_13;
+                    par73 = (Convert.ToInt32(VAR_73) - Convert.ToInt32(VAR_13)).ToString();
+                    par88 = (Convert.ToInt32(VAR_88) - Convert.ToInt32(VAR_13)).ToString();
+
+
                 }
                 else
                 {
-                    par73 = (Convert.ToInt32(VAR_73) - Convert.ToInt32(VAR_13)).ToString();
-                    par88 = (Convert.ToInt32(VAR_88) - Convert.ToInt32(VAR_13)).ToString();
+                    //par 72 y 87 ya vienen en 0
+                    par73 = VAR_73.ToString();
+                    par88 = VAR_88.ToString();
+   
                 }
+
+                //string fecha = DateTime.Now.ToString("yyyyMMdd");
+                //string hora = DateTime.Now.ToString("HH:mm:ss");
+                //string path = @"c:\Log\" + fecha + ".txt";
+                //StreamWriter sw = new StreamWriter(path, true);
+                //StackTrace stacktrace = new StackTrace();
+                //// sw.WriteLine("Par73: " + par73.ToString() + " Var_73: " + VAR_73.ToString() + "Var_13: " + VAR_13.ToString());
+                //sw.WriteLine("pase por aqui 994");
+                //sw.WriteLine("");
+
+                //sw.Flush();
+                //sw.Close();
 
 
                 //VEHICULOS RESIDENTES PAGO INMEDIATO
