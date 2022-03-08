@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -44,15 +45,39 @@ namespace ReportesWeb1_2.Services
         /// <returns></returns>
         public OracleConnection GetConnectionOracle(string NameConString)
         {
-
-            if (Conexion.State == ConnectionState.Closed)
+            try
             {
-                string ConnectString = ConfigurationManager.ConnectionStrings[NameConString].ConnectionString;
-                Conexion.ConnectionString = ConnectString;
-                Conexion.Open();
-            }
+                StreamWriter sw = new StreamWriter(@"C:\Log\ErroresAdmin.txt", true);
 
-            return Conexion;
+                sw.WriteLine("Error en el getConnectionOracle");
+                
+                if (Conexion.State == ConnectionState.Closed)
+                {
+                    sw.WriteLine("Paso el if");
+
+                    string ConnectString = ConfigurationManager.ConnectionStrings[NameConString].ConnectionString;
+                    Conexion.ConnectionString = ConnectString;
+
+                    sw.WriteLine(ConnectString);
+                    sw.Flush();
+                    sw.Close();
+
+                    Conexion.Open();
+                }
+
+                return Conexion;
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(@"C:\Log\ErroresAdmin.txt", true);
+
+                sw.WriteLine("Error en el getConnectionOracle");
+                sw.WriteLine(ex.ToString());
+                sw.Flush();
+                sw.Close();
+
+                throw;
+            }
         }
 
         /// <summary>

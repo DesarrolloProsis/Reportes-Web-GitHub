@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -398,7 +399,7 @@ namespace ReportesWeb1_2.Controllers
         // GET: Administradores en formato Json para cargarlos con ajax
         [HttpGet]
         public JsonResult GetAdministradores()
-        {
+        {        
             var Items = new List<SelectListItem>();
             var table = new DataTable("TABLE_PERSONNEL_ADMINISTRADOR");
             string Query = "SELECT MATRICULE, rtrim(NOM)||' '||rtrim(PRENOM) AS NOMBRE FROM TABLE_PERSONNEL WHERE MATRICULE LIKE '1%%%%%' ORDER BY NOM ";
@@ -409,9 +410,9 @@ namespace ReportesWeb1_2.Controllers
             {
                 adapter.Fill(table);
                 if (table.Rows.Count >= 1)
-                {
+                {                 
                     foreach (var item in table.AsEnumerable().ToList())
-                    {
+                    {                      
                         Items.Add(new SelectListItem
                         {
                             Text = item["NOMBRE"].ToString(),
