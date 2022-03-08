@@ -57,13 +57,14 @@ namespace ReportesWeb1_2.Services
 
                     string ConnectString = ConfigurationManager.ConnectionStrings[NameConString].ConnectionString;
                     Conexion.ConnectionString = ConnectString;
+                    Conexion.Open();
 
                     sw.WriteLine(ConnectString);
-                    sw.Flush();
-                    sw.Close();
-
-                    Conexion.Open();
                 }
+
+                sw.WriteLine("Salimos del if y la conexion fue buena");
+                sw.Flush();
+                sw.Close();
 
                 return Conexion;
             }
