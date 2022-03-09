@@ -47,24 +47,14 @@ namespace ReportesWeb1_2.Services
         {
             try
             {
-                StreamWriter sw = new StreamWriter(@"C:\Log\ErroresAdmin.txt", true);
-
-                sw.WriteLine("Error en el getConnectionOracle");
-                
                 if (Conexion.State == ConnectionState.Closed)
                 {
-                    sw.WriteLine("Paso el if");
 
                     string ConnectString = ConfigurationManager.ConnectionStrings[NameConString].ConnectionString;
                     Conexion.ConnectionString = ConnectString;
                     Conexion.Open();
 
-                    sw.WriteLine(ConnectString);
                 }
-
-                sw.WriteLine("Salimos del if y la conexion fue buena");
-                sw.Flush();
-                sw.Close();
 
                 return Conexion;
             }

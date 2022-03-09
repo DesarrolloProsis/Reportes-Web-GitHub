@@ -3911,55 +3911,71 @@ namespace ReportesWeb1_2.ServicesReportes
                 oDataTableReporte.Rows.Add(oDatarowReporte);
             }
 
-            //solo excedentes directos aclase
-            foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
+            //Cambios Richi
+            try
             {
-                strGrupo = "h";
-                strConcepto = "Ingreso Total";
-
-                oDatarowReporte = oDataTableReporte.NewRow();
-
-                oDatarowReporte["Grupo"] = strGrupo;
-                oDatarowReporte["Concepto"] = strConcepto;
-                oDatarowReporte["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
-                oDatarowReporte["Numero_clase"] = StrLinea;
-
-                dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
-
-                if (dvEvento.Count >= 1)
+                //solo excedentes directos aclase
+                foreach (DataRow item in MtGlb.Ds8.Tables["TYPE_CLASSE"].Rows)
                 {
-                    dvTarifa.RowFilter = "CODE = 2 ";
+                    strGrupo = "h";
+                    strConcepto = "Ingreso Total";
 
-                    switch (Convert.ToInt32("ID_CLASSE"))
+                    oDatarowReporte = oDataTableReporte.NewRow();
+
+                    oDatarowReporte["Grupo"] = strGrupo;
+                    oDatarowReporte["Concepto"] = strConcepto;
+                    oDatarowReporte["Descricion_clase"] = Encabezados_clases(Convert.ToInt32(item["ID_CLASSE"]));
+                    oDatarowReporte["Numero_clase"] = StrLinea;
+
+                    dvEvento.RowFilter = "ID_CLASSE = " + item["ID_CLASSE"] + " ";
+
+                    if (dvEvento.Count >= 1)
                     {
-                        case 10:
-                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
-                            oDatarowReporte["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
-                            oDatarowReporte["strNumero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
-                            db_tot_32 = db_tot_32 + Convert.ToDouble((dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"])));
-                            break;
-                        case 11:
-                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
-                            oDatarowReporte["Numero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
-                            oDatarowReporte["strNumero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
-                            db_tot_32 = db_tot_32 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
-                            break;
-                        case 18:
-                            dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL16"]);
-                            oDatarowReporte["Numero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
-                            oDatarowReporte["strNumero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
-                            db_tot_32 = db_tot_32 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
-                            break;
-                        default:
-                            break;
+                        dvTarifa.RowFilter = "CODE = 2 ";
+
+                        //Cambios Richi
+                        switch (/*Convert.ToInt32("ID_CLASSE")*/Convert.ToInt32(item["ID_CLASSE"]))
+                        {
+                            case 10:
+                                dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                                oDatarowReporte["Numero"] = dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]);
+                                oDatarowReporte["strNumero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                                db_tot_32 = db_tot_32 + Convert.ToDouble((dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"])));
+                                break;
+                            case 11:
+                                dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
+                                oDatarowReporte["Numero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                                oDatarowReporte["strNumero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                                db_tot_32 = db_tot_32 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]) * 2);
+                                break;
+                            case 18:
+                                dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL16"]);
+                                oDatarowReporte["Numero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                                oDatarowReporte["strNumero"] = (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                                db_tot_32 = db_tot_32 + (dbl_tarifa_excedentes_asignada * Convert.ToDouble(dvEvento[0]["cruces"]));
+                                break;
+                            default:
+                                break;
+                        }
                     }
+                    else
+                    {
+                        oDatarowReporte["Numero"] = 0;
+                        oDatarowReporte["strNumero"] = 0;
+                    }
+                    oDataTableReporte.Rows.Add(oDatarowReporte);
                 }
-                else
-                {
-                    oDatarowReporte["Numero"] = 0;
-                    oDatarowReporte["strNumero"] = 0;
-                }
-                oDataTableReporte.Rows.Add(oDatarowReporte);
+            }
+            catch (Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(@"C:\Log\ErroresAdmin.txt", true);
+
+                sw.WriteLine("Error en la linea 3971");
+                sw.WriteLine(ex.ToString());
+                sw.Flush();
+                sw.Close();
+                
+                throw;
             }
 
             //EFG
@@ -4240,7 +4256,8 @@ namespace ReportesWeb1_2.ServicesReportes
                 {
                     dvTarifa.RowFilter = "CODE = 72 ";
 
-                    switch (Convert.ToInt32("ID_CLASSE"))
+                    //Cambios Richi
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
                     {
                         case 10:
                             dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
