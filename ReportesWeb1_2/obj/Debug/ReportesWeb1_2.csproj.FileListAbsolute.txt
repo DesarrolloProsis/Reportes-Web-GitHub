@@ -2833,6 +2833,7 @@ C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\EntityFra
 C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.csproj.AssemblyReference.cache
 C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Migrations.InitialCreate.resources
 C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoCajeroReceptor.resources
 C:\Users\glucasc1400\Desktop\Reportes-Web-GitHub\ReportesWeb1_2\obj\Debug\ReportesWeb1_2.Views.Reportes.ComparativoDiaCaseta.resources
