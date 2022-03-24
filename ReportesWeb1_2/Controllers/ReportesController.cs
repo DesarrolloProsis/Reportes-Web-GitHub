@@ -91,34 +91,61 @@ namespace ReportesWeb1_2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
-                model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
+                var table = new DataTable("FIN_POSTE");
+                string Query = $"SELECT * FROM FIN_POSTE WHERE MATRICULE = '{model.NumCajeroReceptor}'";
+                bool validation;
 
-                var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
-                model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
+                OracleCommand Command = new OracleCommand(Query, MtGlb.GetConnectionOracle(NameConnectionString));
 
-                var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
-                model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
+                using (OracleDataAdapter adapter = new OracleDataAdapter(Command))
+                {
+                    adapter.Fill(table);
 
-                var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
-                model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
+                    if (table.Rows.Count >= 1)
+                    {
+                        validation = true;
+                    }
+                    else
+                    {
+                        validation = false;
+                    }
+                }
 
-                var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
-                var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
-                var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
-                var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
+                if (validation == true)
+                {
+                    var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
+                    model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
-                string admin_num = "";
-                string Matricule_Cajero = Administrador.Value;
-                var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+                    var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
+                    model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
 
-                if (Query_Cajero != null)
-                    admin_num = Query_Cajero.Num_Capufe;
+                    var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
+                    model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
+
+                    var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
+                    model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
+
+                    var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
+                    var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
+                    var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
+                    var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
+
+                    string admin_num = "";
+                    string Matricule_Cajero = Administrador.Value;
+                    var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                    if (Query_Cajero != null)
+                        admin_num = Query_Cajero.Num_Capufe;
+                    else
+                        admin_num = Administrador.Value;
+                    model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
+                    return PartialView("_ListaBolsasPartial", model);
+                }
                 else
-                    admin_num = Administrador.Value;
-                model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
-
-                return PartialView("_ListaBolsasPartial", model);
+                {
+                    ViewBag.Error = $"Cajero no existente, favor de ingresar un cajero que exista";
+                    return RedirectToAction("CajeroReceptorIndex");
+                }               
             }
 
             return View(model);
