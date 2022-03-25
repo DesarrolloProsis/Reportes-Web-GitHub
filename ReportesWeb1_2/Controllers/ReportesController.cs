@@ -144,7 +144,7 @@ namespace ReportesWeb1_2.Controllers
                 else
                 {
                     ViewBag.Error = $"Cajero no existente, favor de ingresar un cajero que exista";
-                    return RedirectToAction("CajeroReceptorIndex");
+                    return RedirectToAction("CajeroReceptorIndex", "Reportes");
                 }               
             }
 
