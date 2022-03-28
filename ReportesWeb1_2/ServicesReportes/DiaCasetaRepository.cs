@@ -3085,7 +3085,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 {
                     dvTarifa.RowFilter = "CODE = 2 ";
 
-                    switch (Convert.ToInt32("ID_CLASSE"))
+                    switch (Convert.ToInt32(item["ID_CLASSE"]))
                     {
                         case 10:
                             dbl_tarifa_excedentes_asignada = Convert.ToDouble(dvTarifa[0]["Prix_CL17"]);
