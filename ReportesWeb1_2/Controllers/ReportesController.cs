@@ -89,55 +89,87 @@ namespace ReportesWeb1_2.Controllers
         [HttpPost]
         public ActionResult CajeroReceptorIndex(CajeroReceptorModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
-                model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
-                var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
-                model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
+                if (ModelState.IsValid)
+                {
+                    var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
+                    model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
-                var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
-                model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
+                    var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
+                    model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
 
-                var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
-                model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
+                    var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
+                    model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
 
-                var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
-                var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
-                var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
-                var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
+                    var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
+                    model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
 
-                string admin_num = "";
-                string Matricule_Cajero = Administrador.Value;
-                var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+                    var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
+                    var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
+                    var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
+                    var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
 
-                if (Query_Cajero != null)
-                    admin_num = Query_Cajero.Num_Capufe;
-                else
-                    admin_num = Administrador.Value;
-                model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
+                    string admin_num = "";
+                    string Matricule_Cajero = Administrador.Value;
+                    var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
 
-                return PartialView("_ListaBolsasPartial", model);
+                    if (Query_Cajero != null)
+                        admin_num = Query_Cajero.Num_Capufe;
+                    else
+                        admin_num = Administrador.Value;
+                    model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
+
+                    return PartialView("_ListaBolsasPartial", model);
+                }
+
+                return View(model);
+
             }
+            catch (Exception ex)
+            {
+                string path = @"C:\Log\ErrorSource.txt";
 
-            return View(model);
+                StreamWriter sw = new StreamWriter(path, true);
+
+                sw.WriteLine(ex.Message);
+
+                sw.Flush();
+                sw.Close();
+                return null;
+            }
         }
 
         // GET: Report Book CajeroReceptor
         [HttpGet]
         public ActionResult ReportCajeroReceptorView(int? IdRow)
         {
-            if (IdRow == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            CajeroReceptorModel model = new CajeroReceptorModel
+            try
             {
-                PreCRViewModel = CaReRepository.GenerarPreliquidacion_Cajero_Receptor(IdRow),
-                ComCRViewModel = CaReRepository.GenerarComparativo_Cajero_Receptor()
-            };
+                if (IdRow == null)
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            return View(model);
+                CajeroReceptorModel model = new CajeroReceptorModel
+                {
+                    PreCRViewModel = CaReRepository.GenerarPreliquidacion_Cajero_Receptor(IdRow),
+                    ComCRViewModel = CaReRepository.GenerarComparativo_Cajero_Receptor()
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                string path = @"C:\Log\ErrorSource.txt";
+
+                StreamWriter sw = new StreamWriter(path, true);
+
+                sw.WriteLine(ex.Message);
+
+                sw.Flush();
+                sw.Close();
+                return null;
+            }
         }
 
         // GET: Turno/Carriles Form
@@ -173,82 +205,92 @@ namespace ReportesWeb1_2.Controllers
         [HttpPost]
         public ActionResult ReportTurnoCarrilesView(TurnoCarrilesModel model)
         {
-            //DataSet comTCViewModel = new DataSet();
-            if (ModelState.IsValid)
+            try
             {
 
-                var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
-                model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
-                var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
-                model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
-
-                var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
-                model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
-
-                var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
-                model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
-
-                var EncargadosTurno = new JavaScriptSerializer().Serialize(GetEncargadosTurno().Data);
-                model.ListEncargadosTurno = JsonConvert.DeserializeObject<List<SelectListItem>>(EncargadosTurno);
-
-                var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
-                var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
-                var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
-                var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
-                var EncargadoTurno = model.ListEncargadosTurno.Find(x => x.Value == model.IdEncargadoTurno);
-                string ConexionDB = string.Empty;
-
-                ConexionDB = ConfigurationManager.ConnectionStrings[NameConnectionString].ConnectionString;
-
-                if (validaciones.ValidarCarrilesCerrados(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                //DataSet comTCViewModel = new DataSet();
+                if (ModelState.IsValid)
                 {
-                    TempData["Carril"] = "Existen carriles abiertos: " + validaciones.Message;
 
-                    return RedirectToAction("TurnoCarrilesIndex", model);
+                    var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
+                    model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
+
+                    var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
+                    model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
+
+                    var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
+                    model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
+
+                    var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
+                    model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
+
+                    var EncargadosTurno = new JavaScriptSerializer().Serialize(GetEncargadosTurno().Data);
+                    model.ListEncargadosTurno = JsonConvert.DeserializeObject<List<SelectListItem>>(EncargadosTurno);
+
+                    var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
+                    var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
+                    var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
+                    var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
+                    var EncargadoTurno = model.ListEncargadosTurno.Find(x => x.Value == model.IdEncargadoTurno);
+                    string ConexionDB = string.Empty;
+
+                    ConexionDB = ConfigurationManager.ConnectionStrings[NameConnectionString].ConnectionString;
+
+                    if (validaciones.ValidarCarrilesCerrados(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                    {
+                        TempData["Carril"] = "Existen carriles abiertos: " + validaciones.Message;
+
+                        return RedirectToAction("TurnoCarrilesIndex", model);
+                    }
+                    else if (validaciones.ValidarBolsas(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                    {
+                        TempData["Bolsa"] = "Existen bolsas sin declarar: " + validaciones.Message;
+
+                        return RedirectToAction("TurnoCarrilesIndex", model);
+                    }
+                    else if (validaciones.ValidarComentarios(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
+                    {
+                        TempData["Comenta"] = "Falta ingresar comentarios: " + validaciones.Message;
+
+                        return RedirectToAction("TurnoCarrilesIndex", model);
+                    }
+
+                    string encargado_num = "";
+                    string admin_num = "";
+                    string Matricule_Cajero = EncargadoTurno.Value;
+                    var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                    if (Query_Cajero != null)
+                        encargado_num = Query_Cajero.Num_Capufe;
+                    else
+                        encargado_num = EncargadoTurno.Value;
+
+                    Matricule_Cajero = Administrador.Value;
+                    Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                    if (Query_Cajero != null)
+                        admin_num = Query_Cajero.Num_Capufe;
+                    else
+                        admin_num = Administrador.Value;
+
+                    var preTCViewModel = TuCaRepository.GenerarPreliquidacion_Turno_Carriles(model.Fecha, Plaza.Value, Turno.Text, encargado_num + "    " + EncargadoTurno.Text, Delegacion.Text, admin_num + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
+                    var comTCViewModel = TuCaRepository.GenerarComparativo_Turno_Carriles();
+
+                    model.PreTCViewModel = preTCViewModel;
+                    model.ComTCViewModel = comTCViewModel;
+
+                    //return View("Pruebas", comTCViewModel);
+                    return View(model);
                 }
-                else if (validaciones.ValidarBolsas(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
-                {
-                    TempData["Bolsa"] = "Existen bolsas sin declarar: " + validaciones.Message;
 
-                    return RedirectToAction("TurnoCarrilesIndex", model);
-                }
-                else if (validaciones.ValidarComentarios(model.Fecha, model.Fecha, Turno.Text, ConexionDB) == "STOP")
-                {
-                    TempData["Comenta"] = "Falta ingresar comentarios: " + validaciones.Message;
-
-                    return RedirectToAction("TurnoCarrilesIndex", model);
-                }
-
-                string encargado_num = "";
-                string admin_num = "";
-                string Matricule_Cajero = EncargadoTurno.Value;
-                var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
-
-                if (Query_Cajero != null)
-                    encargado_num = Query_Cajero.Num_Capufe;
-                else
-                    encargado_num = EncargadoTurno.Value;
-
-                Matricule_Cajero = Administrador.Value;
-                Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
-
-                if (Query_Cajero != null)
-                    admin_num = Query_Cajero.Num_Capufe;
-                else
-                    admin_num = Administrador.Value;
-
-                var preTCViewModel = TuCaRepository.GenerarPreliquidacion_Turno_Carriles(model.Fecha, Plaza.Value, Turno.Text, encargado_num + "    " + EncargadoTurno.Text, Delegacion.Text, admin_num + "    " + Administrador.Text, model.Observaciones, NameConnectionString);
-                var comTCViewModel = TuCaRepository.GenerarComparativo_Turno_Carriles();
-
-                model.PreTCViewModel = preTCViewModel;
-                model.ComTCViewModel = comTCViewModel;
-
-                //return View("Pruebas", comTCViewModel);
-                return View(model);
+                return RedirectToAction("TurnoCarrilesIndex");
             }
+            catch (Exception ex)
+            {
 
-            return RedirectToAction("TurnoCarrilesIndex");
+                throw;
+            }
         }
 
         // GET: Dia/Caseta Form
@@ -399,7 +441,7 @@ namespace ReportesWeb1_2.Controllers
         // GET: Administradores en formato Json para cargarlos con ajax
         [HttpGet]
         public JsonResult GetAdministradores()
-        {        
+        {
             var Items = new List<SelectListItem>();
             var table = new DataTable("TABLE_PERSONNEL_ADMINISTRADOR");
             string Query = "SELECT MATRICULE, rtrim(NOM)||' '||rtrim(PRENOM) AS NOMBRE FROM TABLE_PERSONNEL WHERE MATRICULE LIKE '1%%%%%' ORDER BY NOM ";
@@ -410,9 +452,9 @@ namespace ReportesWeb1_2.Controllers
             {
                 adapter.Fill(table);
                 if (table.Rows.Count >= 1)
-                {                 
+                {
                     foreach (var item in table.AsEnumerable().ToList())
-                    {                      
+                    {
                         Items.Add(new SelectListItem
                         {
                             Text = item["NOMBRE"].ToString(),

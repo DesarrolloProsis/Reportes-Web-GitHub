@@ -530,6 +530,7 @@ namespace ReportesWeb1_2.ServicesReportes
                                 Value = "0"
                             });
                             par8 = item["VOIE"].ToString();
+
                             str_id_voie = item["VOIE"].ToString();
                             loc_voie = item["VOIE"].ToString();
                             int_id_voie = item["ID_VOIE"].ToString();
@@ -837,7 +838,7 @@ namespace ReportesWeb1_2.ServicesReportes
                     StrQuerys = StrQuerys + "AND (MSG_DHM >= TO_DATE('" + _H_inicio_turno.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) AND " +
                                             "(MSG_DHM <= TO_DATE('" + _H_inicio_turno.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) ";
 
-                    StrQuerys = StrQuerys + "ORDER BY LANE_ASSIGN.Id_PLAZA, LANE_ASSIGN.Id_LANE, LANE_ASSIGN.MSG_DHM";
+                    StrQuerys = StrQuerys + "ORDER BY LANE_ASSIGN.Id_PLAZA, LANE_ASSIGN.Id_LANE, LANE_ASSIGN.MSG_DHM";                  
 
                     if (MtGlb.QueryDataSet2(StrQuerys, "Asig_Carril"))
                     {
@@ -850,7 +851,9 @@ namespace ReportesWeb1_2.ServicesReportes
                     //fin encargado de turno
 
                     //ENCARGADO
+
                     var Matricule_Encargado = MtGlb.oDataRow2["Matricule"].ToString();
+
 
                     var Query_Encargado = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Encargado).FirstOrDefault();
 
@@ -1017,19 +1020,6 @@ namespace ReportesWeb1_2.ServicesReportes
                         par88 = VAR_88.ToString();
 
                     }
-
-                    //string fecha = DateTime.Now.ToString("yyyyMMdd");
-                    //string hora = DateTime.Now.ToString("HH:mm:ss");
-                    //string path = @"c:\Log\" + fecha + ".txt";
-                    //StreamWriter sw = new StreamWriter(path, true);
-                    //StackTrace stacktrace = new StackTrace();
-                    //// sw.WriteLine("Par73: " + par73.ToString() + " Var_73: " + VAR_73.ToString() + "Var_13: " + VAR_13.ToString());
-                    //sw.WriteLine("pase por aqui 994");
-                    //sw.WriteLine("");
-
-                    //sw.Flush();
-                    //sw.Close();
-
 
                     //VEHICULOS RESIDENTES PAGO INMEDIATO
 
@@ -1779,8 +1769,15 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 }
                 catch (Exception ex)
-                {
-                    var Message = ex.Message + ex.StackTrace;
+                {                    
+                    string path = @"C:\Log\Linea1796.txt";
+
+                    StreamWriter sw = new StreamWriter(path, true);
+
+                    sw.WriteLine(ex.ToString());
+
+                    sw.Flush();
+                    sw.Close();
                 }
 
                 return Reporte;
