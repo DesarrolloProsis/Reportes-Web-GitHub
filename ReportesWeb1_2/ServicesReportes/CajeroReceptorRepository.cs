@@ -2393,22 +2393,6 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 MtGlb.QueryDataSetTarifa(StrQuerys, "TABLE_TARIF");
 
-                //if (true)
-                //{
-                //    //string fecha = System.DateTime.Now.ToString("yyyyMMdd");
-                //    //string hora = System.DateTime.Now.ToString("HH:mm:ss");
-                //    //string path = @"D:\Monitoreo\" + fecha + ".txt";
-
-                //    //StreamWriter sw = new StreamWriter(path, true);
-
-                //    //StackTrace stacktrace = new StackTrace();                
-                //    //sw.WriteLine(StrQuerys);
-                //    //sw.WriteLine("");
-
-                //    //sw.Flush();
-                //    //sw.Close();
-                //}
-
                 dvTarifa = MtGlb.DsTarifa.Tables["TABLE_TARIF"].DefaultView;
                 dvTarifa.RowFilter = "CODE = 1 ";
 
@@ -2447,21 +2431,7 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 catch (Exception ex)
                 {
-                    //string fecha = System.DateTime.Now.ToString("yyyyMMdd");
-                    //string hora = System.DateTime.Now.ToString("HH:mm:ss");
-                    //string path = @"D:\Monitoreo\" + fecha + ".txt";
-
-                    //StreamWriter sw = new StreamWriter(path, true);
-
-                    //StackTrace stacktrace = new StackTrace();
-                    //sw.WriteLine(this.GetType().FullName + " " + hora);
-                    //sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
-                    //sw.WriteLine(id);
-                    //sw.WriteLine(StrQuerys);
-                    //sw.WriteLine("");
-
-                    //sw.Flush();
-                    //sw.Close();
+                 
                 }
 
                 //-------------------------------------------------------------------------
