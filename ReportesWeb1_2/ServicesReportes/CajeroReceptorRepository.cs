@@ -236,11 +236,16 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-                string path = @"C:\Log\ErrorSource.txt";
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = $@"C:\Log\ErrorLinea240.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
 
-                sw.WriteLine(ex.Message);
+                StackTrace stacktrace = new StackTrace();
+                sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                sw.WriteLine("");
 
                 sw.Flush();
                 sw.Close();
@@ -848,6 +853,22 @@ namespace ReportesWeb1_2.ServicesReportes
 
                         MtGlb.QueryDataSet2(StrQuerys, "TABLE_PERSONNEL");
                     }
+                    else
+                    {
+                        string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                        string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                        string path = $@"C:\Log\ErrorQuery.txt";
+
+                        StreamWriter sw = new StreamWriter(path, true);
+
+                        StackTrace stacktrace = new StackTrace();
+                        sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                        sw.WriteLine("");
+
+                        sw.Flush();
+                        sw.Close();
+                    }
+
                     //fin encargado de turno
 
                     //ENCARGADO
@@ -1769,12 +1790,17 @@ namespace ReportesWeb1_2.ServicesReportes
 
                 }
                 catch (Exception ex)
-                {                    
-                    string path = @"C:\Log\Linea1796.txt";
+                {
+                    string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                    string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                    string path = $@"C:\Log\ErrorLinea1791.txt";
 
                     StreamWriter sw = new StreamWriter(path, true);
 
-                    sw.WriteLine(ex.ToString());
+                    StackTrace stacktrace = new StackTrace();
+                    sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                    sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                    sw.WriteLine("");
 
                     sw.Flush();
                     sw.Close();
@@ -1786,11 +1812,16 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-                string path = @"C:\Log\ErrorSource.txt";
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = $@"C:\Log\ErrorQuery.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
 
-                sw.WriteLine(ex.Message);
+                StackTrace stacktrace = new StackTrace();
+                sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                sw.WriteLine("");
 
                 sw.Flush();
                 sw.Close();
@@ -2431,7 +2462,19 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 catch (Exception ex)
                 {
-                 
+                    string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                    string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                    string path = $@"C:\Log\ErrorLinea1791.txt";
+
+                    StreamWriter sw = new StreamWriter(path, true);
+
+                    StackTrace stacktrace = new StackTrace();
+                    sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                    sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                    sw.WriteLine("");
+
+                    sw.Flush();
+                    sw.Close();
                 }
 
                 //-------------------------------------------------------------------------
@@ -3970,14 +4013,20 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 catch (Exception ex)
                 {
-                    StreamWriter sw = new StreamWriter(@"C:\Log\ErroresAdmin.txt", true);
+                    string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                    string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                    string path = $@"C:\Log\ErrorLinea4013.txt";
 
-                    sw.WriteLine("Error en la linea 3971");
-                    sw.WriteLine(ex.ToString());
+                    StreamWriter sw = new StreamWriter(path, true);
+
+                    StackTrace stacktrace = new StackTrace();
+                    sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                    sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                    sw.WriteLine("");
+
                     sw.Flush();
                     sw.Close();
-
-                    throw;
+                    return null;
                 }
 
                 //EFG
@@ -15895,11 +15944,16 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-                string path = @"C:\Log\ErrorSource.txt";
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = $@"C:\Log\ErrorLinea15943.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
 
-                sw.WriteLine(ex.Message);
+                StackTrace stacktrace = new StackTrace();
+                sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                sw.WriteLine("");
 
                 sw.Flush();
                 sw.Close();
@@ -15954,11 +16008,16 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-                string path = @"C:\Log\ErrorSource.txt";
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = $@"C:\Log\ErrorLinea16007.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
 
-                sw.WriteLine(ex.Message);
+                StackTrace stacktrace = new StackTrace();
+                sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                sw.WriteLine("");
 
                 sw.Flush();
                 sw.Close();
@@ -32990,11 +33049,16 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-                string path = @"C:\Log\ErrorSource.txt";
+                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                string path = $@"C:\Log\ErrorLinea33049.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
 
-                sw.WriteLine(ex.Message);
+                StackTrace stacktrace = new StackTrace();
+                sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                sw.WriteLine("");
 
                 sw.Flush();
                 sw.Close();
