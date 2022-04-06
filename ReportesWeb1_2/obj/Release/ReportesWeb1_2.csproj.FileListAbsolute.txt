@@ -1393,7 +1393,7 @@ C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\Reporte
 C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Newtonsoft.Json.dll
-C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\oracle.dataaccess.dll
+C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Oracle.DataAccess.dll
 C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\Owin.dll
 C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Rodrigo\Desktop\RichiLucas\Reportes mex-aca\Reportes-Web-GitHub\ReportesWeb1_2\bin\System.IO.FileSystem.Primitives.dll

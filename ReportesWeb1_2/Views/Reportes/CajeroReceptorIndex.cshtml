@@ -132,10 +132,3 @@
 <div id="divListaBolsas" class="row">
     @Html.Partial("_ListaBolsasPartial", Model)
 </div>
-
-@if (ViewBag.Error != null && ViewBag.Error != "")
-{
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.Error
-    </div>
-}

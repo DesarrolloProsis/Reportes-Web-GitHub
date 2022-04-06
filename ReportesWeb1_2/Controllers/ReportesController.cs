@@ -89,8 +89,8 @@ namespace ReportesWeb1_2.Controllers
         [HttpPost]
         public ActionResult CajeroReceptorIndex(CajeroReceptorModel model)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var table = new DataTable("FIN_POSTE");
                 string Query = $"SELECT * FROM FIN_POSTE WHERE MATRICULE = '{model.NumCajeroReceptor}'";
                 bool validation;
@@ -138,15 +138,15 @@ namespace ReportesWeb1_2.Controllers
                         admin_num = Query_Cajero.Num_Capufe;
                     else
                         admin_num = Administrador.Value;
-                    model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
+                        model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
                     return PartialView("_ListaBolsasPartial", model);
                 }
                 else
                 {
                     ViewBag.Error = $"Cajero no existente, favor de ingresar un cajero que exista";
-                    return RedirectToAction("CajeroReceptorIndex", "Reportes");
-                }               
-            }
+                return PartialView("_ListaBolsasPartial", model);
+            }               
+            //}
 
             return View(model);
         }
