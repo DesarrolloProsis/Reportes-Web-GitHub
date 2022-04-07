@@ -59,7 +59,12 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - PROSIS S.A DE C.V.</p>
+                @*<p class="">&copy; @DateTime.Now.Year - PROSIS S.A DE C.V.</p>
+                <p class="text-right">v1.0.1</p>*@
+                <div class="row">
+                    <div class="col-6 text-left">&copy; @DateTime.Now.Year - PROSIS S.A DE C.V.</div>
+                    <div class="col-6 text-right">v1.0.1</div>
+                </div>
             </footer>
         </div>
 

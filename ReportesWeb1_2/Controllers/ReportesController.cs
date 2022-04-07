@@ -91,37 +91,65 @@ namespace ReportesWeb1_2.Controllers
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
-                    var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
-                    model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
-                    var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
-                    model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
+                    var table = new DataTable("FIN_POSTE");
+                    string Query = $"SELECT * FROM FIN_POSTE WHERE MATRICULE = '{model.NumCajeroReceptor}'";
+                    bool validation;
 
-                    var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
-                    model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
+                    OracleCommand Command = new OracleCommand(Query, MtGlb.GetConnectionOracle(NameConnectionString));
 
-                    var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
-                    model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
+                    using (OracleDataAdapter adapter = new OracleDataAdapter(Command))
+                    {
+                        adapter.Fill(table);
 
-                    var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
-                    var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
-                    var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
-                    var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
+                        if (table.Rows.Count >= 1)
+                        {
+                            validation = true;
+                        }
+                        else
+                        {
+                            validation = false;
+                        }
+                    }
 
-                    string admin_num = "";
-                    string Matricule_Cajero = Administrador.Value;
-                    var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+                    if (validation == true)
+                    {
+                        var Delegaciones = new JavaScriptSerializer().Serialize(GetDelegaciones().Data);
+                        model.ListDelegaciones = JsonConvert.DeserializeObject<List<SelectListItem>>(Delegaciones);
 
-                    if (Query_Cajero != null)
-                        admin_num = Query_Cajero.Num_Capufe;
+                        var Plazas = new JavaScriptSerializer().Serialize(GetPlazas().Data);
+                        model.ListPlazas = JsonConvert.DeserializeObject<List<SelectListItem>>(Plazas);
+
+                        var Turnos = new JavaScriptSerializer().Serialize(GetTurnos().Data);
+                        model.ListTurnos = JsonConvert.DeserializeObject<List<SelectListItem>>(Turnos);
+
+                        var Administradores = new JavaScriptSerializer().Serialize(GetAdministradores().Data);
+                        model.ListAdministradores = JsonConvert.DeserializeObject<List<SelectListItem>>(Administradores);
+
+                        var Delegacion = model.ListDelegaciones.Find(x => x.Value == IdDelegacion);
+                        var Plaza = model.ListPlazas.Find(x => x.Value == IdPlaza);
+                        var Turno = model.ListTurnos.Find(x => x.Value == model.IdTurno);
+                        var Administrador = model.ListAdministradores.Find(x => x.Value == model.IdAdministrador);
+                        string admin_num = "";
+                        string Matricule_Cajero = Administrador.Value;
+                        var Query_Cajero = db.Type_Operadores.Where(x => x.Num_Gea == Matricule_Cajero).FirstOrDefault();
+
+                        if (Query_Cajero != null)
+                            admin_num = Query_Cajero.Num_Capufe;
+                        else
+                            admin_num = Administrador.Value;
+
+                        model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
+
+                        return PartialView("_ListaBolsasPartial", model);
+                    }
                     else
-                        admin_num = Administrador.Value;
-                    model.ListBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
-
-                    return PartialView("_ListaBolsasPartial", model);
+                    {
+                        ViewBag.Error = $"Cajero no existente, favor de ingresar un cajero que exista";
+                        return PartialView("_ListaBolsasPartial", model);
+                    }
                 }
 
                 return View(model);
@@ -130,7 +158,6 @@ namespace ReportesWeb1_2.Controllers
             catch (Exception ex)
             {
                 string path = @"C:\Log\ErrorSource.txt";
-
                 StreamWriter sw = new StreamWriter(path, true);
 
                 sw.WriteLine(ex.Message);

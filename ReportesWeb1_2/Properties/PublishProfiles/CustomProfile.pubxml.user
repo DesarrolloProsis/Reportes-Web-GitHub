@@ -7,7 +7,11 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\Users\Rodrigo\Desktop\RichiLucas\Publicado</_PublishTargetUrl>
+<<<<<<< HEAD
     <History>True|2022-03-29T02:09:40.2764083Z;False|2022-03-28T20:07:53.8882614-06:00;True|2022-03-28T19:44:21.6841720-06:00;True|2022-03-28T19:33:46.5253529-06:00;True|2022-03-28T19:25:12.0343660-06:00;True|2022-03-28T19:12:59.2742748-06:00;True|2022-03-28T18:56:31.4172264-06:00;True|2022-03-28T18:44:25.2429739-06:00;False|2022-03-28T18:35:06.8611564-06:00;True|2022-03-28T13:28:38.2729891-06:00;True|2022-03-25T18:29:20.8645205-06:00;True|2022-02-28T18:32:16.0131563-06:00;False|2022-02-28T18:31:09.8478992-06:00;False|2022-02-28T18:30:45.7805671-06:00;True|2022-02-28T18:18:39.6339748-06:00;True|2022-02-28T18:00:50.6021651-06:00;True|2022-02-28T17:16:32.6360093-06:00;True|2022-02-28T17:15:35.3607728-06:00;False|2022-02-28T17:15:11.5879093-06:00;True|2022-02-24T14:15:26.3892052-06:00;True|2022-02-24T11:47:46.1797637-06:00;True|2022-02-24T11:30:59.1685117-06:00;</History>
+=======
+    <History>True|2022-03-25T19:52:11.0975811Z;True|2022-03-24T16:36:10.8805016-06:00;True|2022-03-24T15:06:59.4327079-06:00;True|2022-03-24T14:55:34.8517177-06:00;True|2022-03-24T14:49:36.7414014-06:00;True|2022-03-24T14:37:34.4014374-06:00;True|2022-03-24T14:24:49.1811659-06:00;True|2022-03-24T14:09:01.4205789-06:00;True|2022-03-24T13:56:37.0441337-06:00;True|2022-03-24T13:43:26.5529902-06:00;True|2022-03-24T13:26:28.0544279-06:00;True|2022-03-23T17:40:14.3064399-06:00;True|2022-03-23T17:13:26.8261010-06:00;True|2022-03-18T16:55:21.0864400-06:00;True|2022-03-18T16:46:06.7346048-06:00;True|2022-02-28T18:32:16.0131563-06:00;False|2022-02-28T18:31:09.8478992-06:00;False|2022-02-28T18:30:45.7805671-06:00;True|2022-02-28T18:18:39.6339748-06:00;True|2022-02-28T18:00:50.6021651-06:00;True|2022-02-28T17:16:32.6360093-06:00;True|2022-02-28T17:15:35.3607728-06:00;False|2022-02-28T17:15:11.5879093-06:00;True|2022-02-24T14:15:26.3892052-06:00;True|2022-02-24T11:47:46.1797637-06:00;True|2022-02-24T11:30:59.1685117-06:00;</History>
+>>>>>>> validacionesgral
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -143,10 +147,17 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/18/2022 16:44:38</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.dll">
+<<<<<<< HEAD
       <publishTime>03/28/2022 20:09:18</publishTime>
     </File>
     <File Include="bin/ReportesWeb1_2.pdb">
       <publishTime>03/28/2022 20:09:18</publishTime>
+=======
+      <publishTime>03/25/2022 13:50:27</publishTime>
+    </File>
+    <File Include="bin/ReportesWeb1_2.pdb">
+      <publishTime>03/25/2022 13:50:27</publishTime>
+>>>>>>> validacionesgral
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>03/18/2022 16:44:38</publishTime>
@@ -677,7 +688,11 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/18/2022 16:44:36</publishTime>
     </File>
     <File Include="Views/Reportes/CajeroReceptorIndex.cshtml">
+<<<<<<< HEAD
       <publishTime>03/28/2022 14:02:59</publishTime>
+=======
+      <publishTime>03/24/2022 17:18:00</publishTime>
+>>>>>>> validacionesgral
     </File>
     <File Include="Views/Reportes/DiaCasetaIndex.cshtml">
       <publishTime>03/18/2022 16:44:36</publishTime>
@@ -692,7 +707,11 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/18/2022 16:45:17</publishTime>
     </File>
     <File Include="Views/Reportes/ReportTurnoCarrilesView.cshtml">
+<<<<<<< HEAD
       <publishTime>03/25/2022 18:22:03</publishTime>
+=======
+      <publishTime>03/18/2022 16:45:17</publishTime>
+>>>>>>> validacionesgral
     </File>
     <File Include="Views/Reportes/TurnoCarrilesIndex.cshtml">
       <publishTime>03/18/2022 16:45:17</publishTime>
@@ -710,7 +729,11 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/18/2022 16:44:36</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
+<<<<<<< HEAD
       <publishTime>03/28/2022 14:02:59</publishTime>
+=======
+      <publishTime>03/24/2022 17:18:00</publishTime>
+>>>>>>> validacionesgral
     </File>
     <File Include="Views/Shared/_LayoutLogin.cshtml">
       <publishTime>03/18/2022 16:44:36</publishTime>
@@ -725,7 +748,11 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/18/2022 16:44:36</publishTime>
     </File>
     <File Include="Web.config">
+<<<<<<< HEAD
       <publishTime>03/28/2022 20:09:39</publishTime>
+=======
+      <publishTime>03/25/2022 13:52:10</publishTime>
+>>>>>>> validacionesgral
     </File>
   </ItemGroup>
 </Project>

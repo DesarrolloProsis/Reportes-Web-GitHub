@@ -58,18 +58,14 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<div id="loader-wrapper">
-    <div id="loader"></div>
-</div>
+@*<div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>*@
 
 <div class="container">
     <h1>Cajero-Receptor</h1>
 </div>
 <hr />
-<div id="divListaBolsas" class="row">
-    @Html.Partial("_ListaBolsasPartial", Model)
-</div>
-
 
 @using (Ajax.BeginForm("CajeroReceptorIndex", "Reportes", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divListaBolsas" }))
 {
@@ -132,3 +128,7 @@
         </div>
     </div>
 }
+
+<div id="divListaBolsas" class="row">
+    @Html.Partial("_ListaBolsasPartial", Model)
+</div>

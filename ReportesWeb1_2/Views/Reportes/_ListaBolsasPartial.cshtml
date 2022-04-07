@@ -24,7 +24,7 @@
                         <td>@item.Fin</td>
                         <td>@item.Carril</td>
                         <td>@item.Bolsa</td>
-                        <td><a class="btn btn-primary" href="@Url.Action("ReportCajeroReceptorView", "Reportes", new { IdRow = item.Id})" target = "_blank"  @*onclick="InLoaderVal()"*@ id="loaderButton" role="button">Generar</a></td>
+                        <td><a class="btn btn-primary" href="@Url.Action("ReportCajeroReceptorView", "Reportes", new { IdRow = item.Id})" target="_blank" @*onclick="InLoaderVal()"*@ id="loaderButton" role="button">Generar</a></td>
                     </tr>
                 }
             </tbody>
@@ -35,5 +35,11 @@ else
 {
     <div class="col-lg-12">
         <p class="text-center lead">NO HAY DATOS</p>
+    </div>
+}
+@if (ViewBag.Error != null && ViewBag.Error != "")
+{
+    <div class="alert alert-danger col-md-12 text-center" role="alert">
+        @ViewBag.Error
     </div>
 }
