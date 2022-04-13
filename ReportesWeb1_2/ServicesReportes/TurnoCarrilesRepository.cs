@@ -12,6 +12,7 @@ namespace ReportesWeb1_2.ServicesReportes
 {
     public class TurnoCarrilesRepository
     {
+        private CreationLogger logger = new CreationLogger();
         private ProsisSQLServerModel db = new ProsisSQLServerModel();
         private MetodosGlbRepository MtGlb = new MetodosGlbRepository();
         private readonly string StrConnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -1255,9 +1256,8 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-
+                logger.Error(ex, ex.Message);
             }
-
             return Reporte;
         }
 

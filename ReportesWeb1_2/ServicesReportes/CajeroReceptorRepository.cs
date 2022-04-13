@@ -11,11 +11,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace ReportesWeb1_2.ServicesReportes
 {
     public class CajeroReceptorRepository
     {
+        private CreationLogger logger = new CreationLogger();
+        //logger.CreationFolders(@"C:\Listas", "ReportesLog", 7);
         private ProsisSQLServerModel db = new ProsisSQLServerModel();
         private MetodosGlbRepository MtGlb = new MetodosGlbRepository();
         private readonly string StrConnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -140,6 +141,7 @@ namespace ReportesWeb1_2.ServicesReportes
         {
             try
             {
+                logger.CreationFolders(@"C:\Listas", "ReportesLog", 7);
                 string H_inicio_turno = string.Empty;
                 string H_fin_turno = string.Empty;
                 string No_Turno = string.Empty;
@@ -226,6 +228,7 @@ namespace ReportesWeb1_2.ServicesReportes
                                 Carril = item["VOIE"].ToString(),
                                 Bolsa = item["Expr4"].ToString()
                             });
+                            logger.Information("Se metieron bien");
                         }
                     }
                 }
@@ -236,20 +239,22 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
-                string fecha = System.DateTime.Now.ToString("yyyyMMdd");
-                string hora = System.DateTime.Now.ToString("HH:mm:ss");
-                string path = $@"C:\Log\ErrorLinea240.txt";
-
-                StreamWriter sw = new StreamWriter(path, true);
-
-                StackTrace stacktrace = new StackTrace();
-                sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
-                sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
-                sw.WriteLine("");
-
-                sw.Flush();
-                sw.Close();
+                logger.Error(ex, ex.Message);
                 return null;
+                //string fecha = System.DateTime.Now.ToString("yyyyMMdd");
+                //string hora = System.DateTime.Now.ToString("HH:mm:ss");
+                //string path = $@"C:\Log\ErrorLinea240.txt";
+
+                //StreamWriter sw = new StreamWriter(path, true);
+
+                //StackTrace stacktrace = new StackTrace();
+                //sw.WriteLine(this.GetType().FullName + " " + fecha + hora);
+                //sw.WriteLine(stacktrace.GetFrame(1).GetMethod().Name + " - " + ex.Message);
+                //sw.WriteLine("");
+
+                //sw.Flush();
+                //sw.Close();
+                //return null;
             }
         }
 
@@ -1791,6 +1796,8 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 catch (Exception ex)
                 {
+
+                    logger.Error(ex, ex.Message);
                     string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                     string hora = System.DateTime.Now.ToString("HH:mm:ss");
                     string path = $@"C:\Log\ErrorLinea1791.txt";
@@ -1812,6 +1819,8 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
+
+                logger.Error(ex, ex.Message);
                 string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                 string hora = System.DateTime.Now.ToString("HH:mm:ss");
                 string path = $@"C:\Log\ErrorQuery.txt";
@@ -2462,6 +2471,8 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 catch (Exception ex)
                 {
+
+                    logger.Error(ex, ex.Message);
                     string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                     string hora = System.DateTime.Now.ToString("HH:mm:ss");
                     string path = $@"C:\Log\ErrorLinea1791.txt";
@@ -4013,6 +4024,8 @@ namespace ReportesWeb1_2.ServicesReportes
                 }
                 catch (Exception ex)
                 {
+
+                    logger.Error(ex, ex.Message);
                     string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                     string hora = System.DateTime.Now.ToString("HH:mm:ss");
                     string path = $@"C:\Log\ErrorLinea4013.txt";
@@ -15944,6 +15957,7 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
+                logger.Error(ex, ex.Message);
                 string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                 string hora = System.DateTime.Now.ToString("HH:mm:ss");
                 string path = $@"C:\Log\ErrorLinea15943.txt";
@@ -16008,6 +16022,8 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
+
+                logger.Error(ex, ex.Message);
                 string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                 string hora = System.DateTime.Now.ToString("HH:mm:ss");
                 string path = $@"C:\Log\ErrorLinea16007.txt";
@@ -33049,6 +33065,7 @@ namespace ReportesWeb1_2.ServicesReportes
             }
             catch (Exception ex)
             {
+                logger.Error(ex, ex.Message);
                 string fecha = System.DateTime.Now.ToString("yyyyMMdd");
                 string hora = System.DateTime.Now.ToString("HH:mm:ss");
                 string path = $@"C:\Log\ErrorLinea33049.txt";

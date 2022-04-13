@@ -22,6 +22,7 @@ namespace ReportesWeb1_2.Controllers
     [Authorize]
     public class ReportesController : Controller
     {
+        private CreationLogger logger = new CreationLogger();
         private ProsisSQLServerModel db = new ProsisSQLServerModel();
         private MetodosGlbRepository MtGlb = new MetodosGlbRepository();
         private Validation validaciones = new Validation();
@@ -129,6 +130,7 @@ namespace ReportesWeb1_2.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex, ex.Message);
                 string path = @"C:\Log\ErrorSource.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
@@ -160,6 +162,7 @@ namespace ReportesWeb1_2.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex, ex.Message);
                 string path = @"C:\Log\ErrorSource.txt";
 
                 StreamWriter sw = new StreamWriter(path, true);
