@@ -43,3 +43,21 @@ else
         @ViewBag.Error
     </div>
 }
+@if (ViewBag.ErrorCentavos != null && ViewBag.ErrorCentavos != "")
+{
+    <div class="alert alert-danger col-md-12 text-center" role="alert">
+        @ViewBag.ErrorCentavos
+    </div>
+}
+@if (ViewBag.ErrorComentarios != null && ViewBag.ErrorComentarios != "")
+{
+    <div class="alert alert-danger col-md-12 text-center" role="alert">
+        @ViewBag.ErrorComentarios
+    </div>
+}
+@if (ViewBag.errorDiferenciaSegundos != null && ViewBag.errorDiferenciaSegundos != "")
+{
+    <div class="alert alert-danger col-md-12 text-center" role="alert">
+        @ViewBag.errorDiferenciaSegundos
+    </div>
+}

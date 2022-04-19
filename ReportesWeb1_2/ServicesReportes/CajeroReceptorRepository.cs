@@ -204,14 +204,13 @@ namespace ReportesWeb1_2.ServicesReportes
                                      "GEADBA.FIN_POSTE.NUMERO_POSTE, GEADBA.FIN_POSTE.MATRICULE, Expr4";
 
                 /**********************************/
+                Data.Clear();
                 MtGlb.GetConnectionOracle(NameConStringSt);
 
                 if (MtGlb.QueryDataSet(StrQuerys, "TYPE_VOIE"))
                 {
                     if (MtGlb.Ds.Tables["TYPE_VOIE"].Rows.Count >= 1)
-                    {
-                        Data.Clear();
-
+                    {                   
                         foreach (DataRow item in MtGlb.Ds.Tables["TYPE_VOIE"].Rows)
                         {
                             i += 1;
