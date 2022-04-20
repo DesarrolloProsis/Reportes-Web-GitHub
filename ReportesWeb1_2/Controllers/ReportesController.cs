@@ -149,80 +149,94 @@ namespace ReportesWeb1_2.Controllers
 
                         listaBolsas = CaReRepository._PartialViewBolsas(model.Fecha, Plaza.Value, Turno.Text, model.NumCajeroReceptor, Delegacion.Text, admin_num + "    " + Administrador.Text, NameConnectionString);
 
-                        foreach (var item in listaBolsas)
+                        if (listaBolsas.Count != 0)
                         {
-                            //Query para obtener el saldo total de la bolsa
-                            string StrQuerys = "SELECT MATRICULE,SAC AS Expr1, NVL(NB_POSTE, 0) + NVL(NB_POSTE_POS, 0) AS Expr2, NVL(RED_RCT_MONNAIE1, 0) AS Expr3, " +
-                                "NVL(RED_RCT_CHQ, 0) AS Expr4, NVL(RED_NB_CHQ, 0) AS Expr5, NVL(RED_RCT_DEVISE, 0) AS Expr6, NVL(RED_RCT_MONNAIE3, 0) AS Expr7, " +
-                                "NVL(RED_RCT_MONNAIE4, 0) AS Expr8, NVL(RED_CPT1, 0) AS Expr9, NVL(RED_RCT_MONNAIE1, 0) + NVL(RED_RCT_MONNAIE2, 0) + NVL(RED_RCT_MONNAIE3, 0) " +
-                                "+ NVL(RED_RCT_MONNAIE4, 0) + NVL(RED_RCT_CHQ, 0) + NVL(RED_RCT_DEVISE, 0) AS Expr10, NVL(POSTE_RCT_MONNAIE1, 0) + NVL(POSTE_RCT_MONNAIE2, 0) " +
-                                "+ NVL(POSTE_RCT_MONNAIE3, 0) + NVL(POSTE_RCT_MONNAIE4, 0) + NVL(POSTE_RCT_DEVISE, 0) + NVL(POSTE_RCT_CHQ, 0) + NVL(POSTE_POS_RCT_MONNAIE1, " +
-                                "0) + NVL(POSTE_POS_RMB_MONNAIE1, 0) + NVL(POSTE_POS_RCT_MONNAIE2, 0) + NVL(POSTE_POS_RCT_MONNAIE3, 0) + NVL(POSTE_POS_RCT_MONNAIE4, 0) " +
-                                "+ NVL(POSTE_POS_RCT_DEVISE, 0) + NVL(POSTE_POS_RCT_CHQ, 0) AS Expr11, NVL(RED_RCT_MONNAIE1, 0) + NVL(RED_RCT_MONNAIE2, 0) " +
-                                "+ NVL(RED_RCT_MONNAIE3, 0) + NVL(RED_RCT_MONNAIE4, 0) + NVL(RED_RCT_DEVISE, 0) + NVL(RED_RCT_CHQ, 0) - NVL(POSTE_RCT_MONNAIE1, 0) " +
-                                "- NVL(POSTE_RCT_MONNAIE2, 0) - NVL(POSTE_RCT_MONNAIE3, 0) - NVL(POSTE_RCT_MONNAIE4, 0) - NVL(POSTE_RCT_DEVISE, 0) - NVL(POSTE_RCT_CHQ, 0) " +
-                                "- NVL(POSTE_POS_RCT_MONNAIE1, 0) - NVL(POSTE_POS_RMB_MONNAIE1, 0) - NVL(POSTE_POS_RCT_MONNAIE2, 0) - NVL(POSTE_POS_RCT_MONNAIE3, 0) " +
-                                "- NVL(POSTE_POS_RCT_MONNAIE4, 0) - NVL(POSTE_POS_RCT_DEVISE, 0) - NVL(POSTE_POS_RCT_CHQ, 0) AS Expr12, NVL(RED_RCT_MONNAIE1, 0) " +
-                                "- NVL(POSTE_RCT_MONNAIE1, 0) - NVL(POSTE_POS_RMB_MONNAIE1, 0) - NVL(POSTE_POS_RCT_MONNAIE1, 0) AS Expr13, NVL(RED_RCT_CHQ, 0) " +
-                                "- NVL(POSTE_RCT_CHQ, 0) - NVL(POSTE_POS_RCT_CHQ, 0) AS Expr14, NVL(RED_RCT_DEVISE, 0) - NVL(POSTE_RCT_DEVISE, 0) - NVL(POSTE_POS_RCT_DEVISE, 0) " +
-                                "AS Expr15, NVL(RED_CPT24, 0) AS Expr16, NVL(RED_CPT25, 0) AS Expr17, NVL(RED_JETON, 0) - NVL(POSTE_JETON, 0) AS Expr18, NVL(RED_RDD, 0) " +
-                                "- NVL(POSTE_RDD, 0) AS Expr19, NVL(RED_GRATUIT, 0) + NVL(RED_CPT2, 0) - NVL(POSTE_GRATUIT, 0) AS Expr20, MATRICULE_COMMENTAIRE, COMMENTAIRE, " +
-                                "0 AS Expr21, TO_CHAR(DATE_REDDITION, 'YYYYMMDDHH24MISS') AS Expr22, ID_SITE, RED_CPT21, NB_POSTE, ETAT_REDDITION, " +
-                                "NVL(Red_Rct_Monnaie1,0)	+ NVL(Red_Rct_Devise,0)	+ NVL(Red_Rct_Chq,0) + NVL(Red_cpt21,0)	- NVL(Poste_Rct_Monnaie1,0) - NVL(Poste_Rct_Devise,0) - NVL(Poste_Rct_Chq,0) AS Expr23, RED_CPT22  " +
-                                "FROM REDDITION " +
-                                "WHERE  (ID_SITE = '" + Plaza.Value + "') AND (MATRICULE = '" + model.NumCajeroReceptor + "') AND (SAC = '" + item.Bolsa + "')";
-
-                            if (MtGlb.QueryDataSet1(StrQuerys, "REDDITION"))
+                            foreach (var item in listaBolsas)
                             {
-                                var saldo = MtGlb.oDataRow1["Expr3"].ToString();
+                                //Query para obtener el saldo total de la bolsa
+                                string StrQuerys = "SELECT MATRICULE,SAC AS Expr1, NVL(NB_POSTE, 0) + NVL(NB_POSTE_POS, 0) AS Expr2, NVL(RED_RCT_MONNAIE1, 0) AS Expr3, " +
+                                    "NVL(RED_RCT_CHQ, 0) AS Expr4, NVL(RED_NB_CHQ, 0) AS Expr5, NVL(RED_RCT_DEVISE, 0) AS Expr6, NVL(RED_RCT_MONNAIE3, 0) AS Expr7, " +
+                                    "NVL(RED_RCT_MONNAIE4, 0) AS Expr8, NVL(RED_CPT1, 0) AS Expr9, NVL(RED_RCT_MONNAIE1, 0) + NVL(RED_RCT_MONNAIE2, 0) + NVL(RED_RCT_MONNAIE3, 0) " +
+                                    "+ NVL(RED_RCT_MONNAIE4, 0) + NVL(RED_RCT_CHQ, 0) + NVL(RED_RCT_DEVISE, 0) AS Expr10, NVL(POSTE_RCT_MONNAIE1, 0) + NVL(POSTE_RCT_MONNAIE2, 0) " +
+                                    "+ NVL(POSTE_RCT_MONNAIE3, 0) + NVL(POSTE_RCT_MONNAIE4, 0) + NVL(POSTE_RCT_DEVISE, 0) + NVL(POSTE_RCT_CHQ, 0) + NVL(POSTE_POS_RCT_MONNAIE1, " +
+                                    "0) + NVL(POSTE_POS_RMB_MONNAIE1, 0) + NVL(POSTE_POS_RCT_MONNAIE2, 0) + NVL(POSTE_POS_RCT_MONNAIE3, 0) + NVL(POSTE_POS_RCT_MONNAIE4, 0) " +
+                                    "+ NVL(POSTE_POS_RCT_DEVISE, 0) + NVL(POSTE_POS_RCT_CHQ, 0) AS Expr11, NVL(RED_RCT_MONNAIE1, 0) + NVL(RED_RCT_MONNAIE2, 0) " +
+                                    "+ NVL(RED_RCT_MONNAIE3, 0) + NVL(RED_RCT_MONNAIE4, 0) + NVL(RED_RCT_DEVISE, 0) + NVL(RED_RCT_CHQ, 0) - NVL(POSTE_RCT_MONNAIE1, 0) " +
+                                    "- NVL(POSTE_RCT_MONNAIE2, 0) - NVL(POSTE_RCT_MONNAIE3, 0) - NVL(POSTE_RCT_MONNAIE4, 0) - NVL(POSTE_RCT_DEVISE, 0) - NVL(POSTE_RCT_CHQ, 0) " +
+                                    "- NVL(POSTE_POS_RCT_MONNAIE1, 0) - NVL(POSTE_POS_RMB_MONNAIE1, 0) - NVL(POSTE_POS_RCT_MONNAIE2, 0) - NVL(POSTE_POS_RCT_MONNAIE3, 0) " +
+                                    "- NVL(POSTE_POS_RCT_MONNAIE4, 0) - NVL(POSTE_POS_RCT_DEVISE, 0) - NVL(POSTE_POS_RCT_CHQ, 0) AS Expr12, NVL(RED_RCT_MONNAIE1, 0) " +
+                                    "- NVL(POSTE_RCT_MONNAIE1, 0) - NVL(POSTE_POS_RMB_MONNAIE1, 0) - NVL(POSTE_POS_RCT_MONNAIE1, 0) AS Expr13, NVL(RED_RCT_CHQ, 0) " +
+                                    "- NVL(POSTE_RCT_CHQ, 0) - NVL(POSTE_POS_RCT_CHQ, 0) AS Expr14, NVL(RED_RCT_DEVISE, 0) - NVL(POSTE_RCT_DEVISE, 0) - NVL(POSTE_POS_RCT_DEVISE, 0) " +
+                                    "AS Expr15, NVL(RED_CPT24, 0) AS Expr16, NVL(RED_CPT25, 0) AS Expr17, NVL(RED_JETON, 0) - NVL(POSTE_JETON, 0) AS Expr18, NVL(RED_RDD, 0) " +
+                                    "- NVL(POSTE_RDD, 0) AS Expr19, NVL(RED_GRATUIT, 0) + NVL(RED_CPT2, 0) - NVL(POSTE_GRATUIT, 0) AS Expr20, MATRICULE_COMMENTAIRE, COMMENTAIRE, " +
+                                    "0 AS Expr21, TO_CHAR(DATE_REDDITION, 'YYYYMMDDHH24MISS') AS Expr22, ID_SITE, RED_CPT21, NB_POSTE, ETAT_REDDITION, " +
+                                    "NVL(Red_Rct_Monnaie1,0)	+ NVL(Red_Rct_Devise,0)	+ NVL(Red_Rct_Chq,0) + NVL(Red_cpt21,0)	- NVL(Poste_Rct_Monnaie1,0) - NVL(Poste_Rct_Devise,0) - NVL(Poste_Rct_Chq,0) AS Expr23, RED_CPT22  " +
+                                    "FROM REDDITION " +
+                                    "WHERE  (ID_SITE = '" + Plaza.Value + "') AND (MATRICULE = '" + model.NumCajeroReceptor + "') AND (SAC = '" + item.Bolsa + "')";
 
-                                if (Convert.ToString(saldo).Contains(".")) //Se valida que el saldo de la bolsa no contenga punto decimal, ya que tener punto decimal dice que tiene centavos
+                                if (MtGlb.QueryDataSet1(StrQuerys, "REDDITION"))
                                 {
-                                    errorValidacion = false;
-                                    errorCentavos = errorCentavos + $"La bolsa {item.Bolsa} fue declarada con centavos, favor de volverla a declarla sin centavos.";
-                                }
+                                    var saldo = MtGlb.oDataRow1["Expr3"].ToString();
 
-                                if (!DBNull.Value.Equals(MtGlb.oDataRow1["COMMENTAIRE"])) //Se valida que la bolsa contenga comentarios 
-                                {
-                                    if (errorValidacion == true)
+                                    if (Convert.ToString(saldo).Contains(".")) //Se valida que el saldo de la bolsa no contenga punto decimal, ya que tener punto decimal dice que tiene centavos
                                     {
-                                        DateTime inicio = DateTime.ParseExact(item.Inicio, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                                        errorValidacion = false;
+                                        errorCentavos = errorCentavos + $"La bolsa {item.Bolsa} fue declarada con centavos, favor de volverla a declarla sin centavos.";
+                                    }
 
-                                        string StrQuerys2 = "SELECT	LANE_ASSIGN.Id_plaza,LANE_ASSIGN.Id_lane,TO_CHAR(LANE_ASSIGN.MSG_DHM,'MM/DD/YY HH24:MI:SS'),LANE_ASSIGN.SHIFT_NUMBER,LANE_ASSIGN.OPERATION_ID, " +
-                                               "LANE_ASSIGN.DELEGATION, TO_CHAR(LANE_ASSIGN.ASSIGN_DHM,'MM/DD/YY'),LTRIM(TO_CHAR(LANE_ASSIGN.JOB_NUMBER,'09')),	LANE_ASSIGN.STAFF_NUMBER,LANE_ASSIGN.IN_CHARGE_SHIFT_NUMBER " +
-                                               "FROM 	LANE_ASSIGN, SITE_GARE " +
-                                               "WHERE	LANE_ASSIGN.id_NETWORK = SITE_GARE.id_Reseau " +
-                                               "AND LANE_ASSIGN.id_plaza = SITE_GARE.id_Gare " +
-                                               "AND SITE_GARE.id_reseau = '01' " +
-                                               "AND	SITE_GARE.id_Site ='" + Plaza.Value + "' " +
-                                               "AND LANE_ASSIGN.Id_lane = '" + item.Carril + "'" +
-                                               "AND (MSG_DHM >= TO_DATE('" + inicio.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) AND " +
-                                               "(MSG_DHM <= TO_DATE('" + inicio.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
-                                               "ORDER BY LANE_ASSIGN.Id_PLAZA, LANE_ASSIGN.Id_LANE, LANE_ASSIGN.MSG_DHM";
-
-                                        if (MtGlb.QueryDataSet2(StrQuerys2, "Asig_Carril"))
+                                    if (!DBNull.Value.Equals(MtGlb.oDataRow1["COMMENTAIRE"])) //Se valida que la bolsa contenga comentarios 
+                                    {
+                                        if (errorValidacion == true)
                                         {
-                                            //Despues de validar que la bolsa generada tenga comentarios y su saldo no sea con centavos, se guarda la bolsa
-                                            lista.Add(new Bolsas
+                                            DateTime inicio = DateTime.ParseExact(item.Inicio, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                                            string StrQuerys2 = "SELECT	LANE_ASSIGN.Id_plaza,LANE_ASSIGN.Id_lane,TO_CHAR(LANE_ASSIGN.MSG_DHM,'MM/DD/YY HH24:MI:SS'),LANE_ASSIGN.SHIFT_NUMBER,LANE_ASSIGN.OPERATION_ID, " +
+                                                   "LANE_ASSIGN.DELEGATION, TO_CHAR(LANE_ASSIGN.ASSIGN_DHM,'MM/DD/YY'),LTRIM(TO_CHAR(LANE_ASSIGN.JOB_NUMBER,'09')),	LANE_ASSIGN.STAFF_NUMBER,LANE_ASSIGN.IN_CHARGE_SHIFT_NUMBER " +
+                                                   "FROM 	LANE_ASSIGN, SITE_GARE " +
+                                                   "WHERE	LANE_ASSIGN.id_NETWORK = SITE_GARE.id_Reseau " +
+                                                   "AND LANE_ASSIGN.id_plaza = SITE_GARE.id_Gare " +
+                                                   "AND SITE_GARE.id_reseau = '01' " +
+                                                   "AND	SITE_GARE.id_Site ='" + Plaza.Value + "' " +
+                                                   "AND LANE_ASSIGN.Id_lane = '" + item.Carril + "'" +
+                                                   "AND (MSG_DHM >= TO_DATE('" + inicio.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) AND " +
+                                                   "(MSG_DHM <= TO_DATE('" + inicio.ToString("yyyyMMddHHmmss") + "', 'YYYYMMDDHH24MISS')) " +
+                                                   "ORDER BY LANE_ASSIGN.Id_PLAZA, LANE_ASSIGN.Id_LANE, LANE_ASSIGN.MSG_DHM";
+
+                                            if (MtGlb.QueryDataSet2(StrQuerys2, "Asig_Carril"))
                                             {
-                                                Id = item.Id,
-                                                Inicio = item.Inicio,
-                                                Fin = item.Fin,
-                                                Carril = item.Carril,
-                                                Bolsa = item.Bolsa
-                                            });
-                                        }
-                                        else
-                                        {
-                                            errorDiferenciaSegundos = errorDiferenciaSegundos + $"La bolsa {item.Bolsa}, tiene una diferencia de segundos, favor de arreglar la fecha";
+                                                //Despues de validar que la bolsa generada tenga comentarios y su saldo no sea con centavos, se guarda la bolsa
+                                                lista.Add(new Bolsas
+                                                {
+                                                    Id = item.Id,
+                                                    Inicio = item.Inicio,
+                                                    Fin = item.Fin,
+                                                    Carril = item.Carril,
+                                                    Bolsa = item.Bolsa
+                                                });
+                                            }
+                                            else
+                                            {
+                                                errorDiferenciaSegundos = errorDiferenciaSegundos + $"No se pudo generar la bolsa {item.Bolsa}, favor de notificarle a sistemas";
+                                                string path = @"C:\Log\CajeroReceptor.txt";
+                                                StreamWriter sw = new StreamWriter(path, true);
+
+                                                sw.WriteLine($"La bolsa {item.Bolsa}, tiene una diferencia de segundos, favor de arreglar la fecha");
+
+                                                sw.Flush();
+                                                sw.Close();
+                                            }
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    errorComentarios = errorComentarios + $"La bolsa {item.Bolsa} no tiene observaciones o comentarios, favor de ingresarlos. ";
+                                    else
+                                    {
+                                        errorComentarios = errorComentarios + $"La bolsa {item.Bolsa} no tiene observaciones o comentarios, favor de ingresarlos.";
+                                    }
                                 }
                             }
+                        }
+                        else
+                        {
+                            ViewBag.Nulo = "rojo";
                         }
 
                         ViewBag.ErrorCentavos = errorCentavos;

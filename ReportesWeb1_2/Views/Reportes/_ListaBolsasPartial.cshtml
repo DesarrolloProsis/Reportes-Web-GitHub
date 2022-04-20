@@ -34,7 +34,14 @@
 else
 {
     <div class="col-lg-12">
-        <p class="text-center lead">NO HAY DATOS</p>
+        @if (ViewBag.Nulo == "rojo")
+        {
+            <p class="text-center lead bg-danger text-white">NO HAY DATOS</p>
+        }
+        else
+        {
+            <p class="text-center lead">NO HAY DATOS</p>
+        }
     </div>
 }
 @if (ViewBag.Error != null && ViewBag.Error != "")
