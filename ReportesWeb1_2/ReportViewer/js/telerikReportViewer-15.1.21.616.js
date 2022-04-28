@@ -1,11 +1,50 @@
 ﻿/*
-* TelerikReporting v12.1.18.620 (http://www.telerik.com/products/reporting.aspx)
-* Copyright 2018 Telerik AD. All rights reserved.
+* TelerikReporting v15.1.21.616 (http://www.telerik.com/products/reporting.aspx)
+* Copyright 2021 Progress Software EAD. All rights reserved.
 *
 * Telerik Reporting commercial licenses may be obtained at
 * http://www.telerik.com/purchase/license-agreement/reporting.aspx
 * If you do not own a commercial license, this file shall be governed by the trial license terms.
 */
+(function(window, undefined) {
+    "$:nomunge";
+    var $ = window.Cowboy || (window.Cowboy = {}), jq_throttle;
+    $.throttle = jq_throttle = function(delay, no_trailing, callback, debounce_mode) {
+        var timeout_id, last_exec = 0;
+        if (typeof no_trailing !== "boolean") {
+            debounce_mode = callback;
+            callback = no_trailing;
+            no_trailing = undefined;
+        }
+        function wrapper() {
+            var that = this, elapsed = +new Date() - last_exec, args = arguments;
+            function exec() {
+                last_exec = +new Date();
+                callback.apply(that, args);
+            }
+            function clear() {
+                timeout_id = undefined;
+            }
+            if (debounce_mode && !timeout_id) {
+                exec();
+            }
+            timeout_id && clearTimeout(timeout_id);
+            if (debounce_mode === undefined && elapsed > delay) {
+                exec();
+            } else if (no_trailing !== true) {
+                timeout_id = setTimeout(debounce_mode ? clear : exec, debounce_mode === undefined ? delay - elapsed : delay);
+            }
+        }
+        if ($.guid) {
+            wrapper.guid = callback.guid = callback.guid || $.guid++;
+        }
+        return wrapper;
+    };
+    $.debounce = function(delay, at_begin, callback) {
+        return callback === undefined ? jq_throttle(delay, at_begin, false) : jq_throttle(delay, callback, at_begin !== false);
+    };
+})(window);
+
 (function(trv, $, window, document, undefined) {
     "use strict";
     var stringFormatRegExp = /{(\w+?)}/g;
@@ -38,7 +77,41 @@
             return false;
         };
     }
+    function toXhrErrorData(xhr, status, error) {
+        return {
+            xhr: xhr,
+            status: status,
+            error: error
+        };
+    }
+    function rectangle(left, top, width, height) {
+        return {
+            left: left,
+            top: top,
+            width: width,
+            height: height,
+            right: function() {
+                return left + width;
+            },
+            bottom: function() {
+                return top + height;
+            },
+            union: function(other) {
+                var newLeft = Math.min(left, other.left);
+                var newTop = Math.min(top, other.top);
+                var newWidth = Math.max(this.right(), other.right()) - newLeft;
+                var newHeight = Math.max(this.bottom(), other.bottom()) - newTop;
+                return rectangle(newLeft, newTop, newWidth, newHeight);
+            }
+        };
+    }
     var utils = trv.utils = {
+        generateGuidString: function() {
+            return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == "x" ? r : r & 3 | 8;
+                return v.toString(16);
+            });
+        },
         trim: function(s, charlist) {
             return this.rtrim(this.ltrim(s, charlist), charlist);
         },
@@ -105,37 +178,27 @@
         },
         reportSourcesAreEqual: function(rs1, rs2) {
             if (rs1 && rs2 && rs1.report === rs2.report) {
-                var params1 = [], params2 = [];
-                if (rs1.parameters) params1 = Object.getOwnPropertyNames(rs1.parameters);
-                if (rs2.parameters) params2 = Object.getOwnPropertyNames(rs2.parameters);
-                if (params1.length === params2.length) {
-                    for (var i = params1.length - 1; i >= 0; i--) {
-                        var p = params1[i];
-                        var v1 = rs1.parameters[p];
-                        var v2 = rs2.parameters[p];
-                        if (Array.isArray(v1)) {
-                            if (!Array.isArray(v2)) return false;
-                            if (!utils.areEqualArrays(v1, v2)) {
-                                return false;
-                            }
-                        } else if (!utils.areEqual(v1, v2)) {
-                            return false;
-                        }
-                    }
-                    return true;
+                var params1String = "";
+                if (rs1.parameters) {
+                    params1String = JSON.stringify(rs1.parameters);
                 }
+                var params2String = "";
+                if (rs2.parameters) {
+                    params2String = JSON.stringify(rs2.parameters);
+                }
+                return params1String === params2String;
             }
             return false;
         },
         areEqualArrays: function(array1, array2) {
-            if (array1 == null) {
-                if (array2 != null) {
+            if (array1 === null) {
+                if (array2 !== null) {
                     return false;
                 } else {
                     return true;
                 }
             } else {
-                if (array2 == null) {
+                if (array2 === null) {
                     return false;
                 }
             }
@@ -173,7 +236,7 @@
                 return JSON.parse(json, function(key, value) {
                     if (key && value) {
                         var firstChar = key.charAt(0);
-                        if (firstChar == firstChar.toUpperCase()) {
+                        if (firstChar === firstChar.toUpperCase()) {
                             var newPropertyName = firstChar.toLowerCase() + key.slice(1);
                             this[newPropertyName] = value;
                         }
@@ -232,16 +295,24 @@
             }
             return false;
         },
-        loadScript: function(src, done) {
+        loadScriptWithCallback: function(src, done, version) {
             var js = document.createElement("script");
             js.src = src;
             js.onload = function() {
-                done();
+                done(version);
             };
             js.onerror = function() {
-                done(new Error("Failed to load script " + src));
+                utils.logError(new Error("Failed to load script " + src));
             };
             document.head.appendChild(js);
+        },
+        loadScript: function(url) {
+            var ajaxOptions = {
+                dataType: "script",
+                cache: true,
+                url: url
+            };
+            return utils.$ajax(ajaxOptions);
         },
         filterUniqueLastOccurance: function(array) {
             function onlyLastUnique(value, index, self) {
@@ -264,7 +335,54 @@
                 $area = $area.find(selectorChain[i]);
             }
             return $area;
-        }
+        },
+        toRgbColor: function(hexColor) {
+            if (hexColor && hexColor.length < 6) {
+                var index = 1;
+                var hexParts = hexColor.split("");
+                if (hexParts[0] !== "#") {
+                    index = 0;
+                }
+                for (index; index < hexParts.length; index++) {
+                    hexParts[index] = hexParts[index] + hexParts[index];
+                }
+                hexColor = hexParts.join("");
+            }
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
+            return result ? parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16) : null;
+        },
+        isRgbColor: function(color) {
+            if (!color) {
+                return false;
+            }
+            return color.indexOf(",") > -1 ? true : false;
+        },
+        getColorAlphaValue: function(color) {
+            if (color.toLowerCase() === "transparent") {
+                return 0;
+            }
+            if (!this.isRgbColor(color)) {
+                return 1;
+            }
+            if (color.indexOf("#") !== -1) {
+                color = this.toRgbColor(color);
+            }
+            var colorComponents = color.split(",").map(function(c) {
+                return c.trim();
+            });
+            var alpha = colorComponents.length === 4 ? parseFloat((parseFloat(colorComponents[3].replace(/[()]/g, "")) / 255).toFixed(2)) : 1;
+            return alpha;
+        },
+        $ajax: function(ajaxSettings) {
+            return new Promise(function(resolve, reject) {
+                $.ajax(ajaxSettings).done(function(data) {
+                    return resolve(data);
+                }).fail(function(xhr, status, error) {
+                    reject(toXhrErrorData(xhr, status, error));
+                });
+            });
+        },
+        rectangle: rectangle
     };
     trv.domUtils = function() {
         function toPixels(value) {
@@ -327,19 +445,22 @@
         loadingReport: "Loading report...",
         preparingDownload: "Preparing document to download. Please wait...",
         preparingPrint: "Preparing document to print. Please wait...",
-        errorLoadingTemplates: "Error loading the report viewer's templates. (Template = {0}).",
+        errorLoadingTemplates: "Error loading the report viewer's templates. (templateUrl = '{0}').",
+        errorServiceUrl: "Cannot access the Reporting REST service. (serviceUrl = '{0}'). Make sure the service address is correct and enable CORS if needed. (https://enable-cors.org)",
         loadingReportPagesInProgress: "{0} pages loaded so far...",
         loadedReportPagesComplete: "Done. Total {0} pages loaded.",
         noPageToDisplay: "No page to display.",
-        errorDeletingReportInstance: "Error deleting report instance: {0}.",
+        errorDeletingReportInstance: "Error deleting report instance: '{0}'.",
         errorRegisteringViewer: "Error registering the viewer with the service.",
         noServiceClient: "No serviceClient has been specified for this controller.",
         errorRegisteringClientInstance: "Error registering client instance.",
-        errorCreatingReportInstance: "Error creating report instance (Report = {0}).",
-        errorCreatingReportDocument: "Error creating report document (Report = {0}; Format = {1}).",
+        errorCreatingReportInstance: "Error creating report instance (Report = '{0}').",
+        errorCreatingReportDocument: "Error creating report document (Report = '{0}'; Format = '{1}').",
         unableToGetReportParameters: "Unable to get report parameters.",
         errorObtainingAuthenticationToken: "Error obtaining authentication token.",
         clientExpired: "Click 'Refresh' to restore client session.",
+        promisesChainStopError: "Error shown. Throwing promises chain stop error.",
+        renderingCanceled: "Report processing was canceled.",
         parameterEditorSelectNone: "clear selection",
         parameterEditorSelectAll: "select all",
         parametersAreaPreviewButton: "Preview",
@@ -347,6 +468,8 @@
         menuNavigateBackwardTitle: "Navigate Backward",
         menuNavigateForwardText: "Navigate Forward",
         menuNavigateForwardTitle: "Navigate Forward",
+        menuStopRenderingText: "Stop Rendering",
+        menuStopRenderingTitle: "Stop Rendering",
         menuRefreshText: "Refresh",
         menuRefreshTitle: "Refresh",
         menuFirstPageText: "First Page",
@@ -362,7 +485,11 @@
         menuZoomOutTitle: "Zoom Out",
         menuPageStateTitle: "Toggle FullPage/PageWidth",
         menuPrintText: "Print...",
+        menuContinuousScrollText: "Toggle Continuous Scrolling",
+        menuSendMailText: "Send an email",
         menuPrintTitle: "Print",
+        menuContinuousScrollTitle: "Toggle Continuous Scrolling",
+        menuSendMailTitle: "Send an email",
         menuExportText: "Export",
         menuExportTitle: "Export",
         menuPrintPreviewText: "Toggle Print Preview",
@@ -370,6 +497,13 @@
         menuSearchText: "Search",
         menuSearchTitle: "Toggle Search",
         menuSideMenuTitle: "Toggle Side Menu",
+        sendEmailFromLabel: "From:",
+        sendEmailToLabel: "To:",
+        sendEmailCCLabel: "CC:",
+        sendEmailSubjectLabel: "Subject:",
+        sendEmailFormatLabel: "Format:",
+        sendEmailSendLabel: "Send",
+        sendEmailCancelLabel: "Cancel",
         ariaLabelPageNumberSelector: "Page number selector. Showing page {0} of {1}.",
         ariaLabelPageNumberEditor: "Page number editor",
         ariaLabelExpandable: "Expandable",
@@ -389,8 +523,11 @@
         ariaLabelCompactMenu: "Compact menu",
         ariaLabelSideMenu: "Side menu",
         ariaLabelDocumentMap: "Document map area",
+        ariaLabelDocumentMapSplitter: "Document map area splitbar.",
+        ariaLabelParametersAreaSplitter: "Parameters area splitbar.",
         ariaLabelPagesArea: "Report contents area",
         ariaLabelSearchDialogArea: "Search area",
+        ariaLabelSendEmailDialogArea: "Send email area",
         ariaLabelSearchDialogStop: "Stop search",
         ariaLabelSearchDialogOptions: "Search options",
         ariaLabelSearchDialogNavigateUp: "Navigate up",
@@ -400,6 +537,7 @@
         ariaLabelSearchDialogUseRegex: "Use regex",
         ariaLabelMenuNavigateBackward: "Navigate backward",
         ariaLabelMenuNavigateForward: "Navigate forward",
+        ariaLabelMenuStopRendering: "Stop rendering",
         ariaLabelMenuRefresh: "Refresh",
         ariaLabelMenuFirstPage: "First page",
         ariaLabelMenuLastPage: "Last page",
@@ -412,10 +550,19 @@
         ariaLabelMenuZoomOut: "Zoom out",
         ariaLabelMenuPageState: "Toggle FullPage/PageWidth",
         ariaLabelMenuPrint: "Print",
+        ariaLabelMenuContinuousScroll: "Continuous scrolling",
+        ariaLabelMenuSendMail: "Send an email",
         ariaLabelMenuExport: "Export",
         ariaLabelMenuPrintPreview: "Toggle print preview",
         ariaLabelMenuSearch: "Search in report contents",
         ariaLabelMenuSideMenu: "Toggle side menu",
+        ariaLabelSendEmailFrom: "From email address",
+        ariaLabelSendEmailTo: "Recipient email address",
+        ariaLabelSendEmailCC: "Carbon Copy email address",
+        ariaLabelSendEmailSubject: "Email subject:",
+        ariaLabelSendEmailFormat: "Report format:",
+        ariaLabelSendEmailSend: "Send email",
+        ariaLabelSendEmailCancel: "Cancel sending email",
         searchDialogTitle: "Search in report contents",
         searchDialogSearchInProgress: "searching...",
         searchDialogNoResultsLabel: "No results",
@@ -426,10 +573,730 @@
         searchDialogMatchCaseTitle: "Match Case",
         searchDialogMatchWholeWordTitle: "Match Whole Word",
         searchDialogUseRegexTitle: "Use Regex",
-        searchDialogCaptionText: "Find"
+        searchDialogCaptionText: "Find",
+        searchDialogPageText: "page",
+        sendEmailDialogTitle: "Send Email",
+        sendEmailValidationEmailRequired: "Email field is required",
+        sendEmailValidationEmailFormat: "Email format is not valid",
+        sendEmailValidationSingleEmail: "The field accepts a single email address only",
+        sendEmailValidationFormatRequired: "Format field is required",
+        errorSendingDocument: "Error sending report document (Report = '{0}')."
     };
     trv.sr = trv.utils.extend(sr, trv.sr);
 })(window.telerikReportViewer = window.telerikReportViewer || {});
+
+(function(trv, $, window, document, undefined) {
+    "use strict";
+    var utils = trv.utils;
+    if (!utils) {
+        throw "Missing telerikReportViewer.utils";
+    }
+    var rectangle = utils.rectangle;
+    var uiFreezeCoordinator = {
+        $placeholder: null,
+        $scrollableContainer: null,
+        itemsInitialState: {},
+        xFrozenAreasBounds: {},
+        yFrozenAreasBounds: {},
+        freezeMaxZIndex: {},
+        zIndex: 1,
+        freezeBGColor: {},
+        currentlyfreezedContainer: {
+            vertical: {},
+            horizontal: {}
+        },
+        isInitialize: false,
+        scaleFactor: null,
+        init: function($placeholder) {
+            this.$placeholder = $placeholder;
+            this.$scrollableContainer = $placeholder.find(".trv-page-container");
+            if (this.isInitialize) {
+                this.reset($placeholder);
+            }
+            this._attachToScrollEvent();
+            this.isInitialize = true;
+        },
+        reset: function($placeholder) {
+            this.$placeholder = $placeholder;
+            this.$scrollableContainer = $placeholder.find(".trv-page-container");
+            this.itemsInitialState = {};
+            this.xFrozenAreasBounds = {};
+            this.yFrozenAreasBounds = {};
+            this.currentlyfreezedContainer = {
+                vertical: {},
+                horizontal: {}
+            };
+        },
+        setScaleFactor: function(scale) {
+            this.scaleFactor = scale;
+        },
+        _attachToScrollEvent: function() {
+            var thisInstance = this;
+            this.$scrollableContainer.scroll(function updateFreezeUIOnScroll() {
+                var $freezeItems = thisInstance.$scrollableContainer.find("div[data-sticky-id]");
+                if ($freezeItems.length) {
+                    var tableIDs = $freezeItems.map(function(index, $element) {
+                        return $($element).attr("data-sticky-id");
+                    }).get();
+                    var uniqueIDs = tableIDs.filter(function(item, index) {
+                        return index === tableIDs.indexOf(item);
+                    });
+                    var scrollableContainerScrollTop = thisInstance.$scrollableContainer.scrollTop();
+                    var scrollableContainerScrollLeft = thisInstance.$scrollableContainer.scrollLeft();
+                    for (var index = 0; index < uniqueIDs.length; index++) {
+                        var freezeItemsContainerID = uniqueIDs[index];
+                        if (!thisInstance.itemsInitialState[freezeItemsContainerID]) {
+                            thisInstance._saveFreezeItemsInitialState(freezeItemsContainerID);
+                        }
+                        thisInstance._updateFreezeItemsOnScroll(freezeItemsContainerID, scrollableContainerScrollTop, scrollableContainerScrollLeft);
+                    }
+                }
+            });
+        },
+        _saveFreezeItemsInitialState: function(freezeItemsContainerID) {
+            var $allFreezeItems = $("[data-sticky-direction][data-sticky-id='" + freezeItemsContainerID + "']");
+            var $freezeActions = $("[data-reporting-action][data-sticky-id='" + freezeItemsContainerID + "']");
+            var yAreaBounds;
+            var xAreaBounds;
+            this.itemsInitialState[freezeItemsContainerID] = {};
+            this.freezeBGColor[freezeItemsContainerID] = $("[data-id='" + freezeItemsContainerID + "']").attr("data-sticky-bg-color");
+            for (var index = 0; index < $allFreezeItems.length; index++) {
+                var $item = $($allFreezeItems[index]);
+                var scrollDirection = $item.attr("data-sticky-direction");
+                var itemID = $item.attr("data-id");
+                var itemPosition = $item.position();
+                var scaledItemPosition = {
+                    top: itemPosition.top / this.scaleFactor,
+                    left: itemPosition.left / this.scaleFactor
+                };
+                var itemBounds = rectangle(scaledItemPosition.left, scaledItemPosition.top, $item.outerWidth(true) * this.scaleFactor, $item.outerHeight(true) * this.scaleFactor);
+                switch (scrollDirection) {
+                  case "Vertical":
+                    yAreaBounds = yAreaBounds ? yAreaBounds.union(itemBounds) : itemBounds;
+                    break;
+
+                  case "Horizontal":
+                    xAreaBounds = xAreaBounds ? xAreaBounds.union(itemBounds) : itemBounds;
+                    break;
+
+                  default:
+                }
+                this._saveFreezeItemInitialState(freezeItemsContainerID, $item, itemID, scaledItemPosition);
+            }
+            this.freezeMaxZIndex[freezeItemsContainerID] = $freezeActions.length ? $freezeActions.css("zIndex") : this.zIndex;
+            this.yFrozenAreasBounds[freezeItemsContainerID] = yAreaBounds;
+            this.xFrozenAreasBounds[freezeItemsContainerID] = xAreaBounds;
+        },
+        _saveFreezeItemInitialState: function(freezeItemsContainerID, $item, itemID, position) {
+            var itemBgColor = $item.css("background-color");
+            var hasInitialBgColor = this._hasSetBgColor(itemBgColor);
+            var itemState = {
+                top: position.top,
+                left: position.left,
+                zIndex: $item.css("zIndex"),
+                hasBgColor: hasInitialBgColor
+            };
+            this.itemsInitialState[freezeItemsContainerID][itemID] = itemState;
+        },
+        _updateFreezeItemsOnScroll: function(freezeItemsContainerID, scrollableContainerScrollTop, scrollableContainerScrollLeft) {
+            var $elementWrapper = $("div[data-id='" + freezeItemsContainerID + "']");
+            if (this._isInScrollVisibleArea($elementWrapper)) {
+                var $pageContainer = $elementWrapper.closest(".trv-report-page");
+                var pageContainerPosition = $pageContainer.position();
+                var pageContainerMargin = parseFloat($pageContainer.css("margin-top"));
+                var pageContainerTopOffset = parseFloat($pageContainer.css("padding-top"));
+                var pageContainerLeftOffset = parseFloat($pageContainer.css("padding-left"));
+                var pageContainerBorderTopWidth = parseFloat($pageContainer.css("border-top-width"));
+                var pageContainerBorderLeftWidth = parseFloat($pageContainer.css("border-left-width"));
+                var $rowHeaders = $("[data-sticky-direction*='Horizontal'][data-sticky-id='" + freezeItemsContainerID + "']");
+                var $colHeaders = $("[data-sticky-direction*='Vertical'][data-sticky-id='" + freezeItemsContainerID + "']");
+                var hasFixRow = $rowHeaders.length > 0;
+                var hasFixColumn = $colHeaders.length > 0;
+                var elementWrapperPosition = $elementWrapper.position();
+                var elementWrapperTopPosition = elementWrapperPosition.top + pageContainerPosition.top + pageContainerMargin + pageContainerTopOffset + pageContainerBorderTopWidth;
+                var elementWrapperLeftPosition = elementWrapperPosition.left + pageContainerLeftOffset + pageContainerBorderLeftWidth;
+                var verticalMoveOffset = scrollableContainerScrollTop - elementWrapperTopPosition;
+                var horizontalMoveOffset = scrollableContainerScrollLeft - elementWrapperLeftPosition;
+                if (hasFixColumn && verticalMoveOffset > 0) {
+                    if (scrollableContainerScrollTop <= $elementWrapper.outerHeight() * this.scaleFactor + elementWrapperTopPosition - this.yFrozenAreasBounds[freezeItemsContainerID].height) {
+                        this.currentlyfreezedContainer.vertical[freezeItemsContainerID] = true;
+                        this._updateUIElementsPosition($colHeaders, "top", verticalMoveOffset / this.scaleFactor, freezeItemsContainerID);
+                    }
+                } else {
+                    if (this.currentlyfreezedContainer.vertical[freezeItemsContainerID]) {
+                        delete this.currentlyfreezedContainer.vertical[freezeItemsContainerID];
+                        this._updateUIElementsPosition($colHeaders, "top", -1, freezeItemsContainerID);
+                    }
+                }
+                if (hasFixRow && horizontalMoveOffset > 0) {
+                    if (scrollableContainerScrollLeft <= $elementWrapper.outerWidth() * this.scaleFactor + elementWrapperLeftPosition - this.xFrozenAreasBounds[freezeItemsContainerID].width) {
+                        this.currentlyfreezedContainer.horizontal[freezeItemsContainerID] = true;
+                        this._updateUIElementsPosition($rowHeaders, "left", horizontalMoveOffset / this.scaleFactor, freezeItemsContainerID);
+                    }
+                } else {
+                    if (this.currentlyfreezedContainer.horizontal[freezeItemsContainerID]) {
+                        delete this.currentlyfreezedContainer.horizontal[freezeItemsContainerID];
+                        this._updateUIElementsPosition($rowHeaders, "left", -1, freezeItemsContainerID);
+                    }
+                }
+            } else {
+                if (this.currentlyfreezedContainer.horizontal[freezeItemsContainerID] || this.currentlyfreezedContainer.vertical[freezeItemsContainerID]) {
+                    this._resetToDefaultPosition(freezeItemsContainerID);
+                }
+            }
+        },
+        _resetToDefaultPosition: function(freezeItemsContainerID) {
+            var $rowHeaders = $("[data-sticky-direction*='Horizontal'][data-sticky-id='" + freezeItemsContainerID + "']");
+            var $colHeaders = $("[data-sticky-direction*='Vertical'][data-sticky-id='" + freezeItemsContainerID + "']");
+            this._updateUIElementsPosition($colHeaders, "top", -1, freezeItemsContainerID);
+            this._updateUIElementsPosition($rowHeaders, "left", -1, freezeItemsContainerID);
+            delete this.currentlyfreezedContainer.horizontal[freezeItemsContainerID];
+            delete this.currentlyfreezedContainer.vertical[freezeItemsContainerID];
+        },
+        _updateUIElementsPosition: function(targetElements, position, offset, freezeItemsContainerID) {
+            for (var index = 0; index < targetElements.length; index++) {
+                var $item = $(targetElements[index]);
+                var itemFreezeDirection = $item.attr("data-sticky-direction");
+                var isFrozenBothDirection = itemFreezeDirection.indexOf(",") > 0;
+                var itemID = $item.attr("data-id");
+                var itemInitialState = this.itemsInitialState[freezeItemsContainerID][itemID];
+                var itemNewPostion = itemInitialState[position];
+                var initialZIndex = itemInitialState["zIndex"];
+                var hasInitialBgColor = itemInitialState["hasBgColor"];
+                var zIndexValue = 1;
+                var maxZIndex = this.freezeMaxZIndex[freezeItemsContainerID] ? this.freezeMaxZIndex[freezeItemsContainerID] : zIndexValue;
+                if (isFrozenBothDirection) {
+                    zIndexValue = initialZIndex !== "auto" ? initialZIndex : maxZIndex + 2;
+                } else {
+                    zIndexValue = initialZIndex !== "auto" ? initialZIndex + 1 : maxZIndex;
+                }
+                var newStyleRules = {
+                    "z-index": zIndexValue
+                };
+                if (offset >= 0) {
+                    itemNewPostion = itemNewPostion + offset;
+                } else {
+                    newStyleRules["z-index"] = initialZIndex;
+                }
+                if (!hasInitialBgColor) {
+                    this._applyBgColorOnScroll($item, isFrozenBothDirection, hasInitialBgColor, offset >= 0, freezeItemsContainerID);
+                }
+                newStyleRules[position] = itemNewPostion + "px";
+                $item.css(newStyleRules);
+            }
+        },
+        _applyBgColorOnScroll: function($item, isItemFrozenBothDirection, hasInitialBgColor, shouldApplyBGColor, freezeItemsContainerID) {
+            if ($item.is("img")) {
+                return true;
+            }
+            if (isItemFrozenBothDirection && this._isFrozen(freezeItemsContainerID) && !hasInitialBgColor) {
+                $item.css("background-color", this.freezeBGColor[freezeItemsContainerID]);
+                return true;
+            }
+            if (shouldApplyBGColor) {
+                $item.css("background-color", this.freezeBGColor[freezeItemsContainerID]);
+            } else {
+                $item.css("background-color", "initial");
+            }
+        },
+        _hasSetBgColor: function(bgColorValue) {
+            return utils.getColorAlphaValue(bgColorValue) > 0;
+        },
+        _isFrozen: function(freezeItemsContainerID) {
+            return this.currentlyfreezedContainer.horizontal[freezeItemsContainerID] || this.currentlyfreezedContainer.vertical[freezeItemsContainerID];
+        },
+        _isInScrollVisibleArea: function($element) {
+            var $page = $element.closest(".trv-report-page");
+            var elementPosition = $element.position();
+            return this._isVisibleVertically($element, $page, elementPosition) && this._isVisibleHorizontally($element, $page, elementPosition);
+        },
+        _isVisibleHorizontally: function($element, $page, elementPosition) {
+            var pageLeftOffset = parseFloat($page.css("padding-left"));
+            var scrollableContainerLeftScrollPosition = this.$scrollableContainer.scrollLeft();
+            var scrollableContainerWidth = this.$scrollableContainer.width();
+            var elementWidth = $element.outerWidth(true) * this.scaleFactor;
+            var elementLeftOffset = elementPosition.left + pageLeftOffset;
+            return elementLeftOffset > scrollableContainerLeftScrollPosition - elementWidth && elementLeftOffset < scrollableContainerLeftScrollPosition + elementWidth + scrollableContainerWidth;
+        },
+        _isVisibleVertically: function($element, $page, elementPosition) {
+            var pageTopOffset = parseFloat($page.css("padding-top"));
+            var pagePosition = $page.position();
+            var scrollableContainerTopScrollPosition = this.$scrollableContainer.scrollTop();
+            var scrollableContainerHeight = this.$scrollableContainer.height();
+            var elementHeight = $element.outerHeight(true) * this.scaleFactor;
+            var elementTopOffset = elementPosition.top + pageTopOffset + pagePosition.top;
+            return elementTopOffset > scrollableContainerTopScrollPosition - elementHeight && elementTopOffset < scrollableContainerTopScrollPosition + elementHeight + scrollableContainerHeight;
+        }
+    };
+    trv.uiFreezeCoordinator = uiFreezeCoordinator;
+})(window.telerikReportViewer = window.telerikReportViewer || {}, jQuery, window, document);
+
+(function(trv, $, window, document, undefined) {
+    "use strict";
+    var utils = trv.utils;
+    if (!utils) {
+        throw "Missing telerikReportViewer.utils";
+    }
+    var Scroll = {
+        controller: {},
+        $placeholder: null,
+        $pageContainer: null,
+        pageContainer: null,
+        $pageWrapper: null,
+        pageWrapper: null,
+        viewMode: null,
+        loadedPage: {},
+        scrollInProgress: false,
+        enabled: false,
+        pageCount: 0,
+        additionalTopOffset: 130,
+        pageDistance: 20,
+        oldScrollTopPosition: 0,
+        skeletonTemplate: '<div class="trv-report-page trv-skeleton-page trv-skeleton-{0}" style="{1}" data-page="{0}">' + '<div class="trv-skeleton-wrapper" style="{2}"></div></div>',
+        init: function init(placeholder, options) {
+            var that = this;
+            that.$placeholder = $("[data-selector='" + options.viewerSelector + "']").find(placeholder);
+            that.$pageContainer = this.$placeholder.find(".trv-page-container");
+            that.pageContainer = this.$pageContainer[0];
+            that.$pageWrapper = this.$placeholder.find(".trv-page-wrapper");
+            that.pageWrapper = this.$pageWrapper[0];
+            that.controller = options.controller;
+            that.viewMode = null;
+            that.loadedPage = {};
+            that.scrollInProgress = false;
+            that.enabled = false;
+            that.pageCount = 0;
+            that.controller.scale(function(e, args) {
+                if (that.enabled) {
+                    setTimeout(function() {
+                        that._loadMorePages();
+                        that._keepCurrentPageInToView();
+                    }, 100);
+                }
+            }).onLoadedReportChange(function(args) {
+                if (that.enabled) {
+                    that.disable();
+                    if (args !== "trv.ON_LOADED_REPORT_CHANGE") {
+                        setTimeout(function() {
+                            that.controller.getPageData(1).then(function(newPage) {
+                                that.renderPage(newPage);
+                            });
+                        });
+                    }
+                }
+            }).viewModeChanged(function(args) {
+                if (that.enabled) {
+                    that.disable();
+                }
+            }).interactiveActionExecuting(function(e, args) {
+                var actionType = args.action.Type;
+                if (that.enabled && (actionType === "sorting" || actionType === "toggleVisibility")) {
+                    that.disable();
+                }
+            }).updatePageDimensionsReady(function(event, args) {
+                if (that.enabled && that._currentPageNumber() > 0) {
+                    that._keepCurrentPageInToView();
+                }
+            }).pageCountChange(function(event, args) {
+                if (that.enabled && that.pageCount !== args) {
+                    if (that._currentPageNumber() > 0 && !that.scrollInProgress) {
+                        that._loadMorePages();
+                    }
+                    if (args > 1) {
+                        that._initEvents();
+                    }
+                    that.pageCount = args;
+                }
+            });
+        },
+        isEnabled: function isEnabled() {
+            return this.enabled;
+        },
+        disable: function disable() {
+            this.$pageWrapper.empty();
+            this.enabled = false;
+            this.loadedPage = {};
+            this.pageCount = 0;
+            this.$placeholder.removeClass("scrollable");
+            this._unbind();
+        },
+        enable: function() {
+            this.enabled = true;
+            this.$placeholder.addClass("scrollable");
+            this._initEvents();
+        },
+        renderPage: function renderPage(page) {
+            var that = this, pageViewMode = that.controller.viewMode(), renderedPage = that.$placeholder.find('[data-page="' + page.pageNumber + '"]');
+            if (!that.enabled) {
+                that.enabled = true;
+                that.$placeholder.addClass("scrollable");
+                if (pageViewMode !== that.viewMode || !renderedPage.length) {
+                    that._updatePageArea(page);
+                } else {
+                    that._render(page, true);
+                    this.$pageContainer.scrollTop(3);
+                    that._setCurrentPage(page.pageNumber);
+                }
+                that.viewMode = that.controller.viewMode();
+                that._loadMorePages();
+            } else {
+                if (pageViewMode !== that.viewMode || !renderedPage.length) {
+                    that._updatePageArea(page);
+                } else {
+                    that._navigateToPage(page, renderedPage);
+                }
+                that.viewMode = that.controller.viewMode();
+            }
+        },
+        navigateToElement: function navigateToElement(offsetTop, pageNumber) {
+            var that = this;
+            that.scrollInProgress = true;
+            if (that._isSkeletonScreen(null, pageNumber)) {
+                that.controller.getPageData(pageNumber).then(function(newPage) {
+                    that._render(newPage, false);
+                    that.$pageContainer.animate({
+                        scrollTop: offsetTop
+                    }, 500, function() {
+                        that._setCurrentPage(pageNumber);
+                        setTimeout(function() {
+                            that.scrollInProgress = false;
+                        }, 100);
+                    });
+                });
+            } else {
+                that.$pageContainer.animate({
+                    scrollTop: offsetTop
+                }, 500, function() {
+                    that._setCurrentPage(pageNumber);
+                    setTimeout(function() {
+                        that.scrollInProgress = false;
+                    }, 100);
+                });
+            }
+        },
+        _setCurrentPage: function _setCurrentPage(pageNumber) {
+            var that = this;
+            if (pageNumber !== that._currentPageNumber()) {
+                that.controller.currentPageNumber(pageNumber);
+            }
+            if (that.controller.pageCount() > 1) {
+                that.$placeholder.find(".k-state-default").removeClass("k-state-default");
+                that.$placeholder.find('[data-page="' + pageNumber + '"]').addClass("k-state-default");
+            }
+            that._loadNextPreviousPage(pageNumber);
+        },
+        _updatePageArea: function _updatePageArea(page) {
+            var that = this, scrollTo = 0, pageNumber = page.pageNumber;
+            that.scrollInProgress = true;
+            if (pageNumber > 1) {
+                that._generateSkeletonScreens(pageNumber);
+            }
+            that._render(page, false);
+            that._setCurrentPage(page.pageNumber);
+            setTimeout(function() {
+                scrollTo = pageNumber > 1 ? that.$placeholder.find('[data-page="' + pageNumber + '"]').position().top : 0;
+                that.$pageContainer.animate({
+                    scrollTop: scrollTo
+                }, 0, function() {
+                    that.scrollInProgress = false;
+                });
+            }, 100);
+        },
+        _navigateToPage: function _navigateToPage(page, renderedPage) {
+            var that = this;
+            that.scrollInProgress = true;
+            var scrollTo = renderedPage.position().top, pages = that.$placeholder.find(".trv-report-page"), pageNumber = page.pageNumber, pageHeight = $(pages[0]).height();
+            if (that._isSkeletonScreen(renderedPage, pageNumber)) {
+                that.controller.getPageData(pageNumber).then(function(newPage) {
+                    that._render(newPage, false);
+                    that.$pageContainer.animate({
+                        scrollTop: scrollTo
+                    }, 500, function() {
+                        setTimeout(function() {
+                            that._setCurrentPage(newPage.pageNumber);
+                            that.scrollInProgress = false;
+                        });
+                    });
+                });
+            } else {
+                that._updatePageContent(page, renderedPage);
+                that.$pageContainer.animate({
+                    scrollTop: scrollTo
+                }, 500, function() {
+                    setTimeout(function() {
+                        that._setCurrentPage(page.pageNumber);
+                        that.scrollInProgress = false;
+                    });
+                });
+            }
+        },
+        _updatePageContent: function _updatePageContent(page, renderedPage) {
+            this._updatePageStyle(page);
+            var pageNumber = page.pageNumber, wrapper = $($.parseHTML(page.pageContent)), $pageContent = wrapper.find("div.sheet"), $page = this.$placeholder.find('[data-page="' + pageNumber + '"]');
+            $pageContent.css("margin", 0);
+            $page.append($pageContent).append($('<div class="trv-page-overlay"></div>'));
+            renderedPage.replaceWith($page);
+            this.controller.scrollPageReady({
+                page: page,
+                target: $page
+            });
+        },
+        _currentPageNumber: function _currentPageNumber() {
+            return this.controller.currentPageNumber();
+        },
+        _isSkeletonScreen: function _isSkeletonScreen(page, pageNumber) {
+            if (!page) {
+                page = this.$placeholder.find('[data-page="' + pageNumber + '"]');
+            }
+            return page.hasClass("trv-skeleton-" + pageNumber);
+        },
+        _addSkeletonScreen: function _addSkeletonScreen(pageNumber, position) {
+            var that = this, pageStyleNumber = position ? parseInt(pageNumber + 1) : parseInt(pageNumber - 1), pageStyleBaseDom = that.$placeholder.find('[data-page="' + pageStyleNumber + '"]'), pageStyle = pageStyleBaseDom.attr("style"), contentStyle = pageStyleBaseDom.find("sheet").attr("style"), skeletonEl = utils.stringFormat(that.skeletonTemplate, [ pageNumber, pageStyle, contentStyle ]);
+            if (position) {
+                that.$pageWrapper.prepend(skeletonEl);
+            } else {
+                that.$pageWrapper.append(skeletonEl);
+            }
+        },
+        _generateSkeletonScreens: function _generateSkeletonScreens(upToPageNumber) {
+            var that = this, skeletonEl = "", pageStyleBaseDom = this.$placeholder.find('[data-page="1"]'), pageStyle = pageStyleBaseDom.attr("style"), contentStyle = pageStyleBaseDom.find("sheet").attr("style"), lastPage = that.$placeholder.find(".trv-report-page").last().attr("data-page"), index = lastPage ? parseInt(lastPage) + 1 : 1;
+            for (index; index < upToPageNumber; index++) {
+                skeletonEl = skeletonEl + utils.stringFormat(that.skeletonTemplate, [ index, pageStyle, contentStyle ]);
+            }
+            that.$pageWrapper.append($(skeletonEl));
+        },
+        _loadMorePages: function _loadMorePages() {
+            var that = this, pageCount = that.controller.pageCount(), isViewPortBiggerThanPageHeight = that.$pageContainer.innerHeight() > that.$pageWrapper.innerHeight();
+            if (pageCount > 1) {
+                if (isViewPortBiggerThanPageHeight) {
+                    that.scrollInProgress = true;
+                    var lastPage = parseInt(that.$placeholder.find(".trv-report-page").last().attr("data-page")), nextPage = lastPage + 1;
+                    if (nextPage <= pageCount) {
+                        that.controller.getPageData(nextPage).then(function(newPage) {
+                            that._render(newPage, false);
+                            that._loadMorePages();
+                            that.scrollInProgress = false;
+                        });
+                    }
+                } else {
+                    that._loadVisiblePages();
+                    that.scrollInProgress = false;
+                }
+            }
+        },
+        _loadVisiblePages: function _loadVisiblePages() {
+            var that = this, pages = that.$placeholder.find(".trv-report-page");
+            $.each(pages, function(index, value) {
+                var pageItem = $(value), pageNumber = parseInt(pageItem.attr("data-page"));
+                if (that._scrolledInToView(pageItem) && that._isSkeletonScreen(pageItem, pageNumber)) {
+                    that.controller.getPageData(pageNumber).then(function(newPage) {
+                        that._render(newPage, false);
+                    });
+                }
+            });
+        },
+        _scrolledInToView: function _scrolledInToView(elem) {
+            var pageCoords = elem[0].getBoundingClientRect(), parentCoords = elem.closest(".trv-pages-area")[0].getBoundingClientRect(), parentTop = parentCoords.top, parentBottom = parentCoords.top + parentCoords.height, pageTop = pageCoords.top, pageBottom = pageTop + elem.outerHeight(true), additionalTopOffset = this.additionalTopOffset + parentTop, topVisible = pageTop > 0 && pageTop < parentBottom, bottomVisible = pageBottom < parentBottom && pageBottom > additionalTopOffset;
+            return topVisible || bottomVisible;
+        },
+        _render: function _render(page, empty) {
+            var that = this, pageNumber = page.pageNumber, pageItem = that.$placeholder.find('[data-page="' + pageNumber + '"]');
+            if (!empty && pageItem && pageItem.length && !that._isSkeletonScreen(pageItem, pageNumber)) {
+                return;
+            }
+            that.loadedPage[pageNumber] = page;
+            that._updatePageStyle(page);
+            var wrapper = $($.parseHTML(page.pageContent)), $pageContent = wrapper.find("div.sheet"), $page = $('<div class="trv-report-page" data-page="' + pageNumber + '"></div>');
+            $pageContent.css("margin", 0);
+            $page.append($pageContent).append($('<div class="trv-page-overlay"></div>'));
+            if (empty) {
+                that.$pageWrapper.empty();
+            }
+            that.$pageWrapper.removeData().data("pageNumber", pageNumber);
+            var $skeletonPage = that.$placeholder.find(".trv-skeleton-" + pageNumber);
+            if ($skeletonPage.length) {
+                $skeletonPage.replaceWith($page);
+            } else {
+                that.$pageWrapper.append($page);
+            }
+            that.controller.scrollPageReady({
+                page: page,
+                target: $page
+            });
+        },
+        _updatePageStyle: function _updatePageStyle(page) {
+            var that = this, lastLoadedPage = that.loadedPage[that._lastLoadedPage()] || page, styleId = "trv-" + that.controller.clientId() + "-styles", pageStyles;
+            $("#" + styleId).remove();
+            pageStyles = $("<style id=" + styleId + "></style>");
+            pageStyles.append(lastLoadedPage.pageStyles);
+            pageStyles.appendTo("head");
+        },
+        _lastLoadedPage: function _lastLoadedPage() {
+            var that = this, lastKey;
+            for (var key in that.loadedPage) {
+                if (that.loadedPage.hasOwnProperty(key)) {
+                    lastKey = key;
+                }
+            }
+            return lastKey;
+        },
+        _loadNextPreviousPage: function _loadNextPreviousPage(pageNumber) {
+            var that = this, nextPage, previousPage, nextItem, previousItem;
+            if (pageNumber < that.controller.pageCount()) {
+                nextPage = pageNumber + 1;
+                nextItem = that.$placeholder.find('[data-page="' + nextPage + '"]');
+            }
+            if (pageNumber > 1) {
+                previousPage = pageNumber - 1;
+                previousItem = that.$placeholder.find('[data-page="' + previousPage + '"]');
+            }
+            if (previousItem && previousItem.length && that._isSkeletonScreen(previousItem, previousPage)) {
+                that.controller.getPageData(previousPage).then(function(newPage) {
+                    that._render(newPage, false);
+                });
+            }
+            if (nextItem && nextItem.length && that._isSkeletonScreen(nextItem, nextPage)) {
+                that.controller.getPageData(nextPage).then(function(newPage) {
+                    that._render(newPage, false);
+                });
+            }
+        },
+        _clickPage: function _clickPage(pageDom) {
+            var that = this, currentPage = that._currentPageNumber(), pageNumber = parseInt(pageDom.attr("data-page"));
+            if (currentPage !== pageNumber) {
+                if (that._isSkeletonScreen(pageDom, pageNumber)) {
+                    that.controller.getPageData(pageNumber).then(function(newPage) {
+                        that._render(newPage, false, true);
+                        that._setCurrentPage(newPage.pageNumber);
+                    });
+                } else {
+                    that._setCurrentPage(pageNumber);
+                }
+            }
+        },
+        _initEvents: function _initEvents() {
+            var that = this;
+            that.$pageContainer.off("click", ".trv-report-page").on("click", ".trv-report-page", function(e) {
+                that._clickPage($(e.currentTarget));
+            });
+            that.$pageContainer.scroll(Cowboy.throttle(250, function() {
+                var pages = that.$placeholder.find(".trv-report-page"), scrollPosition = parseInt((that.$pageContainer.scrollTop() + that.$pageContainer.innerHeight()).toFixed(0));
+                if (!that.scrollInProgress && that.oldScrollTopPosition !== scrollPosition) {
+                    if (that.oldScrollTopPosition > scrollPosition) {
+                        that._scrollUp(pages);
+                    } else {
+                        that._scrollDown(pages, scrollPosition);
+                    }
+                }
+                that.oldScrollTopPosition = scrollPosition;
+            }));
+            that.$pageContainer.scroll(Cowboy.debounce(250, function() {
+                var pages = that.$placeholder.find(".trv-report-page"), scrollPosition = parseInt((that.$pageContainer.scrollTop() + that.$pageContainer.innerHeight()).toFixed(0));
+                if (!that.scrollInProgress && pages.length && that.oldScrollTopPosition !== scrollPosition) {
+                    that._advanceCurrentPage(pages);
+                }
+            }));
+        },
+        _unbind: function() {
+            var that = this;
+            that.$pageContainer.off("click", ".trv-report-page");
+            that.$pageContainer.off("scroll");
+        },
+        _advanceCurrentPage: function _advanceCurrentPage(pages) {
+            var that = this;
+            var newCurrentPage = that._findNewCurrentPage(pages), pageNumber, currentPageNumber = that._currentPageNumber(), currentPageIsInToView = that._scrolledInToView(that.$placeholder.find('[data-page="' + currentPageNumber + '"]'));
+            if (newCurrentPage !== -1) {
+                newCurrentPage = $(newCurrentPage);
+                pageNumber = parseInt(newCurrentPage.attr("data-page"));
+                if (currentPageNumber !== pageNumber && !currentPageIsInToView) {
+                    if (that._isSkeletonScreen(newCurrentPage, pageNumber)) {
+                        that.controller.getPageData(pageNumber).then(function(newPage) {
+                            that._render(newPage, false, true);
+                            that._setCurrentPage(newPage.pageNumber);
+                        });
+                    } else {
+                        that._setCurrentPage(pageNumber);
+                    }
+                }
+            } else {
+                console.log("Page not found - ", newCurrentPage);
+            }
+        },
+        _findNewCurrentPage: function _findNewCurrentPage(pages) {
+            var that = this, middleIndex = Math.floor(pages.length / 2), result = that._findPageInViewPort(middleIndex, pages);
+            if (pages.length === 1) {
+                return pages[0];
+            }
+            if (result === 0) {
+                return pages[middleIndex];
+            } else if (result < 0 && pages.length > 1) {
+                return that._findNewCurrentPage(pages.splice(middleIndex, Number.MAX_VALUE));
+            } else if (result > 0 && pages.length > 1) {
+                return that._findNewCurrentPage(pages.splice(0, middleIndex));
+            } else {
+                return -1;
+            }
+        },
+        _findPageInViewPort: function _findPageInViewPort(index, pages) {
+            var pageItem = this.$placeholder.find(pages[index]), pageCoords = pageItem[0].getBoundingClientRect(), parentCoords = pageItem.closest(".trv-pages-area")[0].getBoundingClientRect(), parentTop = parentCoords.top, parentBottom = parentCoords.top + parentCoords.height, pageTop = pageCoords.top, pageBottom = pageTop + pageItem.outerHeight(true), additionalTopOffset = this.additionalTopOffset + parentTop, isCurentPage = pageTop <= additionalTopOffset && additionalTopOffset < pageBottom;
+            if (isCurentPage) {
+                return 0;
+            }
+            if (pageBottom < additionalTopOffset) {
+                return -1;
+            } else {
+                return 1;
+            }
+        },
+        _scrollDown: function _scrollDown(pages, scrollPosition) {
+            var that = this;
+            if (scrollPosition >= that.pageContainer.scrollHeight) {
+                var lastPage = parseInt($(pages[pages.length - 1]).attr("data-page")), nextPage = lastPage + 1;
+                if (that._currentPageNumber() < nextPage && nextPage <= that.controller.pageCount()) {
+                    that._addSkeletonScreen(nextPage, false);
+                    that.controller.getPageData(nextPage).then(function(newPage) {
+                        that._render(newPage, false);
+                    });
+                }
+            } else {
+                that._advanceCurrentPage(pages);
+                that._loadVisiblePages();
+            }
+        },
+        _scrollUp: function _scrollUp(pages) {
+            var that = this;
+            if (that.$pageContainer.scrollTop() === 0) {
+                var firstPage = $(pages[0]), pageNumber = parseInt(firstPage.attr("data-page")), previousPage = pageNumber - 1;
+                if (that._currentPageNumber() > previousPage && previousPage >= 1) {
+                    that._addSkeletonScreen(previousPage, true);
+                    that.controller.getPageData(previousPage).then(function(newPage) {
+                        that._render(newPage, false);
+                        that.$pageContainer.scrollTop(3);
+                    });
+                }
+            } else {
+                that._advanceCurrentPage(pages);
+                that._loadVisiblePages();
+            }
+        },
+        _keepCurrentPageInToView: function _keepCurrentPageInToView() {
+            var that = this, currentPage = that.$placeholder.find('[data-page="' + that._currentPageNumber() + '"]'), currentPagePosition = currentPage.position().top, currentPageHeight = currentPage.innerHeight(), pageContainerHeight = that.$pageContainer.innerHeight(), emptyView;
+            that.scrollInProgress = true;
+            if (currentPageHeight < pageContainerHeight) {
+                emptyView = (pageContainerHeight - currentPageHeight) / 2;
+                currentPagePosition = parseInt(currentPagePosition - emptyView);
+            }
+            that.$pageContainer.animate({
+                scrollTop: currentPagePosition
+            }, 0, function() {
+                setTimeout(function() {
+                    that.scrollInProgress = false;
+                }, 100);
+            });
+        }
+    };
+    trv.scroll = Scroll;
+})(window.telerikReportViewer = window.telerikReportViewer || {}, jQuery, window, document);
 
 (function(trv, window, document, undefined) {
     "use strict";
@@ -480,30 +1347,12 @@
             }
         };
     }
-    function ChromeHelper() {
+    function ChromiumHelper(defaultPlugin) {
         function hasPdfPlugin() {
             var navPlugins = navigator.plugins;
             var found = false;
             utils.each(navPlugins, function(key, value) {
-                if (navPlugins[key].name === "Chrome PDF Viewer" || navPlugins[key].name === "Adobe Acrobat") {
-                    found = true;
-                    return false;
-                }
-            });
-            return found;
-        }
-        return {
-            hasPdfPlugin: function() {
-                return hasPdfPlugin();
-            }
-        };
-    }
-    function SafariHelper() {
-        function hasPdfPlugin() {
-            var navPlugins = navigator.plugins;
-            var found = false;
-            utils.each(navPlugins, function(key, value) {
-                if (navPlugins[key].name === "WebKit built-in PDF" || navPlugins[key].name === "Adobe Acrobat") {
+                if (navPlugins[key].name === defaultPlugin || navPlugins[key].name === "Adobe Acrobat") {
                     found = true;
                     return false;
                 }
@@ -526,7 +1375,7 @@
     function selectBrowserHelper() {
         if (window.navigator) {
             var userAgent = window.navigator.userAgent.toLowerCase();
-            if (userAgent.indexOf("msie") > -1 || userAgent.indexOf("mozilla") > -1 && userAgent.indexOf("trident") > -1) return IEHelper(); else if (userAgent.indexOf("firefox") > -1) return FirefoxHelper(); else if (userAgent.indexOf("chrome") > -1) return ChromeHelper(); else if (userAgent.indexOf("safari") > -1) return SafariHelper(); else return OtherBrowserHelper();
+            if (userAgent.indexOf("msie") > -1 || userAgent.indexOf("mozilla") > -1 && userAgent.indexOf("trident") > -1) return IEHelper(); else if (userAgent.indexOf("firefox") > -1) return FirefoxHelper(); else if (userAgent.indexOf("edg/") > -1) return ChromiumHelper("Microsoft Edge PDF Plugin"); else if (userAgent.indexOf("chrome") > -1) return ChromiumHelper("Chrome PDF Viewer"); else if (userAgent.indexOf("safari") > -1) return ChromiumHelper("WebKit built-in PDF"); else return OtherBrowserHelper();
         }
         return null;
     }
@@ -535,16 +1384,59 @@
     trv.printManager = function() {
         var iframe;
         function printDesktop(src) {
-            if (window.navigator.userAgent.toLowerCase().indexOf("chrome") > -1) {
-                printJS({ printable: src, type: 'pdf', showModal: true });
-            } else {
-                if (!iframe) {
-                    iframe = document.createElement("IFRAME");
-                    iframe.style = "position:absolute; left: -10000px; top: -10000px;";
-                }
+            var sameOriginUrl = null;
+            if (!iframe) {
+                iframe = document.createElement("iframe");
+                iframe.style.display = "none";
+                iframe.onload = function() {
+                    try {
+                        iframe.contentDocument.execCommand("print", true, null);
+                    } catch (e) {
+                        utils.logError(e);
+                    } finally {
+                        if (sameOriginUrl) {
+                            (window.URL || window.webkitURL).revokeObjectURL(sameOriginUrl);
+                        }
+                    }
+                };
+            }
+            if (isSameOriginUrl(src) && useMsBlobHandling()) {
                 iframe.src = src;
                 document.body.appendChild(iframe);
+                return;
             }
+            var request = new XMLHttpRequest();
+            request.open("GET", src, true);
+            request.responseType = "arraybuffer";
+            request.onload = function(e) {
+                if (this.status === 200) {
+                    var localPdf = new Blob([ this.response ], {
+                        type: "application/pdf"
+                    });
+                    if (useMsBlobHandling()) {
+                        window.navigator.msSaveOrOpenBlob(localPdf);
+                    } else {
+                        sameOriginUrl = (window.URL || window.webkitURL).createObjectURL(localPdf);
+                        iframe.src = sameOriginUrl;
+                        document.body.appendChild(iframe);
+                    }
+                } else {
+                    console.log("Could not retrieve remote PDF document.");
+                }
+            };
+            request.send();
+        }
+        function useMsBlobHandling() {
+            return window.navigator && window.navigator.msSaveOrOpenBlob;
+        }
+        function isSameOriginUrl(url) {
+            var location = window.location;
+            var anchor = document.createElement("a");
+            anchor.setAttribute("href", url);
+            if (anchor.host == "") {
+                anchor.href = anchor.href;
+            }
+            return location.hostname === anchor.hostname && location.protocol === anchor.protocol && location.port === anchor.port;
         }
         function printMobile(src) {
             window.open(src, "_self");
@@ -562,6 +1454,375 @@
     }();
 })(window.telerikReportViewer = window.telerikReportViewer || {}, window, document);
 
+(function(trv, $, window, document, undefined) {
+    "use strict";
+    var sr = trv.sr;
+    if (!sr) {
+        throw "Missing telerikReportViewer.sr";
+    }
+    var utils = trv.utils;
+    if (!utils) {
+        throw "Missing telerikReportViewer.utils";
+    }
+    var defaultOptions = {};
+    function SendEmail(placeholder, options, viewerOptions) {
+        options = $.extend({}, defaultOptions, options);
+        var controller = options.controller, initialized = false, dialogVisible = false, $placeholder, kendoSendEmailDialog, selector = viewerOptions.viewerSelector, inputFrom, inputTo, inputCC, inputSubject, docFormat, docFormatEl, bodyEditorEl, bodyEditor, docFormatList, optionsCommandSet, windowLocation, reportViewerWrapper = $("[data-selector='" + selector + "']").find(".trv-report-viewer");
+        if (!controller) {
+            throw "No controller (telerikReporting.ReportViewerController) has been specified.";
+        }
+        if (!viewerOptions.sendEmail || !viewerOptions.sendEmail.enabled) {
+            var toolbarSendEmailItem = $("[data-selector='" + selector + "']").find("a[data-command='telerik_ReportViewer_toggleSendEmailDialog']").closest(".k-item ");
+            toolbarSendEmailItem.hide();
+            return;
+        }
+        controller.getSendEmailDialogState(function(event, args) {
+            args.visible = dialogVisible;
+        }).setSendEmailDialogVisible(function(event, args) {
+            toggle(args.visible);
+        }).setSearchDialogVisible(function(event, args) {
+            if (args.visible && dialogVisible) {
+                toggle(!dialogVisible);
+            }
+        }).beginLoadReport(closeAndClear).viewModeChanged(closeAndClear);
+        controller.getDocumentFormats().then(function(formats) {
+            docFormatList = formats;
+        });
+        function closeAndClear() {
+            toggle(false);
+        }
+        function toggle(show) {
+            dialogVisible = show;
+            if (show) {
+                ensureInitialized();
+                setDefaultValues(viewerOptions.sendEmail);
+                kendoSendEmailDialog.open();
+            } else {
+                if (kendoSendEmailDialog && kendoSendEmailDialog.options.visible) {
+                    kendoSendEmailDialog.close();
+                }
+            }
+        }
+        function getBody() {
+            return bodyEditor ? bodyEditor.value() : bodyText.val();
+        }
+        function ensureInitialized() {
+            if (!initialized) {
+                $placeholder = $(placeholder);
+                inputFrom = $placeholder.find("[name='from']");
+                inputTo = $placeholder.find("[name='to']");
+                inputCC = $placeholder.find("[name='cc']");
+                inputSubject = $placeholder.find("[name='subject']");
+                docFormatEl = $placeholder.find("[name='format']");
+                bodyEditorEl = $placeholder.find("textarea");
+                setAttrs();
+                initCommands();
+                replaceStringResources($placeholder);
+                kendoSendEmailDialog = reportViewerWrapper.find(".trv-send-email-window").kendoWindow({
+                    title: sr.sendEmailDialogTitle,
+                    minWidth: 350,
+                    minHeight: 350,
+                    maxHeight: 900,
+                    modal: true,
+                    close: function() {
+                        storeDialogPosition();
+                        clearValidation();
+                    },
+                    open: function() {
+                        adjustDialogSize();
+                        adjustDialogPosition();
+                    },
+                    deactivate: function() {
+                        controller.setSendEmailDialogVisible({
+                            visible: false
+                        });
+                    },
+                    activate: function() {
+                        kendoSendEmailDialog.wrapper.find(".trv-send-email-fields input[type='email']:visible").first().focus();
+                        setTimeout(function() {
+                            setValidation();
+                        }, 250);
+                    }
+                }).data("kendoWindow");
+                kendoSendEmailDialog.wrapper.addClass("trv-send-email");
+                docFormat = docFormatEl.kendoComboBox({
+                    dataTextField: "localizedName",
+                    dataValueField: "name",
+                    dataSource: docFormatList || [],
+                    filter: "startswith",
+                    dataBound: function() {
+                        this.select(0);
+                        this.trigger("change");
+                    }
+                }).data("kendoComboBox");
+                $placeholder.on("keydown", '[name="format_input"]', function(e) {
+                    var tabkey = 9;
+                    if (e.keyCode === tabkey && bodyEditor) {
+                        setTimeout(function() {
+                            bodyEditor.focus();
+                        });
+                    }
+                });
+                bodyEditor = bodyEditorEl.kendoEditor({
+                    tools: [ "bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "cleanFormatting", "formatting", "fontName", "fontSize", "foreColor", "backColor", "subscript", "superscript" ]
+                }).data("kendoEditor");
+                setDefaultValues(viewerOptions.sendEmail);
+                initialized = true;
+            }
+        }
+        $(window).resize(function() {
+            if (kendoSendEmailDialog && kendoSendEmailDialog.options.visible) {
+                storeDialogPosition();
+                adjustDialogSize();
+                adjustDialogPosition();
+            }
+        });
+        function setAttrs() {
+            $placeholder.find(".trv-send-email-field input").each(function() {
+                var el = $(this), attrName = el.attr("name");
+                el.attr("id", selector + "-" + attrName);
+            });
+            $placeholder.find(".trv-send-email-label label").each(function() {
+                var el = $(this), attrName = el.attr("for");
+                el.attr("for", selector + "-" + attrName);
+            });
+        }
+        function storeDialogPosition() {
+            var kendoWindow = kendoSendEmailDialog.element.parent(".k-window");
+            windowLocation = kendoWindow.offset();
+        }
+        function adjustDialogSize() {
+            var kendoWindow = kendoSendEmailDialog.element.parent(".k-window"), windowWidth = $(window).width(), kendoWindowWidth = 350;
+            if (windowWidth > 800) {
+                kendoWindowWidth = 720;
+            }
+            kendoWindow.css({
+                width: kendoWindowWidth
+            });
+            kendoSendEmailDialog.refresh({
+                width: kendoWindowWidth
+            });
+        }
+        function adjustDialogPosition() {
+            if (!windowLocation) {
+                kendoSendEmailDialog.center();
+            } else {
+                var padding = 10, windowWidth = $(window).innerWidth(), windowHeight = $(window).innerHeight(), kendoWindow = kendoSendEmailDialog.wrapper, width = kendoWindow.outerWidth(true), height = kendoWindow.outerHeight(true), left = windowLocation.left, top = windowLocation.top, right = left + width, bottom = top + height;
+                if (right > windowWidth - padding) {
+                    left = Math.max(padding, windowWidth - width - padding);
+                    kendoWindow.css({
+                        left: left
+                    });
+                    kendoSendEmailDialog.setOptions({
+                        position: {
+                            left: left
+                        }
+                    });
+                }
+                if (bottom > windowHeight - padding) {
+                    top = Math.max(padding, windowHeight - height - padding);
+                    kendoWindow.css({
+                        top: top
+                    });
+                    kendoSendEmailDialog.setOptions({
+                        position: {
+                            top: top
+                        }
+                    });
+                }
+            }
+        }
+        var commandNames = {
+            Send: "sendEmail_Send",
+            Cancel: "sendEmail_Cancel"
+        };
+        function initCommands() {
+            optionsCommandSet = {
+                sendEmail_Cancel: new command(function() {
+                    closeWindow();
+                }),
+                sendEmail_Send: new command(function(e) {
+                    sendingEmail();
+                })
+            };
+            var binder = trv.binder;
+            binder.bind($placeholder.find(".trv-send-email-actions"), {
+                controller: controller,
+                commands: optionsCommandSet
+            }, viewerOptions);
+        }
+        function sendingEmail(cmd, args) {
+            var sendEmailArgs = {
+                from: inputFrom.val(),
+                to: inputTo.val(),
+                cc: inputCC.val(),
+                subject: inputSubject.val(),
+                format: docFormat.value(),
+                body: getBody(),
+                deviceInfo: {}
+            };
+            if (validateFields()) {
+                controller.sendReport(sendEmailArgs);
+                closeWindow();
+            }
+        }
+        function setValidation() {
+            inputFrom.off("blur").on("blur", function(e) {
+                if (!isEmpty($(this))) {
+                    isValidEmail($(this), false);
+                }
+            });
+            inputTo.off("blur").on("blur", function(e) {
+                if (!isEmpty($(this))) {
+                    isValidEmail($(this), true);
+                }
+            });
+            inputCC.off("blur").on("blur", function(e) {
+                if ($(this).val().length) {
+                    isValidEmail($(this), true);
+                } else {
+                    hideError($(this));
+                }
+            });
+        }
+        function validateFields() {
+            var fromIsValid = isEmpty(inputFrom) || !isValidEmail(inputFrom, false), toIsValid = isEmpty(inputTo) || !isValidEmail(inputTo, true), ccIsValid = inputCC.val().length && !isValidEmail(inputCC, true), hasFormat = docFormat.value().length;
+            if (!hasFormat) {
+                showError(docFormatEl, "data-required-msg");
+            }
+            if (fromIsValid || toIsValid || ccIsValid || !hasFormat) {
+                return false;
+            }
+            return true;
+        }
+        function setDefaultValues(sendEmail) {
+            inputFrom.val(sendEmail && sendEmail.from || "");
+            inputTo.val(sendEmail && sendEmail.to || "");
+            inputCC.val(sendEmail && sendEmail.cc || "");
+            inputSubject.val(sendEmail && sendEmail.subject || "");
+            if (sendEmail && sendEmail.format) {
+                docFormat.value(sendEmail.format);
+            } else {
+                docFormat.select(0);
+            }
+            docFormat.trigger("change");
+            bodyEditor.value(sendEmail && sendEmail.body || "");
+        }
+        function isEmpty($el) {
+            if (!$el.val().length) {
+                showError($el, "data-required-msg");
+                return true;
+            }
+            hideError($el);
+            return false;
+        }
+        function showError($el, tag) {
+            var validationMsg = sr[$el.attr(tag)];
+            $('[data-for="' + $el.attr("name") + '"]').addClass("-visible").html(validationMsg);
+        }
+        function hideError($el) {
+            $('[data-for="' + $el.attr("name") + '"]').removeClass("-visible");
+        }
+        function isValidEmail($el, moreThenOneEmail) {
+            var inputValue = $el.val();
+            if (moreThenOneEmail) {
+                var listEmailsAddress = inputValue.split(/[\s,;]+/);
+                for (var i = 0; i < listEmailsAddress.length; i++) {
+                    if (!_validateEmail(listEmailsAddress[i].trim(), $el)) {
+                        return false;
+                    }
+                }
+                return true;
+            } else {
+                return _validateEmail(inputValue, $el);
+            }
+        }
+        function _validateEmail(email, $el) {
+            var regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+            if (email.indexOf(",") > -1 || email.indexOf(";") > -1) {
+                showError($el, "data-single-email-msg");
+                return false;
+            }
+            if (!regexEmail.test(email)) {
+                showError($el, "data-email-msg");
+                return false;
+            }
+            return true;
+        }
+        function closeWindow() {
+            kendoSendEmailDialog.close();
+        }
+        function clearValidation() {
+            $(".k-invalid-msg").removeClass("-visible");
+        }
+        function replaceStringResources($sendEmailDialog) {
+            if (!$sendEmailDialog) {
+                return;
+            }
+            var labels = $sendEmailDialog.find(".trv-replace-string"), ariaLabel = $sendEmailDialog.find("[aria-label]"), titles = $sendEmailDialog.find("[title]");
+            if (labels.length) {
+                $.each(labels, function(key, value) {
+                    replaceText($(value));
+                });
+            }
+            if (ariaLabel.length) {
+                $.each(ariaLabel, function(key, value) {
+                    replaceAttribute($(value), "aria-label");
+                });
+            }
+            if (titles.length) {
+                $.each(titles, function(key, value) {
+                    replaceAttribute($(value), "title");
+                });
+            }
+        }
+        function replaceText($el) {
+            if ($el) {
+                $el.text(sr[$el.text()]);
+            }
+        }
+        function replaceAttribute($el, attribute) {
+            if ($el) {
+                $el.attr(attribute, sr[$el.attr(attribute)]);
+            }
+        }
+        function command(execCallback) {
+            var enabledState = true;
+            var checkedState = false;
+            var cmd = {
+                enabled: function(state) {
+                    if (arguments.length === 0) {
+                        return enabledState;
+                    }
+                    var newState = Boolean(state);
+                    enabledState = newState;
+                    $(this).trigger("enabledChanged");
+                    return cmd;
+                },
+                checked: function(state) {
+                    if (arguments.length === 0) {
+                        return checkedState;
+                    }
+                    var newState = Boolean(state);
+                    checkedState = newState;
+                    $(this).trigger("checkedChanged");
+                    return cmd;
+                },
+                exec: execCallback
+            };
+            return cmd;
+        }
+    }
+    var pluginName = "telerik_ReportViewer_SendEmail";
+    $.fn[pluginName] = function(options, viewerOptions) {
+        return utils.each(this, function() {
+            if (!$.data(this, pluginName)) {
+                $.data(this, pluginName, new SendEmail(this, options, viewerOptions));
+            }
+        });
+    };
+})(window.telerikReportViewer = window.telerikReportViewer || {}, jQuery, window, document);
+
 (function(trv, $, undefined) {
     "use strict";
     var utils = trv.utils;
@@ -573,9 +1834,9 @@
     trv.ServiceClient = function(options) {
         options = utils.extend({}, defaultOptions, options);
         var baseUrl = utils.rtrim(options.serviceUrl || options.baseUrl, "\\/"), loginPromise;
-        var _ajax = $ajax;
+        var _ajax = utils.$ajax;
         function validateClientID(clientID) {
-            if (!clientID) throw "Invalid cliendID";
+            if (!clientID) throw "Invalid clientID";
         }
         function urlFromTemplate(template, args) {
             args = utils.extend({}, {
@@ -613,22 +1874,6 @@
             }
             return loginPromise;
         }
-        function $ajax(ajaxSettings) {
-            return new Promise(function(resolve, reject) {
-                $.ajax(ajaxSettings).done(function(data) {
-                    return resolve(data);
-                }).fail(function(xhr, status, error) {
-                    reject(toXhrErrorData(xhr, status, error));
-                });
-            });
-        }
-        function toXhrErrorData(xhr, status, error) {
-            return {
-                xhr: xhr,
-                status: status,
-                error: error
-            };
-        }
         return {
             _urlFromTemplate: urlFromTemplate,
             registerClient: function(settings) {
@@ -643,6 +1888,9 @@
                     });
                     return _ajax(ajaxSettings);
                 }).then(function(clientData) {
+                    if (clientData.Message) {
+                        throw clientData.Message;
+                    }
                     return clientData.clientId;
                 });
             },
@@ -735,6 +1983,28 @@
                     return documentData.documentId;
                 });
             },
+            sendDocument: function(clientID, instanceID, documentID, mailArgs, settings) {
+                validateClientID(clientID);
+                return login().then(function(authorizationToken) {
+                    var ajaxSettings = utils.extend(getHeaderSettings(authorizationToken), settings, {
+                        type: HTTP_POST,
+                        url: urlFromTemplate("{baseUrl}/clients/{clientID}/instances/{instanceID}/documents/{documentID}/send", {
+                            clientID: clientID,
+                            instanceID: instanceID,
+                            documentID: documentID
+                        }),
+                        contentType: JSON_CONTENT_TYPE,
+                        data: JSON.stringify({
+                            from: mailArgs.from,
+                            to: mailArgs.to,
+                            cc: mailArgs.cc,
+                            subject: mailArgs.subject,
+                            body: mailArgs.body
+                        })
+                    });
+                    return _ajax(ajaxSettings);
+                });
+            },
             deleteReportDocument: function(clientID, instanceID, documentID, settings) {
                 validateClientID(clientID);
                 return login().then(function(authorizationToken) {
@@ -799,26 +2069,30 @@
                 return url;
             },
             getDocumentFormats: function(settings) {
-                var ajaxSettings = utils.extend({}, settings, {
-                    type: HTTP_GET,
-                    url: urlFromTemplate("{baseUrl}/formats"),
-                    dataType: "json"
+                return login().then(function(authorizationToken) {
+                    var ajaxSettings = utils.extend(getHeaderSettings(authorizationToken), settings, {
+                        type: HTTP_GET,
+                        url: urlFromTemplate("{baseUrl}/formats"),
+                        dataType: "json"
+                    });
+                    return _ajax(ajaxSettings);
                 });
-                return _ajax(ajaxSettings);
             },
             getResource: function(clientID, instanceID, documentID, resourceID, settings) {
                 validateClientID(clientID);
-                var ajaxSettings = utils.extend({}, settings, {
-                    type: HTTP_GET,
-                    url: urlFromTemplate("{baseUrl}/clients/{clientID}/instances/{instanceID}/documents/{documentID}/resources/{resourceID}", {
-                        clientID: clientID,
-                        instanceID: instanceID,
-                        documentID: documentID,
-                        resourceID: resourceID
-                    }),
-                    dataType: "json"
+                return login().then(function(authorizationToken) {
+                    var ajaxSettings = utils.extend(getHeaderSettings(authorizationToken), settings, {
+                        type: HTTP_GET,
+                        url: urlFromTemplate("{baseUrl}/clients/{clientID}/instances/{instanceID}/documents/{documentID}/resources/{resourceID}", {
+                            clientID: clientID,
+                            instanceID: instanceID,
+                            documentID: documentID,
+                            resourceID: resourceID
+                        }),
+                        dataType: "json"
+                    });
+                    return _ajax(ajaxSettings);
                 });
-                return _ajax(ajaxSettings);
             },
             getSearchResults: function(clientID, instanceID, documentID, searchToken, matchCase, matchWholeWord, useRegex, settings) {
                 validateClientID(clientID);
@@ -827,24 +2101,48 @@
                     instanceID: instanceID,
                     documentID: documentID
                 });
-                var ajaxSettings = utils.extend({}, settings, {
-                    type: HTTP_POST,
-                    url: searchUrl,
-                    contentType: JSON_CONTENT_TYPE,
-                    dataType: "json",
-                    data: JSON.stringify({
-                        searchToken: searchToken,
-                        matchCase: matchCase,
-                        matchWholeWord: matchWholeWord,
-                        useRegularExpressions: useRegex
-                    })
+                return login().then(function(authorizationToken) {
+                    var ajaxSettings = utils.extend(getHeaderSettings(authorizationToken), settings, {
+                        type: HTTP_POST,
+                        url: searchUrl,
+                        contentType: JSON_CONTENT_TYPE,
+                        dataType: "json",
+                        data: JSON.stringify({
+                            searchToken: searchToken,
+                            matchCase: matchCase,
+                            matchWholeWord: matchWholeWord,
+                            useRegularExpressions: useRegex
+                        })
+                    });
+                    return _ajax(ajaxSettings);
                 });
-                return _ajax(ajaxSettings);
             },
             setAccessToken: function(accessToken) {
                 loginPromise = Promise.resolve(accessToken);
             },
-            login: login
+            login: login,
+            keepClientAlive: function(clientID, settings) {
+                return login().then(function(authorizationToken) {
+                    var ajaxSettings = utils.extend(getHeaderSettings(authorizationToken), settings, {
+                        type: HTTP_POST,
+                        url: urlFromTemplate("{baseUrl}/clients/keepAlive/{clientID}", {
+                            clientID: clientID
+                        })
+                    });
+                    return _ajax(ajaxSettings);
+                });
+            },
+            getClientsSessionTimeoutSeconds: function(settings) {
+                return login().then(function(authorizationToken) {
+                    var ajaxSettings = utils.extend(getHeaderSettings(authorizationToken), settings, {
+                        type: HTTP_GET,
+                        url: urlFromTemplate("{baseUrl}/clients/sessionTimeout")
+                    });
+                    return _ajax(ajaxSettings);
+                }).then(function(sessionTimeoutData) {
+                    return sessionTimeoutData.clientSessionTimeout;
+                });
+            }
         };
     };
 })(window.telerikReportViewer = window.telerikReportViewer || {}, jQuery);
@@ -872,12 +2170,30 @@
         FORCE_PDF_PLUGIN: "FORCE_PDF_PLUGIN",
         FORCE_PDF_FILE: "FORCE_PDF_FILE"
     };
+    trv.PageModes = {
+        SINGLE_PAGE: "SINGLE_PAGE",
+        CONTINUOUS_SCROLL: "CONTINUOUS_SCROLL"
+    };
+    trv.ParameterEditorTypes = {
+        COMBO_BOX: "COMBO_BOX",
+        LIST_VIEW: "LIST_VIEW"
+    };
+    trv.ParametersAreaPositions = {
+        RIGHT: "RIGHT",
+        LEFT: "LEFT",
+        TOP: "TOP",
+        BOTTOM: "BOTTOM"
+    };
+    trv.DocumentMapAreaPositions = {
+        RIGHT: "RIGHT",
+        LEFT: "LEFT"
+    };
     var defaultOptions = {
         pagePollIntervalMs: 500,
         documentInfoPollIntervalMs: 2e3
     };
     function ReportViewerController(options) {
-        var controller = {}, clientId, reportInstanceId, reportDocumentId, registerClientPromise, registerInstancePromise, documentFormatsPromise, report, parameterValues, currentPageNumber, pageCount, viewMode = trv.ViewModes.INTERACTIVE, loader, printMode = trv.PrintModes.AUTO_SELECT, bookmarkNodes, clientHasExpired = false, parameterValidators = trv.parameterValidators, events = new Events();
+        var controller = {}, clientId, reportInstanceId, reportDocumentId, registerClientPromise, registerInstancePromise, documentFormatsPromise, report, parameterValues, currentPageNumber, pageCount, viewMode = trv.ViewModes.INTERACTIVE, pageMode = trv.PageModes.CONTINUOUS_SCROLL, loader, printMode = trv.PrintModes.AUTO_SELECT, bookmarkNodes, renderingExtensions, clientHasExpired = false, parameterValidators = trv.parameterValidators, events = new Events(), keepClientAliveSentinel;
         clearReportState();
         options = utils.extend({}, defaultOptions, options);
         if (options.settings.printMode) {
@@ -888,14 +2204,35 @@
             throw sr.noServiceClient;
         }
         clientId = options.settings.clientId();
+        initializeAndStartSentinel();
         function setClientId(id) {
             clientId = id;
+            stopSentinel();
             options.settings.clientId(clientId);
+            initializeAndStartSentinel();
         }
         function clearClientId() {
             clientId = null;
             registerClientPromise = null;
+            stopSentinel();
+            keepClientAliveSentinel = null;
             options.settings.clientId(null);
+        }
+        function initializeAndStartSentinel() {
+            if (!options.settings.keepClientAlive) {
+                throw new Error("Required settings.keepClientAlive() is not supplied for ReportViewerController");
+            }
+            if (options.settings.keepClientAlive() && clientId) {
+                return client.getClientsSessionTimeoutSeconds().then(function(sessionTimeout) {
+                    keepClientAliveSentinel = new KeepClientAliveSentinel(client, clientId, sessionTimeout);
+                    keepClientAliveSentinel.start();
+                });
+            }
+        }
+        function stopSentinel() {
+            if (options.settings.keepClientAlive() && !!keepClientAliveSentinel) {
+                keepClientAliveSentinel.stop();
+            }
         }
         function getFormat() {
             if (viewMode === trv.ViewModes.PRINT_PREVIEW) {
@@ -904,12 +2241,21 @@
             return "HTML5Interactive";
         }
         function handleRequestError(xhrData, localizedMessage, suppressErrorBubbling) {
+            var errorMessage = "";
+            if (!xhrData.xhr) {
+                errorMessage = xhrData;
+                raiseError(formatXhrError({
+                    responseText: errorMessage
+                }, null, null, null));
+                throw errorMessage;
+            }
             if (utils.isInvalidClientException(xhrData.xhr)) {
                 onClientExpired();
             }
             raiseError(formatXhrError(xhrData.xhr, xhrData.status, xhrData.error, localizedMessage));
             if (!suppressErrorBubbling) {
-                throw "Error shown. Throwing promises chain stop error.";
+                errorMessage = xhrData.xhr.responseJSON && xhrData.xhr.responseJSON.exceptionMessage ? xhrData.xhr.responseJSON.exceptionMessage : sr.promisesChainStopError;
+                throw errorMessage;
             }
         }
         function initializeClientAsync() {
@@ -937,11 +2283,14 @@
             reportDocumentId = null;
             reportInstanceId = null;
             registerInstancePromise = null;
+            resetPageNumbers();
+        }
+        function resetPageNumbers() {
             currentPageNumber = pageCount = 0;
         }
         function formatError(args) {
             var len = args.length;
-            if (len == 1) {
+            if (len === 1) {
                 return args[0];
             }
             if (len > 1) {
@@ -966,8 +2315,15 @@
                 handleRequestError(xhrErrorData, utils.stringFormat(sr.errorCreatingReportDocument, [ utils.escapeHtml(report), utils.escapeHtml(format) ]));
             });
         }
+        function sendDocumentAsync(documentId, args) {
+            throwIfNotInitialized();
+            throwIfNoReportInstance();
+            return client.sendDocument(clientId, reportInstanceId, documentId, args).catch(function(xhrErrorData) {
+                handleRequestError(xhrErrorData, utils.stringFormat(sr.errorSendingDocument, [ utils.escapeHtml(report) ]));
+            });
+        }
         function getDocumentInfoRecursive(clientId, instanceId, documentId, options) {
-            if (instanceId == reportInstanceId) {
+            if (!options.isCanceled && instanceId === reportInstanceId) {
                 return client.getDocumentInfo(clientId, instanceId, documentId).catch(handleRequestError).then(function(info) {
                     if (info && info.documentReady) {
                         return info;
@@ -993,10 +2349,10 @@
                     getReportDocumentReady();
                 }
             }
-            function onBeforeLoadReport() {
+            function onBeforeLoadReport(args) {
                 loaderOptions.documentInfoPollIntervalMs = options.pagePollIntervalMs;
                 if (reportHost) {
-                    reportHost.beforeLoadReport();
+                    reportHost.beforeLoadReport(args);
                 }
             }
             function onBeginLoadReport() {
@@ -1058,9 +2414,11 @@
             var loadPromise;
             function loadAsync() {
                 if (!loadPromise) {
-                    onBeforeLoadReport();
                     var format = getFormat();
                     var deviceInfo = createPreviewDeviceInfo();
+                    onBeforeLoadReport({
+                        deviceInfo: deviceInfo
+                    });
                     loadPromise = initializeClientAsync().then(registerInstanceAsync).then(function() {
                         return registerDocumentAsync(format, deviceInfo, useCache, baseDocumentId, actionId);
                     }).then(onReportDocumentRegistered);
@@ -1089,17 +2447,24 @@
                         }
                     });
                 },
+                getPageData: function(pageNo) {
+                    throwIfNotInitialized();
+                    return loadAsync().then(function() {
+                        return getPageAsync(pageNo);
+                    });
+                },
                 dispose: function() {
                     reportHost = null;
+                },
+                cancel: function() {
+                    loaderOptions.isCanceled = true;
                 }
             };
         }
         function createDeviceInfo() {
-            var enableAcc = options.settings.enableAccessibility();
-            var deviceInfo = {
-                enableAccessibility: enableAcc
-            };
-            if (enableAcc) {
+            var deviceInfo = {};
+            if (options.settings.enableAccessibility()) {
+                deviceInfo.enableAccessibility = true;
                 deviceInfo.contentTabIndex = options.settings.contentTabIndex;
             }
             var args = {};
@@ -1127,8 +2492,8 @@
                 if (errorMessage) {
                     return errorMessage;
                 }
-                result = parsedXhr.message;
-                var exceptionMessage = parsedXhr.exceptionMessage || parsedXhr.error_description;
+                result = utils.escapeHtml(parsedXhr.message);
+                var exceptionMessage = utils.escapeHtml(parsedXhr.exceptionMessage || parsedXhr.error_description);
                 if (exceptionMessage) {
                     if (result) {
                         result += "<br/>" + exceptionMessage;
@@ -1137,13 +2502,13 @@
                     }
                 }
             } else {
-                result = xhr.responseText;
+                result = utils.escapeHtml(xhr.responseText);
             }
             if (localizedMessage || error) {
                 if (result) {
                     result = "<br/>" + result;
                 }
-                result = (localizedMessage ? localizedMessage : error) + result;
+                result = utils.escapeHtml(localizedMessage ? localizedMessage : error) + result;
             }
             if (utils.isInvalidClientException(xhr)) {
                 result += "<br />" + sr.clientExpired;
@@ -1168,33 +2533,67 @@
             loader = new ReportLoader(controller, !ignoreCache, baseDocumentId, actionId);
             loader.beginLoad();
         }
-        function onExportStarted() {
-            controller.exportStarted();
+        function onExportStarted(args) {
+            controller.exportStarted(args);
         }
         function onExportDocumentReady(args) {
             controller.exportReady(args);
         }
-        function onPrintStarted() {
-            controller.printStarted();
+        function onSendEmailStarted(args) {
+            controller.sendEmailStarted(args);
+        }
+        function onSendEmailDocumentReady(args) {
+            controller.sendEmailReady(args);
+        }
+        function onPrintStarted(args) {
+            controller.printStarted(args);
         }
         function onPrintDocumentReady(args) {
             controller.printReady(args);
         }
+        function showNotification(args) {
+            controller.showNotification(args);
+        }
+        function hideNotification(args) {
+            controller.hideNotification(args);
+        }
+        function setUIState(args) {
+            controller.setUIState(args);
+        }
         function printReport() {
             throwIfNoReport();
-            onPrintStarted();
-            var canUsePlugin = getCanUsePlugin();
-            var contentDisposition = canUsePlugin ? "inline" : "attachment";
-            var queryString = "response-content-disposition=" + contentDisposition;
-            exportAsync("PDF", {
+            var deviceInfo = {
                 ImmediatePrint: true
-            }).then(function(info) {
-                var url = client.formatDocumentUrl(info.clientId, info.instanceId, info.documentId, queryString);
-                onPrintDocumentReady({
-                    url: url
+            }, printStartArgs = {
+                deviceInfo: deviceInfo,
+                handled: false
+            };
+            onPrintStarted(printStartArgs);
+            if (!printStartArgs.handled) {
+                setUIState({
+                    operationName: "PrintInProgress",
+                    inProgress: true
                 });
-                printManager.print(url);
-            });
+                showNotification({
+                    stringResources: "preparingPrint"
+                });
+                var canUsePlugin = getCanUsePlugin(), contentDisposition = canUsePlugin ? "inline" : "attachment", queryString = "response-content-disposition=" + contentDisposition;
+                exportAsync("PDF", deviceInfo).then(function(info) {
+                    var url = client.formatDocumentUrl(info.clientId, info.instanceId, info.documentId, queryString), printEndArgs = {
+                        url: url,
+                        handled: false
+                    };
+                    onPrintDocumentReady(printEndArgs);
+                    hideNotification();
+                    setUIState({
+                        operationName: "PrintInProgress",
+                        inProgress: false
+                    });
+                    if (!printEndArgs.handled) {
+                        printManager.print(url);
+                    }
+                });
+            }
         }
         function getCanUsePlugin() {
             switch (printMode) {
@@ -1212,18 +2611,67 @@
         }
         function exportReport(format, deviceInfo) {
             throwIfNoReport();
-            onExportStarted();
             if (!deviceInfo) {
                 deviceInfo = createDeviceInfo();
             }
-            var queryString = "response-content-disposition=attachment";
-            exportAsync(format, deviceInfo).then(function(info) {
-                var url = client.formatDocumentUrl(info.clientId, info.instanceId, info.documentId, queryString);
-                onExportDocumentReady({
-                    url: url
+            var exportStartArgs = {
+                format: format,
+                deviceInfo: deviceInfo,
+                handled: false
+            };
+            onExportStarted(exportStartArgs);
+            if (!exportStartArgs.handled) {
+                var queryString = "response-content-disposition=attachment";
+                setUIState({
+                    operationName: "ExportInProgress",
+                    inProgress: true
                 });
-                window.open(url, "_self");
-            });
+                showNotification({
+                    stringResources: "preparingDownload"
+                });
+                exportAsync(format, exportStartArgs.deviceInfo).then(function(info) {
+                    var url = client.formatDocumentUrl(info.clientId, info.instanceId, info.documentId, queryString), exportEndArgs = {
+                        url: url,
+                        format: format,
+                        handled: false,
+                        windowOpenTarget: "_self"
+                    };
+                    onExportDocumentReady(exportEndArgs);
+                    hideNotification();
+                    setUIState({
+                        operationName: "ExportInProgress",
+                        inProgress: false
+                    });
+                    if (!exportEndArgs.handled) {
+                        window.open(url, exportEndArgs.windowOpenTarget);
+                    }
+                });
+            }
+        }
+        function sendReport(args) {
+            throwIfNoReport();
+            if (!args.deviceInfo) {
+                args.deviceInfo = createDeviceInfo();
+            }
+            var sendEmailStartArgs = {
+                deviceInfo: args.deviceInfo,
+                handled: false,
+                format: args.format
+            };
+            onSendEmailStarted(sendEmailStartArgs);
+            var queryString = "response-content-disposition=attachment";
+            if (!sendEmailStartArgs.handled) {
+                exportAsync(args.format, args.deviceInfo).then(function(info) {
+                    var url = client.formatDocumentUrl(info.clientId, info.instanceId, info.documentId, queryString);
+                    args["url"] = url;
+                    args["handled"] = false;
+                    onSendEmailDocumentReady(args);
+                    delete args.deviceInfo;
+                    if (!args.handled) {
+                        sendDocumentAsync(info.documentId, args);
+                    }
+                });
+            }
         }
         function exportAsync(format, deviceInfo) {
             throwIfNoReport();
@@ -1283,7 +2731,7 @@
             if (args && args.length) {
                 arg0 = args[0];
             }
-            if (typeof arg0 == "function") {
+            if (typeof arg0 === "function") {
                 return arg0;
             }
             return null;
@@ -1339,6 +2787,9 @@
             });
         }
         function getDocumentFormatsAsync() {
+            if (renderingExtensions) {
+                return Promise.resolve(renderingExtensions);
+            }
             if (!documentFormatsPromise) {
                 documentFormatsPromise = client.getDocumentFormats().catch(handleRequestError);
             }
@@ -1348,7 +2799,7 @@
             if (nodes) {
                 for (var i = 0, len = nodes.length; i < len; i++) {
                     var node = nodes[i];
-                    if (node.id == id) {
+                    if (node.id === id) {
                         return node.page;
                     } else {
                         var page = getPageForBookmark(node.items, id);
@@ -1370,10 +2821,13 @@
             return dict;
         }
         function changeReportSource(rs) {
+            setStateReportSource(rs);
+            controller.reportSourceChanged();
+        }
+        function setStateReportSource(rs) {
             if (options.settings.reportSource) {
                 options.settings.reportSource(rs);
             }
-            controller.reportSourceChanged();
         }
         function changePageNumber(pageNr) {
             options.settings.pageNumber(pageNr);
@@ -1408,16 +2862,16 @@
             },
             customAction: function(action) {}
         };
-        function onInteractiveActionExecuting(cancelArgs) {
-            controller.interactiveActionExecuting(cancelArgs);
+        function onInteractiveActionExecuting(interactiveActionArgs) {
+            controller.interactiveActionExecuting(interactiveActionArgs);
         }
-        function executeReportAction(cancelArgs) {
-            var action = cancelArgs.action;
+        function executeReportAction(interactiveActionArgs) {
+            var action = interactiveActionArgs.action;
             var handler = actionHandlers[action.Type];
             if (typeof handler === "function") {
                 window.setTimeout(function() {
-                    onInteractiveActionExecuting(cancelArgs);
-                    if (!cancelArgs.cancel) {
+                    onInteractiveActionExecuting(interactiveActionArgs);
+                    if (!interactiveActionArgs.cancel) {
                         handler(action);
                     }
                 }, 0);
@@ -1478,6 +2932,7 @@
             BEGIN_LOAD_PAGE: "trv.BEGIN_LOAD_PAGE",
             PAGE_READY: "trv.PAGE_READY",
             VIEW_MODE_CHANGED: "trv.VIEW_MODE_CHANGED",
+            PAGE_MODE_CHANGED: "trv.PAGE_MODE_CHANGED",
             PRINT_MODE_CHANGED: "trv.PRINT_MODE_CHANGED",
             REPORT_SOURCE_CHANGED: "trv.REPORT_SOURCE_CHANGED",
             NAVIGATE_TO_PAGE: "trv.NAVIGATE_TO_PAGE",
@@ -1489,7 +2944,8 @@
             PAGE_SCALE: "trv.PAGE_SCALE",
             GET_PAGE_SCALE: "trv.GET_PAGE_SCALE",
             SERVER_ACTION_STARTED: "trv.SERVER_ACTION_STARTED",
-            TOGGLE_SIDE_MENU: "trv.TOGGLE_SIDE_MENU",
+            SET_TOGGLE_SIDE_MENU: "trv.SET_TOGGLE_SIDE_MENU",
+            GET_TOGGLE_SIDE_MENU: "trv.GET_TOGGLE_SIDE_MENU",
             UPDATE_UI: "trv.UPDATE_UI",
             CSS_LOADED: "trv.CSS_LOADED",
             RELOAD_PARAMETERS: "trv.RELOAD_PARAMETERS",
@@ -1502,9 +2958,25 @@
             PAGE_NUMBER: "trv.PAGE_NUMBER",
             PAGE_COUNT: "trv.PAGE_COUNT",
             GET_SEARCH_DIALOG_STATE: "trv.GET_SEARCH_DIALOG_STATE",
-            SET_SEARCH_DIALOG_VISIBLE: "trv.SET_SEARCH_DIALOG_VISIBLE"
+            SET_SEARCH_DIALOG_VISIBLE: "trv.SET_SEARCH_DIALOG_VISIBLE",
+            SET_SEND_EMAIL_DIALOG_VISIBLE: "trv.SET_SEND_EMAIL_DIALOG_VISIBLE",
+            SEND_EMAIL_STARTED: "trv.SEND_EMAIL_STARTED",
+            SEND_EMAIL_READY: "trv.SEND_EMAIL_READY",
+            SHOW_NOTIFICATION: "trv.SHOW_NOTIFICATION",
+            HIDE_NOTIFICATION: "trv.HIDE_NOTIFICATION",
+            UI_STATE: "trv.UI_STATE",
+            SCROLL_PAGE_READY: "trv.SCROLL_PAGE_READY",
+            UPDATE_SCROLL_PAGE_DIMENSIONS_READY: "trv.UPDATE_SCROLL_PAGE_DIMENSIONS_READY",
+            MISSING_OR_INVALID_PARAMETERS: "trv.MISSING_OR_INVALID_PARAMETERS",
+            RENDERING_STOPPED: "trv.RENDERING_STOPPED"
         };
         utils.extend(controller, {
+            getPageData: function(pageNumber) {
+                if (loader) {
+                    return loader.getPageData(pageNumber);
+                }
+                return;
+            },
             reportSource: function(rs) {
                 if (null === rs) {
                     report = parameterValues = null;
@@ -1526,6 +2998,15 @@
                     };
                 }
             },
+            updateSettings: function(settings) {
+                options.settings = utils.extend({}, settings, options.settings);
+            },
+            clearReportSource: function() {
+                report = parameterValues = null;
+                clearReportState();
+                changeReportSource(undefined);
+                return this;
+            },
             reportDocumentIdExposed: function() {
                 return reportDocumentId;
             },
@@ -1538,7 +3019,7 @@
             currentPageNumber: function(pageNo) {
                 if (pageNo === undefined) return currentPageNumber;
                 var num = utils.tryParseInt(pageNo);
-                if (num != currentPageNumber) {
+                if (num !== currentPageNumber) {
                     currentPageNumber = num;
                     changePageNumber(num);
                 }
@@ -1558,9 +3039,29 @@
                 if (!vm) {
                     return viewMode;
                 }
-                if (viewMode != vm) {
+                if (viewMode !== vm) {
                     viewMode = vm;
                     controller.viewModeChanged(vm);
+                }
+                return controller;
+            },
+            pageMode: function(psm) {
+                var psmode = controller.setPageMode(psm);
+                if (typeof psmode === "string") {
+                    return psmode;
+                }
+                if (report) {
+                    controller.refreshReportCore(false, reportDocumentId);
+                }
+                return controller;
+            },
+            setPageMode: function(psm) {
+                if (!psm) {
+                    return pageMode;
+                }
+                if (pageMode !== psm) {
+                    pageMode = psm;
+                    controller.pageModeChanged(psm);
                 }
                 return controller;
             },
@@ -1568,7 +3069,7 @@
                 if (!pm) {
                     return printMode;
                 }
-                if (printMode != pm) {
+                if (printMode !== pm) {
                     printMode = pm;
                     controller.printModeChanged(pm);
                 }
@@ -1580,6 +3081,18 @@
             },
             refreshReportCore: function(ignoreCache, baseDocumentId, actionId) {
                 loadReportAsync(ignoreCache, baseDocumentId, actionId);
+            },
+            stopRendering: function() {
+                throwIfNoReport();
+                throwIfNoReportInstance();
+                throwIfNoReportDocument();
+                client.deleteReportDocument(clientId, reportInstanceId, reportDocumentId).catch(handleRequestError).then(function() {
+                    if (loader) {
+                        loader.cancel();
+                    }
+                    resetPageNumbers();
+                    controller.renderingStopped();
+                });
             },
             refreshReport: function(ignoreCache, baseDocumentId, actionId) {
                 controller.onLoadedReportChange();
@@ -1605,6 +3118,7 @@
                     });
                     if (hasError) {
                         raiseError(sr.missingOrInvalidParameter);
+                        controller.missingOrInvalidParameters();
                     } else {
                         controller.setParameters(parameterValues);
                         controller.refreshReportCore(ignoreCache, baseDocumentId, actionId);
@@ -1615,14 +3129,17 @@
             exportReport: function(format, deviceInfo) {
                 exportReport(format, deviceInfo);
             },
+            sendReport: function(args) {
+                sendReport(args);
+            },
             printReport: function() {
                 printReport();
             },
             getReportPage: function(pageNumber) {
                 getReportPage(pageNumber);
             },
-            executeReportAction: function(cancelArgs) {
-                executeReportAction(cancelArgs);
+            executeReportAction: function(interactiveActionArgs) {
+                executeReportAction(interactiveActionArgs);
             },
             reportActionEnter: function(args) {
                 onReportActionEnter(args);
@@ -1637,7 +3154,7 @@
                 if (report === null) {
                     return {};
                 }
-                controller.beforeLoadParameters(paramValues == null);
+                controller.beforeLoadParameters(paramValues === null);
                 return loadParametersAsync(report, paramValues);
             },
             getDocumentFormats: function() {
@@ -1652,6 +3169,8 @@
             onReportLoadComplete: function(info) {
                 pageCount = info.pageCount;
                 bookmarkNodes = info.bookmarkNodes;
+                renderingExtensions = info.renderingExtensions;
+                setStateReportSource(controller.reportSource());
                 controller.reportLoadComplete(info);
             },
             raiseError: raiseError,
@@ -1659,6 +3178,15 @@
                 return getSearchResultsAsync(args, results);
             },
             on: events.on,
+            showNotification: function() {
+                return eventFactory(controller.Events.SHOW_NOTIFICATION, arguments);
+            },
+            hideNotification: function() {
+                return eventFactory(controller.Events.HIDE_NOTIFICATION, arguments);
+            },
+            setUIState: function() {
+                return eventFactory(controller.Events.UI_STATE, arguments);
+            },
             error: function() {
                 return eventFactory(controller.Events.ERROR, arguments);
             },
@@ -1670,6 +3198,12 @@
             },
             exportReady: function() {
                 return eventFactory(controller.Events.EXPORT_DOCUMENT_READY, arguments);
+            },
+            sendEmailStarted: function() {
+                return eventFactory(controller.Events.SEND_EMAIL_STARTED, arguments);
+            },
+            sendEmailReady: function() {
+                return eventFactory(controller.Events.SEND_EMAIL_READY, arguments);
             },
             printStarted: function() {
                 return eventFactory(controller.Events.PRINT_STARTED, arguments);
@@ -1707,6 +3241,9 @@
             viewModeChanged: function() {
                 return eventFactory(controller.Events.VIEW_MODE_CHANGED, arguments);
             },
+            pageModeChanged: function() {
+                return eventFactory(controller.Events.PAGE_MODE_CHANGED, arguments);
+            },
             printModeChanged: function() {
                 return eventFactory(controller.Events.PRINT_MODE_CHANGED, arguments);
             },
@@ -1730,6 +3267,12 @@
             },
             setParametersAreaVisible: function() {
                 return eventFactory(controller.Events.SET_PARAMETER_AREA_VISIBLE, arguments);
+            },
+            setSideMenuVisible: function() {
+                return eventFactory(controller.Events.SET_TOGGLE_SIDE_MENU, arguments);
+            },
+            getSideMenuVisible: function() {
+                return eventFactory(controller.Events.GET_TOGGLE_SIDE_MENU, arguments);
             },
             scale: function() {
                 return eventFactory(controller.Events.PAGE_SCALE, arguments);
@@ -1770,13 +3313,74 @@
             getSearchDialogState: function() {
                 return eventFactory(controller.Events.GET_SEARCH_DIALOG_STATE, arguments);
             },
+            getSendEmailDialogState: function() {
+                return eventFactory(controller.Events.GET_SEND_EMAIL_DIALOG_STATE, arguments);
+            },
             setSearchDialogVisible: function() {
                 return eventFactory(controller.Events.SET_SEARCH_DIALOG_VISIBLE, arguments);
+            },
+            setSendEmailDialogVisible: function() {
+                return eventFactory(controller.Events.SET_SEND_EMAIL_DIALOG_VISIBLE, arguments);
+            },
+            scrollPageReady: function() {
+                return eventFactory(controller.Events.SCROLL_PAGE_READY, arguments);
+            },
+            updatePageDimensionsReady: function() {
+                return eventFactory(controller.Events.UPDATE_SCROLL_PAGE_DIMENSIONS_READY, arguments);
+            },
+            missingOrInvalidParameters: function() {
+                return eventFactory(controller.Events.MISSING_OR_INVALID_PARAMETERS, arguments);
+            },
+            renderingStopped: function() {
+                return eventFactory(controller.Events.RENDERING_STOPPED, arguments);
             },
             clientExpired: clientExpired
         });
         return controller;
     }
+    var KeepClientAliveSentinel = function(serviceClient, clientID, sessionTimeoutSeconds) {
+        function isNumber(value) {
+            return typeof value === "number" && isFinite(value);
+        }
+        if (!serviceClient) {
+            throw sr.noServiceClient;
+        }
+        var interval, pingMilliseconds;
+        if (!isNumber(sessionTimeoutSeconds)) {
+            throw "sessionTimeoutSeconds must a number and must be finite";
+        }
+        if (sessionTimeoutSeconds <= 120) {
+            pingMilliseconds = secondsToMilliseconds(sessionTimeoutSeconds) / 2;
+        } else {
+            pingMilliseconds = secondsToMilliseconds(sessionTimeoutSeconds - 60);
+        }
+        function secondsToMilliseconds(seconds) {
+            return seconds * 1e3;
+        }
+        function start() {
+            if (pingMilliseconds <= 0) {
+                return;
+            }
+            interval = setInterval(function() {
+                serviceClient.keepClientAlive(clientID);
+            }, pingMilliseconds);
+        }
+        function restart() {
+            stop();
+            start();
+        }
+        function stop() {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+            }
+        }
+        return {
+            start: start,
+            restart: restart,
+            stop: stop
+        };
+    };
     trv.ReportViewerController = ReportViewerController;
 })(window.telerikReportViewer = window.telerikReportViewer || {}, window, document);
 
@@ -1787,7 +3391,7 @@
         init(dom);
         function init(element) {
             if (typeof $.fn.kendoTouch === "function") {
-                $(element).find(".trv-page-wrapper").mousedown(function() {
+                $(element).mousedown(function() {
                     ignoreTouch = true;
                 }).mouseup(function() {
                     ignoreTouch = false;
@@ -1882,8 +3486,11 @@
         options = $.extend({}, defaultOptions, options, otherOptions);
         var controller = options.controller;
         if (!controller) throw "No controller (telerikReportViewer.reportViewerController) has been specified.";
-        var $placeholder = $(placeholder), $pageContainer = $placeholder.find(".trv-page-container"), pageContainer = $pageContainer[0], $pageWrapper = $placeholder.find(".trv-page-wrapper"), pageWrapper = $pageWrapper[0], $errorMessage = $placeholder.find(".trv-error-message"), actions, pendingElement, pageScaleMode = scaleModes.SPECIFIC, pageScale = 1, minPageScale = .1, maxPageScale = 8, documentReady = true, navigateToPageOnDocReady, navigateToElementOnDocReady, isNewReportSource, showErrorTimeoutId;
+        var $placeholder = $(placeholder), $pageContainer = $placeholder.find(".trv-page-container"), pageContainer = $pageContainer[0], $pageWrapper = $placeholder.find(".trv-page-wrapper"), pageWrapper = $pageWrapper[0], $errorMessage = $placeholder.find(".trv-error-message"), actions, pendingElement, pageScaleMode = scaleModes.SPECIFIC, pageScale = 1, minPageScale = .1, maxPageScale = 8, documentReady = true, navigateToPageOnDocReady, navigateToElementOnDocReady, isNewReportSource, showErrorTimeoutId, showPageAreaImage = false, reportPageIsLoaded = false, pageAreaImageStyle = '.trv-page-container {background: #ffffff url("{0}") no-repeat center 50px}', pageAreaImageID = "trv-initial-image-styles", scroll = utils.extend({}, trv.scroll, {}), uiFreezeCoordinator = null;
         init();
+        if (scroll) {
+            scroll.init(placeholder, options);
+        }
         function init() {
             replaceStringResources($placeholder);
         }
@@ -1914,7 +3521,7 @@
         }
         function navigateOnLoadComplete(pageNumber, pageCount) {
             if (pageNumber) {
-                var pageNumber = Math.min(pageNumber, pageCount);
+                pageNumber = Math.min(pageNumber, pageCount);
                 navigateToPage(pageNumber, navigateToElementOnDocReady);
             }
         }
@@ -1922,7 +3529,14 @@
             clear(isNewReportSource);
             isNewReportSource = false;
         }
-        controller.reportSourceChanged(function() {
+        controller.pageModeChanged(function() {
+            if (controller.pageMode() === trv.PageModes.CONTINUOUS_SCROLL) {
+                scroll.enable();
+            } else {
+                scroll.disable();
+            }
+            controller.refreshReport(true);
+        }).reportSourceChanged(function() {
             isNewReportSource = true;
             navigateToPageOnDocReady = null;
             navigateToElementOnDocReady = null;
@@ -1933,7 +3547,9 @@
             }
         }).beforeLoadReport(function() {
             documentReady = false;
-            if (!navigateToPageOnDocReady) navigateToPageOnDocReady = 1;
+            if (!navigateToPageOnDocReady) {
+                navigateToPageOnDocReady = 1;
+            }
             clearPendingTimeoutIds();
             clear();
             disablePagesArea(true);
@@ -1954,22 +3570,40 @@
                 showErrorTimeoutId = window.setTimeout(showError, 2e3);
                 enableInteractivity();
             }
+            if (args.containsFrozenContent && !uiFreezeCoordinator) {
+                uiFreezeCoordinator = utils.extend({}, trv.uiFreezeCoordinator, {});
+                if (controller.viewMode() === trv.ViewModes.INTERACTIVE) {
+                    uiFreezeCoordinator.init($placeholder);
+                }
+            }
         }).navigateToPage(function(event, pageNumber, targetElement) {
             navigateToPage(pageNumber, targetElement);
         }).pageReady(function(event, page) {
-            setPageContent(page);
+            if (controller.pageMode() === trv.PageModes.SINGLE_PAGE) {
+                if (scroll.isEnabled()) {
+                    scroll.disable();
+                }
+                setPageContent(page);
+            } else {
+                scroll.renderPage(page);
+            }
+            if (!reportPageIsLoaded) {
+                reportPageIsLoaded = true;
+            }
+            if (showPageAreaImage) {
+                clearPageAreaImage();
+            }
+            if (controller.viewMode() === trv.ViewModes.INTERACTIVE && uiFreezeCoordinator) {
+                uiFreezeCoordinator.init($placeholder);
+            }
             disablePagesArea(false);
         }).error(function(event, error) {
             disablePagesArea(false);
             clearPage();
             showError(error);
-        }).exportStarted(function(event, args) {
-            showError(sr.preparingDownload);
-        }).exportReady(function(event, args) {
-            showError();
-        }).printStarted(function(event, args) {
-            showError(sr.preparingPrint);
-        }).printReady(function(event, args) {
+        }).showNotification(function(event, args) {
+            showError(sr[args.stringResources]);
+        }).hideNotification(function(event, args) {
             showError();
         }).scale(function(event, args) {
             setPageScale(args);
@@ -1980,26 +3614,40 @@
             args.scaleMode = pageScaleMode;
         }).setDocumentMapVisible(function() {
             if (shouldAutosizePage()) {
-                updatePageDimensions();
+                setTimeout(function() {
+                    updatePageDimensions();
+                });
             }
         }).setParametersAreaVisible(function() {
             if (shouldAutosizePage()) {
-                updatePageDimensions();
+                setTimeout(function() {
+                    updatePageDimensions();
+                });
             }
         }).serverActionStarted(function() {
             disablePagesArea(true);
             showError(sr.loadingReport);
+        }).scrollPageReady(function(event, args) {
+            setScrollablePage(args);
+        }).missingOrInvalidParameters(function(event, args) {
+            if (options.initialPageAreaImageUrl && !reportPageIsLoaded) {
+                clearPage();
+                setPageAreaImage();
+            }
+        }).renderingStopped(function() {
+            clear(true);
+            showError(sr.renderingCanceled);
         });
         function enableTouch(dom) {
             var allowSwipeLeft, allowSwipeRight;
             touchBehavior(dom, {
                 swipe: function(e) {
                     var pageNumber = controller.currentPageNumber();
-                    if (allowSwipeLeft && e.direction == "left") {
+                    if (allowSwipeLeft && e.direction === "left") {
                         if (pageNumber < controller.pageCount()) {
                             controller.navigateToPage(pageNumber + 1);
                         }
-                    } else if (allowSwipeRight && e.direction == "right") {
+                    } else if (allowSwipeRight && e.direction === "right") {
                         if (pageNumber > 1) {
                             controller.navigateToPage(pageNumber - 1);
                         }
@@ -2019,18 +3667,20 @@
                 },
                 touchstart: function(e) {
                     var el = pageWrapper;
-                    allowSwipeRight = 0 == el.scrollLeft;
-                    allowSwipeLeft = el.scrollWidth - el.offsetWidth == el.scrollLeft;
+                    allowSwipeRight = 0 === el.scrollLeft;
+                    allowSwipeLeft = el.scrollWidth - el.offsetWidth === el.scrollLeft;
                 }
             });
         }
         function shouldAutosizePage() {
-            return -1 != [ scaleModes.FIT_PAGE, scaleModes.FIT_PAGE_WIDTH ].indexOf(pageScaleMode);
+            return -1 !== [ scaleModes.FIT_PAGE, scaleModes.FIT_PAGE_WIDTH ].indexOf(pageScaleMode);
         }
         function updatePageDimensions() {
-            for (var i = 0, children = pageContainer.childNodes, len = children.length; i < len; i++) {
-                setPageDimensions(children[i], pageScaleMode, pageScale);
+            for (var i = 0, children = $pageContainer.find(".trv-report-page"), len = children.length; i < len; i++) {
+                var pageNumber = parseInt($(children[i]).attr("data-page"));
+                setPageDimensions(children[i], pageScaleMode, pageScale, pageNumber);
             }
+            controller.updatePageDimensionsReady();
         }
         function setPageScale(options) {
             pageScaleMode = options.scaleMode || pageScaleMode;
@@ -2053,14 +3703,25 @@
             return findPage(controller.currentPageNumber());
         }
         function findPage(pageNumber) {
-            var page;
-            utils.each($pageContainer.children(), function(index, page1) {
-                if (pageNo(page1) == pageNumber) {
-                    page = page1;
-                }
-                return !page;
-            });
-            return page;
+            var result;
+            var allPages = $pageContainer.find(".trv-report-page");
+            if (controller.pageMode() === trv.PageModes.SINGLE_PAGE) {
+                utils.each(allPages, function(index, page) {
+                    if (pageNo(page) === pageNumber) {
+                        result = page;
+                    }
+                    return !result;
+                });
+            } else {
+                $.each(allPages, function(index, page) {
+                    var dataPageNumber = parseInt($(page).attr("data-page"));
+                    if (dataPageNumber === pageNumber) {
+                        result = page;
+                        return false;
+                    }
+                });
+            }
+            return result;
         }
         function navigateToPage(pageNumber, targetElement) {
             if (documentReady) {
@@ -2077,14 +3738,17 @@
             var page = findPage(pageNumber);
             if (page) {
                 if (targetElement) {
-                    navigateToElement(targetElement);
+                    navigateToElement(targetElement, pageNumber);
+                }
+                if (scroll.isEnabled() && !targetElement) {
+                    scroll.navigateToElement(page.offsetTop, pageNumber);
                 }
             } else {
                 pendingElement = targetElement;
                 beginLoadPage(pageNumber);
             }
         }
-        function navigateToElement(targetElement) {
+        function navigateToElement(targetElement, pageNumber) {
             if (targetElement) {
                 var el = $pageContainer.find("[data-" + targetElement.type + "-id=" + targetElement.id + "]")[0];
                 if (el) {
@@ -2095,7 +3759,7 @@
                         }
                     }
                     var container = $pageContainer[0], offsetTop = 0, offsetLeft = 0;
-                    while (el && el != container) {
+                    while (el && el !== container) {
                         if ($(el).is(".trv-page-wrapper")) {
                             var scale = $(el).data("pageScale");
                             if (typeof scale === "number") {
@@ -2107,17 +3771,25 @@
                         offsetLeft += el.offsetLeft;
                         el = el.offsetParent;
                     }
-                    container.scrollTop = offsetTop;
-                    container.scrollLeft = offsetLeft;
+                    if (scroll.isEnabled() && pageNumber) {
+                        scroll.navigateToElement(offsetTop, pageNumber);
+                    } else {
+                        container.scrollTop = offsetTop;
+                        container.scrollLeft = offsetLeft;
+                    }
+                } else {
+                    if (scroll.isEnabled() && pageNumber) {
+                        scroll.navigateToElement($placeholder.find('[data-page="' + pageNumber + '"]')[0].offsetTop, pageNumber);
+                    }
                 }
             }
         }
         function findNextFocusableElement(element) {
-            if (!element || element.length == 0) {
+            if (!element || element.length === 0) {
                 return null;
             }
             var num = utils.tryParseInt(element.attr("tabindex"));
-            if (num != NaN && num > -1) {
+            if (!isNaN(num) && num > -1) {
                 return element;
             }
             return findNextFocusableElement(element.next());
@@ -2142,8 +3814,8 @@
             window.setTimeout(controller.getReportPage.bind(controller, pageNumber), 1);
             navigateToPageOnDocReady = null;
         }
-        function setPageDimensions(page, scaleMode, scale) {
-            var $target = $(page), $page = $target.find("div.trv-report-page"), $pageContent = $target.find("div.sheet"), pageContent = $pageContent[0];
+        function setPageDimensions(page, scaleMode, scale, pageNumber) {
+            var $target = $(page), $page = pageNumber ? $target : $target.find("div.trv-report-page"), $pageContent = $page.find("div.sheet"), $pageSkeletonContent = $page.find("div.trv-skeleton-wrapper"), pageContent = $pageContent[0] || $pageSkeletonContent[0], pageSkeletonContent = $pageSkeletonContent[0];
             if (!pageContent) return;
             var pageWidth, pageHeight, box = $target.data("box");
             if (!box) {
@@ -2165,15 +3837,24 @@
                 pageWidth = $target.data("pageWidth");
                 pageHeight = $target.data("pageHeight");
             }
-            var scrollBarV = pageHeight > pageWidth && scaleMode == scaleModes.FIT_PAGE_WIDTH ? 20 : 0, scaleW = (pageContainer.clientWidth - scrollBarV - box.padLeft - box.padRight) / pageWidth, scaleH = (pageContainer.clientHeight - 1 - box.padTop - box.padBottom) / pageHeight;
-            if (scaleMode == scaleModes.FIT_PAGE_WIDTH) {
+            var scrollBarV = pageHeight > pageWidth && scaleMode === scaleModes.FIT_PAGE_WIDTH ? 20 : 0, scaleW = (pageContainer.clientWidth - scrollBarV - box.padLeft - box.padRight) / pageWidth, scaleH = (pageContainer.clientHeight - 1 - box.padTop - box.padBottom) / pageHeight;
+            if (scaleMode === scaleModes.FIT_PAGE_WIDTH) {
                 scale = scaleW;
-            } else if (!scale || scaleMode == scaleModes.FIT_PAGE) {
+            } else if (!scale || scaleMode === scaleModes.FIT_PAGE) {
                 scale = Math.min(scaleW, scaleH);
             }
+            if (uiFreezeCoordinator) {
+                uiFreezeCoordinator.setScaleFactor(scale);
+            }
             $target.data("pageScale", scale);
-            domUtils.scale($pageContent, scale, scale);
-            $page.css("height", scale * pageHeight).css("width", scale * pageWidth);
+            $page.data("pageScale", scale);
+            if (!pageSkeletonContent) {
+                domUtils.scale($pageContent, scale, scale);
+            }
+            $page.css({
+                height: scale * pageHeight,
+                width: scale * pageWidth
+            });
         }
         function enableInteractivity() {
             $pageContainer.on("click", "[data-reporting-action]", onInteractiveItemClick);
@@ -2189,18 +3870,24 @@
             $pageContainer.off("mouseenter", "[data-tooltip-title],[data-tooltip-text]", onToolTipItemEnter);
             $pageContainer.off("mouseleave", "[data-tooltip-title],[data-tooltip-text]", onToolTipItemLeave);
         }
-        function onInteractiveItemClick(args) {
-            var $t = $(this);
-            var actionId = $t.attr("data-reporting-action");
-            var a = getAction(actionId);
-            if (a) {
-                navigateToPageOnDocReady = controller.currentPageNumber();
+        function onInteractiveItemClick(event) {
+            var $eventTarget = $(this);
+            var actionId = $eventTarget.attr("data-reporting-action"), action = getAction(actionId);
+            if (action) {
+                navigateToPageOnDocReady = getNavigateToPageOnDocReady(event, action.Type);
                 controller.executeReportAction({
-                    element: args.currentTarget,
-                    action: a,
+                    element: event.currentTarget,
+                    action: action,
                     cancel: false
                 });
             }
+            event.stopPropagation();
+        }
+        function getNavigateToPageOnDocReady(event, actionType) {
+            if (scroll.isEnabled() && (actionType === "sorting" || actionType === "toggleVisibility")) {
+                return $(event.target).closest(".trv-report-page").attr("data-page") || controller.currentPageNumber();
+            }
+            return controller.currentPageNumber();
         }
         function onInteractiveItemEnter(args) {
             var $t = $(this);
@@ -2228,7 +3915,7 @@
             if (actions) {
                 var action;
                 utils.each(actions, function() {
-                    if (this.Id == actionId) {
+                    if (this.Id === actionId) {
                         action = this;
                     }
                     return action === undefined;
@@ -2309,13 +3996,12 @@
         function setPageContent(page) {
             actions = JSON.parse(page.pageActions);
             updatePageStyle(page);
-            var wrapper = $($.parseHTML(page.pageContent)), $pageContent = wrapper.find("div.sheet"), $page = $('<div class="trv-report-page"></div>');
+            var pageNumber = page.pageNumber, wrapper = $($.parseHTML(page.pageContent)), $pageContent = wrapper.find("div.sheet"), $page = $('<div class="trv-report-page" data-page="' + pageNumber + '"></div>');
             $pageContent.css("margin", 0);
             $page.append($pageContent).append($('<div class="trv-page-overlay"></div>'));
-            var pageNumber = page.pageNumber;
             var $target = $pageWrapper.empty().removeData().data("pageNumber", pageNumber).append($page);
             controller.currentPageNumber(pageNumber);
-            if (controller.viewMode() == trv.ViewModes.INTERACTIVE) {
+            if (controller.viewMode() === trv.ViewModes.INTERACTIVE) {
                 $placeholder.removeClass("printpreview");
                 $placeholder.addClass("interactive");
             } else {
@@ -2326,6 +4012,32 @@
             $pageContainer.scrollTop(0);
             $pageContainer.scrollLeft(0);
             navigateToElement(pendingElement);
+        }
+        function setScrollablePage(args) {
+            var pageActions = JSON.parse(args.page.pageActions);
+            if (!actions) {
+                actions = pageActions;
+            } else {
+                actions = actions.concat(pageActions);
+            }
+            if (controller.viewMode() === trv.ViewModes.INTERACTIVE) {
+                $placeholder.removeClass("printpreview");
+                $placeholder.addClass("interactive");
+            } else {
+                $placeholder.removeClass("interactive");
+                $placeholder.addClass("printpreview");
+            }
+            setPageDimensions(args.target, pageScaleMode, pageScale, args.page.pageNumber);
+        }
+        function setPageAreaImage() {
+            var pageStyles = $("<style id=" + pageAreaImageID + "></style>");
+            clearPageAreaImage();
+            pageStyles.append(utils.stringFormat(pageAreaImageStyle, [ options.initialPageAreaImageUrl ]));
+            pageStyles.appendTo("head");
+            showPageAreaImage = true;
+        }
+        function clearPageAreaImage() {
+            $("#" + pageAreaImageID).remove();
         }
     }
     var pluginName = "telerik_ReportViewer_PagesArea";
@@ -2358,9 +4070,11 @@
         var $placeholder = $(placeholder), $documentMap;
         var documentMapVisible = options.documentMapVisible !== false;
         var enableAccessibility = options.enableAccessibility;
+        var currentReport = null;
+        var documentMapNecessary = false;
         init();
         function init() {
-            $documentMap = $('<div id="trv-documentMap"></div>');
+            $documentMap = $('<div id="' + options.viewerSelector + '-documentMap"></div>');
             $documentMap.appendTo(placeholder);
             attach();
             replaceStringResources($placeholder);
@@ -2400,18 +4114,28 @@
                 $treeView = $documentMap.data("kendoTreeView");
             }
             $treeView.setDataSource(documentMap);
-            setAccessibilityAttributes($treeView);
+            if (enableAccessibility) {
+                setAccessibilityAttributes($treeView);
+            }
             showDocumentMap(hasDocumentMap);
         }
         function setAccessibilityAttributes(treeView) {
-            if (enableAccessibility) {
-                treeView.bind("expand", onTreeViewNodeExpand);
-                treeView.element.attr("aria-label", "Document map area");
-                var listItems = treeView.element.find("ul");
-                utils.each(listItems, function() {
-                    setNodeAccessibilityAttributes(this);
-                });
+            treeView.bind("expand", onTreeViewNodeExpand);
+            treeView.element.attr("aria-label", sr.ariaLabelDocumentMap);
+            var listItems = treeView.element.find("ul");
+            utils.each(listItems, function() {
+                setNodeAccessibilityAttributes(this);
+            });
+            if (documentMapNecessary) {
+                setSplitbarAccessibilityAttributes();
             }
+        }
+        function setSplitbarAccessibilityAttributes() {
+            var splitbar = $placeholder.next();
+            if (options.documentMapAreaPosition === trv.DocumentMapAreaPositions.RIGHT) {
+                splitbar = $placeholder.prev();
+            }
+            splitbar.attr("aria-label", sr.ariaLabelDocumentMapSplitter);
         }
         function isVisible() {
             var args = {};
@@ -2424,10 +4148,15 @@
         function endLoad() {
             $placeholder.removeClass("trv-loading");
         }
-        var currentReport = null;
-        var documentMapNecessary = false;
         function showDocumentMap(show) {
-            (show ? $.fn.removeClass : $.fn.addClass).call($placeholder, "trv-hidden");
+            var splitter = trv[options.viewerSelector + "-document-map-splitter"], sibling = $placeholder.next();
+            if (options.documentMapAreaPosition === trv.DocumentMapAreaPositions.RIGHT) {
+                sibling = $placeholder.prev();
+            }
+            if (splitter) {
+                (documentMapNecessary ? $.fn.removeClass : $.fn.addClass).call(sibling, "trv-hidden");
+                splitter.toggle(".trv-document-map", show);
+            }
         }
         function attach() {
             controller.beginLoadReport(function() {
@@ -2448,7 +4177,7 @@
                     });
                 } else {
                     documentMapNecessary = false;
-                    showDocumentMap(false);
+                    showDocumentMap(documentMapNecessary);
                 }
                 endLoad();
             }).error(function(event, error) {
@@ -2459,7 +4188,10 @@
                 args.visible = documentMapVisible;
             }).setDocumentMapVisible(function(event, args) {
                 documentMapVisible = args.visible;
-                showDocumentMap(args.visible && documentMapNecessary);
+                showDocumentMap(documentMapVisible && documentMapNecessary);
+            }).renderingStopped(function() {
+                documentMapNecessary = false;
+                showDocumentMap(false);
             });
         }
         function replaceStringResources($documentMap) {
@@ -2490,11 +4222,17 @@
         BOOLEAN: "System.Boolean"
     };
     trv.parameterEditorsMatch = {
-        MultiSelect: function(parameter) {
-            return Boolean(parameter.availableValues) && parameter.multivalue;
+        MultiSelect: function(parameter, editorsType) {
+            return Boolean(parameter.availableValues) && parameter.multivalue && (!editorsType || !editorsType.multiSelect || editorsType.multiSelect !== trv.ParameterEditorTypes.COMBO_BOX);
         },
-        SingleSelect: function(parameter) {
-            return Boolean(parameter.availableValues) && !parameter.multivalue;
+        MultiSelectCombo: function(parameter, editorsType) {
+            return Boolean(parameter.availableValues) && parameter.multivalue && (editorsType && editorsType.multiSelect && editorsType.multiSelect === trv.ParameterEditorTypes.COMBO_BOX);
+        },
+        SingleSelect: function(parameter, editorsType) {
+            return Boolean(parameter.availableValues) && !parameter.multivalue && (!editorsType || !editorsType.singleSelect || editorsType.singleSelect !== trv.ParameterEditorTypes.COMBO_BOX);
+        },
+        SingleSelectCombo: function(parameter, editorsType) {
+            return Boolean(parameter.availableValues) && !parameter.multivalue && (editorsType && editorsType.singleSelect && editorsType.singleSelect === trv.ParameterEditorTypes.COMBO_BOX);
         },
         MultiValue: function(parameter) {
             return Boolean(parameter.multivalue);
@@ -2625,7 +4363,18 @@
                 containerTabIndex = 300;
             }
         }
-        editor.attr("tabindex", containerTabIndex + ++editorsIndex);
+        var wrapper = editor.closest(".trv-parameter-value"), selectAll = wrapper.find(".trv-select-all"), clearSelection = wrapper.find(".trv-select-none"), widgetParent = editor.closest(".k-widget"), hasFocusableElement = widgetParent.find(".k-input"), isComboWidget = hasFocusableElement && hasFocusableElement.length;
+        if (selectAll && selectAll.length) {
+            selectAll.attr("tabindex", containerTabIndex + ++editorsIndex);
+        }
+        if (clearSelection && clearSelection.length) {
+            clearSelection.attr("tabindex", containerTabIndex + ++editorsIndex);
+        }
+        if (isComboWidget) {
+            hasFocusableElement.attr("tabindex", containerTabIndex + ++editorsIndex);
+        } else {
+            editor.attr("tabindex", containerTabIndex + ++editorsIndex);
+        }
     }
     function setAccessibilityErrorAttributes(editor, error) {
         var errToken = utils.stringFormat(" {0}:", [ sr.ariaLabelErrorMessage ]);
@@ -2637,7 +4386,7 @@
         if (errIdx > -1) {
             label = label.substring(0, errIdx);
         }
-        if (error && error != "") {
+        if (error && error !== "") {
             editor.attr("aria-required", true);
             editor.attr("aria-invalid", true);
             label += errToken + error;
@@ -2677,7 +4426,7 @@
                 }
             }
             function applyAriaSelected(selection) {
-                var children = listView.element.children();
+                var children = $list.find(".trv-listviewitem");
                 utils.each(children, function() {
                     var $item = $(this);
                     var isSelected = selection.filter($item).length > 0;
@@ -2705,17 +4454,29 @@
             function getSelectedItems() {
                 return $(listView.element).find(".k-state-selected");
             }
-            function onItemClick() {
+            function onItemClick(e) {
                 if (!enabled) return;
-                $(this).toggleClass("k-state-selected");
+                var clickedItem = $(e.target);
+                var selectedItems = listView.select();
+                if (clickedItem.hasClass("k-state-selected")) {
+                    selectedItems.splice($.inArray(clickedItem[0], selectedItems), 1);
+                } else {
+                    selectedItems.push(clickedItem);
+                }
+                listView.unbind("change");
+                listView.clearSelection();
+                listView.bind("change", onChange);
+                listView.select(selectedItems);
+            }
+            function onChange(e) {
                 onSelectionChanged(getSelectedItems());
             }
             function onKeydown(event) {
                 if (!enabled) return;
-                if (event.which != 32) {
+                if (event.which !== 32) {
                     return;
                 }
-                var focused = $(listView.element).find(".k-state-focused");
+                var focused = listView.element.find(".k-state-focused");
                 if (focused.length > 0) {
                     focused.toggleClass("k-state-selected");
                     onSelectionChanged(getSelectedItems());
@@ -2725,16 +4486,15 @@
             function init() {
                 setEditorTabIndex($list);
                 setSelectedItems(parameter.value);
-                var element = $(listView.element);
-                element.on("mousedown", ".trv-listviewitem", onItemClick);
-                element.on("keydown", onKeydown);
+                listView.element.off().on("touch click", ".trv-listviewitem", onItemClick);
+                listView.element.on("keydown", onKeydown);
                 initialized = true;
             }
             function clear() {
                 initialized = false;
                 if (listView) {
-                    $(listView.element).off("click", ".trv-listviewitem", onItemClick);
-                    $(listView.element).off("keydown", onKeydown);
+                    listView.element.off("touch click", ".trv-listviewitem", onItemClick);
+                    listView.element.off("keydown", onKeydown);
                 }
             }
             function setSelectedItems(items) {
@@ -2745,7 +4505,7 @@
                 if (!Array.isArray(items)) {
                     items = [ items ];
                 }
-                var children = listView.element.children();
+                var children = $list.find(".trv-listviewitem");
                 utils.each(parameter.availableValues, function(i, av) {
                     var selected = false;
                     utils.each(items, function(j, v) {
@@ -2763,15 +4523,15 @@
                 beginEdit: function(param) {
                     clear();
                     parameter = param;
-                    $list.kendoListView({
-                        template: '<div class="trv-listviewitem">${name}</div>',
+                    listView = $list.kendoListView({
+                        template: kendo.template('<div class="trv-listviewitem" style="cursor: pointer">${name}</div>'),
                         dataSource: {
                             data: parameter.availableValues
                         },
-                        selectable: false,
-                        navigatable: navigatableEnabledForList(options.enableAccessibility)
-                    });
-                    listView = $list.data("kendoListView");
+                        selectable: "MULTIPLE",
+                        navigatable: navigatableEnabledForList(options.enableAccessibility),
+                        change: onChange
+                    }).data("kendoListView");
                     init();
                 },
                 enable: function(enable) {
@@ -2790,6 +4550,119 @@
                 },
                 setAccessibilityErrorState: function(param) {
                     setAccessibilityErrorAttributes($list, param.Error);
+                },
+                destroy: function() {
+                    listView.destroy();
+                }
+            };
+        }
+    }, {
+        match: trv.parameterEditorsMatch.MultiSelectCombo,
+        createEditor: function(placeholder, options) {
+            var $placeholder = $(placeholder), enabled = true, selector = ".trv-combo", template = "trv-parameter-editor-available-values-multiselect-combo", valueChangeCallback = options.parameterChanged, $editorDom, $selectNone, $selectAll, editor, updateTimeout, popUpIsClosed = true, parameter;
+            $placeholder.html(options.templates[template]);
+            $editorDom = $placeholder.find(selector);
+            $selectNone = $placeholder.find(".trv-select-none");
+            if ($selectNone) {
+                $selectNone.text(sr[$selectNone.text()]);
+                $selectNone.click(function(e) {
+                    e.preventDefault();
+                    editor.value([]);
+                    editor.trigger("change");
+                });
+            }
+            $selectAll = $placeholder.find(".trv-select-all");
+            if ($selectAll) {
+                $selectAll.text(sr[$selectAll.text()]);
+                $selectAll.click(function(e) {
+                    e.preventDefault();
+                    if (!enabled) return;
+                    var values = $.map(parameter.availableValues, function(dataItem) {
+                        return dataItem.value;
+                    });
+                    editor.value(values);
+                    editor.trigger("change");
+                });
+            }
+            function onSelectionChanged(selection) {
+                notifyParameterChanged(selection);
+            }
+            function notifyParameterChanged(values) {
+                clearPendingChange();
+                var immediateUpdate = !parameter.autoRefresh && !parameter.childParameters;
+                updateTimeout = window.setTimeout(function() {
+                    if (!utils.areEqualArrays(parameter.value, values)) {
+                        valueChangeCallback(parameter, values);
+                    }
+                    updateTimeout = null;
+                }, immediateUpdate ? 0 : 1e3);
+            }
+            function clearPendingChange() {
+                if (updateTimeout) {
+                    window.clearTimeout(updateTimeout);
+                }
+            }
+            function getSelectedItems() {
+                return editor.value();
+            }
+            function onChange() {
+                if (popUpIsClosed) {
+                    onSelectionChanged(getSelectedItems());
+                }
+            }
+            function init() {
+                setEditorTabIndex($editorDom);
+                editor.bind("change", onChange);
+            }
+            function reset() {
+                if (editor) {
+                    editor.unbind("change", onChange);
+                }
+            }
+            return {
+                beginEdit: function(param) {
+                    reset();
+                    parameter = param;
+                    $editorDom.kendoMultiSelect({
+                        itemTemplate: '<div class="trv-editoritem">${name}</div>',
+                        dataSource: parameter.availableValues,
+                        dataTextField: "name",
+                        dataValueField: "value",
+                        value: parameter.value,
+                        filter: "contains",
+                        autoClose: false,
+                        open: function() {
+                            popUpIsClosed = false;
+                        },
+                        close: function(e) {
+                            popUpIsClosed = true;
+                            onChange();
+                        },
+                        autoWidth: true,
+                        clearButton: false
+                    });
+                    editor = $editorDom.data("kendoMultiSelect");
+                    init($editorDom);
+                },
+                enable: function(enable) {
+                    enabled = enable;
+                    editor.enable(enable);
+                },
+                clearPendingChange: clearPendingChange,
+                addAccessibility: function(param) {
+                    var $accessibilityDom = editor.input;
+                    var info = utils.stringFormat(sr.ariaLabelParameterInfo, [ param.availableValues.length ]);
+                    addAccessibilityAttributes($accessibilityDom, sr.ariaLabelMultiSelect, param.text, info, param.Error);
+                    var items = editor.items();
+                    utils.each(items, function() {
+                        $(this).attr("aria-label", this.innerText);
+                    });
+                },
+                setAccessibilityErrorState: function(param) {
+                    setAccessibilityErrorAttributes($editorDom, param.Error);
+                },
+                destroy: function() {
+                    editor.destroy();
                 }
             };
         }
@@ -2836,7 +4709,7 @@
                 }
             }
             function setSelectedItems(value) {
-                var items = listView.element.children();
+                var items = $list.find(".trv-listviewitem");
                 utils.each(parameter.availableValues, function(i, av) {
                     var availableValue = av.value;
                     if (value instanceof Date) {
@@ -2885,6 +4758,88 @@
                 },
                 setAccessibilityErrorState: function(param) {
                     setAccessibilityErrorAttributes($list, param.Error);
+                },
+                destroy: function() {
+                    listView.destroy();
+                }
+            };
+        }
+    }, {
+        match: trv.parameterEditorsMatch.SingleSelectCombo,
+        createEditor: function(placeholder, options) {
+            var $placeholder = $(placeholder), enabled = true, selector = ".trv-combo", template = "trv-parameter-editor-available-values-combo", valueChangeCallback = options.parameterChanged, $editorDom, $selectNone, editor, parameter;
+            $placeholder.html(options.templates[template]);
+            $editorDom = $placeholder.find(selector);
+            $selectNone = $placeholder.find(".trv-select-none");
+            if ($selectNone) {
+                $selectNone.text(sr[$selectNone.text()]);
+                $selectNone.click(function(e) {
+                    e.preventDefault();
+                    editor.value("");
+                    editor.trigger("change");
+                });
+            }
+            function onSelectionChanged(selection, value) {
+                notifyParameterChanged(selection, value);
+            }
+            function notifyParameterChanged(selection, value) {
+                var values = value || "", availableValues;
+                if (!value && selection >= 0) {
+                    availableValues = parameter.availableValues;
+                    values = availableValues[selection].value;
+                }
+                valueChangeCallback(parameter, values);
+            }
+            function getSelectedItems() {
+                return editor.select();
+            }
+            function onChange(Ðµ) {
+                onSelectionChanged(getSelectedItems(), this.value());
+            }
+            function init() {
+                setEditorTabIndex($editorDom);
+                editor.bind("change", onChange);
+            }
+            function reset() {
+                if (editor) {
+                    editor.unbind("change", onChange);
+                }
+            }
+            return {
+                beginEdit: function(param) {
+                    reset();
+                    parameter = param;
+                    $editorDom.kendoComboBox({
+                        template: '<div class="trv-editoritem">${name}</div>',
+                        dataSource: parameter.availableValues,
+                        dataTextField: "name",
+                        dataValueField: "value",
+                        value: parameter.value,
+                        filter: "contains",
+                        suggest: true,
+                        clearButton: false
+                    });
+                    editor = $editorDom.data("kendoComboBox");
+                    init($editorDom);
+                },
+                enable: function(enable) {
+                    enabled = enable;
+                    editor.enable(enable);
+                },
+                addAccessibility: function(param) {
+                    var $accessibilityDom = editor.input;
+                    var info = utils.stringFormat(sr.ariaLabelParameterInfo, [ param.availableValues.length ]);
+                    addAccessibilityAttributes($accessibilityDom, sr.ariaLabelSingleValue, param.text, info, param.Error);
+                    var items = editor.items();
+                    utils.each(items, function() {
+                        $(this).attr("aria-label", this.innerText);
+                    });
+                },
+                setAccessibilityErrorState: function(param) {
+                    setAccessibilityErrorAttributes($editorDom, param.Error);
+                },
+                destroy: function() {
+                    editor.destroy();
                 }
             };
         }
@@ -2966,6 +4921,9 @@
                 },
                 setAccessibilityErrorState: function(param) {
                     setAccessibilityErrorAttributes($dateTimePicker, param.Error);
+                },
+                destroy: function() {
+                    dateTimePicker.destroy();
                 }
             };
         }
@@ -3101,8 +5059,12 @@
                 return checkAvailbaleValues(parameter, validatorFunc(value1), compareFunc);
             });
             if (parameter.multivalue) {
-                if ((value == null || value.length == 0) && !parameter.allowNull) {
-                    throw sr.invalidParameter;
+                if (value == null || value.length == 0) {
+                    if (parameter.allowNull) {
+                        return value;
+                    } else {
+                        throw sr.invalidParameter;
+                    }
                 }
                 return values;
             }
@@ -3184,6 +5146,9 @@
                         return null;
                     }
                     if (!isNaN(Date.parse(value))) {
+                        if (parameter.availableValues) {
+                            return value;
+                        }
                         return utils.parseToLocalDate(value);
                     }
                     throw sr.invalidDateTimeValue;
@@ -3240,7 +5205,7 @@
         }
         var parameterEditors = [].concat(options.parameterEditors, trv.parameterEditors);
         var recentParameterValues, parameters, initialParameterValues = undefined;
-        var $placeholder = $(placeholder), $content = $placeholder.find(".trv-parameters-area-content"), $errorMessage = $placeholder.find(".trv-error-message"), $previewButton = $placeholder.find(".trv-parameters-area-preview-button"), noParametersContent = $placeholder.html();
+        var $placeholder = $(placeholder), $content = $placeholder.find(".trv-parameters-area-content"), $errorMessage = $placeholder.find(".trv-error-message"), $previewButton = $placeholder.find(".trv-parameters-area-preview-button");
         $previewButton.text(sr[$previewButton.text()]);
         $previewButton.attr("aria-label", sr[$previewButton.attr("aria-label")]);
         $previewButton.on("click", function(e) {
@@ -3268,7 +5233,7 @@
             return $(parameterContainerTemplate);
         }
         function createParameterUI(parameter) {
-            var $container = createParameterContainer(), $editorPlaceholder = $container.find(".trv-parameter-value"), $title = $container.find(".trv-parameter-title"), $error = $container.find(".trv-parameter-error"), $errorMessage = $container.find(".trv-parameter-error-message"), $useDefaultValueCheckbox = $container.find(".trv-parameter-use-default input"), editorFactory = selectParameterEditorFactory(parameter);
+            var $container = createParameterContainer(), $editorPlaceholder = $container.find(".trv-parameter-value"), $title = $container.find(".trv-parameter-title"), $error = $container.find(".trv-parameter-error"), $errorMessage = $container.find(".trv-parameter-error-message"), $useDefaultValueCheckbox = $container.find(".trv-parameter-use-default input"), editorsTypes = options.parameters && options.parameters.editors ? options.parameters.editors : null, editorFactory = selectParameterEditorFactory(parameter, editorsTypes);
             var parameterText = parameter.text;
             var isHiddenParameter = !parameter.isVisible;
             if (isHiddenParameter) {
@@ -3316,7 +5281,7 @@
                     editor.enable(!useDefaultValue);
                     raiseParametersReady();
                 });
-                var hasInitialValues = initialParameterValues != null;
+                var hasInitialValues = initialParameterValues !== null;
                 if (hasInitialValues) {
                     if (!(parameter.id in initialParameterValues)) {
                         $useDefaultValueCheckbox.prop("checked", true);
@@ -3345,10 +5310,10 @@
                 $previewButton.addClass("k-state-disabled");
             }
         }
-        function selectParameterEditorFactory(parameter) {
+        function selectParameterEditorFactory(parameter, editorsType) {
             var factory;
             utils.each(parameterEditors, function() {
-                if (this && this.match(parameter)) {
+                if (this && this.match(parameter, editorsType)) {
                     factory = this;
                 }
                 return !factory;
@@ -3376,10 +5341,18 @@
             });
             return allValid;
         }
+        function clearEditors() {
+            utils.each(editors, function() {
+                if (this.hasOwnProperty("destroy")) {
+                    this.destroy();
+                }
+            });
+            editors = {};
+        }
         function fill(newParameters) {
             recentParameterValues = {};
             parameters = newParameters || [];
-            editors = {};
+            clearEditors();
             var $parameterContainer, $tempContainer = $("<div></div>");
             utils.each(parameters, function() {
                 try {
@@ -3394,13 +5367,14 @@
                     this.Error = sr.invalidParameter;
                 }
                 if (this.isVisible || options.showHiddenParameters) {
-                    if ($parameterContainer = createParameterUI(this)) {
+                    $parameterContainer = createParameterUI(this);
+                    if ($parameterContainer) {
                         $tempContainer.append($parameterContainer);
                     }
                 }
             });
             if (initialParameterValues !== undefined) {
-                if (null == initialParameterValues) {
+                if (null === initialParameterValues) {
                     initialParameterValues = {};
                     utils.each(parameters, function() {
                         if (this.isVisible) {
@@ -3423,8 +5397,6 @@
                 if (enableAccessibility) {
                     $content.attr("aria-label", "Parameters area. Contains " + parameters.length + " parameters.");
                 }
-            } else {
-                $content.append(noParametersContent);
             }
             showPreviewButton(parameters);
             var allValid = allParametersValid();
@@ -3527,20 +5499,24 @@
         }
         function endLoad() {
             if (loadingCount > 0) {
-                if (0 == --loadingCount) {
+                if (0 === --loadingCount) {
                     $placeholder.removeClass("trv-loading");
                 }
             }
         }
+        var parametersAreaNecessary = false;
         function onLoadParametersComplete(params, successAction) {
-            var showParamsArea = hasVisibleParameters(params) && parametersAreaVisible;
-            if (!showParamsArea) {
+            parametersAreaNecessary = hasVisibleParameters(params);
+            if (!parametersAreaNecessary) {
                 showParametersArea(false);
             }
             fill(params);
             showError("");
-            if (showParamsArea) {
+            if (parametersAreaNecessary && parametersAreaVisible) {
                 showParametersArea(true);
+                if (enableAccessibility) {
+                    setSplitbarAccessibilityAttributes();
+                }
             }
             controller.updateUIInternal();
             if (typeof successAction === "function") {
@@ -3569,7 +5545,7 @@
             if (args && args.length) {
                 arg0 = args[0];
             }
-            if (typeof arg0 == "function") {
+            if (typeof arg0 === "function") {
                 return arg0;
             }
             return null;
@@ -3590,7 +5566,23 @@
             raiseParametersReady();
         }
         function showParametersArea(show) {
-            (show ? $.fn.removeClass : $.fn.addClass).call($placeholder, "trv-hidden");
+            var splitter = trv[options.viewerSelector + "-parameters-splitter"], sibling = $placeholder.prev();
+            if (options.parametersAreaPosition === trv.ParametersAreaPositions.TOP || options.parametersAreaPosition === trv.ParametersAreaPositions.LEFT) {
+                sibling = $placeholder.next();
+            }
+            if (splitter) {
+                (parametersAreaNecessary ? $.fn.removeClass : $.fn.addClass).call(sibling, "trv-hidden");
+                splitter.toggle(".trv-parameters-area", show);
+            }
+        }
+        function setSplitbarAccessibilityAttributes() {
+            var splitbar = $placeholder.prev();
+            var tabIndex = $placeholder.find(".trv-parameters-area-content").attr("tabIndex");
+            if (options.parametersAreaPosition === trv.ParametersAreaPositions.TOP || options.parametersAreaPosition === trv.ParametersAreaPositions.LEFT) {
+                splitbar = $placeholder.next();
+            }
+            splitbar.attr("aria-label", sr.ariaLabelParametersAreaSplitter);
+            splitbar.attr("tabIndex", tabIndex);
         }
         function onReloadParameters(event, controllerLoadParametersPromise) {
             showError();
@@ -3654,7 +5646,8 @@
     function uiController(options) {
         var stateFlags = {
             ExportInProgress: 1 << 0,
-            PrintInProgress: 1 << 1
+            PrintInProgress: 1 << 1,
+            RenderInProgress: 1 << 2
         };
         function getState(flags) {
             return (state & flags) != 0;
@@ -3685,6 +5678,11 @@
             controller.getSearchDialogState(args);
             return args;
         }
+        function getSendEmailDialogState() {
+            var args = {};
+            controller.getSendEmailDialogState(args);
+            return args;
+        }
         function updateUI() {
             if (!refreshUI) {
                 refreshUI = true;
@@ -3709,29 +5707,34 @@
             var documentMapState = getDocumentMapState();
             var parametersAreaState = getParametersAreaState();
             var searchDialogState = getSearchDialogState();
+            var sendEmailDialogState = getSendEmailDialogState();
+            var renderInProgress = getState(stateFlags.RenderInProgress);
+            var printInProgress = getState(stateFlags.PrintInProgress);
+            var exportInProgress = getState(stateFlags.ExportInProgress);
             commands.goToFirstPage.enabled(prevPage);
             commands.goToPrevPage.enabled(prevPage);
+            commands.stopRendering.enabled(hasReport && renderInProgress);
             commands.goToLastPage.enabled(nextPage);
             commands.goToNextPage.enabled(nextPage);
             commands.goToPage.enabled(hasPages);
-            commands.print.enabled(hasPages && !getState(stateFlags.PrintInProgress));
-            commands.export.enabled(hasPages && !getState(stateFlags.ExportInProgress));
+            commands.print.enabled(hasPages && !renderInProgress && !printInProgress);
+            commands.export.enabled(hasPages && !renderInProgress && !exportInProgress);
             commands.refresh.enabled(hasReport);
             commands.historyBack.enabled(historyManager && historyManager.canMoveBack());
             commands.historyForward.enabled(historyManager && historyManager.canMoveForward());
             commands.toggleDocumentMap.enabled(hasReport && documentMapState.enabled).checked(documentMapState.enabled && documentMapState.visible);
             commands.toggleParametersArea.enabled(hasReport && parametersAreaState.enabled).checked(parametersAreaState.enabled && parametersAreaState.visible);
             commands.togglePrintPreview.enabled(hasPages).checked(controller.viewMode() == trv.ViewModes.PRINT_PREVIEW);
+            commands.pageMode.enabled(hasPages).checked(controller.pageMode() == trv.PageModes.CONTINUOUS_SCROLL);
             commands.zoom.enabled(hasPage);
             commands.zoomIn.enabled(hasPage);
             commands.zoomOut.enabled(hasPage);
             commands.toggleZoomMode.enabled(hasPage);
             commands.toggleSearchDialog.enabled(hasPages).checked(searchDialogState.visible);
+            commands.toggleSendEmailDialog.enabled(hasPages).checked(sendEmailDialogState.visible);
             controller.updateUI(null);
-            try {
-                controller.pageNumberChange(currentPageNumber);
-                controller.pageCountChange(pageCount);
-            } finally {}
+            controller.pageNumberChange(currentPageNumber);
+            controller.pageCountChange(pageCount);
         }
         function getScaleMode() {
             var args = {};
@@ -3739,39 +5742,42 @@
             return args.scaleMode;
         }
         controller.scale(function(event, args) {
-            commands.toggleZoomMode.checked(args.scaleMode == trv.ScaleModes.FIT_PAGE);
+            commands.toggleZoomMode.checked(args.scaleMode === trv.ScaleModes.FIT_PAGE || args.scaleMode === trv.ScaleModes.FIT_PAGE_WIDTH);
         });
         controller.currentPageChanged(updateUI);
-        controller.beforeLoadReport(updateUI);
+        controller.beforeLoadReport(function() {
+            setState(stateFlags.RenderInProgress, true);
+            updateUI();
+        });
         controller.reportLoadProgress(updateUI);
-        controller.reportLoadComplete(updateUI);
+        controller.reportLoadComplete(function() {
+            setState(stateFlags.RenderInProgress, false);
+            updateUI();
+        });
         controller.reportSourceChanged(updateUI);
         controller.viewModeChanged(updateUI);
+        controller.pageModeChanged(function() {
+            updateUI();
+        });
         controller.setParametersAreaVisible(updateUI);
         controller.setDocumentMapVisible(updateUI);
-        controller.exportStarted(function() {
-            setState(stateFlags.ExportInProgress, true);
-            updateUI();
-        });
-        controller.exportReady(function() {
-            setState(stateFlags.ExportInProgress, false);
-            updateUI();
-        });
-        controller.printStarted(function() {
-            setState(stateFlags.PrintInProgress, true);
-            updateUI();
-        });
-        controller.printReady(function() {
-            setState(stateFlags.PrintInProgress, false);
+        controller.setUIState(function(event, args) {
+            setState(stateFlags[args.operationName], args.inProgress);
             updateUI();
         });
         controller.error(function() {
             setState(stateFlags.ExportInProgress, false);
             setState(stateFlags.PrintInProgress, false);
+            setState(stateFlags.RenderInProgress, false);
             updateUI();
         });
         controller.updateUIInternal(updateUI);
         controller.setSearchDialogVisible(updateUI);
+        controller.setSendEmailDialogVisible(updateUI);
+        controller.renderingStopped(function() {
+            setState(stateFlags.RenderInProgress, false);
+            updateUI();
+        });
         updateUI();
     }
     trv.uiController = uiController;
@@ -3944,9 +5950,19 @@
             controller.getParametersAreaState(args);
             return Boolean(args.visible);
         }
+        function getSideMenuVisible() {
+            var args = {};
+            controller.getSideMenuVisible(args);
+            return Boolean(args.visible);
+        }
         function getSearchDialogVisible() {
             var args = {};
             controller.getSearchDialogState(args);
+            return Boolean(args.visible);
+        }
+        function getSendEmailDialogVisible() {
+            var args = {};
+            controller.getSendEmailDialogState(args);
             return Boolean(args.visible);
         }
         return {
@@ -3955,6 +5971,9 @@
             }),
             historyForward: new command(function() {
                 historyManager.forward();
+            }),
+            stopRendering: new command(function() {
+                controller.stopRendering();
             }),
             goToPrevPage: new command(function() {
                 controller.navigateToPage(controller.currentPageNumber() - 1);
@@ -3991,8 +6010,11 @@
             print: new command(function() {
                 controller.printReport();
             }),
+            pageMode: new command(function() {
+                controller.pageMode(controller.pageMode() === trv.PageModes.SINGLE_PAGE ? trv.PageModes.CONTINUOUS_SCROLL : trv.PageModes.SINGLE_PAGE);
+            }),
             togglePrintPreview: new command(function() {
-                controller.viewMode(controller.viewMode() == trv.ViewModes.PRINT_PREVIEW ? trv.ViewModes.INTERACTIVE : trv.ViewModes.PRINT_PREVIEW);
+                controller.viewMode(controller.viewMode() === trv.ViewModes.PRINT_PREVIEW ? trv.ViewModes.INTERACTIVE : trv.ViewModes.PRINT_PREVIEW);
             }),
             toggleDocumentMap: new command(function() {
                 controller.setDocumentMapVisible({
@@ -4005,9 +6027,10 @@
                 });
             }),
             zoom: new command(function(scale) {
-                controller.scale({
-                    scale: 1
-                });
+                var args = {};
+                args.scale = scale;
+                args.scaleMode = trv.ScaleModes.SPECIFIC;
+                controller.scale(args);
             }),
             zoomIn: new command(function() {
                 zoom(1);
@@ -4016,19 +6039,23 @@
                 zoom(-1);
             }),
             toggleSideMenu: new command(function() {
-                $(controller).trigger(controller.Events.TOGGLE_SIDE_MENU);
+                controller.setSideMenuVisible({
+                    visible: !getSideMenuVisible()
+                });
             }),
             toggleZoomMode: new command(function(Ðµ) {
                 var args = {};
                 controller.getScale(args);
                 controller.scale(scaleTransitionMap[args.scaleMode]);
-                if (args.scaleMode !== "FIT_PAGE_WIDTH") {
-                    $("[data-command='telerik_ReportViewer_toggleZoomMode']").closest(".k-item").addClass("k-state-selected");
-                }
             }),
             toggleSearchDialog: new command(function() {
                 controller.setSearchDialogVisible({
                     visible: !getSearchDialogVisible()
+                });
+            }),
+            toggleSendEmailDialog: new command(function() {
+                controller.setSendEmailDialogVisible({
+                    visible: !getSendEmailDialogVisible()
                 });
             })
         };
@@ -4047,7 +6074,7 @@
                     pos = i - .5;
                     break;
                 }
-                if (scale == value) {
+                if (scale === value) {
                     pos = i;
                     break;
                 }
@@ -4072,7 +6099,7 @@
         var checkedState = false;
         var cmd = {
             enabled: function(state) {
-                if (arguments.length == 0) {
+                if (arguments.length === 0) {
                     return enabledState;
                 }
                 var newState = Boolean(state);
@@ -4081,7 +6108,7 @@
                 return cmd;
             },
             checked: function(state) {
-                if (arguments.length == 0) {
+                if (arguments.length === 0) {
                     return checkedState;
                 }
                 var newState = Boolean(state);
@@ -4106,21 +6133,24 @@
         throw "Missing telerikReporting.utils";
     }
     var lastSelectedMenuItem, lastSelectedSubmenuItem;
-    function MainMenu(dom, options, otherOptions) {
-        options = $.extend({}, options, otherOptions);
-        var menu = $(dom).data("kendoMenu"), childrenL1 = dom.childNodes, controller = options.controller, enableAccessibility = options.enableAccessibility, DEFAULT_TABINDEX = 1;
+    function MainMenu(dom, rootOptions, otherOptions) {
+        var options = $.extend({}, rootOptions, otherOptions), menu = $(dom).data("kendoMenu"), childrenL1 = dom.childNodes, controller = options.controller, enableAccessibility = options.enableAccessibility;
+        if (!controller) {
+            throw "No controller (telerikReporting.ReportViewerController) has been specified.";
+        }
         if (!menu) {
             init();
         }
         controller.reportLoadComplete(function(e, args) {
-            if (enableAccessibility) {} else {
+            if (!enableAccessibility) {
                 if (menu && menu._oldHoverItem) {
                     menu._oldHoverItem.toggleClass("k-state-focused");
                 }
             }
         });
         function init() {
-            menu = $(dom).kendoMenu().data("kendoMenu"), menu.bind("open", onSubmenuOpen);
+            menu = $(dom).kendoMenu().data("kendoMenu");
+            menu.bind("open", onSubmenuOpen);
             menu.bind("activate", onSubmenuActivate);
             menu.bind("deactivate", onSubmenuDeactivate);
             menu.element.off("keydown", onMenuKeyDown);
@@ -4177,25 +6207,25 @@
         }
         function onSubmenuOpen(e) {
             var $item = $(e.item);
-            if ($item.children("ul[data-command-list=export-format-list]").length > 0) {
-                menu.unbind("open", onSubmenuOpen);
-                menu.append({
-                    text: sr.loadingFormats,
-                    spriteCssClass: "k-icon k-loading"
-                }, $item);
-                controller.getDocumentFormats().then(fillFormats).then(function() {
-                    menu.open($item);
-                });
-            }
+            menu.unbind("open", onSubmenuOpen);
+            menu.append({
+                text: sr.loadingFormats,
+                spriteCssClass: "k-icon k-loading"
+            }, $item);
+            controller.getDocumentFormats().then(fillFormats).then(function() {
+                menu.open($item);
+            }).then(function() {
+                menu.bind("open", onSubmenuOpen);
+            });
         }
         function fillFormats(formats) {
             utils.each($(dom).find("ul[data-command-list=export-format-list]"), function() {
                 var $list = $(this), $parent = $list.parents("li");
-                menu.remove($list.children("li"));
                 var tabIndex = enableAccessibility ? $parent.attr("tabindex") : -1;
                 if (!tabIndex) {
                     tabIndex = 1;
                 }
+                $list.empty();
                 utils.each(formats, function() {
                     var format = this;
                     var ariaLabel = enableAccessibility ? utils.stringFormat('aria-label="{localizedName}" ', format) : " ";
@@ -4304,9 +6334,11 @@
                         break;
                     }
                 }
+            } else if (focusedItem && focusedItem.localName == "input") {
+                $item = $(focusedItem).closest("li.k-item");
             } else {
                 $item = menu.element.children("li.k-item.k-state-focused");
-                if ($item.length == 0) {
+                if ($item.length === 0) {
                     $item = menu.element.children("li.k-item").first();
                 }
             }
@@ -4366,13 +6398,13 @@
         }
         function getKendoFocusedNestedItem() {
             var $focused = menu.element.find('li.k-item.k-state-focused [data-command="telerik_ReportViewer_export"]');
-            if ($focused.length == 1) {
+            if ($focused.length === 1) {
                 return $focused.parent("li");
             }
             return undefined;
         }
         function isItemExportContainer(item) {
-            if (item.length == 0) {
+            if (item.length === 0) {
                 return;
             }
             var id = item.attr("id");
@@ -4424,15 +6456,14 @@
     if (!utils) {
         throw "Missing telerikReporting.utils";
     }
-    var loadingFormats, panelBar;
-    function SideMenu(dom, options, otherOptions) {
-        options = $.extend({}, options, otherOptions);
-        var enableAccessibility = options.enableAccessibility, lastSelectedMenuItem, DEFAULT_TABINDEX = 3;
-        var controller = options.controller;
+    function SideMenu(dom, rootOptions, otherOptions) {
+        var options = $.extend({}, rootOptions, otherOptions), menu = $(dom).data("kendoMenu"), enableAccessibility = options.enableAccessibility, lastSelectedMenuItem, DEFAULT_TABINDEX = 3, panelBar, loadingFormats, sideMenuVisible = false, controller = options.controller;
         if (!controller) {
             throw "No controller (telerikReporting.ReportViewerController) has been specified.";
         }
-        init(dom);
+        if (!menu) {
+            init(dom);
+        }
         function init(root) {
             var $root = $(root);
             panelBar = $root.children("ul").kendoPanelBar().data("kendoPanelBar");
@@ -4443,16 +6474,24 @@
             enableCloseOnClick($root);
             $root.click(function(e) {
                 if (e.target == root) {
-                    $(options.controller).trigger(options.controller.Events.TOGGLE_SIDE_MENU);
+                    controller.setSideMenuVisible({
+                        visible: !sideMenuVisible
+                    });
                 }
             });
             replaceStringResources();
         }
-        $(controller).on(controller.Events.TOGGLE_SIDE_MENU, function() {
+        controller.setSideMenuVisible(function(event, args) {
             setSideMenuVisibility();
             if (enableAccessibility) {
                 panelBar.element.focus();
             }
+            sideMenuVisible = args.visible;
+            if (!sideMenuVisible) {
+                panelBar.collapse($("#trv-side-menu-export-command"));
+            }
+        }).getSideMenuVisible(function(event, args) {
+            args.visible = sideMenuVisible;
         });
         function setSideMenuVisibility() {
             var $root = panelBar.element.parent();
@@ -4467,25 +6506,25 @@
         }
         function onSubmenuOpen(e) {
             var $item = $(e.item);
-            if ($item.children("ul[data-command-list=export-format-list]").length > 0) {
-                panelBar.unbind("expand", onSubmenuOpen);
-                panelBar.append({
-                    text: sr.loadingFormats,
-                    spriteCssClass: "k-icon k-loading"
-                }, $item);
-                options.controller.getDocumentFormats().then(fillFormats).then(function() {
-                    panelBar.expand($item);
-                });
-            }
+            panelBar.unbind("expand", onSubmenuOpen);
+            panelBar.append({
+                text: sr.loadingFormats,
+                spriteCssClass: "k-icon k-loading"
+            }, $item);
+            options.controller.getDocumentFormats().then(fillFormats).then(function() {
+                panelBar.expand($item);
+            }).then(function() {
+                panelBar.bind("expand", onSubmenuOpen);
+            });
         }
         function fillFormats(formats) {
             utils.each($(dom).find("ul[data-command-list=export-format-list]"), function() {
                 var $list = $(this), $parent = $list.parents("li");
-                panelBar.remove($list.children("li"));
                 var tabIndex = $parent.attr("tabindex");
                 if (!tabIndex) {
                     tabIndex = DEFAULT_TABINDEX;
                 }
+                $list.empty();
                 utils.each(formats, function(i) {
                     var format = this;
                     var ariaLabel = enableAccessibility ? utils.stringFormat('aria-label="{localizedName}" ', format) : " ";
@@ -4508,10 +6547,12 @@
         }
         function enableCloseOnClick(root) {
             utils.each(root.find("li"), function() {
-                var isLeaf = $(this).children("ul").length == 0;
+                var isLeaf = $(this).children("ul").length === 0;
                 if (isLeaf) {
                     $(this).children("a").click(function() {
-                        $(options.controller).trigger(options.controller.Events.TOGGLE_SIDE_MENU);
+                        controller.setSideMenuVisible({
+                            visible: !sideMenuVisible
+                        });
                     });
                 }
             });
@@ -4586,7 +6627,7 @@
                 return;
             }
             lastSelectedMenuItem = item;
-            var isLeaf = item.children("ul").length == 0;
+            var isLeaf = item.children("ul").length === 0;
             if (!isLeaf) {
                 if (handleExpandCollapse) {
                     if (item.hasClass("k-state-active")) {
@@ -4614,7 +6655,7 @@
                     var $menuItem = $(this), $a = $menuItem.find("a");
                     $menuItem.attr("aria-label", sr[$menuItem.attr("aria-label")]);
                     if ($a) {
-                        var $span = $a.find("span");
+                        var $span = $a.find("span:not(.k-icon)");
                         $a.attr("title", sr[$a.attr("title")]);
                         if ($span) {
                             $span.text(sr[$span.text()]);
@@ -4728,9 +6769,12 @@
         });
     };
     function PageNumberInput(dom, options) {
-        var $element = $(dom), cmd = options.commands["goToPage"];
+        var $element = $(dom), oldValue = 0, cmd = options.commands["goToPage"];
         function setPageNumber(value) {
-            $element.val(value);
+            if (oldValue !== value || !$element.is(":focus")) {
+                $element.val(value);
+                oldValue = value;
+            }
         }
         options.controller.pageNumberChange(function(e, value) {
             setPageNumber(value);
@@ -4738,7 +6782,7 @@
         $element.change(function() {
             var val = $(this).val();
             var num = utils.tryParseInt(val);
-            if (num != NaN) {
+            if (!isNaN(num)) {
                 var result = cmd.exec(num);
                 setPageNumber(result);
             }
@@ -4883,7 +6927,8 @@
             controller.cssLoaded(onCssLoaded);
         }
         function getPerspective() {
-            return smallMenu && getComputedStyle(smallMenu)["display"] != "none" ? "small" : "large";
+            var windowWidthInEm = $(window).width() / parseFloat($("body").css("font-size")), windowMinWidth = 40.5;
+            return smallMenu && windowWidthInEm <= windowMinWidth ? "small" : "large";
         }
         function initStateFromController(state) {
             state.documentMapVisible = documentMapVisible();
@@ -4894,7 +6939,7 @@
             parametersAreaVisible(state.parametersAreaVisible);
         }
         function documentMapVisible() {
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 var args1 = {};
                 controller.getDocumentMapState(args1);
                 return args1.visible;
@@ -4905,7 +6950,7 @@
             return this;
         }
         function parametersAreaVisible() {
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 var args1 = {};
                 controller.getParametersAreaState(args1);
                 return args1.visible;
@@ -4975,7 +7020,7 @@
         function focusOnErrorMessage() {
             var selectorChain = [ "div.trv-pages-area", "div.trv-error-message" ];
             var $errMsg = utils.findElement(selectorChain);
-            if ($errMsg.length == 0) {
+            if ($errMsg.length === 0) {
                 return;
             }
             $errMsg.attr("tabIndex", 0);
@@ -5056,7 +7101,7 @@
             event.preventDefault();
         }
         function setParameterEditorsKeyDown(parametersAreaContent) {
-            if (parametersAreaContent.length == 0) {
+            if (parametersAreaContent.length === 0) {
                 return;
             }
             var $paramsArea = parametersAreaContent.parent("div[data-role=telerik_ReportViewer_ParametersArea]");
@@ -5074,7 +7119,7 @@
             });
         }
         function IsAreaContainerVisible(container) {
-            return container && !container.hasClass("trv-hidden");
+            return container && !(container.hasClass("k-state-collapsed") || container.hasClass("trv-hidden"));
         }
         function setContentAreaKeyDown(contentArea) {
             if (!contentArea) {
@@ -5105,8 +7150,8 @@
                     var $menuItem = $(this);
                     if (!$menuItem.hasClass("trv-report-pager")) {
                         var ariaLabel = $menuItem.attr("aria-label");
-                        var expandableSr = utils.stringFormat(". {0}", [ sr.ariaLabelExpandable ]), expandable = $menuItem.find("ul").length > 0 && !ariaLabel.includes(expandableSr) ? expandableSr : "";
-                        var selectedSr = utils.stringFormat(". {0}", [ sr.ariaLabelSelected ]), selected = $menuItem.hasClass("k-state-selected") && !ariaLabel.includes(selectedSr) ? selectedSr : "";
+                        var expandableSr = utils.stringFormat(". {0}", [ sr.ariaLabelExpandable ]), expandable = $menuItem.find("ul").length > 0 && ariaLabel.indexOf(expandableSr) < 0 ? expandableSr : "";
+                        var selectedSr = utils.stringFormat(". {0}", [ sr.ariaLabelSelected ]), selected = $menuItem.hasClass("k-state-selected") && ariaLabel.indexOf(selectedSr) < 0 ? selectedSr : "";
                         var label = ariaLabel + expandable + selected;
                         $menuItem.attr("aria-label", label);
                         if ($menuItem.hasClass("k-state-disabled")) {
@@ -5144,9 +7189,9 @@
         throw "Missing telerikReportViewer.utils";
     }
     var defaultOptions = {};
-    function Search(placeholder, options, otherOptions) {
+    function Search(placeholder, options, viewerOptions) {
         options = $.extend({}, defaultOptions, options);
-        var controller = options.controller, initialized = false, viewerOptions = otherOptions, dialogVisible = false, $placeholder, $inputBox, $searchOptionsPlaceholder, $resultsLabel, $resultsPlaceholder, kendoComboBox, kendoSearchDialog, stopSearchCommand, optionsCommandSet, navigationCommandSet, searchResults, mruList = [], inputComboRebinding, searchMetadataRequested, searchMetadataLoaded, pendingHighlightItem, windowLocation;
+        var controller = options.controller, initialized = false, dialogVisible = false, $placeholder, $inputBox, $searchOptionsPlaceholder, searchOptionsMenu, $stopSearchPlaceholder, stopSearchMenu, $navigationPlaceholder, navigationMenu, $resultsLabel, $resultsPlaceholder, kendoComboBox, kendoSearchDialog, stopSearchCommand, optionsCommandSet, navigationCommandSet, searchResults, mruList = [], inputComboRebinding, searchMetadataRequested, searchMetadataLoaded, pendingHighlightItem, windowLocation, reportViewerWrapper = $("[data-selector='" + viewerOptions.viewerSelector + "']").find(".trv-report-viewer"), lastSearch = "";
         var highlightManager = {
             shadedClassName: "trv-search-dialog-shaded-result",
             highlightedClassName: "trv-search-dialog-highlighted-result",
@@ -5160,7 +7205,11 @@
             args.visible = dialogVisible;
         }).setSearchDialogVisible(function(event, args) {
             toggleSearchDialog(args.visible);
-        }).pageReady(onPageReady).beginLoadReport(closeAndClear).viewModeChanged(closeAndClear);
+        }).setSendEmailDialogVisible(function(event, args) {
+            if (args.visible && dialogVisible) {
+                toggle(!dialogVisible);
+            }
+        }).pageReady(onPageReady).scrollPageReady(onPageReady).beginLoadReport(closeAndClear).viewModeChanged(closeAndClear);
         function closeAndClear() {
             if (searchMetadataRequested) {
                 return;
@@ -5208,13 +7257,22 @@
                 $inputBox = $placeholder.find(".trv-search-dialog-input-box");
                 $resultsLabel = $placeholder.find(".trv-search-dialog-results-label");
                 $resultsPlaceholder = $placeholder.find(".trv-search-dialog-results-area");
-                initCommands();
                 initResultsArea();
                 replaceStringResources($placeholder);
+                $searchOptionsPlaceholder = $placeholder.find(".trv-search-dialog-search-options").kendoMenu();
+                $stopSearchPlaceholder = $placeholder.find(".trv-search-dialog-stopsearch-placeholder").kendoMenu();
+                $navigationPlaceholder = $placeholder.find(".trv-search-dialog-navigational-buttons").kendoMenu();
+                searchOptionsMenu = $searchOptionsPlaceholder.data("kendoMenu");
+                stopSearchMenu = $stopSearchPlaceholder.data("kendoMenu");
+                navigationMenu = $navigationPlaceholder.data("kendoMenu");
+                searchOptionsMenu.element.on("keydown", onKeyDown);
+                stopSearchMenu.element.on("keydown", onKeyDown);
+                navigationMenu.element.on("keydown", onKeyDown);
                 kendoComboBox = $inputBox.kendoComboBox({
                     dataTextField: "value",
                     dataValueField: "value",
                     dataSource: mruList,
+                    contentElement: "",
                     change: kendoComboBoxSelect,
                     ignoreCase: false,
                     filtering: onInputFiltering,
@@ -5227,29 +7285,42 @@
                     },
                     select: processComboBoxEvent
                 }).data("kendoComboBox");
-                kendoSearchDialog = $(".trv-search-window").kendoWindow({
+                kendoSearchDialog = reportViewerWrapper.find(".trv-search-window").kendoWindow({
                     title: sr.searchDialogTitle,
                     height: 390,
-                    width: 290,
-                    minWidth: 290,
+                    width: 310,
+                    minWidth: 310,
                     minHeight: 390,
                     maxHeight: 700,
                     scrollable: false,
                     close: function() {
                         storeDialogPosition();
+                        lastSearch = "";
                     },
                     open: function() {
                         adjustDialogPosition();
                     },
                     deactivate: function() {
-                        toggle(false);
-                        clearSearchToolbarSelection();
+                        controller.setSearchDialogVisible({
+                            visible: false
+                        });
                     },
                     activate: function() {
                         kendoComboBox.input.focus();
                     }
                 }).data("kendoWindow");
+                kendoSearchDialog.wrapper.addClass("trv-search");
+                initCommands();
                 initialized = true;
+            }
+        }
+        function onKeyDown(event) {
+            var item = $(event.target).find(".k-state-focused");
+            if (event.keyCode === 13 && item && item.length > 0) {
+                var anchor = item.children("a");
+                if (anchor.length > 0) {
+                    anchor.click();
+                }
             }
         }
         $(window).resize(function() {
@@ -5263,28 +7334,43 @@
             windowLocation = kendoWindow.offset();
         }
         function adjustDialogPosition() {
+            var windowWidth = $(window).innerWidth(), windowHeight = $(window).innerHeight(), kendoWindow = kendoSearchDialog.wrapper, width = kendoWindow.outerWidth(true), height = kendoWindow.outerHeight(true), padding = 10;
             if (!windowLocation) {
-                kendoSearchDialog.center();
+                var reportViewerCoords = reportViewerWrapper[0].getBoundingClientRect();
+                kendoWindow.css({
+                    top: reportViewerCoords.top + padding,
+                    left: reportViewerCoords.right - width - padding
+                });
+                kendoSearchDialog.setOptions({
+                    position: {
+                        top: reportViewerCoords.top + padding,
+                        left: reportViewerCoords.right - width - padding
+                    }
+                });
             } else {
-                var padding = 10, kendoWindow = kendoSearchDialog.element.parent(".k-window"), left = windowLocation.left, top = windowLocation.top, width = kendoWindow.outerWidth(true), height = kendoWindow.outerHeight(true), right = left + width, bottom = top + height, windowWidth = $(window).innerWidth(), windowHeight = $(window).innerHeight();
+                var left = windowLocation.left, top = windowLocation.top, right = left + width, bottom = top + height;
                 if (right > windowWidth - padding) {
-                    left = windowWidth - width - padding;
+                    left = Math.max(padding, windowWidth - width - padding);
+                    kendoWindow.css({
+                        left: left
+                    });
+                    kendoSearchDialog.setOptions({
+                        position: {
+                            left: left
+                        }
+                    });
                 }
                 if (bottom > windowHeight - padding) {
-                    top = windowHeight - height - padding;
+                    top = Math.max(padding, windowHeight - height - padding);
+                    kendoWindow.css({
+                        top: top
+                    });
+                    kendoSearchDialog.setOptions({
+                        position: {
+                            top: top
+                        }
+                    });
                 }
-                left = Math.max(padding, left);
-                top = Math.max(padding, top);
-                kendoWindow.css({
-                    top: top,
-                    left: left
-                });
-            }
-        }
-        function clearSearchToolbarSelection() {
-            var selectedToobarSearchItem = $(".k-menu").find("a[data-command='telerik_ReportViewer_toggleSearchDialog']").closest(".k-item ");
-            if (selectedToobarSearchItem.hasClass("k-state-selected")) {
-                selectedToobarSearchItem.removeClass("k-state-selected k-state-focused");
             }
         }
         function processComboBoxEvent(e) {
@@ -5307,8 +7393,6 @@
             useRegex: "searchDialog_UseRegex"
         };
         function initCommands() {
-            $searchOptionsPlaceholder = $placeholder.find(".trv-search-dialog-search-options");
-            $searchOptionsPlaceholder.kendoMenu();
             optionsCommandSet = {
                 searchDialog_MatchCase: new command(function() {
                     toggleCommand(this);
@@ -5325,8 +7409,6 @@
                 controller: controller,
                 commands: optionsCommandSet
             }, viewerOptions);
-            var $stopSearchPlaceholder = $placeholder.find(".trv-search-dialog-stopsearch-placeholder");
-            $stopSearchPlaceholder.kendoMenu();
             stopSearchCommand = new command(function() {
                 stopSearch();
             });
@@ -5336,8 +7418,6 @@
                     searchDialog_StopSearch: stopSearchCommand
                 }
             }, viewerOptions);
-            var $navigationPlaceholder = $placeholder.find(".trv-search-dialog-navigational-buttons");
-            $navigationPlaceholder.kendoMenu();
             navigationCommandSet = {
                 searchDialog_NavigateUp: new command(function() {
                     moveListSelection(-1);
@@ -5356,7 +7436,8 @@
                 selectable: true,
                 navigatable: true,
                 dataSource: {},
-                template: "<div class='trv-search-dialog-results-row'><span>#: description #</span> <span class='trv-search-dialog-results-pageSpan'>page #:page#</span></div>",
+                contentElement: "",
+                template: "<div class='trv-search-dialog-results-row'><span>#: description #</span> <span class='trv-search-dialog-results-pageSpan'>" + sr.searchDialogPageText + " #:page#</span></div>",
                 change: function() {
                     var index = this.select().index(), view = this.dataSource.view(), dataItem = view[index];
                     onSelectedItem(dataItem);
@@ -5375,15 +7456,22 @@
             stopSearchCommand.enabled(enabledState);
         }
         function onPageReady(args, page) {
-            colorPageElements(searchResults);
+            if (dialogVisible) {
+                colorPageElements(searchResults);
+            }
         }
         function onInputFiltering(e) {
             e.preventDefault();
-            searchForToken(e.filter.value);
+            if (e.filter && e.filter.value !== lastSearch) {
+                lastSearch = e.filter.value;
+                searchForToken(lastSearch);
+            }
         }
         function kendoComboBoxSelect(e) {
-            if (e.sender.dataItem() && e.sender.dataItem().value) {
-                searchForToken(e.sender.dataItem().value);
+            var newValue = e.sender.dataItem() ? e.sender.dataItem().value : null;
+            if (newValue && lastSearch !== newValue) {
+                lastSearch = newValue;
+                searchForToken(lastSearch);
             }
         }
         function searchForCurrentToken() {
@@ -5392,7 +7480,6 @@
             }
         }
         function searchForToken(token) {
-            console.log("Token: " + token);
             onSearchStarted();
             addToMRU(token);
             controller.getSearchResults({
@@ -5445,7 +7532,6 @@
             if (mruList.length > 10) {
                 mruList.pop();
             }
-            console.log(mruList);
             inputComboRebinding = true;
             kendoComboBox.dataSource.data(mruList);
             kendoComboBox.select(function(item) {
@@ -5461,12 +7547,10 @@
             $listView.dataSource.data(results);
         }
         function colorPageElements(results) {
-            if (!results || results.length == 0) {
+            if (!results || results.length === 0) {
                 return;
             }
-            var $parent = $placeholder.parent("div .trv-content");
-            var $pageContainer = $parent.find(".trv-page-container");
-            var elements = $pageContainer.find("[data-search-id]");
+            var $parent = $placeholder.parent(), $pageContainer = $parent.find(".trv-page-container"), elements = $pageContainer.find("[data-search-id]");
             utils.each(results, function() {
                 var $searchElement = elements.filter("[data-search-id=" + this.id + "]");
                 if ($searchElement) {
@@ -5486,8 +7570,9 @@
                 if (newHighlighted) {
                     highlightManager.current = newHighlighted[0];
                     if (highlightManager.current) {
-                        highlightManager.current.removeClass(highlightManager.shadedClassName);
-                        highlightManager.current.addClass(highlightManager.highlightedClassName);
+                        var current = $("[data-search-id='" + currentItemId + "']");
+                        current.removeClass(highlightManager.shadedClassName);
+                        current.addClass(highlightManager.highlightedClassName);
                     }
                 }
             }
@@ -5505,19 +7590,23 @@
                 highlightManager.current.removeClass(highlightManager.highlightedClassName);
                 highlightManager.current.addClass(highlightManager.shadedClassName);
             }
-            if (item.page == controller.currentPageNumber()) {
+            if (item.page === controller.currentPageNumber()) {
                 highlightItem(item);
             } else {
-                clearColoredItems();
-                pendingHighlightItem = item;
+                if (controller.pageMode() !== trv.PageModes.CONTINUOUS_SCROLL) {
+                    clearColoredItems();
+                } else {
+                    highlightItem(item);
+                }
             }
+            pendingHighlightItem = item;
             controller.navigateToPage(item.page, {
                 type: "search",
                 id: item.id
             });
         }
         function updateUI(index, count) {
-            var str = count == 0 ? sr.searchDialogNoResultsLabel : utils.stringFormat(sr.searchDialogResultsFormatLabel, [ index + 1, count ]);
+            var str = count === 0 ? sr.searchDialogNoResultsLabel : utils.stringFormat(sr.searchDialogResultsFormatLabel, [ index + 1, count ]);
             $resultsLabel.text(str);
             var allowMoveUp = index > 0;
             var allowMoveDown = index < count - 1;
@@ -5567,7 +7656,7 @@
         }
         function toggleErrorLabel(show, message) {
             var $errorIcon = $searchOptionsPlaceholder.find("i[data-role='telerik_ReportViewer_SearchDialog_Error']");
-            if (!$errorIcon || $errorIcon.length == 0) {
+            if (!$errorIcon || $errorIcon.length === 0) {
                 console.log(message);
                 return;
             }
@@ -5613,7 +7702,7 @@
             var checkedState = false;
             var cmd = {
                 enabled: function(state) {
-                    if (arguments.length == 0) {
+                    if (arguments.length === 0) {
                         return enabledState;
                     }
                     var newState = Boolean(state);
@@ -5622,7 +7711,7 @@
                     return cmd;
                 },
                 checked: function(state) {
-                    if (arguments.length == 0) {
+                    if (arguments.length === 0) {
                         return checkedState;
                     }
                     var newState = Boolean(state);
@@ -5636,10 +7725,10 @@
         }
     }
     var pluginName = "telerik_ReportViewer_SearchDialog";
-    $.fn[pluginName] = function(options, otherOptions) {
+    $.fn[pluginName] = function(options, viewerOptions) {
         return utils.each(this, function() {
             if (!$.data(this, pluginName)) {
-                $.data(this, pluginName, new Search(this, options, otherOptions));
+                $.data(this, pluginName, new Search(this, options, viewerOptions));
             }
         });
     };
@@ -5693,7 +7782,9 @@
         INTERACTIVE_ACTION_EXECUTING: "INTERACTIVE_ACTION_EXECUTING",
         INTERACTIVE_ACTION_ENTER: "INTERACTIVE_ACTION_ENTER",
         INTERACTIVE_ACTION_LEAVE: "INTERACTIVE_ACTION_LEAVE",
-        VIEWER_TOOLTIP_OPENING: "VIEWER_TOOLTIP_OPENING"
+        VIEWER_TOOLTIP_OPENING: "VIEWER_TOOLTIP_OPENING",
+        SEND_EMAIL_BEGIN: "SEND_EMAIL_BEGIN",
+        SEND_EMAIL_END: "SEND_EMAIL_END"
     };
     var templateCache = function() {
         var cache = {};
@@ -5749,20 +7840,25 @@
         var _this = {};
         function getItem(key) {
             var value = storage.getItem(formatKey(key));
-            return value != null ? value : defaultSettings[key];
+            return value !== null && value !== undefined ? value : defaultSettings[key];
         }
         function stateItem(prop, args) {
             var stateKey = "state";
-            var value = getItem(stateKey);
-            var currentState = typeof value == "string" ? JSON.parse(value) : {};
+            var stateString = getItem(stateKey);
+            var state = typeof stateString === "string" ? JSON.parse(stateString) : {};
             if (args.length) {
-                if (currentState) {
-                    currentState[prop] = args[0];
+                if (state) {
+                    var newValue = args[0];
+                    if (newValue === undefined) {
+                        delete state[prop];
+                    } else {
+                        state[prop] = newValue;
+                    }
                 }
-                setItem(stateKey, JSON.stringify(currentState));
+                setItem(stateKey, JSON.stringify(state));
                 return _this;
             } else {
-                return currentState[prop];
+                return state[prop];
             }
         }
         function setItem(key, value) {
@@ -5800,12 +7896,15 @@
                 return _this;
             } else {
                 var value = getItem(key);
-                return typeof value == "string" ? JSON.parse(value) : null;
+                return typeof value === "string" ? JSON.parse(value) : null;
             }
         }
         utils.extend(_this, {
             viewMode: function() {
                 return stateItem("viewMode", arguments);
+            },
+            pageMode: function() {
+                return stateItem("pageMode", arguments);
             },
             printMode: function() {
                 return stateItem("printMode", arguments);
@@ -5842,21 +7941,34 @@
             },
             searchMetadataOnDemand: function() {
                 return value("searchMetadataOnDemand", arguments);
+            },
+            keepClientAlive: function() {
+                return value("keepClientAlive", arguments);
             }
         });
         return _this;
     }
-    function getDefaultOptions(serviceUrl) {
+    function getDefaultOptions(serviceUrl, version) {
         return {
             id: null,
             serviceUrl: null,
-            templateUrl: utils.rtrim(serviceUrl, "\\/") + "/resources/templates/telerikReportViewerTemplate-html",
+            templateUrl: utils.rtrim(serviceUrl, "\\/") + "/resources/templates/telerikReportViewerTemplate-" + version + ".html/",
             reportSource: null,
             reportServer: null,
             authenticationToken: null,
+            sendEmail: null,
             scale: 1,
             scaleMode: trv.ScaleModes.FIT_PAGE,
             viewMode: trv.ViewModes.INTERACTIVE,
+            pageMode: trv.PageModes.CONTINUOUS_SCROLL,
+            parametersAreaPosition: trv.ParametersAreaPositions.RIGHT,
+            documentMapAreaPosition: trv.DocumentMapAreaPositions.LEFT,
+            parameters: {
+                editors: {
+                    multiSelect: trv.ParameterEditorTypes.LIST_VIEW,
+                    singleSelect: trv.ParameterEditorTypes.LIST_VIEW
+                }
+            },
             persistSession: false,
             parameterEditors: [],
             disabledButtonClass: null,
@@ -5864,33 +7976,38 @@
             parametersAreaVisible: true,
             documentMapVisible: true,
             enableAccessibility: false,
-            searchMetadataOnDemand: false
+            searchMetadataOnDemand: false,
+            initialPageAreaImageUrl: null,
+            keepClientAlive: true
         };
     }
     function ReportViewer(dom, options) {
-        if (!window.kendo) {
-            alert("Kendo is not loaded. Make sure that Kendo is included.");
+        var svcApiUrl = options.serviceUrl, reportServerUrlSVCApiUrl = "";
+        if (options.reportServer) {
+            reportServerUrlSVCApiUrl = utils.rtrim(options.reportServer.url, "\\/");
+            svcApiUrl = reportServerUrlSVCApiUrl + "/api/reports";
         }
-        var $placeholder = $(dom), templates = {}, scripts = {}, persistanceKey = options.id || "#" + $placeholder.attr("id"), accessibility;
+        var $placeholder = $(dom), templates = {}, scripts = {}, persistanceKey = options.id || "#" + $placeholder.attr("id"), accessibility, settings = {}, client = {}, controller = {}, history = {}, commands = {}, viewer = {}, serviceClientOptions = {}, reportServerUrl = "";
+        options.viewerSelector = "reportViewer-" + utils.generateGuidString();
+        $placeholder.attr("data-selector", options.viewerSelector);
         if (!validateOptions(options)) {
             return;
         }
-        var svcApiUrl = options.serviceUrl;
-        if (options.reportServer) {
-            var reportServerUrl = utils.rtrim(options.reportServer.url, "\\/");
-            svcApiUrl = reportServerUrl + "/api/reports";
-        }
-        options = utils.extend({}, getDefaultOptions(svcApiUrl), options);
-        var settings = new ReportViewerSettings(persistanceKey, options.persistSession ? window.sessionStorage : new MemStorage(), {
+        var version = "15.1.21.616";
+        options = utils.extend({}, getDefaultOptions(svcApiUrl, version), options);
+        settings = new ReportViewerSettings(persistanceKey, options.persistSession ? window.sessionStorage : new MemStorage(), {
             scale: options.scale,
             scaleMode: options.scaleMode,
             printMode: options.printMode ? options.printMode : options.directPrint,
             enableAccessibility: options.enableAccessibility,
-            searchMetadataOnDemand: options.searchMetadataOnDemand
+            searchMetadataOnDemand: options.searchMetadataOnDemand,
+            sendEmail: options.sendEmail,
+            parametersAreaPosition: options.parametersAreaPosition,
+            documentMapAreaPosition: options.documentMapAreaPosition,
+            keepClientAlive: options.keepClientAlive
         });
-        var serviceClientOptions = {};
         if (options.reportServer) {
-            var reportServerUrl = utils.rtrim(options.reportServer.url, "\\/");
+            reportServerUrl = utils.rtrim(options.reportServer.url, "\\/");
             serviceClientOptions.serviceUrl = reportServerUrl + "/api/reports";
             serviceClientOptions.loginInfo = {
                 url: reportServerUrl + "/Token",
@@ -5900,19 +8017,21 @@
         } else {
             serviceClientOptions.serviceUrl = options.serviceUrl;
         }
-        var client = new trv.ServiceClient(serviceClientOptions);
-        var controller = options.controller;
+        client = new trv.ServiceClient(serviceClientOptions);
+        controller = options.controller;
         if (!controller) {
             controller = new trv.ReportViewerController({
                 serviceClient: client,
                 settings: settings
             });
+        } else {
+            controller.updateSettings(settings);
         }
-        var history = new trv.HistoryManager({
+        history = new trv.HistoryManager({
             controller: controller,
             settings: settings
         });
-        var commands = new trv.CommandSet({
+        commands = new trv.CommandSet({
             controller: controller,
             history: history
         });
@@ -5921,7 +8040,8 @@
             history: history,
             commands: commands
         });
-        var viewer = {
+        viewer = {
+            stringResources: sr,
             refreshReport: function(ignoreCache) {
                 if (arguments.length === 0) {
                     ignoreCache = true;
@@ -5937,12 +8057,23 @@
                 }
                 return controller.reportSource();
             },
+            clearReportSource: function() {
+                controller.clearReportSource();
+                return viewer;
+            },
             viewMode: function(vm) {
                 if (vm) {
                     controller.viewMode(vm);
                     return viewer;
                 }
                 return controller.viewMode();
+            },
+            pageMode: function(psm) {
+                if (psm) {
+                    controller.pageMode(psm);
+                    return viewer;
+                }
+                return controller.pageMode();
             },
             printMode: function(pm) {
                 if (pm) {
@@ -5965,6 +8096,11 @@
             },
             pageCount: function() {
                 return controller.pageCount();
+            },
+            parametersAreaVisible: function(visible) {
+                controller.setParametersAreaVisible({
+                    visible: visible
+                });
             },
             authenticationToken: function(token) {
                 if (token) {
@@ -6009,7 +8145,7 @@
             return true;
         }
         function eventBinder(eventName, eventHandler, bind) {
-            if (typeof eventHandler == "function") {
+            if (typeof eventHandler === "function") {
                 if (bind) {
                     $(viewer).on(eventName, {
                         sender: viewer
@@ -6035,7 +8171,9 @@
                 INTERACTIVE_ACTION_EXECUTING: controller.Events.INTERACTIVE_ACTION_EXECUTING,
                 INTERACTIVE_ACTION_ENTER: controller.Events.INTERACTIVE_ACTION_ENTER,
                 INTERACTIVE_ACTION_LEAVE: controller.Events.INTERACTIVE_ACTION_LEAVE,
-                VIEWER_TOOLTIP_OPENING: controller.Events.TOOLTIP_OPENING
+                VIEWER_TOOLTIP_OPENING: controller.Events.TOOLTIP_OPENING,
+                SEND_EMAIL_BEGIN: controller.Events.SEND_EMAIL_STARTED,
+                SEND_EMAIL_END: controller.Events.SEND_EMAIL_READY
             }, $viewer = $(viewer);
             for (var eventName in viewerEventsMapping) {
                 var controllerEventName = viewerEventsMapping[eventName];
@@ -6063,11 +8201,8 @@
             eventBinder(trv.Events.INTERACTIVE_ACTION_ENTER, options.interactiveActionEnter, true);
             eventBinder(trv.Events.INTERACTIVE_ACTION_LEAVE, options.interactiveActionLeave, true);
             eventBinder(trv.Events.VIEWER_TOOLTIP_OPENING, options.viewerToolTipOpening, true);
-            $(controller).on(controller.Events.TOGGLE_SIDE_MENU, function() {
-                window.setTimeout(function() {
-                    $placeholder.toggleClass("trv-side-menu-visible");
-                }, 1);
-            });
+            eventBinder(trv.Events.SEND_EMAIL_BEGIN, options.sendEmailBegin, true);
+            eventBinder(trv.Events.SEND_EMAIL_END, options.sendEmailEnd, true);
         }
         function init() {
             $placeholder.html(templates["trv-report-viewer"]);
@@ -6077,13 +8212,83 @@
                 templates: templates
             }, options);
             new trv.PerspectiveManager(dom, controller).attach();
+            initSplitter();
             attachEvents();
             attachEventHandlers();
             initFromStorage();
             initAccessibility(options);
         }
+        function initSplitter() {
+            var parameterAreaPaneOptions = {
+                max: "500px",
+                min: "50px",
+                size: "210px",
+                collapsible: true
+            }, parameterAreaTemplate = $placeholder.find(".trv-parameters-area"), parameterAreaPanes = [ {} ], documentMapPaneOptions = {
+                max: "500px",
+                min: "50px",
+                size: "210px",
+                collapsible: true,
+                collapsed: true
+            }, documentMapTemplate = $placeholder.find(".trv-document-map"), documentMapPanes = [ {} ], orientation = "horizontal";
+            if (options.documentMapAreaPosition === trv.DocumentMapAreaPositions.RIGHT) {
+                documentMapTemplate.insertAfter($placeholder.find(".trv-pages-area"));
+                documentMapPanes.push(documentMapPaneOptions);
+            } else {
+                documentMapPanes.unshift(documentMapPaneOptions);
+            }
+            if (options.parametersAreaPosition === trv.ParametersAreaPositions.TOP || options.parametersAreaPosition === trv.ParametersAreaPositions.BOTTOM) {
+                orientation = "vertical";
+                parameterAreaTemplate.addClass("-vertical");
+                parameterAreaPaneOptions.size = "130px";
+            }
+            if (options.parametersAreaPosition === trv.ParametersAreaPositions.LEFT || options.parametersAreaPosition === trv.ParametersAreaPositions.TOP) {
+                parameterAreaTemplate.insertBefore($placeholder.find(".trv-document-map-splitter"));
+                parameterAreaPanes.unshift(parameterAreaPaneOptions);
+            } else {
+                parameterAreaPanes.push(parameterAreaPaneOptions);
+            }
+            var documentMapSplitter = $placeholder.find(".trv-document-map-splitter").kendoSplitter({
+                panes: documentMapPanes,
+                expand: function(e) {
+                    setSplitterPaneVisibility(e.pane, true);
+                },
+                collapse: function(e) {
+                    setSplitterPaneVisibility(e.pane, false);
+                }
+            }).data("kendoSplitter");
+            var parametersSplitter = $placeholder.find(".trv-parameters-splitter").kendoSplitter({
+                panes: parameterAreaPanes,
+                orientation: orientation,
+                expand: function(e) {
+                    setSplitterPaneVisibility(e.pane, true);
+                },
+                collapse: function(e) {
+                    setSplitterPaneVisibility(e.pane, false);
+                }
+            }).data("kendoSplitter");
+            trv[options.viewerSelector + "-parameters-splitter"] = parametersSplitter;
+            trv[options.viewerSelector + "-document-map-splitter"] = documentMapSplitter;
+        }
+        function setSplitterPaneVisibility(pane, visible) {
+            var paneID = $(pane).attr("data-id");
+            switch (paneID) {
+              case "trv-document-map":
+                controller.setDocumentMapVisible({
+                    visible: visible
+                });
+                break;
+
+              case "trv-parameters-area":
+                controller.setParametersAreaVisible({
+                    visible: visible
+                });
+                break;
+            }
+        }
         function initFromStorage() {
             var vm = settings.viewMode();
+            var psm = settings.pageMode();
             var pm = settings.printMode();
             var s = settings.scale();
             var sm = settings.scaleMode();
@@ -6091,6 +8296,7 @@
             var pa = settings.parametersAreaVisible();
             var am = settings.accessibilityKeyMap();
             controller.viewMode(vm ? vm : options.viewMode);
+            controller.pageMode(psm ? psm : options.pageMode);
             controller.printMode(pm ? pm : options.printMode);
             controller.scale({
                 scale: s ? s : options.scale,
@@ -6108,11 +8314,19 @@
             controller.viewModeChanged(function() {
                 settings.viewMode(controller.viewMode());
             });
+            controller.pageModeChanged(function() {
+                settings.pageMode(controller.pageMode());
+            });
             controller.scale(function() {
                 var args = {};
                 controller.getScale(args);
                 settings.scale(args.scale);
                 settings.scaleMode(args.scaleMode);
+            });
+            controller.setSideMenuVisible(function(event, args) {
+                window.setTimeout(function() {
+                    (args.visible ? $.fn.addClass : $.fn.removeClass).call($placeholder, "trv-side-menu-visible");
+                }, 1);
             });
             controller.setDocumentMapVisible(function() {
                 var args = {};
@@ -6142,7 +8356,7 @@
             var pageAreaSelector = "div.trv-pages-area";
             try {
                 var pagesArea$ = $placeholder.find(pageAreaSelector);
-                if (pagesArea$.length == 0) {
+                if (pagesArea$.length === 0) {
                     throw "Selector " + pageAreaSelector + " did not return a result.";
                 }
                 return parseInt(pagesArea$.attr("tabindex"));
@@ -6173,6 +8387,9 @@
                 if (options.viewMode) {
                     controller.viewMode(options.viewMode);
                 }
+                if (options.pageMode) {
+                    controller.pageMode(options.pageMode);
+                }
                 if (options.reportSource) {
                     controller.reportSource(options.reportSource);
                     pendingRefresh = true;
@@ -6200,7 +8417,7 @@
             }).toArray();
             var promises = [];
             utils.each(styleSheets, function(i, e) {
-                if (-1 == currentStyleLinks.indexOf(e)) {
+                if (-1 === currentStyleLinks.indexOf(e)) {
                     promises.push(new Promise(function(resolve, reject) {
                         var $link = $(e);
                         $link.on("load", resolve);
@@ -6217,27 +8434,38 @@
         function browserSupportsAllFeatures() {
             return window.Promise;
         }
-        function main(err) {
-            if (err) {
-                utils.logError(err);
+        function ensureKendo(version) {
+            if (window.kendo) {
+                return Promise.resolve();
             } else {
-                if (options.authenticationToken) {
-                    controller.setAuthenticationToken(options.authenticationToken);
-                }
-                templateCache.load(options.templateUrl, svcApiUrl, client).catch(function() {
-                    $placeholder.html(utils.stringFormat(sr.errorLoadingTemplates, [ utils.escapeHtml(options.templateUrl) ]));
-                    return Promise.reject();
-                }).then(function(result) {
-                    templates = result.templates;
-                    scripts = result.scripts;
-                    return loadStyleSheets(result.styleSheets);
-                }).then(start);
+                var kendoUrl = utils.rtrim(svcApiUrl, "\\/") + "/resources/js/telerikReportViewer.kendo-" + version + ".min.js/";
+                return utils.loadScript(kendoUrl).catch(function(errorData) {
+                    utils.logError("Kendo could not be loaded automatically. Make sure 'options.serviceUrl' / 'options.reportServer.url' is correct and accessible. The error is: " + errorData.error);
+                });
             }
         }
+        function main(version) {
+            ensureKendo(version).then(function() {
+                viewer.authenticationToken(options.authenticationToken);
+                controller.getDocumentFormats().catch(function() {
+                    $placeholder.html(utils.stringFormat(sr.errorServiceUrl, [ utils.escapeHtml(svcApiUrl) ]));
+                    return Promise.reject();
+                }).then(function() {
+                    templateCache.load(options.templateUrl, svcApiUrl, client).catch(function() {
+                        $placeholder.html(utils.stringFormat(sr.errorLoadingTemplates, [ utils.escapeHtml(options.templateUrl) ]));
+                        return Promise.reject();
+                    }).then(function(result) {
+                        templates = result.templates;
+                        scripts = result.scripts;
+                        return loadStyleSheets(result.styleSheets);
+                    }).then(start);
+                });
+            });
+        }
         if (browserSupportsAllFeatures()) {
-            main();
+            main(version);
         } else {
-            utils.loadScript("https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise", main);
+            utils.loadScriptWithCallback("https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise", main, version);
         }
         return viewer;
     }
@@ -6254,4 +8482,4 @@
     };
     trv.ReportViewer = ReportViewer;
 })(window.telerikReportViewer = window.telerikReportViewer || {}, jQuery, window, document);
-/* DO NOT MODIFY OR DELETE THIS LINE! UPGRADE WIZARD CHECKSUM 442A952F4F523426CB3877E48D7C6B6C */
+/* DO NOT MODIFY OR DELETE THIS LINE! UPGRADE WIZARD CHECKSUM BD3221A7DACEF217AB0FB181769BCCBB */
