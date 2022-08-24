@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using ReportesWeb1_2.ModelsReportes;
 using ReportesWeb1_2.ModelsSQLServer;
 using ReportesWeb1_2.Services;
