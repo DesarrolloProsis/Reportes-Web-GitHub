@@ -34,6 +34,7 @@ namespace ReportesWeb1_2.Controllers
         static string PlazaBag = string.Empty;
         static string IdPlaza = string.Empty;
         static string IdDelegacion = string.Empty;
+        static string NomPlaza = string.Empty;
 
         private async Task UserPlaza()
         {
@@ -60,6 +61,7 @@ namespace ReportesWeb1_2.Controllers
                 IdDelegacion = Result.pla.del.Num_Delegacion;
                 PlazaBag = Result.pla.pla.Num_Plaza + " " + Result.pla.pla.Nom_Plaza;
                 IdPlaza = Result.pla.pla.Num_Plaza;
+                NomPlaza = Result.pla.pla.Nom_Plaza;
             });
         }
 
@@ -80,7 +82,18 @@ namespace ReportesWeb1_2.Controllers
             };
 
             ViewBag.Delegacion = DelegacionBag;
-            ViewBag.Plaza = PlazaBag;
+
+            string aux = "";
+
+            if (PlazaBag.Contains("08"))
+            {
+                aux = "001" + " " + NomPlaza;
+                ViewBag.Plaza = aux;
+            }
+            else
+            {
+                ViewBag.Plaza = PlazaBag;
+            }
 
             return View(model);
         }
@@ -310,7 +323,17 @@ namespace ReportesWeb1_2.Controllers
             var model = new TurnoCarrilesModel();
 
             ViewBag.Delegacion = DelegacionBag;
-            ViewBag.Plaza = PlazaBag;
+
+            string aux = "";
+            if (PlazaBag.Contains("08"))
+            {
+                aux = "001" + " " + NomPlaza;
+                ViewBag.Plaza = aux;
+            }
+            else
+            {
+                ViewBag.Plaza = PlazaBag;
+            }
 
             if (TempData.ContainsKey("Carril"))
                 ViewBag.Error = TempData["Carril"].ToString();
@@ -430,7 +453,17 @@ namespace ReportesWeb1_2.Controllers
             await UserPlaza();
             var model = new DiaCasetaModel();
             ViewBag.Delegacion = DelegacionBag;
-            ViewBag.Plaza = PlazaBag;
+
+            string aux = "";
+            if (PlazaBag.Contains("08"))
+            {
+                aux = "001" + " " + NomPlaza;
+                ViewBag.Plaza = aux;
+            }
+            else
+            {
+                ViewBag.Plaza = PlazaBag;
+            }
 
 
             return View(model);
